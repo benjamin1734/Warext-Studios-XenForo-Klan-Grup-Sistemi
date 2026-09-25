@@ -279,7 +279,7 @@ A licensed live XenForo installation is still required for final runtime/theme v
 
 ## Installation
 
-Use the ZIP attached to the latest GitHub Release:
+Use the ZIP attached to the latest GitHub Release. Releases provide a full direct-install package and, when a previous version is available, a smaller UPDATE ZIP containing only changed runtime files:
 
 1. Open XenForo Admin CP.
 2. Go to **Add-ons → Install/upgrade from archive**.
@@ -578,7 +578,7 @@ Lisanslı gerçek XenForo kurulumu CI ortamında bulunmadığı için final runt
 
 ## Kurulum
 
-En son GitHub Release altındaki ZIP dosyasını kullanın:
+En son GitHub Release altındaki ZIP dosyasını kullanın. Release; tam kurulum paketini ve önceki sürüm mevcutsa yalnız değişen runtime dosyalarını içeren daha küçük UPDATE ZIP'ini birlikte sağlar:
 
 1. XenForo Admin CP'yi açın.
 2. **Add-ons → Install/upgrade from archive** bölümüne girin.
