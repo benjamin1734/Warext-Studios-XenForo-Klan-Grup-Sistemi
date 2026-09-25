@@ -43,6 +43,13 @@ class Clan extends Entity
 
     public function canView(?string &$error = null): bool
     {
+        $visitor = \XF::visitor();
+        if (!$visitor->hasPermission('wxClans', 'view') && !$this->visitorCanModerateClans())
+        {
+            $error = 'You do not have permission to view clans.';
+            return false;
+        }
+
         return $this->status !== 'closed' || $this->isVisitorOwner() || $this->visitorCanModerateClans();
     }
 

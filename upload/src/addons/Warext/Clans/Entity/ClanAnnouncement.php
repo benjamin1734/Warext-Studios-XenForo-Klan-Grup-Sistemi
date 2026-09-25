@@ -10,7 +10,11 @@ class ClanAnnouncement extends Entity
 
     public function canView(?string &$error = null): bool
     {
-        return (bool)($this->Clan && $this->Clan->canView($error));
+        return (bool)(
+            $this->Clan
+            && $this->Clan->canView($error)
+            && $this->Clan->canViewAnnouncements($error)
+        );
     }
 
     public function canReport(?string &$error = null): bool

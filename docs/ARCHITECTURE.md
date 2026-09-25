@@ -2,7 +2,7 @@
 
 ## Version
 
-`0.10.0 Alpha`
+`0.11.0 Beta`
 
 ## Add-on ID
 
@@ -180,6 +180,8 @@ Creates immutable-style append-only clan audit events for important management o
 
 ### XenForo public permissions
 
+Public controller dispatch and Clan entity visibility both enforce these permissions. Navigation conditions are treated only as presentation, not authorization.
+
 Permission group: `wxClans`
 
 - `view`
@@ -282,7 +284,7 @@ Notifications should be emitted after the committed state exists whenever practi
 
 Existing installations are upgraded in place. Upgrade packages must not require resetting the XenForo database or reinstalling the add-on.
 
-Version `0.2.0` introduced base role normalization. Version `0.5.0` introduced later tables/fields needed by ownership, blacklist, announcements and active preferences. Version `0.7.0` added lifecycle behavior without requiring destructive schema reset. Version `0.8.0` adds option/cron/service behavior and does not require a destructive schema reset. Version `0.9.0` adds two clan privacy columns through an in-place schema upgrade plus service-level capacity/cooldown controls. Version `0.10.0` adds pagination and ownership-limit hardening without a schema change.
+Version `0.2.0` introduced base role normalization. Version `0.5.0` introduced later tables/fields needed by ownership, blacklist, announcements and active preferences. Version `0.7.0` added lifecycle behavior without requiring destructive schema reset. Version `0.8.0` adds option/cron/service behavior and does not require a destructive schema reset. Version `0.9.0` adds two clan privacy columns through an in-place schema upgrade plus service-level capacity/cooldown controls. Version `0.10.0` adds pagination and ownership-limit hardening without a schema change. Version `0.11.0 Beta` hardens XenForo public permission enforcement without a schema change.
 
 ## Repository layout
 

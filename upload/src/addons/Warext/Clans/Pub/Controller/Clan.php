@@ -10,9 +10,16 @@ class Clan extends AbstractController
 {
     protected function preDispatchController($action, ParameterBag $params)
     {
+        $visitor = \XF::visitor();
+        if (!$visitor->hasPermission('wxClans', 'view')
+            && !$visitor->hasPermission('wxClans', 'moderate')
+            && !$visitor->is_admin)
+        {
+            throw $this->exception($this->noPermission('You do not have permission to view clans.'));
+        }
+
         if ($this->request->getRequestMethod() !== 'GET')
         {
-            $visitor = \XF::visitor();
             if ($visitor->user_id && ($visitor->user_state !== 'valid' || $visitor->is_banned))
             {
                 throw $this->exception($this->noPermission('Your forum account is not currently eligible to perform clan actions.'));
@@ -191,6 +198,10 @@ class Clan extends AbstractController
     {
         $this->assertRegistrationRequired();
         $visitor = \XF::visitor();
+        if (!$visitor->hasPermission('wxClans', 'apply'))
+        {
+            throw $this->exception($this->noPermission('You do not have permission to create clan applications.'));
+        }
         $existing = $this->finder('Warext\\Clans:ClanApplication')
             ->where('application_type', 'create')
             ->where('user_id', $visitor->user_id)

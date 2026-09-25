@@ -261,6 +261,9 @@ Main tables:
 
 ## Security and integrity
 
+- Public clan routes enforce `wxClans/view`; clan creation additionally requires `wxClans/apply`.
+- Clan entity visibility repeats the view-permission check so alerts/reports/content handlers cannot bypass controller authorization.
+
 - Clan permissions are checked server-side and are not derived from XenForo moderator status.
 - Owner-only actions remain owner-only even when another member is a clan manager.
 - Critical multi-record operations use database transactions.
@@ -561,6 +564,9 @@ Ana tablolar:
 - `xf_wx_clan_audit_log`
 
 ## Güvenlik ve bütünlük
+
+- Public klan route'larında `wxClans/view`, klan oluşturma akışında ayrıca `wxClans/apply` zorunludur.
+- Controller dışındaki alert/report/content handler akışlarının yetkiyi atlamaması için Clan entity görünürlüğü de aynı izni tekrar kontrol eder.
 
 - Klan yetkileri sunucu tarafında kontrol edilir ve XenForo moderatör statüsünden türetilmez.
 - Owner'a özel işlemler Manager tarafından kullanılamaz.

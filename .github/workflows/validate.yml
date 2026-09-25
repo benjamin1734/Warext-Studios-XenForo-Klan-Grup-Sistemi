@@ -66,8 +66,8 @@ jobs:
           data = root / '_data'
 
           addon = json.loads((root / 'addon.json').read_text(encoding='utf-8'))
-          if addon.get('version_id') != 1000100 or addon.get('version_string') != '0.10.0 Alpha':
-              raise SystemExit('Expected version is 0.10.0 Alpha / 1000100')
+          if addon.get('version_id') != 1000110 or addon.get('version_string') != '0.11.0 Beta':
+              raise SystemExit('Expected version is 0.11.0 Beta / 1000110')
           if addon.get('require', {}).get('XF', [0])[0] != 2030000:
               raise SystemExit('XenForo 2.3.0+ requirement is missing')
           if addon.get('require', {}).get('php', [''])[0] != '8.1.0':
@@ -306,6 +306,17 @@ jobs:
           for needle in ['memberPerPage', 'memberTotal', 'limitByPage']:
               if needle not in public_controller:
                   raise SystemExit('0.10 member pagination is incomplete: ' + needle)
+
+          if "hasPermission('wxClans', 'view')" not in public_controller or "hasPermission('wxClans', 'apply')" not in public_controller:
+              raise SystemExit('0.11 public permission enforcement is incomplete')
+
+          clan_entity = (root / 'Entity/Clan.php').read_text(encoding='utf-8')
+          if "hasPermission('wxClans', 'view')" not in clan_entity:
+              raise SystemExit('0.11 entity-level clan view permission is missing')
+
+          navigation_xml = (data / 'navigation.xml').read_text(encoding='utf-8')
+          if "hasPermission('wxClans', 'view')" not in navigation_xml:
+              raise SystemExit('0.11 navigation permission condition is missing')
 
           print(f'Validated {len(trees)} XML files, {len(templates)} templates and {len(routes)} routes.')
           PY

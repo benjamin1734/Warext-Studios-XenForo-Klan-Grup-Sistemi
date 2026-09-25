@@ -1,5 +1,25 @@
 # Changelog / Değişiklik Günlüğü
 
+## 0.11.0 Beta - 2026-09-25
+
+### English
+
+- Enforced the XenForo `wxClans/view` permission across public clan controller actions instead of relying only on navigation visibility.
+- Enforced `wxClans/apply` for clan-creation applications.
+- Added entity-level clan view permission checks so alerts, reports and other XenForo content consumers share the same access rule.
+- Updated clan-announcement visibility to honor both base clan visibility and the clan announcement privacy setting.
+- Hid public clan navigation entries when the visitor lacks the required clan-view/moderation permission.
+- Expanded CI checks for public permission enforcement and navigation/entity consistency.
+
+### Türkçe
+
+- XenForo `wxClans/view` izni yalnız navigasyon görünürlüğüne bırakılmayıp tüm public klan controller işlemlerinde zorunlu hale getirildi.
+- Klan oluşturma başvuruları için `wxClans/apply` izni zorunlu hale getirildi.
+- Alert, report ve diğer XenForo içerik tüketicilerinin de aynı erişim kuralını kullanması için Entity seviyesinde klan görüntüleme izni eklendi.
+- Klan duyurusu görünürlüğü hem temel klan erişimini hem de klanın duyuru gizlilik ayarını dikkate alacak şekilde güçlendirildi.
+- Klan görüntüleme/moderasyon izni olmayan ziyaretçiler için public klan navigasyonları gizlendi.
+- CI kontrolleri public izin zorlaması ve navigation/entity tutarlılığını kapsayacak şekilde genişletildi.
+
 ## 0.10.0 Alpha - 2026-09-25
 
 ### English
