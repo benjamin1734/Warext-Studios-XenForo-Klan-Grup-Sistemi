@@ -32,6 +32,8 @@ class Setup extends AbstractSetup
             $table->addColumn('category', 'varchar', 50)->setDefault('');
             $table->addColumn('status', 'varchar', 25)->setDefault('active');
             $table->addColumn('join_mode', 'varchar', 25)->setDefault('application');
+            $table->addColumn('member_list_visibility', 'varchar', 20)->setDefault('public');
+            $table->addColumn('announcement_visibility', 'varchar', 20)->setDefault('public');
             $table->addColumn('manager_banner', 'varchar', 100)->setDefault('');
             $table->addColumn('tag_color', 'varchar', 7)->setDefault('#4f46e5');
             $table->addColumn('manager_banner_color', 'varchar', 7)->setDefault('#805ad5');
@@ -277,6 +279,17 @@ class Setup extends AbstractSetup
     public function upgrade1000050Step2(): void
     {
         $this->ensureBaseRoles();
+    }
+
+    public function upgrade1000090Step1(): void
+    {
+        $sm = $this->schemaManager();
+
+        $sm->alterTable('xf_wx_clan', function (Alter $table)
+        {
+            $table->addColumn('member_list_visibility', 'varchar', 20)->setDefault('public');
+            $table->addColumn('announcement_visibility', 'varchar', 20)->setDefault('public');
+        });
     }
 
     protected function ensureBaseRoles(): void

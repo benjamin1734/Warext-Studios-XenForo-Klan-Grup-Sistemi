@@ -2,7 +2,7 @@
 
 ## Version
 
-`0.8.0 Alpha`
+`0.9.0 Alpha`
 
 ## Add-on ID
 
@@ -38,7 +38,7 @@ Forum authority may approve, reject, suspend or otherwise moderate official clan
 
 Official clan record.
 
-Stores the current owner, public identity, category, join mode, manager banner/tag colors, media URLs, member count and moderation/lifecycle status.
+Stores the current owner, public identity, category, join mode, member/announcement visibility, manager banner/tag colors, media URLs, member count and moderation/lifecycle status.
 
 Important statuses include active, restricted/suspended and closed states used by service-level checks.
 
@@ -233,6 +233,16 @@ Reserved tag and clan-name lists are stored as XenForo options. They are normali
 
 Availability is checked both when a request is submitted and again when staff approves it. This prevents an old pending request from bypassing a newly reserved value or an identity claimed while the request was waiting.
 
+## Capacity and anti-spam enforcement
+
+Global XenForo options can limit active members per clan and Manager-role members per clan. These checks live in service classes rather than templates, so crafted requests cannot bypass them.
+
+Join applications and repeated invitations can also use configurable cooldown windows. Cooldown checks are scoped to the same clan/user pair and can be disabled with a zero value.
+
+## Clan privacy model
+
+Member-list visibility is evaluated by the Clan entity and may be public, active-members only or Owner/forum-staff only. Announcement visibility may be public or active-members only. Controllers avoid loading protected collections when the current visitor cannot view them.
+
 ## Maintenance model
 
 Public GET endpoints do not change invitation expiry state. Scheduled maintenance performs expiry and other integrity repairs. This keeps read requests read-only and makes cleanup independent from traffic to a particular clan page.
@@ -268,7 +278,7 @@ Notifications should be emitted after the committed state exists whenever practi
 
 Existing installations are upgraded in place. Upgrade packages must not require resetting the XenForo database or reinstalling the add-on.
 
-Version `0.2.0` introduced base role normalization. Version `0.5.0` introduced later tables/fields needed by ownership, blacklist, announcements and active preferences. Version `0.7.0` added lifecycle behavior without requiring destructive schema reset. Version `0.8.0` adds option/cron/service behavior and does not require a destructive schema reset.
+Version `0.2.0` introduced base role normalization. Version `0.5.0` introduced later tables/fields needed by ownership, blacklist, announcements and active preferences. Version `0.7.0` added lifecycle behavior without requiring destructive schema reset. Version `0.8.0` adds option/cron/service behavior and does not require a destructive schema reset. Version `0.9.0` adds two clan privacy columns through an in-place schema upgrade plus service-level capacity/cooldown controls.
 
 ## Repository layout
 

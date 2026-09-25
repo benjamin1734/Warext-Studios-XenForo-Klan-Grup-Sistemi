@@ -52,6 +52,29 @@ class Manager extends AbstractService
             throw new \XF\PrintableException('You already have a pending application for this clan.');
         }
 
+        $cooldownHours = (int)($this->app->options()->wxClansJoinCooldownHours ?? 0);
+        if ($cooldownHours > 0)
+        {
+            $latest = $this->finder('Warext\\Clans:ClanApplication')
+                ->where('application_type', 'join')
+                ->where('clan_id', $this->clan->clan_id)
+                ->where('user_id', $user->user_id)
+                ->where('status', ['rejected','cancelled'])
+                ->order('decision_date', 'DESC')
+                ->order('create_date', 'DESC')
+                ->fetchOne();
+            if ($latest)
+            {
+                $lastDate = $latest->decision_date ?: $latest->create_date;
+                $nextAllowed = $lastDate + ($cooldownHours * 3600);
+                if ($lastDate > 0 && $nextAllowed > \XF::$time)
+                {
+                    $remaining = (int)ceil(($nextAllowed - \XF::$time) / 3600);
+                    throw new \XF\PrintableException('You can apply to this clan again in approximately ' . $remaining . ' hour(s).');
+                }
+            }
+        }
+
         $this->service('Warext\\Clans:Clan\\MemberManager', $this->clan)->assertMembershipLimit($user);
 
         $fields = $this->finder('Warext\\Clans:ClanApplicationField')

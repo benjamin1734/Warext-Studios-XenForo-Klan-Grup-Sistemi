@@ -38,10 +38,22 @@ class Clan extends AbstractController
         $total = $finder->total();
         $finder->limitByPage($page, $perPage);
         $categories = $this->db()->fetchAllColumn("SELECT DISTINCT category FROM xf_wx_clan WHERE category <> '' ORDER BY category");
+        $stats = [
+            'total_clans' => (int)$this->db()->fetchOne("SELECT COUNT(*) FROM xf_wx_clan"),
+            'active_clans' => (int)$this->db()->fetchOne("SELECT COUNT(*) FROM xf_wx_clan WHERE status = 'active'"),
+            'restricted_clans' => (int)$this->db()->fetchOne("SELECT COUNT(*) FROM xf_wx_clan WHERE status = 'restricted'"),
+            'suspended_clans' => (int)$this->db()->fetchOne("SELECT COUNT(*) FROM xf_wx_clan WHERE status = 'suspended'"),
+            'closed_clans' => (int)$this->db()->fetchOne("SELECT COUNT(*) FROM xf_wx_clan WHERE status = 'closed'"),
+            'active_memberships' => (int)$this->db()->fetchOne("SELECT COUNT(*) FROM xf_wx_clan_member WHERE member_state = 'active'"),
+            'pending_create' => (int)$this->db()->fetchOne("SELECT COUNT(*) FROM xf_wx_clan_application WHERE application_type = 'create' AND status = 'pending'"),
+            'pending_identity' => (int)$this->db()->fetchOne("SELECT COUNT(*) FROM xf_wx_clan_application WHERE application_type = 'change' AND status = 'pending'"),
+            'pending_lifecycle' => (int)$this->db()->fetchOne("SELECT COUNT(*) FROM xf_wx_clan_application WHERE application_type IN ('close','reopen') AND status = 'pending'"),
+            'pending_ownership' => (int)$this->db()->fetchOne("SELECT COUNT(*) FROM xf_wx_clan_ownership_transfer WHERE status = 'accepted'")
+        ];
 
         return $this->view('Warext\\Clans:ClanList', 'wx_clans_admin_list', [
             'clans'=>$finder->fetch(), 'status'=>$status, 'query'=>$query, 'category'=>$category,
-            'categories'=>$categories, 'page'=>$page, 'perPage'=>$perPage, 'total'=>$total
+            'categories'=>$categories, 'page'=>$page, 'perPage'=>$perPage, 'total'=>$total, 'stats'=>$stats
         ]);
     }
 

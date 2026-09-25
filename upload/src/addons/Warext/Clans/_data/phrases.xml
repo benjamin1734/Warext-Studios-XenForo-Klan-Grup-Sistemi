@@ -97,4 +97,12 @@
   <phrase title="alert_opt_out.wx_clan_member_added" version_id="1000080" version_string="0.8.0 Alpha">Clan notifications: member added</phrase>
   <phrase title="alert_opt_out.wx_clan_manager_assigned" version_id="1000080" version_string="0.8.0 Alpha">Clan notifications: manager assigned</phrase>
   <phrase title="alert_opt_out.wx_clan_clan_approved" version_id="1000080" version_string="0.8.0 Alpha">Clan notifications: clan approved</phrase>
+  <phrase title="option.wxClansMaxMembersPerClan" version_id="1000090" version_string="0.9.0 Alpha">Maximum members per clan</phrase>
+  <phrase title="option_explain.wxClansMaxMembersPerClan" version_id="1000090" version_string="0.9.0 Alpha">Maximum active members allowed in one clan. Set to 0 for unlimited.</phrase>
+  <phrase title="option.wxClansMaxManagersPerClan" version_id="1000090" version_string="0.9.0 Alpha">Maximum managers per clan</phrase>
+  <phrase title="option_explain.wxClansMaxManagersPerClan" version_id="1000090" version_string="0.9.0 Alpha">Maximum Manager-role members allowed in one clan, excluding the Owner. Set to 0 for unlimited.</phrase>
+  <phrase title="option.wxClansJoinCooldownHours" version_id="1000090" version_string="0.9.0 Alpha">Join application cooldown (hours)</phrase>
+  <phrase title="option_explain.wxClansJoinCooldownHours" version_id="1000090" version_string="0.9.0 Alpha">Hours a user must wait after a rejected or cancelled join application before applying to the same clan again. Set to 0 to disable.</phrase>
+  <phrase title="option.wxClansInviteCooldownHours" version_id="1000090" version_string="0.9.0 Alpha">Invitation resend cooldown (hours)</phrase>
+  <phrase title="option_explain.wxClansInviteCooldownHours" version_id="1000090" version_string="0.9.0 Alpha">Hours clan management must wait before sending another invitation to the same user after a previous invitation was resolved. Set to 0 to disable.</phrase>
 </phrases>

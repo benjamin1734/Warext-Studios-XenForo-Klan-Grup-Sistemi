@@ -1,8 +1,8 @@
 {
     "title": "Warext Studios | XenForo Klan & Grup Sistemi",
     "description": "XenForo 2.3 için forum onaylı klanlar, klan içi roller, başvurular, davetler, sahiplik devri, tag/banner ve moderasyon entegrasyonu sunan genel amaçlı klan ve topluluk sistemi.",
-    "version_id": 1000080,
-    "version_string": "0.8.0 Alpha",
+    "version_id": 1000090,
+    "version_string": "0.9.0 Alpha",
     "dev": "Warext Studios | Support Discord Server",
     "require": {
         "XF": [

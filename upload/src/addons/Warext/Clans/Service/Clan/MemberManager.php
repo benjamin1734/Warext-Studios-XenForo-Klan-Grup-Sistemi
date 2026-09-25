@@ -31,6 +31,19 @@ class MemberManager extends AbstractService
                 throw new \XF\PrintableException('This user has reached the maximum number of clan memberships.');
             }
         }
+
+        $maxClanMembers = (int)($this->app->options()->wxClansMaxMembersPerClan ?? 0);
+        if ($maxClanMembers > 0)
+        {
+            $activeMembers = $this->finder('Warext\\Clans:ClanMember')
+                ->where('clan_id', $this->clan->clan_id)
+                ->where('member_state', 'active')
+                ->total();
+            if ($activeMembers >= $maxClanMembers)
+            {
+                throw new \XF\PrintableException('This clan has reached its member limit.');
+            }
+        }
     }
 
     public function addMember(\XF\Entity\User $user, int $actorUserId = 0, int $roleId = 0): \Warext\Clans\Entity\ClanMember
@@ -139,6 +152,20 @@ class MemberManager extends AbstractService
 
         if ($isManager)
         {
+            $maxManagers = (int)($this->app->options()->wxClansMaxManagersPerClan ?? 0);
+            if ($maxManagers > 0)
+            {
+                $managerCount = $this->finder('Warext\\Clans:ClanMember')
+                    ->where('clan_id', $this->clan->clan_id)
+                    ->where('member_state', 'active')
+                    ->where('is_manager', 1)
+                    ->total();
+                if ($managerCount >= $maxManagers)
+                {
+                    throw new \XF\PrintableException('This clan has reached its manager limit.');
+                }
+            }
+
             $role = $this->service('Warext\\Clans:Clan\\RoleManager', $this->clan)->getOrCreateManagerRole();
             $member->is_manager = true;
             $member->role_id = $role->role_id;

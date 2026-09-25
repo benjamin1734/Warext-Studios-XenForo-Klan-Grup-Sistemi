@@ -274,6 +274,26 @@ jobs:
           if "status !== 'closed'" not in lifecycle or "['close', 'reopen']" not in lifecycle:
               raise SystemExit('Lifecycle state protection is incomplete')
 
+          clan_entity = (root / 'Entity/Clan.php').read_text(encoding='utf-8')
+          for needle in ['member_list_visibility', 'announcement_visibility', 'canViewMemberList', 'canViewAnnouncements']:
+              if needle not in clan_entity:
+                  raise SystemExit('0.9 clan privacy support is incomplete: ' + needle)
+
+          member_manager = (root / 'Service/Clan/MemberManager.php').read_text(encoding='utf-8')
+          for needle in ['wxClansMaxMembersPerClan', 'wxClansMaxManagersPerClan']:
+              if needle not in member_manager:
+                  raise SystemExit('0.9 membership limits are incomplete: ' + needle)
+
+          join_manager = (root / 'Service/Join/Manager.php').read_text(encoding='utf-8')
+          invite_manager = (root / 'Service/Invitation/Manager.php').read_text(encoding='utf-8')
+          if 'wxClansJoinCooldownHours' not in join_manager or 'wxClansInviteCooldownHours' not in invite_manager:
+              raise SystemExit('0.9 anti-spam cooldowns are incomplete')
+
+          option_ids = {e.attrib.get('option_id') for e in trees['options.xml'].getroot().findall('option')}
+          for option_id in ['wxClansMaxMembersPerClan','wxClansMaxManagersPerClan','wxClansJoinCooldownHours','wxClansInviteCooldownHours']:
+              if option_id not in option_ids:
+                  raise SystemExit('0.9 option missing: ' + option_id)
+
           print(f'Validated {len(trees)} XML files, {len(templates)} templates and {len(routes)} routes.')
           PY
 

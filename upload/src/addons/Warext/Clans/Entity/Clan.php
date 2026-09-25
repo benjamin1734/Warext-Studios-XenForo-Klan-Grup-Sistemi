@@ -117,6 +117,50 @@ class Clan extends Entity
         return $this->isVisitorAccountEligible() && $this->status !== 'closed';
     }
 
+    public function canViewMemberList(?string &$error = null): bool
+    {
+        if ($this->visitorCanModerateClans() || $this->isVisitorOwner())
+        {
+            return true;
+        }
+
+        if ($this->member_list_visibility === 'public')
+        {
+            return true;
+        }
+
+        $membership = $this->getVisitorMembership();
+        if ($this->member_list_visibility === 'members')
+        {
+            return (bool)($membership && $membership->member_state === 'active');
+        }
+
+        $error = 'The clan member list is private.';
+        return false;
+    }
+
+    public function canViewAnnouncements(?string &$error = null): bool
+    {
+        if ($this->visitorCanModerateClans() || $this->isVisitorOwner())
+        {
+            return true;
+        }
+
+        if ($this->announcement_visibility === 'public')
+        {
+            return true;
+        }
+
+        $membership = $this->getVisitorMembership();
+        if ($membership && $membership->member_state === 'active')
+        {
+            return true;
+        }
+
+        $error = 'Clan announcements are visible to members only.';
+        return false;
+    }
+
     public function canJoin(?string &$error = null): bool
     {
         $visitor = \XF::visitor();
@@ -184,6 +228,8 @@ class Clan extends Entity
             'category' => ['type' => self::STR, 'maxLength' => 50, 'default' => ''],
             'status' => ['type' => self::STR, 'default' => 'active', 'allowedValues' => ['active','restricted','suspended','closed']],
             'join_mode' => ['type' => self::STR, 'default' => 'application', 'allowedValues' => ['open','application','invite','closed']],
+            'member_list_visibility' => ['type' => self::STR, 'default' => 'public', 'allowedValues' => ['public','members','staff']],
+            'announcement_visibility' => ['type' => self::STR, 'default' => 'public', 'allowedValues' => ['public','members']],
             'manager_banner' => ['type' => self::STR, 'maxLength' => 100, 'default' => ''],
             'tag_color' => ['type' => self::STR, 'maxLength' => 7, 'default' => '#4f46e5'],
             'manager_banner_color' => ['type' => self::STR, 'maxLength' => 7, 'default' => '#805ad5'],

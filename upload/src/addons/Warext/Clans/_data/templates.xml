@@ -159,7 +159,12 @@
     &lt;/div&gt;&lt;xf:submitrow submit="Save announcement" /&gt;&lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="admin" title="wx_clans_admin_list" version_id="1000080" version_string="0.8.0 Alpha">&lt;xf:title&gt;Warext Clans&lt;/xf:title&gt;
+  <template type="admin" title="wx_clans_admin_list" version_id="1000090" version_string="0.9.0 Alpha">&lt;xf:title&gt;Warext Clans&lt;/xf:title&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;System overview&lt;/h3&gt;&lt;div class="block-body"&gt;
+&lt;div class="block-row"&gt;&lt;strong&gt;Clans:&lt;/strong&gt; {$stats.total_clans} total · {$stats.active_clans} active · {$stats.restricted_clans} restricted · {$stats.suspended_clans} suspended · {$stats.closed_clans} closed&lt;/div&gt;
+&lt;div class="block-row"&gt;&lt;strong&gt;Active memberships:&lt;/strong&gt; {$stats.active_memberships}&lt;/div&gt;
+&lt;div class="block-row"&gt;&lt;strong&gt;Pending review:&lt;/strong&gt; {$stats.pending_create} creation · {$stats.pending_identity} identity · {$stats.pending_ownership} ownership · {$stats.pending_lifecycle} lifecycle&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;xf:form action="{{ link('warext-clans') }}" class="block"&gt;&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
 &lt;xf:textboxrow name="q" value="{$query}" label="Search" placeholder="Clan name or tag" /&gt;
 &lt;xf:selectrow name="status" value="{$status}" label="Status"&gt;&lt;xf:option value=""&gt;All&lt;/xf:option&gt;&lt;xf:option value="active"&gt;Active&lt;/xf:option&gt;&lt;xf:option value="restricted"&gt;Restricted&lt;/xf:option&gt;&lt;xf:option value="suspended"&gt;Suspended&lt;/xf:option&gt;&lt;xf:option value="closed"&gt;Closed&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
@@ -229,7 +234,7 @@
 &lt;/div&gt;
 &lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="clans" params="{{ {'q': $query, 'category': $category, 'join_mode': $joinMode, 'sort': $sort} }}" /&gt;
 </template>
-  <template type="public" title="wx_clans_manage" version_id="1000070" version_string="0.7.0 Alpha">&lt;xf:title&gt;Manage {$clan.title}&lt;/xf:title&gt;
+  <template type="public" title="wx_clans_manage" version_id="1000090" version_string="0.9.0 Alpha">&lt;xf:title&gt;Manage {$clan.title}&lt;/xf:title&gt;
 &lt;xf:pageaction&gt;&lt;xf:button href="{{ link('clans', $clan) }}"&gt;View clan&lt;/xf:button&gt;&lt;/xf:pageaction&gt;
 
 &lt;xf:if is="$clan.canManagePermission('manage_settings')"&gt;
@@ -238,6 +243,8 @@
     &lt;xf:textarearow name="description" value="{$clan.description}" label="Description" autosize="true" /&gt;
     &lt;xf:textarearow name="rules" value="{$clan.rules}" label="Clan rules" autosize="true" /&gt;
     &lt;xf:selectrow name="join_mode" value="{$clan.join_mode}" label="Join mode"&gt;&lt;xf:option value="open"&gt;Open&lt;/xf:option&gt;&lt;xf:option value="application"&gt;Application&lt;/xf:option&gt;&lt;xf:option value="invite"&gt;Invite only&lt;/xf:option&gt;&lt;xf:option value="closed"&gt;Closed&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
+    &lt;xf:selectrow name="member_list_visibility" value="{$clan.member_list_visibility}" label="Member list visibility"&gt;&lt;xf:option value="public"&gt;Public&lt;/xf:option&gt;&lt;xf:option value="members"&gt;Clan members only&lt;/xf:option&gt;&lt;xf:option value="staff"&gt;Owner / forum staff only&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
+    &lt;xf:selectrow name="announcement_visibility" value="{$clan.announcement_visibility}" label="Announcement visibility"&gt;&lt;xf:option value="public"&gt;Public&lt;/xf:option&gt;&lt;xf:option value="members"&gt;Clan members only&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
     &lt;xf:textboxrow name="logo_url" value="{$clan.logo_url}" label="Logo URL" /&gt;
     &lt;xf:textboxrow name="cover_url" value="{$clan.cover_url}" label="Cover URL" /&gt;
 &lt;/div&gt;&lt;xf:submitrow submit="Save settings" /&gt;&lt;/div&gt;&lt;/xf:form&gt;
@@ -423,7 +430,7 @@
 &lt;xf:foreach loop="$transferHistory" value="$item"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$item.Clan.title}&lt;/strong&gt; · {$item.FromUser.username} → {$item.ToUser.username} · {$item.status} · &lt;xf:date time="$item.create_date" /&gt;&lt;/div&gt;&lt;/xf:foreach&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
 </template>
-  <template type="public" title="wx_clans_view" version_id="1000080" version_string="0.8.0 Alpha">&lt;xf:title&gt;[{$clan.tag}] {$clan.title}&lt;/xf:title&gt;
+  <template type="public" title="wx_clans_view" version_id="1000090" version_string="0.9.0 Alpha">&lt;xf:title&gt;[{$clan.tag}] {$clan.title}&lt;/xf:title&gt;
 &lt;xf:css src="wx_clans.less" /&gt;
 
 &lt;xf:pageaction&gt;
@@ -481,7 +488,9 @@
 &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/xf:if&gt;
 
-&lt;xf:if is="$announcements is not empty"&gt;
+&lt;xf:if is="!$canViewAnnouncements"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;div class="block-row blockMessage blockMessage--none"&gt;{$announcementError}&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;xf:elseif is="$announcements is not empty" /&gt;
 &lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Announcements&lt;/h3&gt;&lt;div class="block-body"&gt;
     &lt;xf:foreach loop="$announcements" value="$announcement"&gt;
         &lt;div class="block-row block-row--separated" id="announcement-{$announcement.announcement_id}"&gt;&lt;strong&gt;&lt;xf:if is="$announcement.is_pinned"&gt;📌 &lt;/xf:if&gt;{$announcement.title}&lt;/strong&gt;&lt;div class="u-muted"&gt;{$announcement.User.username} · &lt;xf:date time="$announcement.create_date" /&gt;&lt;/div&gt;&lt;div&gt;{$announcement.message}&lt;/div&gt;&lt;xf:if is="$announcement.canReport()"&gt;&lt;div class="u-muted"&gt;&lt;a href="{{ link('clans/announcement-report', $clan, {'announcement_id': $announcement.announcement_id}) }}" overlay="true"&gt;Report announcement&lt;/a&gt;&lt;/div&gt;&lt;/xf:if&gt;&lt;/div&gt;
@@ -490,6 +499,7 @@
 &lt;/xf:if&gt;
 
 &lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Members&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:if is="!$canViewMembers"&gt;&lt;div class="block-row blockMessage blockMessage--none"&gt;{$memberListError}&lt;/div&gt;&lt;xf:else /&gt;
     &lt;xf:foreach loop="$members" value="$member"&gt;
         &lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$member.User.username}&lt;/strong&gt;
             &lt;xf:if is="$member.is_owner"&gt;&lt;span class="label label--primary"&gt;Owner&lt;/span&gt;
@@ -498,6 +508,7 @@
             &lt;xf:else /&gt;&lt;span class="label"&gt;[{$clan.tag}]&lt;/span&gt;&lt;/xf:if&gt;
         &lt;/div&gt;
     &lt;/xf:foreach&gt;
+    &lt;/xf:if&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;xf:if is="$xf.visitor.hasPermission('wxClans', 'moderate')"&gt;

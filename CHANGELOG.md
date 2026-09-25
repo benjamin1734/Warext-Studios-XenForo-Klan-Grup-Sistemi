@@ -1,5 +1,25 @@
 # Changelog / Değişiklik Günlüğü
 
+## 0.9.0 Alpha - 2026-09-25
+
+### English
+
+- Added global per-clan active member and Manager limits enforced in the service layer.
+- Added join-application and invitation resend cooldowns to reduce repeated application/invite spam.
+- Added clan privacy controls for member lists and announcements.
+- Added an Admin CP system overview with clan states, active memberships and pending review queues.
+- Added XenForo schema upgrade support for the new privacy fields.
+- Expanded CI checks for 0.9 privacy, limits, cooldowns and option metadata.
+
+### Türkçe
+
+- Servis katmanında zorlanan global klan başına aktif üye ve Manager limitleri eklendi.
+- Tekrarlanan başvuru/davet spamini azaltmak için üyelik başvurusu ve davet yeniden gönderme cooldown ayarları eklendi.
+- Üye listesi ve duyurular için klan gizlilik seçenekleri eklendi.
+- ACP ana klan ekranına durumlar, aktif üyelikler ve bekleyen inceleme kuyruklarını gösteren sistem özeti eklendi.
+- Yeni gizlilik alanları için XenForo schema upgrade adımı eklendi.
+- CI kontrolleri 0.9 gizlilik, limit, cooldown ve option metadata alanlarını kapsayacak şekilde genişletildi.
+
 ## 0.8.0 Alpha - 2026-09-25
 
 ### English

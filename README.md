@@ -8,7 +8,7 @@ The system is intentionally independent from XenForo forum moderation. Clan owne
 
 ## Current version
 
-**0.8.0 Alpha**
+**0.9.0 Alpha**
 
 0.8.0 adds reserved clan identities, automatic maintenance, forum-forced ownership recovery, moderation reasons/Owner alerts and full membership display on member profiles, while preserving the existing lifecycle, membership, invitation, role and moderation workflows.
 
@@ -207,6 +207,14 @@ The add-on provides a dedicated **Clans & Groups** section containing:
 
 A dedicated `wxClansManage` Admin CP permission protects clan administration routes.
 
+### Capacity, anti-spam and privacy
+
+- Administrators can cap active members per clan and Manager-role members per clan.
+- Rejected/cancelled join applications can be rate-limited before the same user reapplies.
+- Resolved invitations can be rate-limited before management sends another invitation to the same user.
+- Clan management can make the member list public, members-only or Owner/forum-staff only.
+- Clan announcements can be public or members-only.
+
 ### Global settings
 
 Administrators can configure:
@@ -325,7 +333,7 @@ Sistemin temel güvenlik kuralı şudur: **klan yöneticiliği forum moderatörl
 
 ## Güncel sürüm
 
-**0.8.0 Alpha**
+**0.9.0 Alpha**
 
 0.8.0 ile rezerve klan kimlikleri, otomatik bakım, forum yönetimi tarafından zorunlu sahiplik kurtarma, moderasyon nedeni/Owner bildirimi ve kullanıcı profilinde tüm klan üyeliklerinin gösterimi eklendi. Mevcut yaşam döngüsü, üyelik, davet, rol ve moderasyon akışları korunur.
 
@@ -499,6 +507,14 @@ ACP içinde bağımsız **Klanlar & Gruplar** bölümü bulunur:
 - Uygun aktif üyeye zorunlu Owner devri
 
 Klan yönetim controller'ları ayrı `wxClansManage` ACP izniyle korunur.
+
+### Kapasite, spam koruması ve gizlilik
+
+- Yöneticiler klan başına aktif üye ve Manager sayısını sınırlandırabilir.
+- Reddedilen/iptal edilen üyelik başvurularından sonra aynı kullanıcının yeniden başvurması cooldown ile sınırlandırılabilir.
+- Sonuçlanmış davetten sonra aynı kullanıcıya tekrar davet göndermek cooldown ile sınırlandırılabilir.
+- Klan yönetimi üye listesini herkese açık, yalnız üyelere açık veya yalnız Owner/forum ekibine açık yapabilir.
+- Klan duyuruları herkese açık veya yalnız üyelere açık olabilir.
 
 ### Global ayarlar
 

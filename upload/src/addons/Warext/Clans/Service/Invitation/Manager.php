@@ -50,6 +50,25 @@ class Manager extends AbstractService
             $existing->save();
         }
 
+        $cooldownHours = (int)($this->app->options()->wxClansInviteCooldownHours ?? 0);
+        if ($cooldownHours > 0)
+        {
+            $latest = $this->finder('Warext\\Clans:ClanInvitation')
+                ->where('clan_id', $this->clan->clan_id)
+                ->where('user_id', $user->user_id)
+                ->order('create_date', 'DESC')
+                ->fetchOne();
+            if ($latest && $latest->status !== 'pending')
+            {
+                $nextAllowed = $latest->create_date + ($cooldownHours * 3600);
+                if ($latest->create_date > 0 && $nextAllowed > \XF::$time)
+                {
+                    $remaining = (int)ceil(($nextAllowed - \XF::$time) / 3600);
+                    throw new \XF\PrintableException('This user can be invited again in approximately ' . $remaining . ' hour(s).');
+                }
+            }
+        }
+
         $days = max(1, (int)($this->app->options()->wxClansInviteDays ?? 7));
         $invitation = $this->em()->create('Warext\\Clans:ClanInvitation');
         $invitation->bulkSet([

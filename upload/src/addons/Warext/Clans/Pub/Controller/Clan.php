@@ -62,22 +62,28 @@ class Clan extends AbstractController
             throw $this->exception($this->noPermission($error));
         }
 
-        $members = $this->finder('Warext\\Clans:ClanMember')
-            ->where('clan_id', $clan->clan_id)
-            ->where('member_state', 'active')
-            ->with(['User', 'Role'])
-            ->order('is_owner', 'DESC')
-            ->order('is_manager', 'DESC')
-            ->order('join_date', 'ASC')
-            ->fetch();
+        $canViewMembers = $clan->canViewMemberList($memberListError);
+        $members = $canViewMembers
+            ? $this->finder('Warext\\Clans:ClanMember')
+                ->where('clan_id', $clan->clan_id)
+                ->where('member_state', 'active')
+                ->with(['User', 'Role'])
+                ->order('is_owner', 'DESC')
+                ->order('is_manager', 'DESC')
+                ->order('join_date', 'ASC')
+                ->fetch()
+            : [];
 
-        $announcements = $this->finder('Warext\\Clans:ClanAnnouncement')
-            ->where('clan_id', $clan->clan_id)
-            ->with('User')
-            ->order('is_pinned', 'DESC')
-            ->order('create_date', 'DESC')
-            ->limit(10)
-            ->fetch();
+        $canViewAnnouncements = $clan->canViewAnnouncements($announcementError);
+        $announcements = $canViewAnnouncements
+            ? $this->finder('Warext\\Clans:ClanAnnouncement')
+                ->where('clan_id', $clan->clan_id)
+                ->with('User')
+                ->order('is_pinned', 'DESC')
+                ->order('create_date', 'DESC')
+                ->limit(10)
+                ->fetch()
+            : [];
 
         $pendingJoin = null;
         if (\XF::visitor()->user_id)
@@ -96,6 +102,10 @@ class Clan extends AbstractController
             'announcements' => $announcements,
             'visitorMembership' => $clan->getVisitorMembership(),
             'pendingJoin' => $pendingJoin,
+            'canViewMembers' => $canViewMembers,
+            'memberListError' => $memberListError ?? '',
+            'canViewAnnouncements' => $canViewAnnouncements,
+            'announcementError' => $announcementError ?? '',
             'pendingLifecycle' => $clan->isVisitorOwner() ? $this->finder('Warext\\Clans:ClanApplication')->where('clan_id', $clan->clan_id)->where('application_type', ['close','reopen'])->where('status', 'pending')->order('create_date', 'DESC')->fetchOne() : null
         ]);
     }
@@ -787,11 +797,20 @@ class Clan extends AbstractController
         $clan = $this->assertClanExists($params->clan_id);
         $this->assertClanPermission($clan, ClanPermission::MANAGE_SETTINGS);
 
-        $input = $this->filter(['description'=>'str','rules'=>'str','category'=>'str','join_mode'=>'str','logo_url'=>'str','cover_url'=>'str']);
+        $input = $this->filter(['description'=>'str','rules'=>'str','category'=>'str','join_mode'=>'str','member_list_visibility'=>'str','announcement_visibility'=>'str','logo_url'=>'str','cover_url'=>'str']);
         if (!in_array($input['join_mode'], ['open', 'application', 'invite', 'closed'], true))
         {
             return $this->error('Invalid join mode.');
         }
+        if (!in_array($input['member_list_visibility'], ['public','members','staff'], true))
+        {
+            return $this->error('Invalid member list visibility.');
+        }
+        if (!in_array($input['announcement_visibility'], ['public','members'], true))
+        {
+            return $this->error('Invalid announcement visibility.');
+        }
+
         foreach (['logo_url','cover_url'] as $field)
         {
             $value = trim($input[$field]);
@@ -805,11 +824,18 @@ class Clan extends AbstractController
         $clan->rules = mb_substr(trim($input['rules']), 0, 20000);
         $clan->category = mb_substr(trim($input['category']), 0, 50);
         $clan->join_mode = $input['join_mode'];
+        $clan->member_list_visibility = $input['member_list_visibility'];
+        $clan->announcement_visibility = $input['announcement_visibility'];
         $clan->logo_url = trim($input['logo_url']);
         $clan->cover_url = trim($input['cover_url']);
         $clan->save();
 
-        $this->service('Warext\\Clans:Audit\\Logger')->log($clan->clan_id, \XF::visitor()->user_id, 'settings_updated', ['category'=>$clan->category,'join_mode'=>$clan->join_mode], 'clan', $clan->clan_id);
+        $this->service('Warext\\Clans:Audit\\Logger')->log($clan->clan_id, \XF::visitor()->user_id, 'settings_updated', [
+            'category'=>$clan->category,
+            'join_mode'=>$clan->join_mode,
+            'member_list_visibility'=>$clan->member_list_visibility,
+            'announcement_visibility'=>$clan->announcement_visibility
+        ], 'clan', $clan->clan_id);
         return $this->redirect($this->buildLink('clans/manage', $clan), 'Clan settings updated.');
     }
 
