@@ -19,7 +19,11 @@ class ClanAnnouncement extends Entity
 
     public function canReport(?string &$error = null): bool
     {
-        return (bool)($this->Clan && $this->Clan->canReport($error));
+        return (bool)(
+            $this->canView($error)
+            && $this->Clan
+            && $this->Clan->canReport($error)
+        );
     }
 
     public static function getStructure(Structure $structure)

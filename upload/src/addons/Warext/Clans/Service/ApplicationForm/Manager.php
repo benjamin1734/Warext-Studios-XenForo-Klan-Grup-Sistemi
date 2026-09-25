@@ -55,6 +55,18 @@ class Manager extends AbstractService
             $fieldKey = 'field_' . substr(md5($title . microtime(true)), 0, 10);
         }
         $fieldKey = preg_replace('/[^a-z0-9_]/', '_', strtolower($fieldKey));
+        $fieldKey = mb_substr($fieldKey, 0, 50);
+        $duplicate = $this->finder('Warext\\Clans:ClanApplicationField')
+            ->where('clan_id', $this->clan->clan_id)
+            ->where('field_key', $fieldKey);
+        if ($field->field_id)
+        {
+            $duplicate->where('field_id', '<>', $field->field_id);
+        }
+        if ($duplicate->fetchOne())
+        {
+            throw new \XF\PrintableException('Field key must be unique within the clan.');
+        }
 
         $options = [];
         if (in_array($type, ['select', 'checkbox'], true))
@@ -100,8 +112,19 @@ class Manager extends AbstractService
             throw new \LogicException('Application field does not belong to this clan.');
         }
         $fieldId = $field->field_id;
-        $field->delete();
-        $this->db()->delete('xf_wx_clan_application_answer', 'field_id = ?', $fieldId);
-        $this->service('Warext\\Clans:Audit\\Logger')->log($this->clan->clan_id, $actorUserId, 'application_field_deleted', ['field_id' => $fieldId], 'clan_application_field', $fieldId);
+        $db = $this->db();
+        $db->beginTransaction();
+        try
+        {
+            $db->delete('xf_wx_clan_application_answer', 'field_id = ?', $fieldId);
+            $field->delete();
+            $this->service('Warext\\Clans:Audit\\Logger')->log($this->clan->clan_id, $actorUserId, 'application_field_deleted', ['field_id' => $fieldId], 'clan_application_field', $fieldId);
+            $db->commit();
+        }
+        catch (\Throwable $e)
+        {
+            $db->rollback();
+            throw $e;
+        }
     }
 }

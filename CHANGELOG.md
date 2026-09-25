@@ -1,5 +1,23 @@
 # Changelog / Değişiklik Günlüğü
 
+## 0.12.1 RC - 2026-09-25
+
+### English
+
+- Prevented members-only clan announcements from being reported through a direct report URL by requiring announcement visibility before reporting.
+- Added explicit per-clan application field-key uniqueness validation before persistence.
+- Made custom-role deletion atomic with reassignment of affected members and the audit event.
+- Made application-field deletion atomic with deletion of historical answers and the audit event.
+- Added permanent CI verification that every Entity column matches the fresh-install schema in Setup.php.
+
+### Türkçe
+
+- Yalnız üyelere açık klan duyurularının doğrudan rapor URL'si üzerinden raporlanabilmesi engellendi; raporlamadan önce duyuru görünürlüğü zorunlu hale getirildi.
+- Başvuru alanı anahtarları için veritabanına yazmadan önce klan içi benzersizlik kontrolü eklendi.
+- Özel rol silme işlemi, etkilenen üyelerin yeniden atanması ve audit kaydıyla birlikte atomik hale getirildi.
+- Başvuru alanı silme işlemi, geçmiş cevapların silinmesi ve audit kaydıyla birlikte atomik hale getirildi.
+- Tüm Entity kolonlarının Setup.php sıfır kurulum şemasıyla birebir eşleştiğini doğrulayan kalıcı CI testi eklendi.
+
 ## 0.12.0 RC - 2026-09-25
 
 ### English

@@ -137,15 +137,26 @@ class RoleManager extends AbstractService
             ->where('role_id', $role->role_id)
             ->fetch();
 
-        foreach ($members as $member)
-        {
-            $member->role_id = $memberRole ? $memberRole->role_id : 0;
-            $member->save();
-        }
-
         $roleId = $role->role_id;
-        $role->delete();
-        $this->service('Warext\\Clans:Audit\\Logger')->log($this->clan->clan_id, $actorUserId, 'custom_role_deleted', ['role_id' => $roleId], 'clan_role', $roleId);
+        $db = $this->db();
+        $db->beginTransaction();
+        try
+        {
+            foreach ($members as $member)
+            {
+                $member->role_id = $memberRole ? $memberRole->role_id : 0;
+                $member->save();
+            }
+
+            $role->delete();
+            $this->service('Warext\\Clans:Audit\\Logger')->log($this->clan->clan_id, $actorUserId, 'custom_role_deleted', ['role_id' => $roleId], 'clan_role', $roleId);
+            $db->commit();
+        }
+        catch (\Throwable $e)
+        {
+            $db->rollback();
+            throw $e;
+        }
     }
 
     protected function assertCustomRole(\Warext\Clans\Entity\ClanRole $role): void

@@ -66,8 +66,8 @@ jobs:
           data = root / '_data'
 
           addon = json.loads((root / 'addon.json').read_text(encoding='utf-8'))
-          if addon.get('version_id') != 1000120 or addon.get('version_string') != '0.12.0 RC':
-              raise SystemExit('Expected version is 0.12.0 RC / 1000120')
+          if addon.get('version_id') != 1000121 or addon.get('version_string') != '0.12.1 RC':
+              raise SystemExit('Expected version is 0.12.1 RC / 1000121')
           if addon.get('require', {}).get('XF', [0])[0] != 2030000:
               raise SystemExit('XenForo 2.3.0+ requirement is missing')
           if addon.get('require', {}).get('php', [''])[0] != '8.1.0':
@@ -333,6 +333,51 @@ jobs:
               raise SystemExit('0.12 content length validation is incomplete')
           if 'mb_strlen($value) > 255' not in public_controller:
               raise SystemExit('0.12 media URL length validation is missing')
+
+          announcement_entity = (root / 'Entity/ClanAnnouncement.php').read_text(encoding='utf-8')
+          if 'canView($error)' not in announcement_entity.split('public function canReport', 1)[1]:
+              raise SystemExit('0.12.1 announcement report privacy check is missing')
+
+          if 'beginTransaction()' not in role_manager or 'beginTransaction()' not in field_manager:
+              raise SystemExit('0.12.1 multi-record delete transaction hardening is incomplete')
+          if 'Field key must be unique within the clan.' not in field_manager:
+              raise SystemExit('0.12.1 application field-key uniqueness check is missing')
+
+          setup_text = (root / 'Setup.php').read_text(encoding='utf-8')
+          install_text = setup_text.split('public function installStep2', 1)[0]
+          install_tables = {}
+          current_table = None
+          for line in install_text.splitlines():
+              table_match = re.search(r"createTable\('([^']+)'", line)
+              if table_match:
+                  current_table = table_match.group(1)
+                  install_tables[current_table] = set()
+                  continue
+              if current_table:
+                  col_match = re.search(r"addColumn\('([^']+)'", line)
+                  if col_match:
+                      install_tables[current_table].add(col_match.group(1))
+                  if line.strip() == '});':
+                      current_table = None
+
+          entity_mismatches = []
+          for entity_path in sorted((root / 'Entity').glob('*.php')):
+              entity_text = entity_path.read_text(encoding='utf-8')
+              table_match = re.search(r"\$structure->table\s*=\s*'([^']+)'", entity_text)
+              columns_match = re.search(r"\$structure->columns\s*=\s*\[([\s\S]*?)\n\s*\];", entity_text)
+              if not table_match or not columns_match:
+                  continue
+              table_name = table_match.group(1)
+              entity_cols = set(re.findall(r"^\s*'([^']+)'\s*=>", columns_match.group(1), flags=re.M))
+              if table_name not in install_tables:
+                  entity_mismatches.append(f'{entity_path.name}: install table {table_name} missing')
+                  continue
+              missing = sorted(entity_cols - install_tables[table_name])
+              extra = sorted(install_tables[table_name] - entity_cols)
+              if missing or extra:
+                  entity_mismatches.append(f'{entity_path.name}: missing={missing}, extra={extra}')
+          if entity_mismatches:
+              raise SystemExit('Entity/install schema mismatch: ' + '; '.join(entity_mismatches))
 
           print(f'Validated {len(trees)} XML files, {len(templates)} templates and {len(routes)} routes.')
           PY
