@@ -80,8 +80,8 @@ jobs:
           git tag -f "$TAG" "$GITHUB_SHA"
           git push -f origin "refs/tags/$TAG"
           if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release edit "$TAG" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md
+            gh release edit "$TAG" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md --prerelease
             gh release upload "$TAG" "dist/$FILE" --clobber
           else
-            gh release create "$TAG" "dist/$FILE" --target "$GITHUB_SHA" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md
+            gh release create "$TAG" "dist/$FILE" --target "$GITHUB_SHA" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md --prerelease
           fi
