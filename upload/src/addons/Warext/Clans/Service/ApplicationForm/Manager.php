@@ -18,6 +18,18 @@ class Manager extends AbstractService
     {
         if (!$field)
         {
+            $maxFields = (int)($this->app->options()->wxClansMaxFields ?? 20);
+            if ($maxFields > 0)
+            {
+                $fieldCount = $this->finder('Warext\\Clans:ClanApplicationField')
+                    ->where('clan_id', $this->clan->clan_id)
+                    ->total();
+                if ($fieldCount >= $maxFields)
+                {
+                    throw new \XF\PrintableException('This clan has reached the maximum number of application fields.');
+                }
+            }
+
             $field = $this->em()->create('Warext\\Clans:ClanApplicationField');
             $field->clan_id = $this->clan->clan_id;
         }
@@ -54,6 +66,11 @@ class Manager extends AbstractService
                 {
                     $options[] = mb_substr($option, 0, 100);
                 }
+            }
+            $options = array_values(array_unique($options));
+            if (count($options) > 50)
+            {
+                throw new \XF\PrintableException('Select and checkbox fields may contain at most 50 options.');
             }
             if (!$options)
             {

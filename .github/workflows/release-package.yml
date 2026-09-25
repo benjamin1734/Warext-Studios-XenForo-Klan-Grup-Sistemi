@@ -28,6 +28,12 @@ jobs:
           echo "file=Warext-Studios-XenForo-Klan-Grup-Sistemi-v$SAFE_VERSION.zip" >> "$GITHUB_OUTPUT"
           PREV_TAG=$(git tag --list 'v*' --sort=-version:refname | grep -vx "v$SAFE_VERSION" | head -n 1 || true)
           echo "previous_tag=$PREV_TAG" >> "$GITHUB_OUTPUT"
+          LOWER_VERSION=$(printf '%s' "$VERSION" | tr '[:upper:]' '[:lower:]')
+          if printf '%s' "$LOWER_VERSION" | grep -Eq '(alpha|beta|rc)'; then
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Build direct-install ZIP
         shell: bash
@@ -83,6 +89,7 @@ jobs:
           TAG: ${{ steps.version.outputs.tag }}
           FILE: ${{ steps.version.outputs.file }}
           VERSION: ${{ steps.version.outputs.version }}
+          PRERELEASE: ${{ steps.version.outputs.prerelease }}
         shell: bash
         run: |
           cat > /tmp/release-notes.md <<EOF2
@@ -106,8 +113,12 @@ jobs:
           EOF2
           git tag -f "$TAG" "$GITHUB_SHA"
           git push -f origin "refs/tags/$TAG"
+          RELEASE_FLAGS=()
+          if [ "$PRERELEASE" = "true" ]; then
+            RELEASE_FLAGS+=(--prerelease)
+          fi
           if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release edit "$TAG" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md --prerelease
+            gh release edit "$TAG" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md "${RELEASE_FLAGS[@]}"
             gh release upload "$TAG" "dist/$FILE" --clobber
             if [ -n "${UPDATE_FILE:-}" ] && [ -f "dist/$UPDATE_FILE" ]; then
               gh release upload "$TAG" "dist/$UPDATE_FILE" --clobber
@@ -117,5 +128,5 @@ jobs:
             if [ -n "${UPDATE_FILE:-}" ] && [ -f "dist/$UPDATE_FILE" ]; then
               ASSETS+=("dist/$UPDATE_FILE")
             fi
-            gh release create "$TAG" "${ASSETS[@]}" --target "$GITHUB_SHA" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md --prerelease
+            gh release create "$TAG" "${ASSETS[@]}" --target "$GITHUB_SHA" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md "${RELEASE_FLAGS[@]}"
           fi

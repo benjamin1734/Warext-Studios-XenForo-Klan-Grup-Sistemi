@@ -209,6 +209,9 @@ A dedicated `wxClansManage` Admin CP permission protects clan administration rou
 
 ### Capacity, anti-spam and privacy
 
+- Custom roles, join-form fields and stored announcements have configurable per-clan ceilings.
+- Long-form clan content and media URL inputs are validated before persistence.
+
 - Large clan member lists are paginated on both public profiles and management screens; the page size is configurable in ACP.
 
 - Administrators can cap active members per clan and Manager-role members per clan.
@@ -514,6 +517,9 @@ ACP içinde bağımsız **Klanlar & Gruplar** bölümü bulunur:
 Klan yönetim controller'ları ayrı `wxClansManage` ACP izniyle korunur.
 
 ### Kapasite, spam koruması ve gizlilik
+
+- Özel roller, başvuru formu alanları ve saklanan duyurular için klan başına ayarlanabilir üst sınırlar bulunur.
+- Uzun klan içerikleri ve medya URL girişleri veritabanına yazılmadan önce doğrulanır.
 
 - Büyük klanların üye listeleri public profil ve yönetim ekranında sayfalanır; sayfa başına üye sayısı ACP'den ayarlanabilir.
 

@@ -69,6 +69,19 @@ class RoleManager extends AbstractService
 
     public function createCustomRole(string $title, int $displayOrder, int $actorUserId): \Warext\Clans\Entity\ClanRole
     {
+        $maxRoles = (int)($this->app->options()->wxClansMaxRoles ?? 20);
+        if ($maxRoles > 0)
+        {
+            $roleCount = $this->finder('Warext\\Clans:ClanRole')
+                ->where('clan_id', $this->clan->clan_id)
+                ->where('role_type', 'custom')
+                ->total();
+            if ($roleCount >= $maxRoles)
+            {
+                throw new \XF\PrintableException('This clan has reached the maximum number of custom roles.');
+            }
+        }
+
         $title = trim($title);
         if ($title === '' || mb_strlen($title) > 75)
         {

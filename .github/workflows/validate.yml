@@ -66,8 +66,8 @@ jobs:
           data = root / '_data'
 
           addon = json.loads((root / 'addon.json').read_text(encoding='utf-8'))
-          if addon.get('version_id') != 1000110 or addon.get('version_string') != '0.11.0 Beta':
-              raise SystemExit('Expected version is 0.11.0 Beta / 1000110')
+          if addon.get('version_id') != 1000120 or addon.get('version_string') != '0.12.0 RC':
+              raise SystemExit('Expected version is 0.12.0 RC / 1000120')
           if addon.get('require', {}).get('XF', [0])[0] != 2030000:
               raise SystemExit('XenForo 2.3.0+ requirement is missing')
           if addon.get('require', {}).get('php', [''])[0] != '8.1.0':
@@ -317,6 +317,22 @@ jobs:
           navigation_xml = (data / 'navigation.xml').read_text(encoding='utf-8')
           if "hasPermission('wxClans', 'view')" not in navigation_xml:
               raise SystemExit('0.11 navigation permission condition is missing')
+
+          role_manager = (root / 'Service/Clan/RoleManager.php').read_text(encoding='utf-8')
+          field_manager = (root / 'Service/ApplicationForm/Manager.php').read_text(encoding='utf-8')
+          announcement_manager = (root / 'Service/Clan/AnnouncementManager.php').read_text(encoding='utf-8')
+          submit_create = (root / 'Service/Application/SubmitCreate.php').read_text(encoding='utf-8')
+
+          for needle in ['wxClansMaxRoles', 'wxClansMaxFields', 'wxClansMaxAnnouncements']:
+              if needle not in option_ids:
+                  raise SystemExit('0.12 abuse-limit option missing: ' + needle)
+
+          if 'wxClansMaxRoles' not in role_manager or 'wxClansMaxFields' not in field_manager or 'wxClansMaxAnnouncements' not in announcement_manager:
+              raise SystemExit('0.12 service-level resource limits are incomplete')
+          if '20000' not in announcement_manager or '20000' not in submit_create:
+              raise SystemExit('0.12 content length validation is incomplete')
+          if 'mb_strlen($value) > 255' not in public_controller:
+              raise SystemExit('0.12 media URL length validation is missing')
 
           print(f'Validated {len(trees)} XML files, {len(templates)} templates and {len(routes)} routes.')
           PY

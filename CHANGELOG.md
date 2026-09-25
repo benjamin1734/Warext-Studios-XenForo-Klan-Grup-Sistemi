@@ -1,5 +1,27 @@
 # Changelog / Değişiklik Günlüğü
 
+## 0.12.0 RC - 2026-09-25
+
+### English
+
+- Added service-level per-clan limits for custom roles, custom application fields and stored announcements.
+- Added a maximum of 50 unique options for select/checkbox application fields.
+- Added explicit 20,000-character limits for clan creation descriptions and announcement messages.
+- Added explicit clan category, manager-banner and media-URL length validation.
+- Kept logo/cover media URLs restricted to HTTP/HTTPS and capped them at the database-safe 255-character limit.
+- Updated release automation so Alpha/Beta/RC versions are prereleases while future stable versions publish as normal releases.
+- Expanded CI validation for resource limits, content validation and release-candidate invariants.
+
+### Türkçe
+
+- Klan başına özel rol, özel başvuru sorusu ve saklanan duyuru sayısı için servis katmanı limitleri eklendi.
+- Seçim/çoklu seçim başvuru alanlarında en fazla 50 benzersiz seçenek sınırı eklendi.
+- Klan oluşturma açıklaması ve duyuru mesajlarında açık 20.000 karakter sınırı eklendi.
+- Klan kategorisi, yönetici bannerı ve medya URL'leri için açık uzunluk doğrulamaları eklendi.
+- Logo/kapak URL'leri yalnız HTTP/HTTPS olacak şekilde korunup veritabanıyla uyumlu 255 karakterle sınırlandırıldı.
+- Release otomasyonu Alpha/Beta/RC sürümlerini prerelease, gelecekteki stabil sürümleri normal release olarak yayınlayacak şekilde hazırlandı.
+- CI; kaynak limitleri, içerik doğrulama ve release-candidate bütünlüğünü kapsayacak şekilde genişletildi.
+
 ## 0.11.0 Beta - 2026-09-25
 
 ### English

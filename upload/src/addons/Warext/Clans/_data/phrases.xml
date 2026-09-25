@@ -107,4 +107,10 @@
   <phrase title="option_explain.wxClansInviteCooldown" version_id="1000090" version_string="0.9.0 Alpha">Hours clan management must wait before sending another invitation to the same user after a previous invitation was resolved. Set to 0 to disable.</phrase>
   <phrase title="option.wxClansMembersPerPage" version_id="1000100" version_string="0.10.0 Alpha">Clan members per page</phrase>
   <phrase title="option_explain.wxClansMembersPerPage" version_id="1000100" version_string="0.10.0 Alpha">Number of clan members loaded per page on public clan profiles and clan management screens. Allowed range: 10–100.</phrase>
+  <phrase title="option.wxClansMaxRoles" version_id="1000120" version_string="0.12.0 RC">Maximum custom roles per clan</phrase>
+  <phrase title="option_explain.wxClansMaxRoles" version_id="1000120" version_string="0.12.0 RC">Maximum number of custom clan roles. Set to 0 for unlimited.</phrase>
+  <phrase title="option.wxClansMaxFields" version_id="1000120" version_string="0.12.0 RC">Maximum application fields per clan</phrase>
+  <phrase title="option_explain.wxClansMaxFields" version_id="1000120" version_string="0.12.0 RC">Maximum number of custom join-application questions per clan. Set to 0 for unlimited.</phrase>
+  <phrase title="option.wxClansMaxAnnouncements" version_id="1000120" version_string="0.12.0 RC">Maximum announcements per clan</phrase>
+  <phrase title="option_explain.wxClansMaxAnnouncements" version_id="1000120" version_string="0.12.0 RC">Maximum number of stored clan announcements. Set to 0 for unlimited.</phrase>
 </phrases>

@@ -18,6 +18,18 @@ class AnnouncementManager extends AbstractService
     {
         if (!$announcement)
         {
+            $maxAnnouncements = (int)($this->app->options()->wxClansMaxAnnouncements ?? 100);
+            if ($maxAnnouncements > 0)
+            {
+                $announcementCount = $this->finder('Warext\\Clans:ClanAnnouncement')
+                    ->where('clan_id', $this->clan->clan_id)
+                    ->total();
+                if ($announcementCount >= $maxAnnouncements)
+                {
+                    throw new \XF\PrintableException('This clan has reached the maximum number of announcements.');
+                }
+            }
+
             $announcement = $this->em()->create('Warext\\Clans:ClanAnnouncement');
             $announcement->clan_id = $this->clan->clan_id;
             $announcement->user_id = $actor->user_id;
@@ -34,8 +46,16 @@ class AnnouncementManager extends AbstractService
         {
             throw new \XF\PrintableException('Announcement title and message are required.');
         }
+        if (mb_strlen($title) > 120)
+        {
+            throw new \XF\PrintableException('Announcement title may not exceed 120 characters.');
+        }
+        if (mb_strlen($message) > 20000)
+        {
+            throw new \XF\PrintableException('Announcement message may not exceed 20,000 characters.');
+        }
 
-        $announcement->title = mb_substr($title, 0, 120);
+        $announcement->title = $title;
         $announcement->message = $message;
         $announcement->is_pinned = !empty($input['is_pinned']);
         $announcement->update_date = \XF::$time;

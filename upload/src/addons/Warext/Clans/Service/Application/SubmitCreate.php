@@ -35,6 +35,9 @@ class SubmitCreate extends AbstractService
         $errors = [];
         $title = trim((string)($this->input['title'] ?? ''));
         $tag = strtoupper(trim((string)($this->input['tag'] ?? '')));
+        $description = trim((string)($this->input['description'] ?? ''));
+        $category = trim((string)($this->input['category'] ?? ''));
+        $banner = trim((string)($this->input['requested_manager_banner'] ?? ''));
         if (mb_strlen($title) < 3 || mb_strlen($title) > 100)
         {
             $errors[] = 'Clan name must be between 3 and 100 characters.';
@@ -42,6 +45,18 @@ class SubmitCreate extends AbstractService
         if (!preg_match('/^[A-Z0-9_-]{2,24}$/', $tag))
         {
             $errors[] = 'Clan tag must be 2-24 characters and contain only letters, numbers, _ or -.';
+        }
+        if (mb_strlen($description) > 20000)
+        {
+            $errors[] = 'Clan description may not exceed 20,000 characters.';
+        }
+        if (mb_strlen($category) > 50)
+        {
+            $errors[] = 'Clan category may not exceed 50 characters.';
+        }
+        if (mb_strlen($banner) > 100)
+        {
+            $errors[] = 'Manager banner may not exceed 100 characters.';
         }
         $clanRepo = $this->repository('Warext\\Clans:Clan');
         if ($clanRepo->isTagReserved($tag))

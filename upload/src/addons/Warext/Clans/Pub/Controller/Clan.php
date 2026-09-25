@@ -845,9 +845,9 @@ class Clan extends AbstractController
         foreach (['logo_url','cover_url'] as $field)
         {
             $value = trim($input[$field]);
-            if ($value !== '' && !$this->isValidHttpUrl($value))
+            if ($value !== '' && (!$this->isValidHttpUrl($value) || mb_strlen($value) > 255))
             {
-                return $this->error('Logo and cover URLs must use http or https.');
+                return $this->error('Logo and cover URLs must use http or https and be 255 characters or less.');
             }
         }
 
