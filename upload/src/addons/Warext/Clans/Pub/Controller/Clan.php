@@ -63,16 +63,26 @@ class Clan extends AbstractController
         }
 
         $canViewMembers = $clan->canViewMemberList($memberListError);
-        $members = $canViewMembers
-            ? $this->finder('Warext\\Clans:ClanMember')
+        $memberPage = $this->filterPage();
+        $memberPerPage = max(10, min(100, (int)($this->options()->wxClansMembersPerPage ?? 50)));
+        $memberTotal = 0;
+        if ($canViewMembers)
+        {
+            $memberFinder = $this->finder('Warext\\Clans:ClanMember')
                 ->where('clan_id', $clan->clan_id)
                 ->where('member_state', 'active')
                 ->with(['User', 'Role'])
                 ->order('is_owner', 'DESC')
                 ->order('is_manager', 'DESC')
-                ->order('join_date', 'ASC')
-                ->fetch()
-            : [];
+                ->order('join_date', 'ASC');
+            $memberTotal = $memberFinder->total();
+            $memberFinder->limitByPage($memberPage, $memberPerPage);
+            $members = $memberFinder->fetch();
+        }
+        else
+        {
+            $members = [];
+        }
 
         $canViewAnnouncements = $clan->canViewAnnouncements($announcementError);
         $announcements = $canViewAnnouncements
@@ -104,6 +114,9 @@ class Clan extends AbstractController
             'pendingJoin' => $pendingJoin,
             'canViewMembers' => $canViewMembers,
             'memberListError' => $memberListError ?? '',
+            'memberPage' => $memberPage,
+            'memberPerPage' => $memberPerPage,
+            'memberTotal' => $memberTotal,
             'canViewAnnouncements' => $canViewAnnouncements,
             'announcementError' => $announcementError ?? '',
             'pendingLifecycle' => $clan->isVisitorOwner() ? $this->finder('Warext\\Clans:ClanApplication')->where('clan_id', $clan->clan_id)->where('application_type', ['close','reopen'])->where('status', 'pending')->order('create_date', 'DESC')->fetchOne() : null
@@ -351,14 +364,18 @@ class Clan extends AbstractController
         $clan = $this->assertClanExists($params->clan_id, ['Owner']);
         $this->assertCanManageClan($clan);
 
-        $members = $this->finder('Warext\\Clans:ClanMember')
+        $memberPage = $this->filterPage();
+        $memberPerPage = max(10, min(100, (int)($this->options()->wxClansMembersPerPage ?? 50)));
+        $memberFinder = $this->finder('Warext\\Clans:ClanMember')
             ->where('clan_id', $clan->clan_id)
             ->where('member_state', 'active')
             ->with(['User', 'Role'])
             ->order('is_owner', 'DESC')
             ->order('is_manager', 'DESC')
-            ->order('join_date', 'ASC')
-            ->fetch();
+            ->order('join_date', 'ASC');
+        $memberTotal = $memberFinder->total();
+        $memberFinder->limitByPage($memberPage, $memberPerPage);
+        $members = $memberFinder->fetch();
 
         $roleManager = $this->service('Warext\\Clans:Clan\\RoleManager', $clan);
         $managerRole = $roleManager->getOrCreateManagerRole();
@@ -439,6 +456,9 @@ class Clan extends AbstractController
         return $this->view('Warext\\Clans:ClanManage', 'wx_clans_manage', [
             'clan' => $clan,
             'members' => $members,
+            'memberPage' => $memberPage,
+            'memberPerPage' => $memberPerPage,
+            'memberTotal' => $memberTotal,
             'managerRole' => $managerRole,
             'managerPermissionRows' => $managerPermissionRows,
             'customRoles' => $customRoles,

@@ -159,6 +159,7 @@ class MemberManager extends AbstractService
                     ->where('clan_id', $this->clan->clan_id)
                     ->where('member_state', 'active')
                     ->where('is_manager', 1)
+                    ->where('is_owner', 0)
                     ->total();
                 if ($managerCount >= $maxManagers)
                 {

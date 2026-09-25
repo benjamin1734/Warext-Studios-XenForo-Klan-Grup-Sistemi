@@ -209,6 +209,8 @@ A dedicated `wxClansManage` Admin CP permission protects clan administration rou
 
 ### Capacity, anti-spam and privacy
 
+- Large clan member lists are paginated on both public profiles and management screens; the page size is configurable in ACP.
+
 - Administrators can cap active members per clan and Manager-role members per clan.
 - Rejected/cancelled join applications can be rate-limited before the same user reapplies.
 - Resolved invitations can be rate-limited before management sends another invitation to the same user.
@@ -509,6 +511,8 @@ ACP içinde bağımsız **Klanlar & Gruplar** bölümü bulunur:
 Klan yönetim controller'ları ayrı `wxClansManage` ACP izniyle korunur.
 
 ### Kapasite, spam koruması ve gizlilik
+
+- Büyük klanların üye listeleri public profil ve yönetim ekranında sayfalanır; sayfa başına üye sayısı ACP'den ayarlanabilir.
 
 - Yöneticiler klan başına aktif üye ve Manager sayısını sınırlandırabilir.
 - Reddedilen/iptal edilen üyelik başvurularından sonra aynı kullanıcının yeniden başvurması cooldown ile sınırlandırılabilir.

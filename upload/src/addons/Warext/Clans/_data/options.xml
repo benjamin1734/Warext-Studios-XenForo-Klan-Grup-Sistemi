@@ -43,4 +43,10 @@
     <edit_format_params>min=0</edit_format_params>
     <relation group_id="wxClans" display_order="90" />
   </option>
+  <option option_id="wxClansMembersPerPage" edit_format="spinbox" data_type="unsigned_integer" advanced="0">
+    <default_value>50</default_value>
+    <edit_format_params>min=10
+max=100</edit_format_params>
+    <relation group_id="wxClans" display_order="100" />
+  </option>
 </options>

@@ -1,5 +1,23 @@
 # Changelog / Değişiklik Günlüğü
 
+## 0.10.0 Alpha - 2026-09-25
+
+### English
+
+- Corrected Manager-limit accounting so the clan Owner is not counted against the configurable Manager cap.
+- Hardened both normal and forum-forced ownership transfers so demoting the previous Owner to Manager cannot exceed the Manager limit.
+- Added configurable member pagination for public clan profiles and clan management screens.
+- Reduced large-clan page load cost by limiting active member entity hydration to the current page.
+- Expanded CI validation for pagination and ownership/Manager-limit invariants.
+
+### Türkçe
+
+- Klan Owner'ının ayarlanabilir Manager limitine dahil edilmesine neden olan hesaplama hatası düzeltildi.
+- Normal ve forum tarafından zorlanan sahiplik devirlerinde eski Owner'ın Manager yapılmasının Manager limitini aşması engellendi.
+- Public klan profili ve klan yönetim ekranına ayarlanabilir üye sayfalaması eklendi.
+- Büyük klanlarda yalnız mevcut sayfadaki aktif üyeler yüklenerek sayfa yükü azaltıldı.
+- CI kontrolleri sayfalama ve sahiplik/Manager-limit bütünlüğünü kapsayacak şekilde genişletildi.
+
 ## 0.9.0 Alpha - 2026-09-25
 
 ### English

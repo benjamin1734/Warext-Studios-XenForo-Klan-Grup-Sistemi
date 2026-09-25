@@ -66,8 +66,8 @@ jobs:
           data = root / '_data'
 
           addon = json.loads((root / 'addon.json').read_text(encoding='utf-8'))
-          if addon.get('version_id') != 1000090 or addon.get('version_string') != '0.9.0 Alpha':
-              raise SystemExit('Expected version is 0.9.0 Alpha / 1000090')
+          if addon.get('version_id') != 1000100 or addon.get('version_string') != '0.10.0 Alpha':
+              raise SystemExit('Expected version is 0.10.0 Alpha / 1000100')
           if addon.get('require', {}).get('XF', [0])[0] != 2030000:
               raise SystemExit('XenForo 2.3.0+ requirement is missing')
           if addon.get('require', {}).get('php', [''])[0] != '8.1.0':
@@ -293,6 +293,19 @@ jobs:
           for option_id in ['wxClansMaxMembersPerClan','wxClansMaxManagersPerClan','wxClansJoinCooldownHours','wxClansInviteCooldown']:
               if option_id not in option_ids:
                   raise SystemExit('0.9 option missing: ' + option_id)
+
+          if 'wxClansMembersPerPage' not in option_ids:
+              raise SystemExit('0.10 member pagination option is missing')
+
+          ownership = (root / 'Service/Ownership/Manager.php').read_text(encoding='utf-8')
+          admin_transfer = (root / 'Service/Ownership/AdminTransfer.php').read_text(encoding='utf-8')
+          if "where('is_owner', 0)" not in member_manager or 'managerCountAfter' not in ownership or 'managerCountAfter' not in admin_transfer:
+              raise SystemExit('0.10 manager-limit ownership hardening is incomplete')
+
+          public_controller = (root / 'Pub/Controller/Clan.php').read_text(encoding='utf-8')
+          for needle in ['memberPerPage', 'memberTotal', 'limitByPage']:
+              if needle not in public_controller:
+                  raise SystemExit('0.10 member pagination is incomplete: ' + needle)
 
           print(f'Validated {len(trees)} XML files, {len(templates)} templates and {len(routes)} routes.')
           PY

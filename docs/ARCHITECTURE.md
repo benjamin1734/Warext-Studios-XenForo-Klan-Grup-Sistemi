@@ -2,7 +2,7 @@
 
 ## Version
 
-`0.9.0 Alpha`
+`0.10.0 Alpha`
 
 ## Add-on ID
 
@@ -235,13 +235,17 @@ Availability is checked both when a request is submitted and again when staff ap
 
 ## Capacity and anti-spam enforcement
 
-Global XenForo options can limit active members per clan and Manager-role members per clan. These checks live in service classes rather than templates, so crafted requests cannot bypass them.
+Global XenForo options can limit active members per clan and Manager-role members per clan. The Owner is excluded from the Manager quota even though the owner membership carries management capability. Ownership-transfer services re-evaluate the resulting Manager count before committing role changes. These checks live in service classes rather than templates, so crafted requests cannot bypass them.
 
 Join applications and repeated invitations can also use configurable cooldown windows. Cooldown checks are scoped to the same clan/user pair and can be disabled with a zero value.
 
 ## Clan privacy model
 
 Member-list visibility is evaluated by the Clan entity and may be public, active-members only or Owner/forum-staff only. Announcement visibility may be public or active-members only. Controllers avoid loading protected collections when the current visitor cannot view them.
+
+## Large-clan pagination
+
+Public clan profiles and clan management screens paginate active membership records. The page size is controlled by `wxClansMembersPerPage` and clamped to 10–100 records. This avoids hydrating every user/role relation on large clans in a single request.
 
 ## Maintenance model
 
@@ -278,7 +282,7 @@ Notifications should be emitted after the committed state exists whenever practi
 
 Existing installations are upgraded in place. Upgrade packages must not require resetting the XenForo database or reinstalling the add-on.
 
-Version `0.2.0` introduced base role normalization. Version `0.5.0` introduced later tables/fields needed by ownership, blacklist, announcements and active preferences. Version `0.7.0` added lifecycle behavior without requiring destructive schema reset. Version `0.8.0` adds option/cron/service behavior and does not require a destructive schema reset. Version `0.9.0` adds two clan privacy columns through an in-place schema upgrade plus service-level capacity/cooldown controls.
+Version `0.2.0` introduced base role normalization. Version `0.5.0` introduced later tables/fields needed by ownership, blacklist, announcements and active preferences. Version `0.7.0` added lifecycle behavior without requiring destructive schema reset. Version `0.8.0` adds option/cron/service behavior and does not require a destructive schema reset. Version `0.9.0` adds two clan privacy columns through an in-place schema upgrade plus service-level capacity/cooldown controls. Version `0.10.0` adds pagination and ownership-limit hardening without a schema change.
 
 ## Repository layout
 

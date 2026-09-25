@@ -234,7 +234,7 @@
 &lt;/div&gt;
 &lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="clans" params="{{ {'q': $query, 'category': $category, 'join_mode': $joinMode, 'sort': $sort} }}" /&gt;
 </template>
-  <template type="public" title="wx_clans_manage" version_id="1000090" version_string="0.9.0 Alpha">&lt;xf:title&gt;Manage {$clan.title}&lt;/xf:title&gt;
+  <template type="public" title="wx_clans_manage" version_id="1000100" version_string="0.10.0 Alpha">&lt;xf:title&gt;Manage {$clan.title}&lt;/xf:title&gt;
 &lt;xf:pageaction&gt;&lt;xf:button href="{{ link('clans', $clan) }}"&gt;View clan&lt;/xf:button&gt;&lt;/xf:pageaction&gt;
 
 &lt;xf:if is="$clan.canManagePermission('manage_settings')"&gt;
@@ -296,6 +296,7 @@
         &lt;/xf:if&gt;
     &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/xf:foreach&gt;
+&lt;xf:if is="$memberTotal &gt; $memberPerPage"&gt;&lt;div class="block-row"&gt;&lt;xf:pagenav page="$memberPage" perpage="$memberPerPage" total="$memberTotal" link="clans/manage" data="$clan" /&gt;&lt;/div&gt;&lt;/xf:if&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;xf:if is="$clan.canManagePermission('manage_applications')"&gt;
@@ -430,7 +431,7 @@
 &lt;xf:foreach loop="$transferHistory" value="$item"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$item.Clan.title}&lt;/strong&gt; · {$item.FromUser.username} → {$item.ToUser.username} · {$item.status} · &lt;xf:date time="$item.create_date" /&gt;&lt;/div&gt;&lt;/xf:foreach&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
 </template>
-  <template type="public" title="wx_clans_view" version_id="1000090" version_string="0.9.0 Alpha">&lt;xf:title&gt;[{$clan.tag}] {$clan.title}&lt;/xf:title&gt;
+  <template type="public" title="wx_clans_view" version_id="1000100" version_string="0.10.0 Alpha">&lt;xf:title&gt;[{$clan.tag}] {$clan.title}&lt;/xf:title&gt;
 &lt;xf:css src="wx_clans.less" /&gt;
 
 &lt;xf:pageaction&gt;
@@ -508,6 +509,7 @@
             &lt;xf:else /&gt;&lt;span class="label"&gt;[{$clan.tag}]&lt;/span&gt;&lt;/xf:if&gt;
         &lt;/div&gt;
     &lt;/xf:foreach&gt;
+    &lt;xf:if is="$canViewMembers &amp;&amp; $memberTotal &gt; $memberPerPage"&gt;&lt;div class="block-row"&gt;&lt;xf:pagenav page="$memberPage" perpage="$memberPerPage" total="$memberTotal" link="clans" data="$clan" /&gt;&lt;/div&gt;&lt;/xf:if&gt;
     &lt;/xf:if&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 

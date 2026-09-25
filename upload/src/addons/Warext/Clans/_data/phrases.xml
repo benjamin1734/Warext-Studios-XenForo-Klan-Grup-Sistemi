@@ -105,4 +105,6 @@
   <phrase title="option_explain.wxClansJoinCooldownHours" version_id="1000090" version_string="0.9.0 Alpha">Hours a user must wait after a rejected or cancelled join application before applying to the same clan again. Set to 0 to disable.</phrase>
   <phrase title="option.wxClansInviteCooldown" version_id="1000090" version_string="0.9.0 Alpha">Invitation resend cooldown (hours)</phrase>
   <phrase title="option_explain.wxClansInviteCooldown" version_id="1000090" version_string="0.9.0 Alpha">Hours clan management must wait before sending another invitation to the same user after a previous invitation was resolved. Set to 0 to disable.</phrase>
+  <phrase title="option.wxClansMembersPerPage" version_id="1000100" version_string="0.10.0 Alpha">Clan members per page</phrase>
+  <phrase title="option_explain.wxClansMembersPerPage" version_id="1000100" version_string="0.10.0 Alpha">Number of clan members loaded per page on public clan profiles and clan management screens. Allowed range: 10–100.</phrase>
 </phrases>

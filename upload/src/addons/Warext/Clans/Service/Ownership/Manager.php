@@ -140,6 +140,24 @@ class Manager extends AbstractService
         $ownerRole = $roleManager->getRoleByType('owner');
         $managerRole = $roleManager->getOrCreateManagerRole();
 
+        $maxManagers = (int)($this->app->options()->wxClansMaxManagersPerClan ?? 0);
+        if ($maxManagers > 0)
+        {
+            $managerCount = $this->finder('Warext\\Clans:ClanMember')
+                ->where('clan_id', $this->clan->clan_id)
+                ->where('member_state', 'active')
+                ->where('is_manager', 1)
+                ->where('is_owner', 0)
+                ->total();
+
+            $targetWasManager = (bool)($newOwnerMember->is_manager && !$newOwnerMember->is_owner);
+            $managerCountAfter = $managerCount - ($targetWasManager ? 1 : 0) + 1;
+            if ($managerCountAfter > $maxManagers)
+            {
+                throw new \XF\PrintableException('Ownership transfer would exceed the clan manager limit.');
+            }
+        }
+
         $db = $this->db();
         $db->beginTransaction();
         try

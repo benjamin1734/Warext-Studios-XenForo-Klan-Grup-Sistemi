@@ -54,6 +54,24 @@ class AdminTransfer extends AbstractService
             throw new \XF\PrintableException('A reason is required for a forum-forced ownership change.');
         }
 
+        $maxManagers = (int)($this->app->options()->wxClansMaxManagersPerClan ?? 0);
+        if ($maxManagers > 0 && $keepOldOwnerAsManager)
+        {
+            $managerCount = $this->finder('Warext\\Clans:ClanMember')
+                ->where('clan_id', $this->clan->clan_id)
+                ->where('member_state', 'active')
+                ->where('is_manager', 1)
+                ->where('is_owner', 0)
+                ->total();
+
+            $targetWasManager = (bool)($targetMember->is_manager && !$targetMember->is_owner);
+            $managerCountAfter = $managerCount - ($targetWasManager ? 1 : 0) + 1;
+            if ($managerCountAfter > $maxManagers)
+            {
+                throw new \XF\PrintableException('Keeping the previous owner as Manager would exceed the clan manager limit.');
+            }
+        }
+
         $db = $this->db();
         $db->beginTransaction();
         try
