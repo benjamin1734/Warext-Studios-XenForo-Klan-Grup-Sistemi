@@ -207,7 +207,7 @@ jobs:
                   raise SystemExit('Default permission setup is incomplete: ' + needle)
 
           lifecycle = (root / 'Service/Clan/LifecycleManager.php').read_text(encoding='utf-8')
-          if 'suspended' not in lifecycle or 'reopen' not in lifecycle or 'close' not in lifecycle:
+          if "status !== 'closed'" not in lifecycle or "['close', 'reopen']" not in lifecycle:
               raise SystemExit('Lifecycle state protection is incomplete')
 
           print(f'Validated {len(trees)} XML files, {len(templates)} templates and {len(routes)} routes.')
