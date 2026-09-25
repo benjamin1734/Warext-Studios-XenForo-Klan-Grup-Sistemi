@@ -168,7 +168,7 @@ jobs:
                   if title not in template_titles:
                       raise SystemExit(f'Controller references missing template {title}: {file}')
 
-          fields = {(e.attrib.get('content_type'), e.attrib.get('field_name')): e.attrib.get('field_value') for e in trees['content_type_fields.xml'].getroot().findall('field')}
+          fields = {(e.attrib.get('content_type'), e.attrib.get('field_name')): (e.text or '').strip() for e in trees['content_type_fields.xml'].getroot().findall('field')}
           required_fields = {
               ('wx_clan', 'entity'): 'Warext\\Clans:Clan',
               ('wx_clan', 'alert_handler_class'): 'Warext\\Clans\\Alert\\Clan',
