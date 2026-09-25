@@ -66,8 +66,8 @@ jobs:
           data = root / '_data'
 
           addon = json.loads((root / 'addon.json').read_text(encoding='utf-8'))
-          if addon.get('version_id') != 1000080 or addon.get('version_string') != '0.8.0 Alpha':
-              raise SystemExit('Expected version is 0.8.0 Alpha / 1000080')
+          if addon.get('version_id') != 1000090 or addon.get('version_string') != '0.9.0 Alpha':
+              raise SystemExit('Expected version is 0.9.0 Alpha / 1000090')
           if addon.get('require', {}).get('XF', [0])[0] != 2030000:
               raise SystemExit('XenForo 2.3.0+ requirement is missing')
           if addon.get('require', {}).get('php', [''])[0] != '8.1.0':
