@@ -50,7 +50,7 @@ class Manager extends AbstractService
             $existing->save();
         }
 
-        $cooldownHours = (int)($this->app->options()->wxClansInviteCooldownHours ?? 0);
+        $cooldownHours = (int)($this->app->options()->wxClansInviteCooldown ?? 0);
         if ($cooldownHours > 0)
         {
             $latest = $this->finder('Warext\\Clans:ClanInvitation')

@@ -38,7 +38,7 @@
     <edit_format_params>min=0</edit_format_params>
     <relation group_id="wxClans" display_order="80" />
   </option>
-  <option option_id="wxClansInviteCooldownHours" edit_format="spinbox" data_type="unsigned_integer" advanced="0">
+  <option option_id="wxClansInviteCooldown" edit_format="spinbox" data_type="unsigned_integer" advanced="0">
     <default_value>6</default_value>
     <edit_format_params>min=0</edit_format_params>
     <relation group_id="wxClans" display_order="90" />

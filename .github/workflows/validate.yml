@@ -286,11 +286,11 @@ jobs:
 
           join_manager = (root / 'Service/Join/Manager.php').read_text(encoding='utf-8')
           invite_manager = (root / 'Service/Invitation/Manager.php').read_text(encoding='utf-8')
-          if 'wxClansJoinCooldownHours' not in join_manager or 'wxClansInviteCooldownHours' not in invite_manager:
+          if 'wxClansJoinCooldownHours' not in join_manager or 'wxClansInviteCooldown' not in invite_manager:
               raise SystemExit('0.9 anti-spam cooldowns are incomplete')
 
           option_ids = {e.attrib.get('option_id') for e in trees['options.xml'].getroot().findall('option')}
-          for option_id in ['wxClansMaxMembersPerClan','wxClansMaxManagersPerClan','wxClansJoinCooldownHours','wxClansInviteCooldownHours']:
+          for option_id in ['wxClansMaxMembersPerClan','wxClansMaxManagersPerClan','wxClansJoinCooldownHours','wxClansInviteCooldown']:
               if option_id not in option_ids:
                   raise SystemExit('0.9 option missing: ' + option_id)
 
