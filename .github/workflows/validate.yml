@@ -1,0 +1,237 @@
+name: XenForo Add-on Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  php-lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.1', '8.2', '8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+      - name: PHP syntax
+        run: find upload/src/addons/Warext/Clans -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Source comment policy
+        run: |
+          php <<'PHP'
+          <?php
+          $root = 'upload/src/addons/Warext/Clans';
+          $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root));
+          $violations = [];
+          foreach ($it as $file)
+          {
+              if (!$file->isFile() || strtolower($file->getExtension()) !== 'php')
+              {
+                  continue;
+              }
+              foreach (token_get_all(file_get_contents($file->getPathname())) as $token)
+              {
+                  if (is_array($token) && ($token[0] === T_COMMENT || $token[0] === T_DOC_COMMENT))
+                  {
+                      $violations[] = $file->getPathname() . ':' . $token[2];
+                  }
+              }
+          }
+          if ($violations)
+          {
+              fwrite(STDERR, "PHP source comments are not allowed:\n" . implode("\n", $violations) . "\n");
+              exit(1);
+          }
+          PHP
+
+  xenforo-metadata:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate add-on data and cross references
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          import re
+          import xml.etree.ElementTree as ET
+
+          root = Path('upload/src/addons/Warext/Clans')
+          data = root / '_data'
+
+          addon = json.loads((root / 'addon.json').read_text(encoding='utf-8'))
+          if addon.get('version_id') != 1000070 or addon.get('version_string') != '0.7.0 Alpha':
+              raise SystemExit('Expected version is 0.7.0 Alpha / 1000070')
+          if addon.get('require', {}).get('XF', [0])[0] != 2030000:
+              raise SystemExit('XenForo 2.3.0+ requirement is missing')
+          if addon.get('require', {}).get('php', [''])[0] != '8.1.0':
+              raise SystemExit('PHP 8.1.0+ requirement is missing')
+
+          if (root / '_output').exists():
+              raise SystemExit('_output must not be committed to the installable source tree')
+
+          trees = {}
+          for path in sorted(data.glob('*.xml')):
+              trees[path.name] = ET.parse(path)
+              print('parsed', path)
+
+          required_data = {
+              'admin_navigation.xml', 'admin_permission.xml', 'class_extensions.xml',
+              'content_type_fields.xml', 'navigation.xml', 'option_groups.xml',
+              'options.xml', 'permission_interface_groups.xml', 'permissions.xml',
+              'phrases.xml', 'routes.xml', 'template_modifications.xml', 'templates.xml'
+          }
+          missing = sorted(required_data - set(trees))
+          if missing:
+              raise SystemExit('Missing XenForo _data files: ' + ', '.join(missing))
+
+          limit_checks = [
+              ('admin_navigation.xml', './/admin_navigation_entry', ['navigation_id', 'parent_navigation_id', 'admin_permission_id']),
+              ('admin_permission.xml', './/admin_permission', ['admin_permission_id']),
+              ('permission_interface_groups.xml', './/interface_group', ['interface_group_id']),
+              ('permissions.xml', './/permission', ['permission_group_id', 'permission_id', 'interface_group_id']),
+              ('option_groups.xml', './/group', ['group_id']),
+              ('options.xml', './/option', ['option_id']),
+              ('routes.xml', './/route', ['route_prefix', 'sub_name', 'context'])
+          ]
+          errors = []
+          for filename, selector, attrs in limit_checks:
+              for node in trees[filename].getroot().findall(selector):
+                  for attr in attrs:
+                      value = node.attrib.get(attr, '')
+                      if value and len(value) > 25:
+                          errors.append(f'{filename}: {attr}={value} ({len(value)})')
+          if errors:
+              raise SystemExit('XenForo identifier length limit exceeded:\n' + '\n'.join(errors))
+
+          admin_perm_ids = {e.attrib.get('admin_permission_id') for e in trees['admin_permission.xml'].getroot().findall('admin_permission')}
+          if 'wxClansManage' not in admin_perm_ids:
+              raise SystemExit('wxClansManage admin permission is missing')
+
+          nav = {e.attrib.get('navigation_id'): e for e in trees['admin_navigation.xml'].getroot().findall('admin_navigation_entry')}
+          required_nav = {'wxClans', 'wxClansApplications', 'wxClansIdentity', 'wxClansOwnership', 'wxClansLifecycle', 'wxClansSettings'}
+          if not required_nav.issubset(nav):
+              raise SystemExit('Admin navigation entries are missing: ' + ', '.join(sorted(required_nav - set(nav))))
+          for key in ('wxClansApplications', 'wxClansIdentity', 'wxClansOwnership', 'wxClansLifecycle'):
+              if nav[key].attrib.get('admin_permission_id') != 'wxClansManage':
+                  raise SystemExit(f'{key} is not protected by wxClansManage')
+          if nav['wxClansSettings'].attrib.get('admin_permission_id') != 'option':
+              raise SystemExit('Settings navigation must use XenForo option permission')
+
+          permissions = {(e.attrib.get('permission_group_id'), e.attrib.get('permission_id')) for e in trees['permissions.xml'].getroot().findall('permission')}
+          expected_permissions = {('wxClans', 'view'), ('wxClans', 'apply'), ('wxClans', 'moderate')}
+          if not expected_permissions.issubset(permissions):
+              raise SystemExit('Required wxClans permissions are missing')
+
+          routes = trees['routes.xml'].getroot().findall('route')
+          for route in routes:
+              controller = route.attrib.get('controller', '')
+              if ':' not in controller:
+                  continue
+              addon_prefix, class_name = controller.split(':', 1)
+              if addon_prefix != 'Warext\\Clans':
+                  raise SystemExit('Unexpected route controller prefix: ' + controller)
+              area = 'Admin' if route.attrib.get('route_type') == 'admin' else 'Pub'
+              file = root / area / 'Controller' / f'{class_name}.php'
+              if not file.is_file():
+                  raise SystemExit(f'Route controller does not exist: {controller} -> {file}')
+
+          admin_controllers = list((root / 'Admin' / 'Controller').glob('*.php'))
+          for file in admin_controllers:
+              source = file.read_text(encoding='utf-8')
+              if "assertAdminPermission('wxClansManage')" not in source:
+                  raise SystemExit(f'Admin controller is missing wxClansManage assertion: {file}')
+
+          templates = trees['templates.xml'].getroot().findall('template')
+          template_titles = {t.attrib.get('title') for t in templates}
+          required_templates = {
+              'wx_clans_list', 'wx_clans_view', 'wx_clans_manage', 'wx_clans_my',
+              'wx_clans_admin_list', 'wx_clans_admin_applications',
+              'wx_clans_admin_identity_changes', 'wx_clans_admin_ownership_transfers',
+              'wx_clans_admin_lifecycle_requests', 'report_content_wx_clan',
+              'report_content_wx_clan_announcement', 'wx_clans_user_badges',
+              'alert_wx_clan_lifecycle_approved', 'alert_wx_clan_lifecycle_rejected'
+          }
+          if not required_templates.issubset(template_titles):
+              raise SystemExit('Required templates missing: ' + ', '.join(sorted(required_templates - template_titles)))
+
+          for file in root.rglob('*.php'):
+              source = file.read_text(encoding='utf-8')
+              for match in re.finditer(r"->view\([^,]+,\s*'([^']+)'", source):
+                  title = match.group(1)
+                  if title not in template_titles:
+                      raise SystemExit(f'Controller references missing template {title}: {file}')
+
+          fields = {(e.attrib.get('content_type'), e.attrib.get('field_name')): e.attrib.get('field_value') for e in trees['content_type_fields.xml'].getroot().findall('field')}
+          required_fields = {
+              ('wx_clan', 'entity'): 'Warext\\Clans:Clan',
+              ('wx_clan', 'alert_handler_class'): 'Warext\\Clans\\Alert\\Clan',
+              ('wx_clan', 'report_handler_class'): 'Warext\\Clans\\Report\\Clan',
+              ('wx_clan', 'moderator_log_handler_class'): 'Warext\\Clans\\ModeratorLog\\Clan',
+              ('wx_clan_announcement', 'entity'): 'Warext\\Clans:ClanAnnouncement',
+              ('wx_clan_announcement', 'report_handler_class'): 'Warext\\Clans\\Report\\Announcement'
+          }
+          for key, value in required_fields.items():
+              if fields.get(key) != value:
+                  raise SystemExit(f'Content type field mismatch: {key} -> {fields.get(key)!r}')
+
+          required_php = [
+              root / 'Service/Clan/LifecycleManager.php',
+              root / 'Service/Ownership/Manager.php',
+              root / 'Service/Identity/Manager.php',
+              root / 'Service/Join/Manager.php',
+              root / 'Service/Invitation/Manager.php',
+              root / 'Report/Clan.php',
+              root / 'Report/Announcement.php',
+              root / 'ModeratorLog/Clan.php',
+              root / 'XF/Entity/User.php'
+          ]
+          missing_php = [str(p) for p in required_php if not p.is_file()]
+          if missing_php:
+              raise SystemExit('Required source files missing:\n' + '\n'.join(missing_php))
+
+          setup = (root / 'Setup.php').read_text(encoding='utf-8')
+          for needle in [
+              "applyMissingGroupPermissions(2, ['view', 'apply'])",
+              "applyMissingGroupPermissions(3, ['view', 'apply', 'moderate'])",
+              "applyMissingGroupPermissions(4, ['view', 'apply', 'moderate'])",
+              "wxClansManage"
+          ]:
+              if needle not in setup:
+                  raise SystemExit('Default permission setup is incomplete: ' + needle)
+
+          lifecycle = (root / 'Service/Clan/LifecycleManager.php').read_text(encoding='utf-8')
+          if 'suspended' not in lifecycle or 'reopen' not in lifecycle or 'close' not in lifecycle:
+              raise SystemExit('Lifecycle state protection is incomplete')
+
+          print(f'Validated {len(trees)} XML files, {len(templates)} templates and {len(routes)} routes.')
+          PY
+
+  package-layout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build direct-install archive
+        run: |
+          VERSION=$(python -c "import json; print(json.load(open('upload/src/addons/Warext/Clans/addon.json', encoding='utf-8'))['version_string'])")
+          SAFE_VERSION=$(printf '%s' "$VERSION" | tr ' ' '-')
+          PACKAGE="Warext-Studios-XenForo-Klan-Grup-Sistemi-v${SAFE_VERSION}.zip"
+          mkdir -p dist
+          zip -q -r "dist/$PACKAGE" upload -x '*/.DS_Store' '*/Thumbs.db'
+          test -s "dist/$PACKAGE"
+          unzip -Z1 "dist/$PACKAGE" | grep -qx 'upload/src/addons/Warext/Clans/addon.json'
+          if unzip -Z1 "dist/$PACKAGE" | grep -E '(^|/)(\.git|\.github|README\.md|CHANGELOG\.md|SECURITY\.md|CONTRIBUTING\.md|LICENSE|_output)($|/)' ; then
+            echo 'Development-only file found in release package.'
+            exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: xenforo-clans-direct-install
+          path: dist/*.zip
+          if-no-files-found: error

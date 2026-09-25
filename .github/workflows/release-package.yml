@@ -1,0 +1,87 @@
+name: Build and Publish XenForo Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read version
+        id: version
+        shell: bash
+        run: |
+          VERSION=$(python -c "import json; print(json.load(open('upload/src/addons/Warext/Clans/addon.json', encoding='utf-8'))['version_string'])")
+          SAFE_VERSION=$(printf '%s' "$VERSION" | tr ' ' '-')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "safe_version=$SAFE_VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$SAFE_VERSION" >> "$GITHUB_OUTPUT"
+          echo "file=Warext-Studios-XenForo-Klan-Grup-Sistemi-v$SAFE_VERSION.zip" >> "$GITHUB_OUTPUT"
+
+      - name: Build direct-install ZIP
+        shell: bash
+        run: |
+          rm -rf dist
+          mkdir -p dist
+          zip -q -r "dist/${{ steps.version.outputs.file }}" upload -x '*/.DS_Store' '*/Thumbs.db'
+
+      - name: Validate package
+        shell: bash
+        run: |
+          test -s "dist/${{ steps.version.outputs.file }}"
+          unzip -Z1 "dist/${{ steps.version.outputs.file }}" | grep -qx 'upload/src/addons/Warext/Clans/addon.json'
+          if unzip -Z1 "dist/${{ steps.version.outputs.file }}" | grep -E '(^|/)(\.git|\.github|README\.md|CHANGELOG\.md|SECURITY\.md|CONTRIBUTING\.md|LICENSE|_output)($|/)' ; then
+            exit 1
+          fi
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: xenforo-clans-${{ steps.version.outputs.safe_version }}
+          path: dist/${{ steps.version.outputs.file }}
+          if-no-files-found: error
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.version.outputs.tag }}
+          FILE: ${{ steps.version.outputs.file }}
+          VERSION: ${{ steps.version.outputs.version }}
+        shell: bash
+        run: |
+          cat > /tmp/release-notes.md <<EOF2
+          ## Türkçe
+
+          XenForo Admin CP → **Add-ons → Install/upgrade from archive** üzerinden doğrudan yüklenebilir pakettir. ZIP kökünde yalnızca \`upload/\` dizini bulunur.
+
+          Sürüm: **$VERSION**
+
+          Detaylı değişiklikler için repodaki \`CHANGELOG.md\` dosyasını inceleyin.
+
+          ---
+
+          ## English
+
+          Direct-install package for XenForo Admin CP → **Add-ons → Install/upgrade from archive**. The ZIP root contains only the \`upload/\` directory.
+
+          Version: **$VERSION**
+
+          See \`CHANGELOG.md\` in the repository for detailed changes.
+          EOF2
+          git tag -f "$TAG" "$GITHUB_SHA"
+          git push -f origin "refs/tags/$TAG"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release edit "$TAG" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md
+            gh release upload "$TAG" "dist/$FILE" --clobber
+          else
+            gh release create "$TAG" "dist/$FILE" --target "$GITHUB_SHA" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md
+          fi

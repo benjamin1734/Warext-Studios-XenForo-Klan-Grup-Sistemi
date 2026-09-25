@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<routes>
+  <route route_type="admin" route_prefix="warext-clans" controller="Warext\Clans:Clan" context="wxClans" />
+  <route route_type="admin" route_prefix="warext-clans" sub_name="applications" format="applications/:int&lt;application_id&gt;/" controller="Warext\Clans:Application" context="wxClans" />
+  <route route_type="admin" route_prefix="warext-clans" sub_name="clans" format="clans/:int&lt;clan_id,slug&gt;/" controller="Warext\Clans:Clan" context="wxClans" />
+  <route route_type="admin" route_prefix="warext-clans" sub_name="identity-changes" format="identity-changes/:int&lt;application_id&gt;/" controller="Warext\Clans:IdentityChange" context="wxClans" />
+  <route route_type="admin" route_prefix="warext-clans" sub_name="ownership-transfers" format="ownership-transfers/:int&lt;transfer_id&gt;/" controller="Warext\Clans:OwnershipTransfer" context="wxClans" />
+  <route route_type="public" route_prefix="clans" format=":int&lt;clan_id,slug&gt;/:page" controller="Warext\Clans:Clan" context="wxClans" />
+  <route route_type="admin" route_prefix="warext-clans" sub_name="lifecycle-requests" format="lifecycle-requests/:int&lt;application_id&gt;/" controller="Warext\Clans:LifecycleRequest" context="wxClans" />
+</routes>

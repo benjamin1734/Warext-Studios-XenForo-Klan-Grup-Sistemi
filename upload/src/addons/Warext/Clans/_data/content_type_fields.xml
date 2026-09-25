@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content_type_fields>
+  <field content_type="wx_clan" field_name="alert_handler_class">Warext\Clans\Alert\Clan</field>
+  <field content_type="wx_clan" field_name="entity">Warext\Clans:Clan</field>
+  <field content_type="wx_clan" field_name="moderator_log_handler_class">Warext\Clans\ModeratorLog\Clan</field>
+  <field content_type="wx_clan" field_name="report_handler_class">Warext\Clans\Report\Clan</field>
+  <field content_type="wx_clan_announcement" field_name="entity">Warext\Clans:ClanAnnouncement</field>
+  <field content_type="wx_clan_announcement" field_name="report_handler_class">Warext\Clans\Report\Announcement</field>
+</content_type_fields>

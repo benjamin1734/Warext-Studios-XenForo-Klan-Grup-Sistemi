@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='utf-8'?>
+<phrases>
+  <phrase title="admin_navigation.wxClans" version_id="1000050" version_string="0.5.0 Alpha">Clans &amp; Groups
+</phrase>
+  <phrase title="admin_navigation.wxClansApplications" version_id="1000050" version_string="0.5.0 Alpha">Clan applications
+</phrase>
+  <phrase title="admin_navigation.wxClansIdentity" version_id="1000050" version_string="0.5.0 Alpha">Identity changes
+</phrase>
+  <phrase title="admin_navigation.wxClansOwnership" version_id="1000050" version_string="0.5.0 Alpha">Ownership transfers
+</phrase>
+  <phrase title="alert_opt_out.wx_clan_application_approved" version_id="1000050" version_string="0.5.0 Alpha">Clan notifications: application approved
+</phrase>
+  <phrase title="alert_opt_out.wx_clan_application_rejected" version_id="1000050" version_string="0.5.0 Alpha">Clan notifications: application rejected
+</phrase>
+  <phrase title="alert_opt_out.wx_clan_identity_change_approved" version_id="1000050" version_string="0.5.0 Alpha">Clan notifications: identity change approved
+</phrase>
+  <phrase title="alert_opt_out.wx_clan_identity_change_rejected" version_id="1000050" version_string="0.5.0 Alpha">Clan notifications: identity change rejected
+</phrase>
+  <phrase title="alert_opt_out.wx_clan_invited" version_id="1000050" version_string="0.5.0 Alpha">Clan notifications: invited
+</phrase>
+  <phrase title="alert_opt_out.wx_clan_join_application" version_id="1000050" version_string="0.5.0 Alpha">Clan notifications: join application
+</phrase>
+  <phrase title="alert_opt_out.wx_clan_member_joined" version_id="1000050" version_string="0.5.0 Alpha">Clan notifications: member joined
+</phrase>
+  <phrase title="alert_opt_out.wx_clan_ownership_transfer_approved" version_id="1000050" version_string="0.5.0 Alpha">Clan notifications: ownership transfer approved
+</phrase>
+  <phrase title="alert_opt_out.wx_clan_ownership_transfer_requested" version_id="1000050" version_string="0.5.0 Alpha">Clan notifications: ownership transfer requested
+</phrase>
+  <phrase title="content_type.wx_clan" version_id="1000050" version_string="0.5.0 Alpha">Clan
+</phrase>
+  <phrase title="mod_log.wx_clan_approve_creation" version_id="1000050" version_string="0.5.0 Alpha">Approved clan creation
+</phrase>
+  <phrase title="mod_log.wx_clan_change_manager_banner" version_id="1000050" version_string="0.5.0 Alpha">Changed clan manager banner
+</phrase>
+  <phrase title="mod_log.wx_clan_change_owner_user_id" version_id="1000050" version_string="0.5.0 Alpha">Changed clan owner
+</phrase>
+  <phrase title="mod_log.wx_clan_change_status" version_id="1000050" version_string="0.5.0 Alpha">Changed clan status from {old} to {new}
+</phrase>
+  <phrase title="mod_log.wx_clan_change_tag" version_id="1000050" version_string="0.5.0 Alpha">Changed clan tag
+</phrase>
+  <phrase title="mod_log.wx_clan_change_title" version_id="1000050" version_string="0.5.0 Alpha">Changed clan title
+</phrase>
+  <phrase title="mod_log.wx_clan_identity_change_approved" version_id="1000050" version_string="0.5.0 Alpha">Approved clan identity change
+</phrase>
+  <phrase title="mod_log.wx_clan_identity_change_rejected" version_id="1000050" version_string="0.5.0 Alpha">Rejected clan identity change
+</phrase>
+  <phrase title="mod_log.wx_clan_ownership_transfer_approved" version_id="1000050" version_string="0.5.0 Alpha">Approved clan ownership transfer
+</phrase>
+  <phrase title="mod_log.wx_clan_ownership_transfer_rejected" version_id="1000050" version_string="0.5.0 Alpha">Rejected clan ownership transfer
+</phrase>
+  <phrase title="mod_log.wx_clan_status_update" version_id="1000050" version_string="0.5.0 Alpha">Changed clan status from {old} to {new}
+</phrase>
+  <phrase title="nav.wxClans" version_id="1000050" version_string="0.5.0 Alpha">Clans
+</phrase>
+  <phrase title="nav.wxClansMy" version_id="1000050" version_string="0.5.0 Alpha">My clans
+</phrase>
+  <phrase title="option.wxClansInviteDays" version_id="1000050" version_string="0.5.0 Alpha">Clan invitation lifetime (days)
+</phrase>
+  <phrase title="option.wxClansMaxMemberships" version_id="1000050" version_string="0.5.0 Alpha">Maximum clan memberships per user
+</phrase>
+  <phrase title="option.wxClansMaxOwned" version_id="1000050" version_string="0.5.0 Alpha">Maximum owned clans per user
+</phrase>
+  <phrase title="option_explain.wxClansInviteDays" version_id="1000070" version_string="0.7.0 Alpha">Number of days before a clan invitation expires.</phrase>
+  <phrase title="option_explain.wxClansMaxMemberships" version_id="1000070" version_string="0.7.0 Alpha">Maximum number of active clan memberships a user may have. Set to 0 for unlimited.</phrase>
+  <phrase title="option_explain.wxClansMaxOwned" version_id="1000070" version_string="0.7.0 Alpha">Maximum number of clans a user may own at the same time. Set to 0 for unlimited.</phrase>
+  <phrase title="option_group.wxClans" version_id="1000050" version_string="0.5.0 Alpha">Clans &amp; Groups
+</phrase>
+  <phrase title="permission.wxClans_apply" version_id="1000050" version_string="0.5.0 Alpha">Apply to create clans
+</phrase>
+  <phrase title="permission.wxClans_moderate" version_id="1000050" version_string="0.5.0 Alpha">Moderate clans
+</phrase>
+  <phrase title="permission.wxClans_view" version_id="1000050" version_string="0.5.0 Alpha">View clans
+</phrase>
+  <phrase title="permission_interface.wxClans" version_id="1000050" version_string="0.5.0 Alpha">Clans &amp; Groups
+</phrase>
+  <phrase title="permission_interface.wxClansModerator" version_id="1000050" version_string="0.5.0 Alpha">Clan moderation</phrase>
+  <phrase title="content_type.wx_clan_announcement" version_id="1000060" version_string="0.6.0 Alpha">Clan announcement</phrase>
+  <phrase title="mod_log.wx_clan_announcement_removed" version_id="1000060" version_string="0.6.0 Alpha">Removed clan announcement {title}</phrase>
+  <phrase title="alert_opt_out.wx_clan_ownership_transfer_rejected" version_id="1000060" version_string="0.6.0 Alpha">Ownership transfer rejected</phrase>
+  <phrase title="admin_navigation.wxClansLifecycle" version_id="1000070" version_string="0.7.0 Alpha">Lifecycle requests</phrase>
+  <phrase title="alert_opt_out.wx_clan_lifecycle_approved" version_id="1000070" version_string="0.7.0 Alpha">Clan lifecycle request approved</phrase>
+  <phrase title="alert_opt_out.wx_clan_lifecycle_rejected" version_id="1000070" version_string="0.7.0 Alpha">Clan lifecycle request rejected</phrase>
+  <phrase title="mod_log.wx_clan_lifecycle_approved" version_id="1000070" version_string="0.7.0 Alpha">Approved clan lifecycle request ({type})</phrase>
+  <phrase title="mod_log.wx_clan_lifecycle_rejected" version_id="1000070" version_string="0.7.0 Alpha">Rejected clan lifecycle request ({type})</phrase>
+  <phrase title="admin_permission.wxClansManage" version_id="1000070" version_string="0.7.0 Alpha">Manage clan and group system</phrase>
+  <phrase title="admin_navigation.wxClansSettings" version_id="1000070" version_string="0.7.0 Alpha">Settings</phrase>
+  <phrase title="option_group_description.wxClans" version_id="1000070" version_string="0.7.0 Alpha">Configure global limits and invitation behavior for the clan and group system.</phrase>
+</phrases>

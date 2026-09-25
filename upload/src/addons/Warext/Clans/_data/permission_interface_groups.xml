@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permission_interface_groups>
+  <interface_group interface_group_id="wxClans" display_order="900" is_moderator="0"/>
+  <interface_group interface_group_id="wxClansModerator" display_order="901" is_moderator="1"/>
+</permission_interface_groups>

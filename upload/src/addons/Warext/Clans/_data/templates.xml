@@ -1,0 +1,498 @@
+<?xml version='1.0' encoding='utf-8'?>
+<templates>
+  <template type="admin" title="wx_clans_admin_applications" version_id="1000050" version_string="0.5.0 Alpha">&lt;xf:title&gt;Clan applications&lt;/xf:title&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$applications" value="$application"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;[{$application.tag}] {$application.title}&lt;/strong&gt; · {$application.User.username}&lt;div&gt;{$application.description}&lt;/div&gt;&lt;div class="u-muted"&gt;Category: {$application.category} · Manager banner: {$application.requested_manager_banner}&lt;/div&gt;
+&lt;xf:form action="{{ link('warext-clans/applications/approve', $application) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:button type="submit" class="button--cta"&gt;Approve&lt;/xf:button&gt;&lt;/xf:form&gt;
+&lt;xf:button href="{{ link('warext-clans/applications/reject', $application) }}" overlay="true"&gt;Reject / request changes&lt;/xf:button&gt;&lt;/div&gt;&lt;xf:else /&gt;&lt;div class="block-row"&gt;No pending clan applications.&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+</template>
+  <template type="admin" title="wx_clans_admin_identity_changes" version_id="1000050" version_string="0.5.0 Alpha">&lt;xf:title&gt;Clan identity changes&lt;/xf:title&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$requests" value="$request"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$request.Clan.title}&lt;/strong&gt; → &lt;strong&gt;[{$request.tag}] {$request.title}&lt;/strong&gt;&lt;div&gt;Requested manager banner: {$request.requested_manager_banner}&lt;/div&gt;&lt;div class="u-muted"&gt;Tag color {$request.requested_tag_color} · Banner color {$request.requested_manager_banner_color} · requested by {$request.User.username}&lt;/div&gt;
+&lt;xf:form action="{{ link('warext-clans/identity-changes/approve', $request) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:button type="submit" class="button--cta"&gt;Approve&lt;/xf:button&gt;&lt;/xf:form&gt;
+&lt;xf:form action="{{ link('warext-clans/identity-changes/reject', $request) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:textbox name="reason" placeholder="Rejection reason" /&gt;&lt;xf:button type="submit"&gt;Reject&lt;/xf:button&gt;&lt;/xf:form&gt;&lt;/div&gt;&lt;xf:else /&gt;&lt;div class="block-row"&gt;No pending identity changes.&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+</template>
+  <template type="admin" title="wx_clans_admin_ownership_transfers" version_id="1000050" version_string="0.5.0 Alpha">&lt;xf:title&gt;Clan ownership transfers&lt;/xf:title&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$transfers" value="$transfer"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$transfer.Clan.title}&lt;/strong&gt; · {$transfer.FromUser.username} → {$transfer.ToUser.username}&lt;div class="u-muted"&gt;Accepted &lt;xf:date time="$transfer.accepted_date" /&gt;&lt;/div&gt;
+&lt;xf:form action="{{ link('warext-clans/ownership-transfers/approve', $transfer) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:button type="submit" class="button--cta"&gt;Approve transfer&lt;/xf:button&gt;&lt;/xf:form&gt;
+&lt;xf:form action="{{ link('warext-clans/ownership-transfers/reject', $transfer) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:textbox name="reason" placeholder="Rejection reason" /&gt;&lt;xf:button type="submit"&gt;Reject&lt;/xf:button&gt;&lt;/xf:form&gt;&lt;/div&gt;&lt;xf:else /&gt;&lt;div class="block-row"&gt;No transfers awaiting forum approval.&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+</template>
+  <template type="admin" title="wx_clans_admin_reject" version_id="1000050" version_string="0.5.0 Alpha">&lt;xf:title&gt;Review clan application&lt;/xf:title&gt;
+&lt;xf:form action="{{ link('warext-clans/applications/reject', $application) }}" class="block" ajax="true"&gt;&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;&lt;xf:textarearow name="reason" label="Reason / requested changes" autosize="true" /&gt;&lt;xf:selectrow name="mode" value="reject" label="Decision"&gt;&lt;xf:option value="reject"&gt;Reject&lt;/xf:option&gt;&lt;xf:option value="changes"&gt;Request changes&lt;/xf:option&gt;&lt;/xf:selectrow&gt;&lt;/div&gt;&lt;xf:submitrow submit="Save decision" /&gt;&lt;/div&gt;&lt;/xf:form&gt;
+</template>
+  <template type="public" title="alert_wx_clan_application_approved" version_id="1000050" version_string="0.5.0 Alpha">Your application to &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt; was approved.
+</template>
+  <template type="public" title="alert_wx_clan_application_rejected" version_id="1000050" version_string="0.5.0 Alpha">Your application to &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt; was rejected.&lt;xf:if is="$extra.reason"&gt; Reason: {$extra.reason}&lt;/xf:if&gt;
+</template>
+  <template type="public" title="alert_wx_clan_clan_approved" version_id="1000050" version_string="0.5.0 Alpha">Your clan &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt; was approved by forum management.
+</template>
+  <template type="public" title="alert_wx_clan_identity_change_approved" version_id="1000050" version_string="0.5.0 Alpha">The identity change request for &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt; was approved.
+</template>
+  <template type="public" title="alert_wx_clan_identity_change_rejected" version_id="1000050" version_string="0.5.0 Alpha">The identity change request for &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt; was rejected.&lt;xf:if is="$extra.reason"&gt; Reason: {$extra.reason}&lt;/xf:if&gt;
+</template>
+  <template type="public" title="alert_wx_clan_invited" version_id="1000050" version_string="0.5.0 Alpha">{$user.username} invited you to join &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt;.
+</template>
+  <template type="public" title="alert_wx_clan_join_application" version_id="1000050" version_string="0.5.0 Alpha">{$user.username} submitted an application to join &lt;a href="{{ link('clans/manage', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt;.
+</template>
+  <template type="public" title="alert_wx_clan_manager_assigned" version_id="1000050" version_string="0.5.0 Alpha">{$user.username} made you a clan manager in &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt;.
+</template>
+  <template type="public" title="alert_wx_clan_member_added" version_id="1000050" version_string="0.5.0 Alpha">{$user.username} added you to &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt;.
+</template>
+  <template type="public" title="alert_wx_clan_member_joined" version_id="1000050" version_string="0.5.0 Alpha">{$user.username} joined &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt;.
+</template>
+  <template type="public" title="alert_wx_clan_ownership_transfer_approved" version_id="1000050" version_string="0.5.0 Alpha">The ownership transfer for &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt; was approved by forum management.
+</template>
+  <template type="public" title="alert_wx_clan_ownership_transfer_requested" version_id="1000050" version_string="0.5.0 Alpha">{$user.username} requested that you become owner of &lt;a href="{{ link('clans/my') }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt;.
+</template>
+  <template type="public" title="report_content_wx_clan" version_id="1000050" version_string="0.5.0 Alpha">&lt;div class="blockMessage blockMessage--none"&gt;&lt;strong&gt;[{$content.tag}] {$content.title}&lt;/strong&gt;&lt;br /&gt;{$content.description}&lt;/div&gt;
+</template>
+  <template type="public" title="wx_clans.less" version_id="1000050" version_string="0.5.0 Alpha">.wxClanCover { height: 220px; background-size: cover; background-position: center; border-radius: @xf-borderRadiusLarge; margin-bottom: @xf-paddingMedium; }
+.wxClanLogo { width: 88px; height: 88px; object-fit: cover; border-radius: @xf-borderRadiusMedium; float: left; margin: 0 @xf-paddingMedium @xf-paddingMedium 0; }
+.wxClanTag, .wxClanManagerBanner { color: #fff !important; margin-top: 3px; }
+</template>
+  <template type="public" title="wx_clans_apply" version_id="1000050" version_string="0.5.0 Alpha">&lt;xf:title&gt;{{ $application ? 'Revise clan application' : 'Create a clan' }}&lt;/xf:title&gt;
+&lt;xf:form action="{{ link('clans/apply') }}" class="block" ajax="true"&gt;
+    &lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+        &lt;xf:if is="$application"&gt;&lt;xf:hiddenval name="application_id" value="{$application.application_id}" /&gt;&lt;xf:inforow label="Forum feedback"&gt;{$application.decision_reason}&lt;/xf:inforow&gt;&lt;/xf:if&gt;
+        &lt;xf:textboxrow name="title" value="{$application.title}" label="Clan name" maxlength="100" required="true" /&gt;
+        &lt;xf:textboxrow name="tag" value="{$application.tag}" label="Clan tag" maxlength="24" required="true" explain="2-24 characters: letters, numbers, underscore or hyphen." /&gt;
+        &lt;xf:textarearow name="description" value="{$application.description}" label="Description" autosize="true" /&gt;
+        &lt;xf:textboxrow name="category" value="{$application.category}" label="Game / category" maxlength="50" /&gt;
+        &lt;xf:textboxrow name="requested_manager_banner" value="{$application.requested_manager_banner}" label="Requested manager banner" maxlength="100" /&gt;
+        &lt;xf:textboxrow name="requested_tag_color" value="{{ $application ? $application.requested_tag_color : '#4f46e5' }}" label="Tag color" explain="Hex color, for example #4f46e5" /&gt;
+        &lt;xf:textboxrow name="requested_manager_banner_color" value="{{ $application ? $application.requested_manager_banner_color : '#805ad5' }}" label="Manager banner color" explain="Hex color, for example #805ad5" /&gt;
+    &lt;/div&gt;&lt;xf:submitrow submit="Submit for forum approval" /&gt;&lt;/div&gt;
+&lt;/xf:form&gt;
+</template>
+  <template type="public" title="wx_clans_join_apply" version_id="1000050" version_string="0.5.0 Alpha">&lt;xf:title&gt;Apply to {$clan.title}&lt;/xf:title&gt;
+&lt;xf:form action="{{ link('clans/join-apply', $clan) }}" class="block" ajax="true"&gt;
+&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+    &lt;xf:foreach loop="$fields" value="$field"&gt;
+        &lt;xf:if is="$field.field_type == 'textarea'"&gt;
+            &lt;xf:textarearow name="answers[{$field.field_id}]" label="{$field.title}" required="{$field.required}" autosize="true" /&gt;
+        &lt;xf:elseif is="$field.field_type == 'select'" /&gt;
+            &lt;xf:selectrow name="answers[{$field.field_id}]" label="{$field.title}" required="{$field.required}"&gt;&lt;xf:option value=""&gt;Select...&lt;/xf:option&gt;&lt;xf:foreach loop="$field.field_options" value="$option"&gt;&lt;xf:option value="{$option}"&gt;{$option}&lt;/xf:option&gt;&lt;/xf:foreach&gt;&lt;/xf:selectrow&gt;
+        &lt;xf:elseif is="$field.field_type == 'checkbox'" /&gt;
+            &lt;xf:checkboxrow label="{$field.title}"&gt;&lt;xf:foreach loop="$field.field_options" value="$option"&gt;&lt;xf:option name="answers[{$field.field_id}][]" value="{$option}"&gt;{$option}&lt;/xf:option&gt;&lt;/xf:foreach&gt;&lt;/xf:checkboxrow&gt;
+        &lt;xf:elseif is="$field.field_type == 'number'" /&gt;
+            &lt;xf:textboxrow type="number" name="answers[{$field.field_id}]" label="{$field.title}" required="{$field.required}" /&gt;
+        &lt;xf:elseif is="$field.field_type == 'date'" /&gt;
+            &lt;xf:textboxrow type="date" name="answers[{$field.field_id}]" label="{$field.title}" required="{$field.required}" /&gt;
+        &lt;xf:else /&gt;
+            &lt;xf:textboxrow name="answers[{$field.field_id}]" label="{$field.title}" required="{$field.required}" /&gt;
+        &lt;/xf:if&gt;
+    &lt;/xf:foreach&gt;
+    &lt;xf:if is="$fields is empty"&gt;&lt;xf:inforow&gt;No additional questions are required.&lt;/xf:inforow&gt;&lt;/xf:if&gt;
+&lt;/div&gt;&lt;xf:submitrow submit="Submit application" /&gt;&lt;/div&gt;
+&lt;/xf:form&gt;
+</template>
+  <template type="public" title="wx_clans_user_badges" version_id="1000050" version_string="0.5.0 Alpha">&lt;xf:macro name="badges" arg-user="!"&gt;
+    &lt;xf:set var="$membership" value="{$user.wx_active_clan_membership}" /&gt;
+    &lt;xf:if is="$membership &amp;&amp; $membership.Clan"&gt;
+        &lt;a href="{{ link('clans', $membership.Clan) }}" class="userBanner wxClanTag" style="background-color:{$membership.Clan.tag_color};border-color:{$membership.Clan.tag_color}"&gt;&lt;strong&gt;[{$membership.Clan.tag}]&lt;/strong&gt;&lt;/a&gt;
+        &lt;xf:if is="$membership.is_owner || $membership.is_manager"&gt;
+            &lt;span class="userBanner wxClanManagerBanner" style="background-color:{$membership.Clan.manager_banner_color};border-color:{$membership.Clan.manager_banner_color}"&gt;&lt;strong&gt;{{ $membership.Clan.manager_banner ?: 'Clan management' }}&lt;/strong&gt;&lt;/span&gt;
+        &lt;/xf:if&gt;
+    &lt;/xf:if&gt;
+&lt;/xf:macro&gt;
+</template>
+  <template type="public" title="report_content_wx_clan_announcement" version_id="1000060" version_string="0.6.0 Alpha">&lt;div class="blockMessage blockMessage--none"&gt;
+    &lt;strong&gt;[{$content.Clan.tag}] {$content.title}&lt;/strong&gt;
+    &lt;div class="u-muted"&gt;{$content.User.username}&lt;/div&gt;
+    &lt;div&gt;{$content.message}&lt;/div&gt;
+&lt;/div&gt;
+</template>
+  <template type="public" title="alert_wx_clan_ownership_transfer_rejected" version_id="1000060" version_string="0.6.0 Alpha">The ownership transfer for &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt; was rejected.&lt;xf:if is="$extra.reason"&gt; Reason: {$extra.reason}&lt;/xf:if&gt;
+</template>
+  <template type="public" title="wx_clans_role_edit" version_id="1000060" version_string="0.6.0 Alpha">&lt;xf:title&gt;Edit clan role&lt;/xf:title&gt;
+&lt;xf:form action="{{ link('clans/role-save', $clan) }}" class="block" ajax="true"&gt;
+    &lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+        &lt;xf:hiddenval name="role_id" value="{$role.role_id}" /&gt;
+        &lt;xf:textboxrow name="title" value="{$role.title}" label="Role title" required="true" /&gt;
+        &lt;xf:numberboxrow name="display_order" value="{$role.display_order}" min="20" label="Display order" /&gt;
+    &lt;/div&gt;&lt;xf:submitrow submit="Save role" /&gt;&lt;/div&gt;
+&lt;/xf:form&gt;
+</template>
+  <template type="public" title="wx_clans_application_field_edit" version_id="1000060" version_string="0.6.0 Alpha">&lt;xf:title&gt;Edit application question&lt;/xf:title&gt;
+&lt;xf:form action="{{ link('clans/application-field-save', $clan) }}" class="block" ajax="true"&gt;
+    &lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+        &lt;xf:hiddenval name="field_id" value="{$field.field_id}" /&gt;
+        &lt;xf:textboxrow name="title" value="{$field.title}" label="Question" required="true" /&gt;
+        &lt;xf:textboxrow name="field_key" value="{$field.field_key}" label="Field key" /&gt;
+        &lt;xf:selectrow name="field_type" value="{$field.field_type}" label="Field type"&gt;&lt;xf:option value="text"&gt;Text&lt;/xf:option&gt;&lt;xf:option value="textarea"&gt;Long text&lt;/xf:option&gt;&lt;xf:option value="select"&gt;Select&lt;/xf:option&gt;&lt;xf:option value="checkbox"&gt;Multiple choice&lt;/xf:option&gt;&lt;xf:option value="number"&gt;Number&lt;/xf:option&gt;&lt;xf:option value="date"&gt;Date&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
+        &lt;xf:textarearow name="options_text" value="{$optionsText}" label="Options" explain="For select / multiple choice, one option per line." autosize="true" /&gt;
+        &lt;xf:checkboxrow&gt;&lt;xf:option name="required" value="1" selected="{$field.required}"&gt;Required&lt;/xf:option&gt;&lt;xf:option name="active" value="1" selected="{$field.active}"&gt;Active&lt;/xf:option&gt;&lt;/xf:checkboxrow&gt;
+        &lt;xf:numberboxrow name="display_order" value="{$field.display_order}" min="1" label="Display order" /&gt;
+    &lt;/div&gt;&lt;xf:submitrow submit="Save question" /&gt;&lt;/div&gt;
+&lt;/xf:form&gt;
+</template>
+  <template type="public" title="wx_clans_announcement_edit" version_id="1000060" version_string="0.6.0 Alpha">&lt;xf:title&gt;Edit clan announcement&lt;/xf:title&gt;
+&lt;xf:form action="{{ link('clans/announcement-save', $clan) }}" class="block" ajax="true"&gt;
+    &lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+        &lt;xf:hiddenval name="announcement_id" value="{$announcement.announcement_id}" /&gt;
+        &lt;xf:textboxrow name="title" value="{$announcement.title}" label="Title" required="true" /&gt;
+        &lt;xf:textarearow name="message" value="{$announcement.message}" label="Message" autosize="true" required="true" /&gt;
+        &lt;xf:checkboxrow&gt;&lt;xf:option name="is_pinned" value="1" selected="{$announcement.is_pinned}"&gt;Pin announcement&lt;/xf:option&gt;&lt;/xf:checkboxrow&gt;
+    &lt;/div&gt;&lt;xf:submitrow submit="Save announcement" /&gt;&lt;/div&gt;
+&lt;/xf:form&gt;
+</template>
+  <template type="admin" title="wx_clans_admin_list" version_id="1000070" version_string="0.7.0 Alpha">&lt;xf:title&gt;Warext Clans&lt;/xf:title&gt;
+&lt;xf:form action="{{ link('warext-clans') }}" class="block"&gt;&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+&lt;xf:textboxrow name="q" value="{$query}" label="Search" placeholder="Clan name or tag" /&gt;
+&lt;xf:selectrow name="status" value="{$status}" label="Status"&gt;&lt;xf:option value=""&gt;All&lt;/xf:option&gt;&lt;xf:option value="active"&gt;Active&lt;/xf:option&gt;&lt;xf:option value="restricted"&gt;Restricted&lt;/xf:option&gt;&lt;xf:option value="suspended"&gt;Suspended&lt;/xf:option&gt;&lt;xf:option value="closed"&gt;Closed&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
+&lt;xf:selectrow name="category" value="{$category}" label="Category"&gt;&lt;xf:option value=""&gt;All&lt;/xf:option&gt;&lt;xf:foreach loop="$categories" value="$cat"&gt;&lt;xf:option value="{$cat}"&gt;{$cat}&lt;/xf:option&gt;&lt;/xf:foreach&gt;&lt;/xf:selectrow&gt;
+&lt;/div&gt;&lt;xf:submitrow submit="Filter" /&gt;&lt;/div&gt;&lt;/xf:form&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$clans" value="$clan"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;[{$clan.tag}] {$clan.title}&lt;/strong&gt; · {$clan.status} · {$clan.member_count} members · owner {$clan.Owner.username}
+&lt;xf:form action="{{ link('warext-clans/status', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:select name="status" value="{$clan.status}"&gt;&lt;xf:option value="active"&gt;Active&lt;/xf:option&gt;&lt;xf:option value="restricted"&gt;Restricted&lt;/xf:option&gt;&lt;xf:option value="suspended"&gt;Suspended&lt;/xf:option&gt;&lt;xf:option value="closed"&gt;Closed&lt;/xf:option&gt;&lt;/xf:select&gt;&lt;xf:button type="submit"&gt;Update&lt;/xf:button&gt;&lt;/xf:form&gt;&lt;/div&gt;&lt;xf:else /&gt;&lt;div class="block-row"&gt;No clans found.&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="warext-clans" params="{{ {'q': $query, 'status': $status, 'category': $category} }}" /&gt;
+</template>
+  <template type="admin" title="wx_clans_admin_lifecycle_requests" version_id="1000070" version_string="0.7.0 Alpha">&lt;xf:title&gt;Clan lifecycle requests&lt;/xf:title&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$requests" value="$request"&gt;
+    &lt;div class="block-row block-row--separated"&gt;
+        &lt;strong&gt;{$request.Clan.title}&lt;/strong&gt; · {$request.application_type} · requested by {$request.User.username} · &lt;xf:date time="$request.create_date" /&gt;
+        &lt;xf:if is="$request.description"&gt;&lt;div class="u-muted"&gt;{$request.description}&lt;/div&gt;&lt;/xf:if&gt;
+        &lt;xf:form action="{{ link('warext-clans/lifecycle-requests/approve', $request) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:button type="submit" class="button--cta"&gt;Approve&lt;/xf:button&gt;&lt;/xf:form&gt;
+        &lt;xf:button href="{{ link('warext-clans/lifecycle-requests/reject', $request) }}" overlay="true"&gt;Reject&lt;/xf:button&gt;
+    &lt;/div&gt;
+&lt;xf:else /&gt;&lt;div class="block-row"&gt;No pending lifecycle requests.&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+</template>
+  <template type="public" title="wx_clans_list" version_id="1000070" version_string="0.7.0 Alpha">&lt;xf:title&gt;Clans &amp; Groups&lt;/xf:title&gt;
+
+&lt;xf:pageaction&gt;
+    &lt;xf:if is="$xf.visitor.user_id"&gt;
+        &lt;xf:button href="{{ link('clans/my') }}"&gt;My clans&lt;/xf:button&gt;
+        &lt;xf:button href="{{ link('clans/apply') }}" icon="add" class="button--cta"&gt;Create / apply&lt;/xf:button&gt;
+    &lt;/xf:if&gt;
+&lt;/xf:pageaction&gt;
+
+&lt;xf:form action="{{ link('clans') }}" class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:textboxrow name="q" value="{$query}" label="Search" placeholder="Clan name or tag" /&gt;
+            &lt;xf:selectrow name="category" value="{$category}" label="Category"&gt;
+                &lt;xf:option value=""&gt;All categories&lt;/xf:option&gt;
+                &lt;xf:foreach loop="$categories" value="$cat"&gt;&lt;xf:option value="{$cat}"&gt;{$cat}&lt;/xf:option&gt;&lt;/xf:foreach&gt;
+            &lt;/xf:selectrow&gt;
+            &lt;xf:selectrow name="join_mode" value="{$joinMode}" label="Join mode"&gt;&lt;xf:option value=""&gt;All&lt;/xf:option&gt;&lt;xf:option value="open"&gt;Open&lt;/xf:option&gt;&lt;xf:option value="application"&gt;Application&lt;/xf:option&gt;&lt;xf:option value="invite"&gt;Invite only&lt;/xf:option&gt;&lt;xf:option value="closed"&gt;Closed&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
+            &lt;xf:selectrow name="sort" value="{$sort}" label="Sort"&gt;&lt;xf:option value="newest"&gt;Newest&lt;/xf:option&gt;&lt;xf:option value="members"&gt;Most members&lt;/xf:option&gt;&lt;xf:option value="name"&gt;Name&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
+        &lt;/div&gt;
+        &lt;xf:submitrow submit="Filter" /&gt;
+    &lt;/div&gt;
+&lt;/xf:form&gt;
+
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:foreach loop="$clans" value="$clan"&gt;
+                &lt;div class="block-row block-row--separated"&gt;
+                    &lt;div class="contentRow"&gt;
+                        &lt;xf:if is="$clan.logo_url"&gt;&lt;div class="contentRow-figure"&gt;&lt;img src="{$clan.logo_url}" alt="{$clan.title}" style="width:64px;height:64px;object-fit:cover;border-radius:8px" /&gt;&lt;/div&gt;&lt;/xf:if&gt;
+                        &lt;div class="contentRow-main"&gt;
+                            &lt;h3 class="contentRow-title"&gt;&lt;a href="{{ link('clans', $clan) }}"&gt;&lt;span style="color:{$clan.tag_color}"&gt;[{$clan.tag}]&lt;/span&gt; {$clan.title}&lt;/a&gt;&lt;/h3&gt;
+                            &lt;div class="contentRow-minor"&gt;Owner: {$clan.Owner.username} · Members: {$clan.member_count}&lt;xf:if is="$clan.category"&gt; · {$clan.category}&lt;/xf:if&gt;&lt;/div&gt;
+                            &lt;div class="contentRow-snippet"&gt;{$clan.description}&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;xf:else /&gt;
+                &lt;div class="block-row"&gt;No clans matched your filters.&lt;/div&gt;
+            &lt;/xf:foreach&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="clans" params="{{ {'q': $query, 'category': $category, 'join_mode': $joinMode, 'sort': $sort} }}" /&gt;
+</template>
+  <template type="public" title="wx_clans_manage" version_id="1000070" version_string="0.7.0 Alpha">&lt;xf:title&gt;Manage {$clan.title}&lt;/xf:title&gt;
+&lt;xf:pageaction&gt;&lt;xf:button href="{{ link('clans', $clan) }}"&gt;View clan&lt;/xf:button&gt;&lt;/xf:pageaction&gt;
+
+&lt;xf:if is="$clan.canManagePermission('manage_settings')"&gt;
+&lt;xf:form action="{{ link('clans/settings', $clan) }}" class="block" ajax="true"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Clan profile settings&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:textboxrow name="category" value="{$clan.category}" label="Category" maxlength="50" /&gt;
+    &lt;xf:textarearow name="description" value="{$clan.description}" label="Description" autosize="true" /&gt;
+    &lt;xf:textarearow name="rules" value="{$clan.rules}" label="Clan rules" autosize="true" /&gt;
+    &lt;xf:selectrow name="join_mode" value="{$clan.join_mode}" label="Join mode"&gt;&lt;xf:option value="open"&gt;Open&lt;/xf:option&gt;&lt;xf:option value="application"&gt;Application&lt;/xf:option&gt;&lt;xf:option value="invite"&gt;Invite only&lt;/xf:option&gt;&lt;xf:option value="closed"&gt;Closed&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
+    &lt;xf:textboxrow name="logo_url" value="{$clan.logo_url}" label="Logo URL" /&gt;
+    &lt;xf:textboxrow name="cover_url" value="{$clan.cover_url}" label="Cover URL" /&gt;
+&lt;/div&gt;&lt;xf:submitrow submit="Save settings" /&gt;&lt;/div&gt;&lt;/xf:form&gt;
+&lt;/xf:if&gt;
+
+&lt;xf:if is="$clan.isVisitorOwner()"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Forum-approved clan identity&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:if is="$identityRequest"&gt;&lt;xf:inforow label="Pending request"&gt;A clan name/tag/banner change is waiting for forum approval.&lt;/xf:inforow&gt;&lt;xf:else /&gt;
+    &lt;xf:form action="{{ link('clans/identity-request', $clan) }}" ajax="true"&gt;
+        &lt;xf:textboxrow name="title" value="{$clan.title}" label="Clan name" /&gt;
+        &lt;xf:textboxrow name="tag" value="{$clan.tag}" label="Clan tag" /&gt;
+        &lt;xf:textboxrow name="manager_banner" value="{$clan.manager_banner}" label="Manager banner" /&gt;
+        &lt;xf:textboxrow name="tag_color" value="{$clan.tag_color}" label="Tag color" /&gt;
+        &lt;xf:textboxrow name="manager_banner_color" value="{$clan.manager_banner_color}" label="Manager banner color" /&gt;
+        &lt;xf:submitrow submit="Request forum approval" /&gt;
+    &lt;/xf:form&gt;&lt;/xf:if&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Ownership transfer&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:if is="$ownershipTransfer"&gt;&lt;div class="block-row"&gt;Transfer to &lt;strong&gt;{$ownershipTransfer.ToUser.username}&lt;/strong&gt; · {$ownershipTransfer.status}
+        &lt;xf:form action="{{ link('clans/ownership-cancel', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:hiddenval name="transfer_id" value="{$ownershipTransfer.transfer_id}" /&gt;&lt;xf:button type="submit"&gt;Cancel&lt;/xf:button&gt;&lt;/xf:form&gt;
+    &lt;/div&gt;&lt;xf:else /&gt;
+    &lt;xf:form action="{{ link('clans/ownership-transfer', $clan) }}" ajax="true"&gt;&lt;xf:textboxrow name="username" label="New owner username" autocomplete="off" explain="The user must already be a clan member. They must accept, then forum management must approve." /&gt;&lt;xf:submitrow submit="Start ownership transfer" /&gt;&lt;/xf:form&gt;
+    &lt;/xf:if&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+
+&lt;xf:if is="$clan.canManagePermission('manage_members')"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Invite / add member&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:form action="{{ link('clans/invite', $clan) }}" ajax="true"&gt;&lt;xf:textboxrow name="username" label="Invite username" autocomplete="off" /&gt;&lt;xf:submitrow submit="Send invitation" /&gt;&lt;/xf:form&gt;
+    &lt;hr class="formRowSep" /&gt;
+    &lt;xf:form action="{{ link('clans/member-add', $clan) }}" ajax="true"&gt;&lt;xf:textboxrow name="username" label="Directly add username" autocomplete="off" /&gt;&lt;xf:submitrow submit="Add member" /&gt;&lt;/xf:form&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Members&lt;/h3&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$members" value="$member"&gt;
+    &lt;div class="block-row block-row--separated"&gt;&lt;div class="contentRow"&gt;&lt;div class="contentRow-main"&gt;&lt;div class="contentRow-title"&gt;&lt;strong&gt;{$member.User.username}&lt;/strong&gt;
+        &lt;xf:if is="$member.is_owner"&gt;&lt;span class="label label--primary"&gt;Owner&lt;/span&gt;&lt;xf:elseif is="$member.is_manager" /&gt;&lt;span class="label label--accent"&gt;Manager&lt;/span&gt;&lt;xf:elseif is="$member.Role &amp;&amp; $member.Role.role_type == 'custom'" /&gt;&lt;span class="label"&gt;{$member.Role.title}&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label"&gt;Member&lt;/span&gt;&lt;/xf:if&gt;
+    &lt;/div&gt;&lt;div class="contentRow-minor"&gt;Joined &lt;xf:date time="$member.join_date" /&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="contentRow-extra"&gt;
+        &lt;xf:if is="!$member.is_owner &amp;&amp; $clan.canManageManagers()"&gt;
+            &lt;xf:form action="{{ link('clans/manager-toggle', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:hiddenval name="user_id" value="{$member.user_id}" /&gt;&lt;xf:hiddenval name="make_manager" value="{{ $member.is_manager ? 0 : 1 }}" /&gt;&lt;xf:button type="submit"&gt;{{ $member.is_manager ? 'Remove manager' : 'Make manager' }}&lt;/xf:button&gt;&lt;/xf:form&gt;
+        &lt;/xf:if&gt;
+        &lt;xf:if is="!$member.is_owner &amp;&amp; !$member.is_manager &amp;&amp; $clan.canManageRoles()"&gt;
+            &lt;xf:form action="{{ link('clans/role-assign', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:hiddenval name="user_id" value="{$member.user_id}" /&gt;&lt;xf:select name="role_id" value="{$member.role_id}"&gt;&lt;xf:option value="0"&gt;Member&lt;/xf:option&gt;&lt;xf:foreach loop="$customRoles" value="$role"&gt;&lt;xf:option value="{$role.role_id}"&gt;{$role.title}&lt;/xf:option&gt;&lt;/xf:foreach&gt;&lt;/xf:select&gt;&lt;xf:button type="submit"&gt;Set role&lt;/xf:button&gt;&lt;/xf:form&gt;
+        &lt;/xf:if&gt;
+        &lt;xf:if is="!$member.is_owner &amp;&amp; $clan.canManagePermission('manage_members') &amp;&amp; (!$member.is_manager || $clan.isVisitorOwner())"&gt;
+            &lt;xf:form action="{{ link('clans/member-remove', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:hiddenval name="user_id" value="{$member.user_id}" /&gt;&lt;xf:button type="submit"&gt;Remove&lt;/xf:button&gt;&lt;/xf:form&gt;
+        &lt;/xf:if&gt;
+    &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;xf:if is="$clan.canManagePermission('manage_applications')"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Pending join applications&lt;/h3&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$joinApplications" value="$application"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$application.User.username}&lt;/strong&gt; · &lt;xf:date time="$application.create_date" /&gt;
+    &lt;xf:foreach loop="$application.Answers" value="$answer"&gt;&lt;div&gt;&lt;strong&gt;{$answer.Field.title}:&lt;/strong&gt; {$answer.answer}&lt;/div&gt;&lt;/xf:foreach&gt;
+    &lt;xf:form action="{{ link('clans/join-application-decision', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:hiddenval name="application_id" value="{$application.application_id}" /&gt;&lt;xf:hiddenval name="approve" value="1" /&gt;&lt;xf:button type="submit" class="button--cta"&gt;Approve&lt;/xf:button&gt;&lt;/xf:form&gt;
+    &lt;xf:form action="{{ link('clans/join-application-decision', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:hiddenval name="application_id" value="{$application.application_id}" /&gt;&lt;xf:hiddenval name="approve" value="0" /&gt;&lt;xf:textbox name="reason" placeholder="Optional rejection reason" /&gt;&lt;xf:button type="submit"&gt;Reject&lt;/xf:button&gt;&lt;/xf:form&gt;
+&lt;/div&gt;&lt;xf:else /&gt;&lt;div class="block-row"&gt;No pending applications.&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Application form&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:foreach loop="$applicationFields" value="$field"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$field.title}&lt;/strong&gt; · {$field.field_type} · {{ $field.required ? 'Required' : 'Optional' }}
+        &lt;xf:button href="{{ link('clans/application-field-edit', $clan, {'field_id': $field.field_id}) }}" overlay="true"&gt;Edit&lt;/xf:button&gt;
+        &lt;xf:form action="{{ link('clans/application-field-delete', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:hiddenval name="field_id" value="{$field.field_id}" /&gt;&lt;xf:button type="submit"&gt;Delete&lt;/xf:button&gt;&lt;/xf:form&gt;
+    &lt;/div&gt;&lt;/xf:foreach&gt;
+    &lt;xf:form action="{{ link('clans/application-field-save', $clan) }}" ajax="true"&gt;
+        &lt;xf:textboxrow name="title" label="New question" /&gt;
+        &lt;xf:textboxrow name="field_key" label="Field key" explain="Optional; generated automatically if blank." /&gt;
+        &lt;xf:selectrow name="field_type" label="Field type"&gt;&lt;xf:option value="text"&gt;Text&lt;/xf:option&gt;&lt;xf:option value="textarea"&gt;Long text&lt;/xf:option&gt;&lt;xf:option value="select"&gt;Select&lt;/xf:option&gt;&lt;xf:option value="checkbox"&gt;Multiple choice&lt;/xf:option&gt;&lt;xf:option value="number"&gt;Number&lt;/xf:option&gt;&lt;xf:option value="date"&gt;Date&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
+        &lt;xf:textarearow name="options_text" label="Options" explain="For select / multiple choice, one option per line." /&gt;
+        &lt;xf:checkboxrow&gt;&lt;xf:option name="required" value="1"&gt;Required&lt;/xf:option&gt;&lt;xf:option name="active" value="1" selected="true"&gt;Active&lt;/xf:option&gt;&lt;/xf:checkboxrow&gt;
+        &lt;xf:numberboxrow name="display_order" value="100" min="1" label="Display order" /&gt;
+        &lt;xf:submitrow submit="Add question" /&gt;
+    &lt;/xf:form&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+
+&lt;xf:if is="$clan.canManageRoles()"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Custom clan roles&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:foreach loop="$customRoles" value="$role"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$role.title}&lt;/strong&gt; · order {$role.display_order}
+        &lt;xf:button href="{{ link('clans/role-edit', $clan, {'role_id': $role.role_id}) }}" overlay="true"&gt;Edit&lt;/xf:button&gt;
+        &lt;xf:form action="{{ link('clans/role-delete', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:hiddenval name="role_id" value="{$role.role_id}" /&gt;&lt;xf:button type="submit"&gt;Delete&lt;/xf:button&gt;&lt;/xf:form&gt;
+    &lt;/div&gt;&lt;/xf:foreach&gt;
+    &lt;xf:form action="{{ link('clans/role-save', $clan) }}" ajax="true"&gt;&lt;xf:textboxrow name="title" label="Role title" /&gt;&lt;xf:numberboxrow name="display_order" value="100" min="20" label="Display order" /&gt;&lt;xf:submitrow submit="Create role" /&gt;&lt;/xf:form&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;xf:form action="{{ link('clans/manager-permissions', $clan) }}" class="block" ajax="true"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Manager permissions&lt;/h3&gt;&lt;div class="block-body"&gt;&lt;xf:checkboxrow label="Allowed actions"&gt;&lt;xf:foreach loop="$managerPermissionRows" value="$permission"&gt;&lt;xf:option name="manager_permissions[{$permission.id}]" value="1" selected="{$permission.enabled}"&gt;{$permission.title}&lt;/xf:option&gt;&lt;/xf:foreach&gt;&lt;/xf:checkboxrow&gt;&lt;xf:inforow label="Security"&gt;These permissions are limited to this clan and never grant XenForo forum moderation privileges.&lt;/xf:inforow&gt;&lt;/div&gt;&lt;xf:submitrow submit="Save manager permissions" /&gt;&lt;/div&gt;&lt;/xf:form&gt;
+&lt;/xf:if&gt;
+
+&lt;xf:if is="$clan.canManagePermission('manage_members')"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Clan blacklist&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:foreach loop="$blacklist" value="$entry"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$entry.User.username}&lt;/strong&gt; · {$entry.reason}&lt;xf:if is="$entry.expiry_date"&gt; · until &lt;xf:date time="$entry.expiry_date" /&gt;&lt;/xf:if&gt;
+        &lt;xf:form action="{{ link('clans/blacklist-remove', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:hiddenval name="blacklist_id" value="{$entry.blacklist_id}" /&gt;&lt;xf:button type="submit"&gt;Remove&lt;/xf:button&gt;&lt;/xf:form&gt;
+    &lt;/div&gt;&lt;/xf:foreach&gt;
+    &lt;xf:form action="{{ link('clans/blacklist-add', $clan) }}" ajax="true"&gt;&lt;xf:textboxrow name="username" label="Username" /&gt;&lt;xf:textboxrow name="reason" label="Reason" /&gt;&lt;xf:numberboxrow name="days" value="0" min="0" label="Duration in days" explain="0 = permanent" /&gt;&lt;xf:submitrow submit="Add to clan blacklist" /&gt;&lt;/xf:form&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+
+&lt;xf:if is="$clan.canManagePermission('manage_announcements')"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Announcements&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:foreach loop="$announcements" value="$announcement"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{{ $announcement.is_pinned ? '📌 ' : '' }}{$announcement.title}&lt;/strong&gt; · &lt;xf:date time="$announcement.create_date" /&gt;&lt;div&gt;{$announcement.message}&lt;/div&gt;
+        &lt;xf:button href="{{ link('clans/announcement-edit', $clan, {'announcement_id': $announcement.announcement_id}) }}" overlay="true"&gt;Edit&lt;/xf:button&gt;
+        &lt;xf:form action="{{ link('clans/announcement-delete', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:hiddenval name="announcement_id" value="{$announcement.announcement_id}" /&gt;&lt;xf:button type="submit"&gt;Delete&lt;/xf:button&gt;&lt;/xf:form&gt;
+    &lt;/div&gt;&lt;/xf:foreach&gt;
+    &lt;xf:form action="{{ link('clans/announcement-save', $clan) }}" ajax="true"&gt;&lt;xf:textboxrow name="title" label="Title" /&gt;&lt;xf:textarearow name="message" label="Message" autosize="true" /&gt;&lt;xf:checkboxrow&gt;&lt;xf:option name="is_pinned" value="1"&gt;Pin announcement&lt;/xf:option&gt;&lt;/xf:checkboxrow&gt;&lt;xf:submitrow submit="Publish announcement" /&gt;&lt;/xf:form&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+
+&lt;xf:if is="$logs != null"&gt;&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Clan audit log&lt;/h3&gt;&lt;div class="block-body"&gt;&lt;xf:foreach loop="$logs" value="$log"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$log.action}&lt;/strong&gt; · &lt;xf:if is="$log.User"&gt;{$log.User.username}&lt;xf:else /&gt;System&lt;/xf:if&gt; · &lt;xf:date time="$log.log_date" /&gt;&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
+
+
+&lt;xf:if is="$clan.isVisitorOwner()"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Clan lifecycle requests&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:if is="$lifecycleRequest"&gt;&lt;div class="block-row"&gt;Pending: &lt;strong&gt;{$lifecycleRequest.application_type}&lt;/strong&gt; · &lt;xf:date time="$lifecycleRequest.create_date" /&gt;&lt;/div&gt;
+    &lt;xf:elseif is="$clan.status == 'active' || $clan.status == 'restricted'" /&gt;
+        &lt;xf:form action="{{ link('clans/lifecycle-request', $clan) }}" ajax="true"&gt;&lt;xf:hiddenval name="type" value="close" /&gt;&lt;xf:textboxrow name="reason" label="Closing reason" /&gt;&lt;xf:submitrow submit="Request clan closure" /&gt;&lt;/xf:form&gt;
+    &lt;/xf:if&gt;
+    &lt;xf:foreach loop="$lifecycleHistory" value="$item"&gt;&lt;div class="block-row block-row--separated"&gt;{$item.application_type} · {$item.status} · &lt;xf:date time="$item.create_date" /&gt;&lt;xf:if is="$item.decision_reason"&gt;&lt;div class="u-muted"&gt;{$item.decision_reason}&lt;/div&gt;&lt;/xf:if&gt;&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+
+&lt;xf:if is="$clan.canManagePermission('manage_applications') &amp;&amp; $joinApplicationHistory is not empty"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Recent application history&lt;/h3&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$joinApplicationHistory" value="$item"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$item.User.username}&lt;/strong&gt; · {$item.status} · &lt;xf:date time="$item.create_date" /&gt;&lt;xf:if is="$item.DecisionUser"&gt; · by {$item.DecisionUser.username}&lt;/xf:if&gt;&lt;xf:if is="$item.decision_reason"&gt;&lt;div class="u-muted"&gt;{$item.decision_reason}&lt;/div&gt;&lt;/xf:if&gt;&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+
+&lt;xf:if is="$clan.canManagePermission('manage_members') &amp;&amp; $invitationHistory is not empty"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Invitation history&lt;/h3&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$invitationHistory" value="$item"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$item.User.username}&lt;/strong&gt; · {$item.status} · invited by {$item.Inviter.username} · &lt;xf:date time="$item.create_date" /&gt;&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+
+&lt;xf:if is="$clan.isVisitorOwner() &amp;&amp; $ownershipHistory is not empty"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Ownership history&lt;/h3&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$ownershipHistory" value="$item"&gt;&lt;div class="block-row block-row--separated"&gt;{$item.FromUser.username} → {$item.ToUser.username} · {$item.status} · &lt;xf:date time="$item.create_date" /&gt;&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+
+&lt;xf:if is="$clan.isVisitorOwner() &amp;&amp; $identityHistory is not empty"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Identity change history&lt;/h3&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$identityHistory" value="$item"&gt;&lt;div class="block-row block-row--separated"&gt;[{$item.tag}] {$item.title} · {$item.status} · &lt;xf:date time="$item.create_date" /&gt;&lt;xf:if is="$item.decision_reason"&gt;&lt;div class="u-muted"&gt;{$item.decision_reason}&lt;/div&gt;&lt;/xf:if&gt;&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+</template>
+  <template type="public" title="wx_clans_my" version_id="1000070" version_string="0.7.0 Alpha">&lt;xf:title&gt;My clans&lt;/xf:title&gt;
+&lt;xf:pageaction&gt;&lt;xf:button href="{{ link('clans') }}"&gt;Browse clans&lt;/xf:button&gt;&lt;xf:button href="{{ link('clans/apply') }}" class="button--cta"&gt;Create clan&lt;/xf:button&gt;&lt;/xf:pageaction&gt;
+
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Memberships / displayed tag&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:form action="{{ link('clans/active') }}" ajax="true"&gt;
+        &lt;xf:selectrow name="clan_id" value="{$activeClanId}" label="Displayed clan"&gt;&lt;xf:option value="0"&gt;Automatic&lt;/xf:option&gt;&lt;xf:foreach loop="$memberships" value="$membership"&gt;&lt;xf:option value="{$membership.clan_id}"&gt;[{$membership.Clan.tag}] {$membership.Clan.title}&lt;/xf:option&gt;&lt;/xf:foreach&gt;&lt;/xf:selectrow&gt;
+        &lt;xf:submitrow submit="Save" /&gt;
+    &lt;/xf:form&gt;
+    &lt;xf:foreach loop="$memberships" value="$membership"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;a href="{{ link('clans', $membership.Clan) }}"&gt;&lt;strong&gt;[{$membership.Clan.tag}] {$membership.Clan.title}&lt;/strong&gt;&lt;/a&gt; · {{ $membership.is_owner ? 'Owner' : ($membership.is_manager ? 'Manager' : ($membership.Role ? $membership.Role.title : 'Member')) }}&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;xf:if is="$invitations is not empty"&gt;&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Pending invitations&lt;/h3&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$invitations" value="$invitation"&gt;&lt;xf:if is="$invitation.status == 'pending'"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;[{$invitation.Clan.tag}] {$invitation.Clan.title}&lt;/strong&gt; invited by {$invitation.Inviter.username}
+&lt;xf:form action="{{ link('clans/invitation-respond', $invitation.Clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:hiddenval name="invitation_id" value="{$invitation.invitation_id}" /&gt;&lt;xf:hiddenval name="accept" value="1" /&gt;&lt;xf:button type="submit" class="button--cta"&gt;Accept&lt;/xf:button&gt;&lt;/xf:form&gt;
+&lt;xf:form action="{{ link('clans/invitation-respond', $invitation.Clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:hiddenval name="invitation_id" value="{$invitation.invitation_id}" /&gt;&lt;xf:hiddenval name="accept" value="0" /&gt;&lt;xf:button type="submit"&gt;Decline&lt;/xf:button&gt;&lt;/xf:form&gt;&lt;/div&gt;&lt;/xf:if&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
+
+&lt;xf:if is="$transfers is not empty"&gt;&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Ownership transfers&lt;/h3&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$transfers" value="$transfer"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$transfer.Clan.title}&lt;/strong&gt; · from {$transfer.FromUser.username} · {$transfer.status}
+&lt;xf:if is="$transfer.status == 'pending'"&gt;&lt;xf:form action="{{ link('clans/ownership-accept', $transfer.Clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:hiddenval name="transfer_id" value="{$transfer.transfer_id}" /&gt;&lt;xf:button type="submit" class="button--cta"&gt;Accept transfer&lt;/xf:button&gt;&lt;/xf:form&gt;&lt;/xf:if&gt;&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
+
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;My applications / requests&lt;/h3&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$applications" value="$application"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{{ $application.application_type == 'create' ? $application.title : ($application.Clan ? $application.Clan.title : 'Clan request') }}&lt;/strong&gt; · {$application.application_type} · {$application.status}&lt;xf:if is="$application.decision_reason"&gt;&lt;div class="u-muted"&gt;{$application.decision_reason}&lt;/div&gt;&lt;/xf:if&gt;
+&lt;xf:if is="$application.application_type == 'create' &amp;&amp; $application.status == 'changes_requested'"&gt;&lt;xf:button href="{{ link('clans/apply') }}"&gt;Revise&lt;/xf:button&gt;&lt;/xf:if&gt;
+&lt;xf:if is="$application.status == 'pending' || $application.status == 'changes_requested'"&gt;&lt;xf:form action="{{ link('clans/application-cancel') }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:hiddenval name="application_id" value="{$application.application_id}" /&gt;&lt;xf:button type="submit"&gt;Cancel&lt;/xf:button&gt;&lt;/xf:form&gt;&lt;/xf:if&gt;
+&lt;/div&gt;&lt;xf:else /&gt;&lt;div class="block-row"&gt;No applications yet.&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+
+&lt;xf:if is="$invitationHistory is not empty"&gt;&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Invitation history&lt;/h3&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$invitationHistory" value="$item"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$item.Clan.title}&lt;/strong&gt; · {$item.status} · &lt;xf:date time="$item.create_date" /&gt;&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
+
+&lt;xf:if is="$transferHistory is not empty"&gt;&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Ownership transfer history&lt;/h3&gt;&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$transferHistory" value="$item"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$item.Clan.title}&lt;/strong&gt; · {$item.FromUser.username} → {$item.ToUser.username} · {$item.status} · &lt;xf:date time="$item.create_date" /&gt;&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
+</template>
+  <template type="public" title="wx_clans_view" version_id="1000070" version_string="0.7.0 Alpha">&lt;xf:title&gt;[{$clan.tag}] {$clan.title}&lt;/xf:title&gt;
+&lt;xf:css src="wx_clans.less" /&gt;
+
+&lt;xf:pageaction&gt;
+    &lt;xf:if is="$clan.canManage()"&gt;&lt;xf:button href="{{ link('clans/manage', $clan) }}" icon="edit"&gt;Manage clan&lt;/xf:button&gt;&lt;/xf:if&gt;
+    &lt;xf:if is="$xf.visitor.user_id"&gt;&lt;xf:button href="{{ link('clans/my') }}"&gt;My clans&lt;/xf:button&gt;&lt;/xf:if&gt;
+    &lt;xf:if is="$clan.canReport()"&gt;&lt;xf:button href="{{ link('clans/report', $clan) }}" overlay="true"&gt;Report&lt;/xf:button&gt;&lt;/xf:if&gt;
+&lt;/xf:pageaction&gt;
+
+&lt;xf:if is="$clan.cover_url"&gt;&lt;div class="wxClanCover" style="background-image:url('{$clan.cover_url}')"&gt;&lt;/div&gt;&lt;/xf:if&gt;
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;&lt;span style="color:{$clan.tag_color}"&gt;[{$clan.tag}]&lt;/span&gt; {$clan.title}&lt;/div&gt;
+        &lt;div class="block-body"&gt;
+            &lt;div class="block-row"&gt;
+                &lt;xf:if is="$clan.logo_url"&gt;&lt;img src="{$clan.logo_url}" alt="{$clan.title}" class="wxClanLogo" /&gt;&lt;/xf:if&gt;
+                &lt;strong&gt;Owner:&lt;/strong&gt; {$clan.Owner.username} · &lt;strong&gt;Members:&lt;/strong&gt; {$clan.member_count}
+                &lt;xf:if is="$clan.category"&gt; · &lt;strong&gt;Category:&lt;/strong&gt; {$clan.category}&lt;/xf:if&gt;
+                &lt;br /&gt;&lt;strong&gt;Status:&lt;/strong&gt; {$clan.status} · &lt;strong&gt;Join mode:&lt;/strong&gt; {$clan.join_mode}
+            &lt;/div&gt;
+            &lt;div class="block-row"&gt;{$clan.description}&lt;/div&gt;
+            &lt;xf:if is="$clan.rules"&gt;&lt;div class="block-row"&gt;&lt;strong&gt;Clan rules&lt;/strong&gt;&lt;div&gt;{$clan.rules}&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
+            &lt;xf:if is="$clan.status != 'active'"&gt;&lt;div class="block-row block-row--minor"&gt;&lt;strong&gt;Forum status:&lt;/strong&gt; {$clan.status}&lt;/div&gt;&lt;/xf:if&gt;
+        &lt;/div&gt;
+        &lt;xf:if is="$xf.visitor.user_id"&gt;
+            &lt;div class="block-footer"&gt;
+                &lt;xf:if is="$visitorMembership"&gt;
+                    &lt;xf:if is="!$visitorMembership.is_owner"&gt;
+                        &lt;xf:form action="{{ link('clans/leave', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:button type="submit"&gt;Leave clan&lt;/xf:button&gt;&lt;/xf:form&gt;
+                    &lt;/xf:if&gt;
+                &lt;xf:elseif is="$pendingJoin" /&gt;
+                    Application pending
+                &lt;xf:elseif is="$clan.join_mode == 'open' &amp;&amp; $clan.canJoin()" /&gt;
+                    &lt;xf:form action="{{ link('clans/join', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:button type="submit" class="button--cta"&gt;Join clan&lt;/xf:button&gt;&lt;/xf:form&gt;
+                &lt;xf:elseif is="$clan.join_mode == 'application' &amp;&amp; $clan.canJoin()" /&gt;
+                    &lt;xf:button href="{{ link('clans/join-apply', $clan) }}" class="button--cta"&gt;Apply to join&lt;/xf:button&gt;
+                &lt;/xf:if&gt;
+            &lt;/div&gt;
+        &lt;/xf:if&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;xf:if is="$clan.isVisitorOwner()"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Clan lifecycle&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:if is="$pendingLifecycle"&gt;
+        &lt;div class="block-row"&gt;A &lt;strong&gt;{$pendingLifecycle.application_type}&lt;/strong&gt; request is waiting for forum approval.&lt;/div&gt;
+        &lt;xf:form action="{{ link('clans/lifecycle-cancel', $clan) }}" ajax="true"&gt;&lt;xf:hiddenval name="application_id" value="{$pendingLifecycle.application_id}" /&gt;&lt;xf:button type="submit"&gt;Cancel request&lt;/xf:button&gt;&lt;/xf:form&gt;
+    &lt;xf:elseif is="$clan.status == 'closed'" /&gt;
+        &lt;xf:form action="{{ link('clans/lifecycle-request', $clan) }}" ajax="true"&gt;&lt;xf:hiddenval name="type" value="reopen" /&gt;&lt;xf:textboxrow name="reason" label="Reopen reason" /&gt;&lt;xf:submitrow submit="Request reopening" /&gt;&lt;/xf:form&gt;
+    &lt;xf:elseif is="$clan.status == 'active' || $clan.status == 'restricted'" /&gt;
+        &lt;xf:form action="{{ link('clans/lifecycle-request', $clan) }}" ajax="true"&gt;&lt;xf:hiddenval name="type" value="close" /&gt;&lt;xf:textboxrow name="reason" label="Closing reason" /&gt;&lt;xf:submitrow submit="Request clan closure" /&gt;&lt;/xf:form&gt;
+    &lt;xf:else /&gt;
+        &lt;div class="block-row"&gt;This clan state can only be changed by forum moderation.&lt;/div&gt;
+    &lt;/xf:if&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+
+&lt;xf:if is="$announcements is not empty"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Announcements&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:foreach loop="$announcements" value="$announcement"&gt;
+        &lt;div class="block-row block-row--separated" id="announcement-{$announcement.announcement_id}"&gt;&lt;strong&gt;&lt;xf:if is="$announcement.is_pinned"&gt;📌 &lt;/xf:if&gt;{$announcement.title}&lt;/strong&gt;&lt;div class="u-muted"&gt;{$announcement.User.username} · &lt;xf:date time="$announcement.create_date" /&gt;&lt;/div&gt;&lt;div&gt;{$announcement.message}&lt;/div&gt;&lt;xf:if is="$announcement.canReport()"&gt;&lt;div class="u-muted"&gt;&lt;a href="{{ link('clans/announcement-report', $clan, {'announcement_id': $announcement.announcement_id}) }}" overlay="true"&gt;Report announcement&lt;/a&gt;&lt;/div&gt;&lt;/xf:if&gt;&lt;/div&gt;
+    &lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Members&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:foreach loop="$members" value="$member"&gt;
+        &lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$member.User.username}&lt;/strong&gt;
+            &lt;xf:if is="$member.is_owner"&gt;&lt;span class="label label--primary"&gt;Owner&lt;/span&gt;
+            &lt;xf:elseif is="$member.is_manager" /&gt;&lt;span class="label label--accent"&gt;{{ $clan.manager_banner ?: 'Clan manager' }}&lt;/span&gt;
+            &lt;xf:elseif is="$member.Role &amp;&amp; $member.Role.role_type == 'custom'" /&gt;&lt;span class="label"&gt;{$member.Role.title}&lt;/span&gt;
+            &lt;xf:else /&gt;&lt;span class="label"&gt;[{$clan.tag}]&lt;/span&gt;&lt;/xf:if&gt;
+        &lt;/div&gt;
+    &lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;xf:if is="$xf.visitor.hasPermission('wxClans', 'moderate')"&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Forum moderation&lt;/h3&gt;&lt;div class="block-body"&gt;
+    &lt;xf:form action="{{ link('clans/moderator-status', $clan) }}" ajax="true"&gt;
+        &lt;xf:selectrow name="status" value="{$clan.status}" label="Clan status"&gt;
+            &lt;xf:option value="active"&gt;Active&lt;/xf:option&gt;&lt;xf:option value="restricted"&gt;Restricted&lt;/xf:option&gt;&lt;xf:option value="suspended"&gt;Suspended&lt;/xf:option&gt;&lt;xf:option value="closed"&gt;Closed&lt;/xf:option&gt;
+        &lt;/xf:selectrow&gt;&lt;xf:submitrow submit="Update moderation status" /&gt;
+    &lt;/xf:form&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+</template>
+  <template type="public" title="alert_wx_clan_lifecycle_approved" version_id="1000070" version_string="0.7.0 Alpha">&lt;a href="{{ link('clans', $content) }}"&gt;{$content.title}&lt;/a&gt; clan lifecycle request was approved.&lt;xf:if is="$extra.type"&gt; ({$extra.type})&lt;/xf:if&gt;
+</template>
+  <template type="public" title="alert_wx_clan_lifecycle_rejected" version_id="1000070" version_string="0.7.0 Alpha">Your lifecycle request for &lt;a href="{{ link('clans', $content) }}"&gt;{$content.title}&lt;/a&gt; was rejected.&lt;xf:if is="$extra.reason"&gt; Reason: {$extra.reason}&lt;/xf:if&gt;
+</template>
+</templates>

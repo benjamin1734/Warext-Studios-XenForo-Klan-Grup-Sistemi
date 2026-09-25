@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+  <permission permission_group_id="wxClans" permission_id="apply" permission_type="flag" interface_group_id="wxClans" display_order="10"/>
+  <permission permission_group_id="wxClans" permission_id="moderate" permission_type="flag" interface_group_id="wxClansModerator" display_order="100"/>
+  <permission permission_group_id="wxClans" permission_id="view" permission_type="flag" interface_group_id="wxClans" display_order="1"/>
+</permissions>
