@@ -23,6 +23,9 @@ class Clan extends AbstractHandler
         return [
             'invited',
             'member_joined',
+            'member_added',
+            'manager_assigned',
+            'clan_approved',
             'join_application',
             'application_approved',
             'application_rejected',
@@ -32,7 +35,9 @@ class Clan extends AbstractHandler
             'ownership_transfer_approved',
             'ownership_transfer_rejected',
             'lifecycle_approved',
-            'lifecycle_rejected'
+            'lifecycle_rejected',
+            'ownership_forced',
+            'moderation_status_changed',
         ];
     }
 

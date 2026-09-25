@@ -117,18 +117,10 @@ class Clan extends AbstractController
         $invitations = $this->finder('Warext\\Clans:ClanInvitation')
             ->where('user_id', $visitor->user_id)
             ->where('status', 'pending')
+            ->where('expiry_date', '>', \XF::$time)
             ->with(['Clan', 'Inviter'])
             ->order('create_date', 'DESC')
             ->fetch();
-
-        foreach ($invitations as $invitation)
-        {
-            if ($invitation->isExpired())
-            {
-                $invitation->status = 'expired';
-                $invitation->save();
-            }
-        }
 
         $applications = $this->finder('Warext\\Clans:ClanApplication')
             ->where('user_id', $visitor->user_id)
@@ -323,18 +315,8 @@ class Clan extends AbstractController
         }
         $clan = $this->assertClanExists($params->clan_id, ['Owner']);
         $status = $this->filter('status', 'str');
-        if (!in_array($status, ['active','restricted','suspended','closed'], true))
-        {
-            return $this->error('Invalid clan status.');
-        }
-        $old = $clan->status;
-        $clan->status = $status;
-        $clan->save();
-        $this->service('Warext\\Clans:Audit\\Logger')->log($clan->clan_id, \XF::visitor()->user_id, 'forum_status_changed', ['old'=>$old,'new'=>$status], 'clan', $clan->clan_id);
-        if (\XF::visitor()->is_moderator || \XF::visitor()->is_admin)
-        {
-            \XF::app()->logger()->moderatorLogger()->log('wx_clan', $clan, 'status_update', ['old'=>$old,'new'=>$status], false, \XF::visitor());
-        }
+        $reason = $this->filter('reason', 'str');
+        $this->service('Warext\\Clans:Moderation\\StatusManager', $clan)->change($status, \XF::visitor(), $reason);
         return $this->redirect($this->buildLink('clans', $clan), 'Clan moderation status updated.');
     }
 
@@ -389,17 +371,8 @@ class Clan extends AbstractController
             : [];
 
         $pendingInvitations = $clan->canManagePermission(ClanPermission::MANAGE_MEMBERS)
-            ? $this->finder('Warext\\Clans:ClanInvitation')->where('clan_id',$clan->clan_id)->where('status','pending')->with(['User','Inviter'])->order('create_date','DESC')->fetch()
+            ? $this->finder('Warext\\Clans:ClanInvitation')->where('clan_id',$clan->clan_id)->where('status','pending')->where('expiry_date','>', \XF::$time)->with(['User','Inviter'])->order('create_date','DESC')->fetch()
             : [];
-
-        foreach ($pendingInvitations as $pendingInvitation)
-        {
-            if ($pendingInvitation->isExpired())
-            {
-                $pendingInvitation->status = 'expired';
-                $pendingInvitation->save();
-            }
-        }
 
         $announcements = $this->finder('Warext\\Clans:ClanAnnouncement')->where('clan_id',$clan->clan_id)->with('User')->order('is_pinned','DESC')->order('create_date','DESC')->fetch();
 

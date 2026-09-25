@@ -1,18 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <options>
   <option option_id="wxClansInviteDays" edit_format="spinbox" data_type="unsigned_integer" advanced="0">
     <default_value>7</default_value>
     <edit_format_params>min=1</edit_format_params>
-    <relation group_id="wxClans" display_order="30"/>
+    <relation group_id="wxClans" display_order="30" />
   </option>
   <option option_id="wxClansMaxMemberships" edit_format="spinbox" data_type="unsigned_integer" advanced="0">
     <default_value>5</default_value>
     <edit_format_params>min=0</edit_format_params>
-    <relation group_id="wxClans" display_order="10"/>
+    <relation group_id="wxClans" display_order="10" />
   </option>
   <option option_id="wxClansMaxOwned" edit_format="spinbox" data_type="unsigned_integer" advanced="0">
     <default_value>1</default_value>
     <edit_format_params>min=0</edit_format_params>
-    <relation group_id="wxClans" display_order="20"/>
+    <relation group_id="wxClans" display_order="20" />
+  </option>
+  <option option_id="wxClansReservedTags" edit_format="textbox" data_type="string" advanced="0">
+    <default_value>ADMIN,ADMINISTRATOR,MOD,MODERATOR,STAFF,SUPPORT</default_value>
+    <relation group_id="wxClans" display_order="40" />
+  </option>
+  <option option_id="wxClansReservedNames" edit_format="textbox" data_type="string" advanced="0">
+    <default_value />
+    <relation group_id="wxClans" display_order="50" />
   </option>
 </options>

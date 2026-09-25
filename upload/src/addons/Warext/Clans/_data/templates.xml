@@ -50,9 +50,13 @@
 </template>
   <template type="public" title="report_content_wx_clan" version_id="1000050" version_string="0.5.0 Alpha">&lt;div class="blockMessage blockMessage--none"&gt;&lt;strong&gt;[{$content.tag}] {$content.title}&lt;/strong&gt;&lt;br /&gt;{$content.description}&lt;/div&gt;
 </template>
-  <template type="public" title="wx_clans.less" version_id="1000050" version_string="0.5.0 Alpha">.wxClanCover { height: 220px; background-size: cover; background-position: center; border-radius: @xf-borderRadiusLarge; margin-bottom: @xf-paddingMedium; }
+  <template type="public" title="wx_clans.less" version_id="1000080" version_string="0.8.0 Alpha">.wxClanCover { height: 220px; background-size: cover; background-position: center; border-radius: @xf-borderRadiusLarge; margin-bottom: @xf-paddingMedium; }
 .wxClanLogo { width: 88px; height: 88px; object-fit: cover; border-radius: @xf-borderRadiusMedium; float: left; margin: 0 @xf-paddingMedium @xf-paddingMedium 0; }
 .wxClanTag, .wxClanManagerBanner { color: #fff !important; margin-top: 3px; }
+
+.wxClanProfileMemberships { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.wxClanProfileMembership { display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; border: 1px solid @xf-borderColor; border-radius: @xf-borderRadiusMedium; background: @xf-contentBg; text-decoration: none; }
+.wxClanProfileMembership-tag { font-weight: 700; }
 </template>
   <template type="public" title="wx_clans_apply" version_id="1000050" version_string="0.5.0 Alpha">&lt;xf:title&gt;{{ $application ? 'Revise clan application' : 'Create a clan' }}&lt;/xf:title&gt;
 &lt;xf:form action="{{ link('clans/apply') }}" class="block" ajax="true"&gt;
@@ -90,13 +94,28 @@
 &lt;/div&gt;&lt;xf:submitrow submit="Submit application" /&gt;&lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="public" title="wx_clans_user_badges" version_id="1000050" version_string="0.5.0 Alpha">&lt;xf:macro name="badges" arg-user="!"&gt;
+  <template type="public" title="wx_clans_user_badges" version_id="1000080" version_string="0.8.0 Alpha">&lt;xf:macro name="badges" arg-user="!"&gt;
     &lt;xf:set var="$membership" value="{$user.wx_active_clan_membership}" /&gt;
     &lt;xf:if is="$membership &amp;&amp; $membership.Clan"&gt;
         &lt;a href="{{ link('clans', $membership.Clan) }}" class="userBanner wxClanTag" style="background-color:{$membership.Clan.tag_color};border-color:{$membership.Clan.tag_color}"&gt;&lt;strong&gt;[{$membership.Clan.tag}]&lt;/strong&gt;&lt;/a&gt;
         &lt;xf:if is="$membership.is_owner || $membership.is_manager"&gt;
             &lt;span class="userBanner wxClanManagerBanner" style="background-color:{$membership.Clan.manager_banner_color};border-color:{$membership.Clan.manager_banner_color}"&gt;&lt;strong&gt;{{ $membership.Clan.manager_banner ?: 'Clan management' }}&lt;/strong&gt;&lt;/span&gt;
         &lt;/xf:if&gt;
+    &lt;/xf:if&gt;
+&lt;/xf:macro&gt;
+
+&lt;xf:macro name="profile_memberships" arg-user="!"&gt;
+    &lt;xf:set var="$memberships" value="{$user.wx_clan_memberships}" /&gt;
+    &lt;xf:if is="$memberships is not empty"&gt;
+        &lt;div class="wxClanProfileMemberships"&gt;
+            &lt;xf:foreach loop="$memberships" value="$membership"&gt;
+                &lt;a href="{{ link('clans', $membership.Clan) }}" class="wxClanProfileMembership"&gt;
+                    &lt;span class="wxClanProfileMembership-tag" style="color:{$membership.Clan.tag_color}"&gt;[{$membership.Clan.tag}]&lt;/span&gt;
+                    &lt;span&gt;{$membership.Clan.title}&lt;/span&gt;
+                    &lt;span class="u-muted"&gt;{{ $membership.is_owner ? 'Owner' : ($membership.is_manager ? 'Manager' : ($membership.Role &amp;&amp; $membership.Role.role_type == 'custom' ? $membership.Role.title : 'Member')) }}&lt;/span&gt;
+                &lt;/a&gt;
+            &lt;/xf:foreach&gt;
+        &lt;/div&gt;
     &lt;/xf:if&gt;
 &lt;/xf:macro&gt;
 </template>
@@ -140,7 +159,7 @@
     &lt;/div&gt;&lt;xf:submitrow submit="Save announcement" /&gt;&lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="admin" title="wx_clans_admin_list" version_id="1000070" version_string="0.7.0 Alpha">&lt;xf:title&gt;Warext Clans&lt;/xf:title&gt;
+  <template type="admin" title="wx_clans_admin_list" version_id="1000080" version_string="0.8.0 Alpha">&lt;xf:title&gt;Warext Clans&lt;/xf:title&gt;
 &lt;xf:form action="{{ link('warext-clans') }}" class="block"&gt;&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
 &lt;xf:textboxrow name="q" value="{$query}" label="Search" placeholder="Clan name or tag" /&gt;
 &lt;xf:selectrow name="status" value="{$status}" label="Status"&gt;&lt;xf:option value=""&gt;All&lt;/xf:option&gt;&lt;xf:option value="active"&gt;Active&lt;/xf:option&gt;&lt;xf:option value="restricted"&gt;Restricted&lt;/xf:option&gt;&lt;xf:option value="suspended"&gt;Suspended&lt;/xf:option&gt;&lt;xf:option value="closed"&gt;Closed&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
@@ -148,7 +167,7 @@
 &lt;/div&gt;&lt;xf:submitrow submit="Filter" /&gt;&lt;/div&gt;&lt;/xf:form&gt;
 &lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
 &lt;xf:foreach loop="$clans" value="$clan"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;[{$clan.tag}] {$clan.title}&lt;/strong&gt; · {$clan.status} · {$clan.member_count} members · owner {$clan.Owner.username}
-&lt;xf:form action="{{ link('warext-clans/status', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:select name="status" value="{$clan.status}"&gt;&lt;xf:option value="active"&gt;Active&lt;/xf:option&gt;&lt;xf:option value="restricted"&gt;Restricted&lt;/xf:option&gt;&lt;xf:option value="suspended"&gt;Suspended&lt;/xf:option&gt;&lt;xf:option value="closed"&gt;Closed&lt;/xf:option&gt;&lt;/xf:select&gt;&lt;xf:button type="submit"&gt;Update&lt;/xf:button&gt;&lt;/xf:form&gt;&lt;/div&gt;&lt;xf:else /&gt;&lt;div class="block-row"&gt;No clans found.&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;div class="u-spacerTop"&gt;&lt;xf:form action="{{ link('warext-clans/status', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:select name="status" value="{$clan.status}"&gt;&lt;xf:option value="active"&gt;Active&lt;/xf:option&gt;&lt;xf:option value="restricted"&gt;Restricted&lt;/xf:option&gt;&lt;xf:option value="suspended"&gt;Suspended&lt;/xf:option&gt;&lt;xf:option value="closed"&gt;Closed&lt;/xf:option&gt;&lt;/xf:select&gt;&lt;xf:textbox name="reason" placeholder="Optional moderation reason" /&gt;&lt;xf:button type="submit"&gt;Update status&lt;/xf:button&gt;&lt;/xf:form&gt; &lt;xf:button href="{{ link('warext-clans/clans/force-owner', $clan) }}" overlay="true"&gt;Change owner&lt;/xf:button&gt;&lt;/div&gt;&lt;/div&gt;&lt;xf:else /&gt;&lt;div class="block-row"&gt;No clans found.&lt;/div&gt;&lt;/xf:foreach&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="warext-clans" params="{{ {'q': $query, 'status': $status, 'category': $category} }}" /&gt;
 </template>
@@ -404,7 +423,7 @@
 &lt;xf:foreach loop="$transferHistory" value="$item"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$item.Clan.title}&lt;/strong&gt; · {$item.FromUser.username} → {$item.ToUser.username} · {$item.status} · &lt;xf:date time="$item.create_date" /&gt;&lt;/div&gt;&lt;/xf:foreach&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
 </template>
-  <template type="public" title="wx_clans_view" version_id="1000070" version_string="0.7.0 Alpha">&lt;xf:title&gt;[{$clan.tag}] {$clan.title}&lt;/xf:title&gt;
+  <template type="public" title="wx_clans_view" version_id="1000080" version_string="0.8.0 Alpha">&lt;xf:title&gt;[{$clan.tag}] {$clan.title}&lt;/xf:title&gt;
 &lt;xf:css src="wx_clans.less" /&gt;
 
 &lt;xf:pageaction&gt;
@@ -486,7 +505,9 @@
     &lt;xf:form action="{{ link('clans/moderator-status', $clan) }}" ajax="true"&gt;
         &lt;xf:selectrow name="status" value="{$clan.status}" label="Clan status"&gt;
             &lt;xf:option value="active"&gt;Active&lt;/xf:option&gt;&lt;xf:option value="restricted"&gt;Restricted&lt;/xf:option&gt;&lt;xf:option value="suspended"&gt;Suspended&lt;/xf:option&gt;&lt;xf:option value="closed"&gt;Closed&lt;/xf:option&gt;
-        &lt;/xf:selectrow&gt;&lt;xf:submitrow submit="Update moderation status" /&gt;
+        &lt;/xf:selectrow&gt;
+        &lt;xf:textarearow name="reason" label="Moderation reason" explain="Optional. The clan owner will receive this reason with the XenForo alert." autosize="true" /&gt;
+        &lt;xf:submitrow submit="Update moderation status" /&gt;
     &lt;/xf:form&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/xf:if&gt;
@@ -494,5 +515,32 @@
   <template type="public" title="alert_wx_clan_lifecycle_approved" version_id="1000070" version_string="0.7.0 Alpha">&lt;a href="{{ link('clans', $content) }}"&gt;{$content.title}&lt;/a&gt; clan lifecycle request was approved.&lt;xf:if is="$extra.type"&gt; ({$extra.type})&lt;/xf:if&gt;
 </template>
   <template type="public" title="alert_wx_clan_lifecycle_rejected" version_id="1000070" version_string="0.7.0 Alpha">Your lifecycle request for &lt;a href="{{ link('clans', $content) }}"&gt;{$content.title}&lt;/a&gt; was rejected.&lt;xf:if is="$extra.reason"&gt; Reason: {$extra.reason}&lt;/xf:if&gt;
+</template>
+  <template type="admin" title="wx_clans_admin_force_owner" version_id="1000080" version_string="0.8.0 Alpha">&lt;xf:title&gt;Change clan owner&lt;/xf:title&gt;
+&lt;xf:form action="{{ link('warext-clans/clans/force-owner', $clan) }}" class="block" ajax="true"&gt;
+&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+&lt;xf:inforow label="Clan"&gt;[{$clan.tag}] {$clan.title}&lt;/xf:inforow&gt;
+&lt;xf:inforow label="Current owner"&gt;{$clan.Owner.username}&lt;/xf:inforow&gt;
+&lt;xf:selectrow name="user_id" label="New owner" required="true"&gt;&lt;xf:option value=""&gt;Select an active member...&lt;/xf:option&gt;&lt;xf:foreach loop="$members" value="$member"&gt;&lt;xf:option value="{$member.user_id}"&gt;{$member.User.username}&lt;/xf:option&gt;&lt;/xf:foreach&gt;&lt;/xf:selectrow&gt;
+&lt;xf:checkboxrow&gt;&lt;xf:option name="keep_old_owner_manager" value="1"&gt;Keep the current owner as a clan manager&lt;/xf:option&gt;&lt;/xf:checkboxrow&gt;
+&lt;xf:textarearow name="reason" label="Reason" explain="Required. Stored in clan audit and XenForo moderator logs and included in affected-user alerts." autosize="true" required="true" /&gt;
+&lt;xf:inforow&gt;This forum-management action bypasses the normal owner acceptance workflow. Pending ownership, identity and lifecycle requests for the old ownership state are cancelled.&lt;/xf:inforow&gt;
+&lt;/div&gt;&lt;xf:submitrow submit="Change owner" /&gt;&lt;/div&gt;
+&lt;/xf:form&gt;
+</template>
+  <template type="admin" title="wx_clans_admin_maintenance" version_id="1000080" version_string="0.8.0 Alpha">&lt;xf:title&gt;Clan system maintenance&lt;/xf:title&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h3 class="block-header"&gt;Current maintenance state&lt;/h3&gt;&lt;div class="block-body"&gt;
+&lt;xf:inforow label="Expired invitations still pending"&gt;{$stats.pending_expired_invitations}&lt;/xf:inforow&gt;
+&lt;xf:inforow label="Stale ownership transfers"&gt;{$stats.stale_transfers}&lt;/xf:inforow&gt;
+&lt;xf:inforow label="Stale owner-bound requests"&gt;{$stats.stale_owner_requests}&lt;/xf:inforow&gt;
+&lt;xf:inforow label="Invalid display preferences"&gt;{$stats.invalid_preferences}&lt;/xf:inforow&gt;
+&lt;xf:inforow label="Active display preferences"&gt;{$stats.active_preferences}&lt;/xf:inforow&gt;
+&lt;xf:inforow label="Total clans"&gt;{$stats.clans}&lt;/xf:inforow&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;xf:form action="{{ link('warext-clans/maintenance') }}" class="block" ajax="true"&gt;&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;&lt;xf:inforow&gt;Maintenance expires stale invitations, cancels ownership transfers and owner-bound requests invalidated by a previous ownership change, repairs invalid active-clan selections and reconciles cached member counts.&lt;/xf:inforow&gt;&lt;/div&gt;&lt;xf:submitrow submit="Run maintenance now" /&gt;&lt;/div&gt;&lt;/xf:form&gt;
+</template>
+  <template type="public" title="alert_wx_clan_moderation_status_changed" version_id="1000080" version_string="0.8.0 Alpha">Forum management changed the status of &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt; from &lt;strong&gt;{$extra.old}&lt;/strong&gt; to &lt;strong&gt;{$extra.new}&lt;/strong&gt;.&lt;xf:if is="$extra.reason"&gt; Reason: {$extra.reason}&lt;/xf:if&gt;
+</template>
+  <template type="public" title="alert_wx_clan_ownership_forced" version_id="1000080" version_string="0.8.0 Alpha">Forum management changed the ownership of &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt;.&lt;xf:if is="$extra.role == 'new_owner'"&gt; You are now the clan owner.&lt;xf:else /&gt; Your previous owner role was removed.&lt;/xf:if&gt;&lt;xf:if is="$extra.reason"&gt; Reason: {$extra.reason}&lt;/xf:if&gt;
 </template>
 </templates>

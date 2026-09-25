@@ -48,6 +48,24 @@ class User extends XFCP_User
         return $membership ? $membership->Clan : null;
     }
 
+    public function getWxClanMemberships()
+    {
+        if (!$this->user_id)
+        {
+            return [];
+        }
+
+        return \XF::finder('Warext\\Clans:ClanMember')
+            ->where('user_id', $this->user_id)
+            ->where('member_state', 'active')
+            ->with(['Clan', 'Role'])
+            ->where('Clan.status', ['active', 'restricted'])
+            ->order('is_owner', 'DESC')
+            ->order('is_manager', 'DESC')
+            ->order('join_date', 'ASC')
+            ->fetch();
+    }
+
     public function getWxClanMembershipCount(): int
     {
         if (!$this->user_id)
@@ -65,6 +83,7 @@ class User extends XFCP_User
         $structure = parent::getStructure($structure);
         $structure->getters['wx_active_clan_membership'] = true;
         $structure->getters['wx_active_clan'] = true;
+        $structure->getters['wx_clan_memberships'] = true;
         $structure->getters['wx_clan_membership_count'] = true;
         return $structure;
     }

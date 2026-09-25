@@ -21,9 +21,18 @@ class Decision extends AbstractService
         {
             throw new \LogicException('Application is not pending.');
         }
-        if (!$this->repository('Warext\\Clans:Clan')->isTagAvailable($this->application->tag, 0, $this->application->application_id))
+        $clanRepo = $this->repository('Warext\\Clans:Clan');
+        if ($clanRepo->isTagReserved($this->application->tag) || $clanRepo->isTitleReserved($this->application->title))
+        {
+            throw new \XF\PrintableException('The requested clan identity is reserved by forum management.');
+        }
+        if (!$clanRepo->isTagAvailable($this->application->tag, 0, $this->application->application_id))
         {
             throw new \XF\PrintableException('The requested clan tag is no longer available.');
+        }
+        if (!$clanRepo->isTitleAvailable($this->application->title, 0, $this->application->application_id))
+        {
+            throw new \XF\PrintableException('The requested clan name is no longer available.');
         }
 
         $owner = $this->application->User ?: $this->em()->find('XF:User', $this->application->user_id);

@@ -90,6 +90,72 @@ class Clan extends Repository
         return !$applicationFinder->fetchOne();
     }
 
+
+    public function isTitleAvailable(string $title, int $ignoreClanId = 0, int $ignoreApplicationId = 0): bool
+    {
+        $title = trim($title);
+        if ($title === '')
+        {
+            return false;
+        }
+
+        $clanFinder = $this->finder('Warext\\Clans:Clan')->where('title', $title);
+        if ($ignoreClanId)
+        {
+            $clanFinder->where('clan_id', '<>', $ignoreClanId);
+        }
+        if ($clanFinder->fetchOne())
+        {
+            return false;
+        }
+
+        $applicationFinder = $this->finder('Warext\\Clans:ClanApplication')
+            ->where('application_type', ['create', 'change'])
+            ->where('status', ['pending', 'changes_requested'])
+            ->where('title', $title);
+        if ($ignoreApplicationId)
+        {
+            $applicationFinder->where('application_id', '<>', $ignoreApplicationId);
+        }
+
+        return !$applicationFinder->fetchOne();
+    }
+
+    public function isTagReserved(string $tag): bool
+    {
+        $tag = strtoupper(trim($tag));
+        return in_array($tag, $this->getReservedValues('wxClansReservedTags', true), true);
+    }
+
+    public function isTitleReserved(string $title): bool
+    {
+        $title = mb_strtolower(trim($title));
+        return in_array($title, $this->getReservedValues('wxClansReservedNames', false), true);
+    }
+
+    protected function getReservedValues(string $optionId, bool $uppercase): array
+    {
+        $raw = (string)($this->app()->options()->$optionId ?? '');
+        if ($raw === '')
+        {
+            return [];
+        }
+
+        $values = preg_split('/[\r\n,;]+/u', $raw, -1, PREG_SPLIT_NO_EMPTY);
+        $normalized = [];
+        foreach ($values as $value)
+        {
+            $value = trim($value);
+            if ($value === '')
+            {
+                continue;
+            }
+            $normalized[] = $uppercase ? strtoupper($value) : mb_strtolower($value);
+        }
+
+        return array_values(array_unique($normalized));
+    }
+
     public function countActiveMemberships(int $userId): int
     {
         return $this->finder('Warext\\Clans:ClanMember')

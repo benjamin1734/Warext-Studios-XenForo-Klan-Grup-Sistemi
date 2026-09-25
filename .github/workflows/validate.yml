@@ -66,8 +66,8 @@ jobs:
           data = root / '_data'
 
           addon = json.loads((root / 'addon.json').read_text(encoding='utf-8'))
-          if addon.get('version_id') != 1000070 or addon.get('version_string') != '0.7.0 Alpha':
-              raise SystemExit('Expected version is 0.7.0 Alpha / 1000070')
+          if addon.get('version_id') != 1000080 or addon.get('version_string') != '0.8.0 Alpha':
+              raise SystemExit('Expected version is 0.8.0 Alpha / 1000080')
           if addon.get('require', {}).get('XF', [0])[0] != 2030000:
               raise SystemExit('XenForo 2.3.0+ requirement is missing')
           if addon.get('require', {}).get('php', [''])[0] != '8.1.0':
@@ -85,7 +85,7 @@ jobs:
               'admin_navigation.xml', 'admin_permission.xml', 'class_extensions.xml',
               'content_type_fields.xml', 'navigation.xml', 'option_groups.xml',
               'options.xml', 'permission_interface_groups.xml', 'permissions.xml',
-              'phrases.xml', 'routes.xml', 'template_modifications.xml', 'templates.xml'
+              'phrases.xml', 'routes.xml', 'template_modifications.xml', 'templates.xml', 'cron.xml'
           }
           missing = sorted(required_data - set(trees))
           if missing:
@@ -98,7 +98,8 @@ jobs:
               ('permissions.xml', './/permission', ['permission_group_id', 'permission_id', 'interface_group_id']),
               ('option_groups.xml', './/group', ['group_id']),
               ('options.xml', './/option', ['option_id']),
-              ('routes.xml', './/route', ['route_prefix', 'sub_name', 'context'])
+              ('routes.xml', './/route', ['route_prefix', 'sub_name', 'context']),
+              ('cron.xml', './/entry', ['entry_id'])
           ]
           errors = []
           for filename, selector, attrs in limit_checks:
@@ -115,10 +116,10 @@ jobs:
               raise SystemExit('wxClansManage admin permission is missing')
 
           nav = {e.attrib.get('navigation_id'): e for e in trees['admin_navigation.xml'].getroot().findall('admin_navigation_entry')}
-          required_nav = {'wxClans', 'wxClansApplications', 'wxClansIdentity', 'wxClansOwnership', 'wxClansLifecycle', 'wxClansSettings'}
+          required_nav = {'wxClans', 'wxClansApplications', 'wxClansIdentity', 'wxClansOwnership', 'wxClansLifecycle', 'wxClansMaintenance', 'wxClansSettings'}
           if not required_nav.issubset(nav):
               raise SystemExit('Admin navigation entries are missing: ' + ', '.join(sorted(required_nav - set(nav))))
-          for key in ('wxClansApplications', 'wxClansIdentity', 'wxClansOwnership', 'wxClansLifecycle'):
+          for key in ('wxClans', 'wxClansApplications', 'wxClansIdentity', 'wxClansOwnership', 'wxClansLifecycle', 'wxClansMaintenance'):
               if nav[key].attrib.get('admin_permission_id') != 'wxClansManage':
                   raise SystemExit(f'{key} is not protected by wxClansManage')
           if nav['wxClansSettings'].attrib.get('admin_permission_id') != 'option':
@@ -156,7 +157,9 @@ jobs:
               'wx_clans_admin_identity_changes', 'wx_clans_admin_ownership_transfers',
               'wx_clans_admin_lifecycle_requests', 'report_content_wx_clan',
               'report_content_wx_clan_announcement', 'wx_clans_user_badges',
-              'alert_wx_clan_lifecycle_approved', 'alert_wx_clan_lifecycle_rejected'
+              'alert_wx_clan_lifecycle_approved', 'alert_wx_clan_lifecycle_rejected',
+              'wx_clans_admin_force_owner', 'wx_clans_admin_maintenance',
+              'alert_wx_clan_moderation_status_changed', 'alert_wx_clan_ownership_forced'
           }
           if not required_templates.issubset(template_titles):
               raise SystemExit('Required templates missing: ' + ', '.join(sorted(required_templates - template_titles)))
@@ -187,6 +190,10 @@ jobs:
               root / 'Service/Identity/Manager.php',
               root / 'Service/Join/Manager.php',
               root / 'Service/Invitation/Manager.php',
+              root / 'Service/Maintenance.php',
+              root / 'Service/Moderation/StatusManager.php',
+              root / 'Service/Ownership/AdminTransfer.php',
+              root / 'Cron/Maintenance.php',
               root / 'Report/Clan.php',
               root / 'Report/Announcement.php',
               root / 'ModeratorLog/Clan.php',
@@ -195,6 +202,63 @@ jobs:
           missing_php = [str(p) for p in required_php if not p.is_file()]
           if missing_php:
               raise SystemExit('Required source files missing:\n' + '\n'.join(missing_php))
+
+          option_ids = {e.attrib.get('option_id') for e in trees['options.xml'].getroot().findall('option')}
+          for option_id in ('wxClansMaxMemberships', 'wxClansMaxOwned', 'wxClansInviteDays', 'wxClansReservedTags', 'wxClansReservedNames'):
+              if option_id not in option_ids:
+                  raise SystemExit('Required option is missing: ' + option_id)
+
+          cron_entries = trees['cron.xml'].getroot().findall('entry')
+          maintenance_cron = next((e for e in cron_entries if e.attrib.get('entry_id') == 'wx_clans_maintenance'), None)
+          if maintenance_cron is None:
+              raise SystemExit('Clan maintenance cron entry is missing')
+          if maintenance_cron.attrib.get('cron_class') != r'Warext\Clans\Cron\Maintenance' or maintenance_cron.attrib.get('cron_method') != 'run':
+              raise SystemExit('Clan maintenance cron callback is invalid')
+
+          repository_source = (root / 'Repository/Clan.php').read_text(encoding='utf-8')
+          for needle in ('isTagReserved', 'isTitleReserved', 'isTitleAvailable'):
+              if needle not in repository_source:
+                  raise SystemExit('Reserved clan identity protection is incomplete: ' + needle)
+
+          for service_path in (root / 'Service/Application/SubmitCreate.php', root / 'Service/Application/Decision.php', root / 'Service/Identity/Manager.php'):
+              service_source = service_path.read_text(encoding='utf-8')
+              if 'isTagReserved' not in service_source or 'isTitleReserved' not in service_source:
+                  raise SystemExit('Reserved identity checks are missing from ' + str(service_path))
+
+          public_controller = (root / 'Pub/Controller/Clan.php').read_text(encoding='utf-8')
+          if "status = 'expired'" in public_controller or "->isExpired()" in public_controller:
+              raise SystemExit('GET clan pages must not mutate invitation expiry state; maintenance service must handle expiry')
+          if r"Warext\\Clans:Moderation\\StatusManager" not in public_controller:
+              raise SystemExit('Public clan moderation status must use StatusManager')
+
+          admin_controller = (root / 'Admin/Controller/Clan.php').read_text(encoding='utf-8')
+          for needle in ('actionForceOwner', r'Ownership\\AdminTransfer', 'actionMaintenance', r'Warext\\Clans:Maintenance'):
+              if needle not in admin_controller:
+                  raise SystemExit('0.8 Admin CP clan management feature is missing: ' + needle)
+
+          alert_handler = (root / 'Alert/Clan.php').read_text(encoding='utf-8')
+          opt_match = re.search(r'getOptOutActions\(\).*?return\s*\[(.*?)\];', alert_handler, flags=re.S)
+          opt_actions = set(re.findall(r"'([a-z_]+)'", opt_match.group(1))) if opt_match else set()
+          expected_alert_actions = {
+              'invited', 'member_joined', 'member_added', 'manager_assigned', 'clan_approved',
+              'join_application', 'application_approved', 'application_rejected',
+              'identity_change_approved', 'identity_change_rejected',
+              'ownership_transfer_requested', 'ownership_transfer_approved', 'ownership_transfer_rejected',
+              'lifecycle_approved', 'lifecycle_rejected', 'ownership_forced', 'moderation_status_changed'
+          }
+          missing_opt = expected_alert_actions - opt_actions
+          if missing_opt:
+              raise SystemExit('Alert handler actions are missing: ' + ', '.join(sorted(missing_opt)))
+          missing_alert_templates = [action for action in expected_alert_actions if f'alert_wx_clan_{action}' not in template_titles]
+          if missing_alert_templates:
+              raise SystemExit('Alert templates are missing: ' + ', '.join(sorted(missing_alert_templates)))
+
+          phrase_titles = {e.attrib.get('title') for e in trees['phrases.xml'].getroot().findall('phrase')}
+          if 'cron_entry.wx_clans_maintenance' not in phrase_titles:
+              raise SystemExit('Maintenance cron phrase is missing')
+          missing_alert_phrases = [action for action in expected_alert_actions if f'alert_opt_out.wx_clan_{action}' not in phrase_titles]
+          if missing_alert_phrases:
+              raise SystemExit('Alert opt-out phrases are missing: ' + ', '.join(sorted(missing_alert_phrases)))
 
           setup = (root / 'Setup.php').read_text(encoding='utf-8')
           for needle in [

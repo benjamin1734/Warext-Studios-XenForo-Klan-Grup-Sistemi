@@ -2,7 +2,7 @@
 
 ## Version
 
-`0.7.0 Alpha`
+`0.8.0 Alpha`
 
 ## Add-on ID
 
@@ -152,6 +152,18 @@ Handles close/reopen requests.
 
 A clan Owner cannot use reopen to bypass a forum suspension. Close/reopen decisions remain forum-reviewed lifecycle operations.
 
+### `Service/Maintenance`
+
+Runs periodic integrity maintenance outside public GET requests. It expires overdue invitations, cancels stale ownership/Owner-bound requests, repairs invalid display preferences and reconciles cached clan member counts. The same service is used by cron and the Admin CP manual-maintenance action.
+
+### `Service/Moderation/StatusManager`
+
+Centralizes forum-side clan status changes, optional moderation reasons, clan audit events, XenForo Moderator Log entries and Owner alerts.
+
+### `Service/Ownership/AdminTransfer`
+
+Provides the forum-authority recovery path when the normal Owner transfer flow cannot be completed. The target must already be an eligible active clan member. The operation atomically rewrites owner/member flags and cancels stale owner-bound requests.
+
 ### `Service/Clan/BlacklistManager`
 
 Manages clan-local blacklist records without touching XenForo user-ban state.
@@ -213,7 +225,19 @@ Clan-internal manager actions do not use this log; they go to `xf_wx_clan_audit_
 
 The `XF\Entity\User` class is extended by `Warext\Clans\XF\Entity\User` to expose clan-display data.
 
-Template modifications integrate approved clan tag/manager banner display into XenForo member/message surfaces without modifying core templates.
+Template modifications integrate approved clan tag/manager banner display into XenForo member/message surfaces without modifying core templates. Member profiles may enumerate all active memberships, while message/tooltip identity remains tied to the user-selected active clan.
+
+## Reserved identity rules
+
+Reserved tag and clan-name lists are stored as XenForo options. They are normalized before comparison and enforced in clan-creation and identity-change services.
+
+Availability is checked both when a request is submitted and again when staff approves it. This prevents an old pending request from bypassing a newly reserved value or an identity claimed while the request was waiting.
+
+## Maintenance model
+
+Public GET endpoints do not change invitation expiry state. Scheduled maintenance performs expiry and other integrity repairs. This keeps read requests read-only and makes cleanup independent from traffic to a particular clan page.
+
+The maintenance service is intentionally idempotent: running it repeatedly should converge to the same consistent state.
 
 ## Lifecycle state rules
 
@@ -244,7 +268,7 @@ Notifications should be emitted after the committed state exists whenever practi
 
 Existing installations are upgraded in place. Upgrade packages must not require resetting the XenForo database or reinstalling the add-on.
 
-Version `0.2.0` introduced base role normalization. Version `0.5.0` introduced later tables/fields needed by ownership, blacklist, announcements and active preferences. Version `0.7.0` adds lifecycle behavior without requiring destructive schema reset.
+Version `0.2.0` introduced base role normalization. Version `0.5.0` introduced later tables/fields needed by ownership, blacklist, announcements and active preferences. Version `0.7.0` added lifecycle behavior without requiring destructive schema reset. Version `0.8.0` adds option/cron/service behavior and does not require a destructive schema reset.
 
 ## Repository layout
 

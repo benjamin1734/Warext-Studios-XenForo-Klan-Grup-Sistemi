@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <admin_navigation>
-  <admin_navigation_entry navigation_id="wxClans" display_order="900" link="warext-clans" icon="fa-users" debug_only="0" development_only="0" hide_no_children="0" />
+  <admin_navigation_entry navigation_id="wxClans" display_order="900" link="warext-clans" icon="fa-users" debug_only="0" development_only="0" hide_no_children="0" admin_permission_id="wxClansManage" />
   <admin_navigation_entry navigation_id="wxClansApplications" parent_navigation_id="wxClans" display_order="10" link="warext-clans/applications" debug_only="0" development_only="0" hide_no_children="0" admin_permission_id="wxClansManage" />
   <admin_navigation_entry navigation_id="wxClansIdentity" parent_navigation_id="wxClans" display_order="20" link="warext-clans/identity-changes" debug_only="0" development_only="0" hide_no_children="0" admin_permission_id="wxClansManage" />
   <admin_navigation_entry navigation_id="wxClansOwnership" parent_navigation_id="wxClans" display_order="30" link="warext-clans/ownership-transfers" debug_only="0" development_only="0" hide_no_children="0" admin_permission_id="wxClansManage" />
   <admin_navigation_entry navigation_id="wxClansLifecycle" parent_navigation_id="wxClans" display_order="40" link="warext-clans/lifecycle-requests" debug_only="0" development_only="0" hide_no_children="0" admin_permission_id="wxClansManage" />
   <admin_navigation_entry navigation_id="wxClansSettings" parent_navigation_id="wxClans" display_order="90" link="options/groups/wxClans/" admin_permission_id="option" debug_only="0" development_only="0" hide_no_children="0" />
+  <admin_navigation_entry navigation_id="wxClansMaintenance" parent_navigation_id="wxClans" display_order="80" link="warext-clans/maintenance" admin_permission_id="wxClansManage" debug_only="0" development_only="0" hide_no_children="0" />
 </admin_navigation>

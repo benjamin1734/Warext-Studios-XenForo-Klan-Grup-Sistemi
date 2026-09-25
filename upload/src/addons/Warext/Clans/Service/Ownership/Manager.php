@@ -163,6 +163,16 @@ class Manager extends AbstractService
             $transfer->decision_reason = '';
             $transfer->save();
 
+            $db->query(
+                "UPDATE xf_wx_clan_application
+                 SET status = 'cancelled', decision_date = ?, decision_user_id = ?, decision_reason = ?
+                 WHERE clan_id = ?
+                   AND application_type IN ('change', 'close', 'reopen')
+                   AND status = 'pending'
+                   AND user_id <> ?",
+                [\XF::$time, $actor->user_id, 'Cancelled because clan ownership changed.', $this->clan->clan_id, $transfer->to_user_id]
+            );
+
             $this->service('Warext\\Clans:Audit\\Logger')->log($this->clan->clan_id, $actor->user_id, 'ownership_transfer_approved', ['from_user_id'=>$transfer->from_user_id,'to_user_id'=>$transfer->to_user_id], 'clan_ownership_transfer', $transfer->transfer_id);
 
             $db->commit();

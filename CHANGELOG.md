@@ -1,5 +1,33 @@
 # Changelog / Değişiklik Günlüğü
 
+## 0.8.0 Alpha - 2026-09-25
+
+### English
+
+- Added forum-managed reserved clan tags and clan names to prevent misleading or protected identities from being requested or approved.
+- Revalidated reserved/duplicate clan identities at both submission and approval time to prevent stale approval races.
+- Added daily clan maintenance cron and a manual Admin CP maintenance screen.
+- Maintenance now expires stale invitations, cancels ownership transfers and owner-bound requests invalidated by ownership changes, repairs invalid active-clan preferences and reconciles cached member counts.
+- Removed invitation-expiry database writes from public GET pages; expiry state is now maintained by the maintenance service.
+- Added forced ownership transfer for authorized forum administrators, including old-owner Manager/member handling and automatic cancellation of stale ownership/identity/lifecycle requests.
+- Added forum moderation reasons to clan status changes and sends the reason/state transition to the clan Owner through XenForo alerts.
+- Added all active clan memberships to member profiles while keeping the selected active clan as the postbit/tooltip identity.
+- Added missing alert-handler actions for clan approval, manager assignment and direct member addition.
+- Expanded CI validation for cron callbacks, reserved identity controls, maintenance, forced ownership, alerts and 0.8 Admin CP surfaces.
+
+### Türkçe
+
+- Yanıltıcı veya korunan kimliklerin talep edilmesini engellemek için forum yönetimli rezerve klan tagı ve klan adı sistemi eklendi.
+- Rezerve/çakışan klan kimliği kontrolleri hem başvuru hem onay anında tekrar doğrulanarak eski bekleyen talepler üzerinden çakışma oluşması engellendi.
+- Günlük klan bakım cron'u ve manuel ACP bakım ekranı eklendi.
+- Bakım sistemi süresi dolan davetleri kapatır, sahiplik değişimiyle geçersiz kalan sahiplik transferi ve Owner'a bağlı talepleri iptal eder, geçersiz aktif-klan tercihlerini düzeltir ve üye sayaçlarını uzlaştırır.
+- Public GET sayfalarında davet süresi dolumu için veritabanına yazma kaldırıldı; bu işlem bakım servisine taşındı.
+- Yetkili forum yöneticisi için zorunlu Owner değiştirme aracı eklendi; eski Owner'ın Manager/üye olarak bırakılması seçilebilir ve eski sahipliğe bağlı bekleyen talepler otomatik iptal edilir.
+- Klan durum moderasyonuna işlem nedeni eklendi; durum değişimi ve nedeni XenForo bildirimiyle Owner'a iletilir.
+- Kullanıcı profilinde tüm aktif klan üyelikleri gösterilir; postbit/tooltip üzerinde yalnızca seçili aktif klan kimliği gösterilmeye devam eder.
+- Klan onayı, Manager ataması ve doğrudan üye ekleme için eksik Alert handler action kayıtları tamamlandı.
+- CI; cron, rezerve kimlik, bakım, zorunlu sahiplik, bildirim ve 0.8 ACP ekranlarını kapsayacak şekilde genişletildi.
+
 ## 0.7.0 Alpha - 2026-09-25
 
 ### English

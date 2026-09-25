@@ -49,9 +49,22 @@ class Manager extends AbstractService
         {
             throw new \XF\PrintableException('Clan tag must be 2-24 characters and contain only letters, numbers, _ or -.');
         }
-        if (!$this->repository('Warext\\Clans:Clan')->isTagAvailable($tag, $this->clan->clan_id))
+        $clanRepo = $this->repository('Warext\\Clans:Clan');
+        if ($clanRepo->isTagReserved($tag))
+        {
+            throw new \XF\PrintableException('The requested clan tag is reserved by forum management.');
+        }
+        if ($clanRepo->isTitleReserved($title))
+        {
+            throw new \XF\PrintableException('The requested clan name is reserved by forum management.');
+        }
+        if (!$clanRepo->isTagAvailable($tag, $this->clan->clan_id))
         {
             throw new \XF\PrintableException('The requested clan tag is not available.');
+        }
+        if (!$clanRepo->isTitleAvailable($title, $this->clan->clan_id))
+        {
+            throw new \XF\PrintableException('The requested clan name is not available.');
         }
         if (!$tagColor || !$bannerColor)
         {
@@ -92,9 +105,18 @@ class Manager extends AbstractService
         {
             throw new \XF\PrintableException('The current clan owner account is not eligible for this identity change.');
         }
-        if (!$this->repository('Warext\\Clans:Clan')->isTagAvailable($application->tag, $this->clan->clan_id, $application->application_id))
+        $clanRepo = $this->repository('Warext\\Clans:Clan');
+        if ($clanRepo->isTagReserved($application->tag) || $clanRepo->isTitleReserved($application->title))
+        {
+            throw new \XF\PrintableException('The requested clan identity is now reserved by forum management.');
+        }
+        if (!$clanRepo->isTagAvailable($application->tag, $this->clan->clan_id, $application->application_id))
         {
             throw new \XF\PrintableException('The requested clan tag is no longer available.');
+        }
+        if (!$clanRepo->isTitleAvailable($application->title, $this->clan->clan_id, $application->application_id))
+        {
+            throw new \XF\PrintableException('The requested clan name is no longer available.');
         }
 
         $db = $this->db();

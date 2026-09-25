@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <template_modifications>
-  <modification type="public" template="member_view" modification_key="wx_clans_member_badges" description="Display the selected clan tag and clan management banner on member profiles." execution_order="50" enabled="1" action="str_replace">
-    <find><![CDATA[<xf:contentcheck><xf:userbanners user="$user" /></xf:contentcheck>]]></find>
-    <replace><![CDATA[$0
-<xf:macro template="wx_clans_user_badges" name="badges" arg-user="{$user}" />]]></replace>
+  <modification type="public" template="member_view" modification_key="wx_clans_member_badges" description="Display the selected clan tag, management banner and all active clan memberships on member profiles." execution_order="50" enabled="1" action="str_replace">
+    <find>&lt;xf:contentcheck&gt;&lt;xf:userbanners user="$user" /&gt;&lt;/xf:contentcheck&gt;</find>
+    <replace>$0
+&lt;xf:macro template="wx_clans_user_badges" name="badges" arg-user="{$user}" /&gt;
+&lt;xf:macro template="wx_clans_user_badges" name="profile_memberships" arg-user="{$user}" /&gt;</replace>
   </modification>
   <modification type="public" template="message_macros" modification_key="wx_clans_message_badges" description="Display the selected clan tag and clan management banner in message user details." execution_order="50" enabled="1" action="str_replace">
-    <find><![CDATA[<xf:userbanners user="$user" tag="div" class="message-userBanner" itemprop="{{ $includeMicrodata ? 'jobTitle' : '' }}" />]]></find>
-    <replace><![CDATA[$0
-<xf:macro template="wx_clans_user_badges" name="badges" arg-user="{$user}" />]]></replace>
+    <find>&lt;xf:userbanners user="$user" tag="div" class="message-userBanner" itemprop="{{ $includeMicrodata ? 'jobTitle' : '' }}" /&gt;</find>
+    <replace>$0
+&lt;xf:macro template="wx_clans_user_badges" name="badges" arg-user="{$user}" /&gt;</replace>
   </modification>
   <modification type="public" template="member_tooltip" modification_key="wx_clans_tooltip_badges" description="Display the selected clan tag on member tooltips." execution_order="50" enabled="1" action="str_replace">
-    <find><![CDATA[<xf:contentcheck><xf:userbanners user="$user" /></xf:contentcheck>]]></find>
-    <replace><![CDATA[$0
-<xf:macro template="wx_clans_user_badges" name="badges" arg-user="{$user}" />]]></replace>
+    <find>&lt;xf:contentcheck&gt;&lt;xf:userbanners user="$user" /&gt;&lt;/xf:contentcheck&gt;</find>
+    <replace>$0
+&lt;xf:macro template="wx_clans_user_badges" name="badges" arg-user="{$user}" /&gt;</replace>
   </modification>
 </template_modifications>

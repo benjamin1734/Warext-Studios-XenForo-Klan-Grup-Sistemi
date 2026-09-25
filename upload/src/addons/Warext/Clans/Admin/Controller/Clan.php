@@ -50,19 +50,64 @@ class Clan extends AbstractController
         $this->assertPostOnly();
         $clan = $this->assertClanExists($params->clan_id);
         $status = $this->filter('status','str');
-        if (!in_array($status, ['active','restricted','suspended','closed'], true))
-        {
-            return $this->error('Invalid clan status.');
-        }
-        $old = $clan->status;
-        $clan->status = $status;
-        $clan->save();
-        $this->service('Warext\\Clans:Audit\\Logger')->log($clan->clan_id, \XF::visitor()->user_id, 'forum_status_changed', ['old'=>$old,'new'=>$status], 'clan', $clan->clan_id);
-        if (\XF::visitor()->user_id && (\XF::visitor()->is_moderator || \XF::visitor()->is_admin))
-        {
-            \XF::app()->logger()->moderatorLogger()->log('wx_clan', $clan, 'status_update', ['old'=>$old,'new'=>$status], false, \XF::visitor());
-        }
+        $reason = $this->filter('reason','str');
+        $this->service('Warext\\Clans:Moderation\\StatusManager', $clan)->change($status, \XF::visitor(), $reason);
         return $this->redirect($this->buildLink('warext-clans'));
+    }
+
+    public function actionForceOwner(ParameterBag $params)
+    {
+        $clan = $this->assertClanExists($params->clan_id);
+
+        if ($this->isPost())
+        {
+            $userId = $this->filter('user_id', 'uint');
+            $member = $this->em()->find('Warext\\Clans:ClanMember', [$clan->clan_id, $userId], ['User']);
+            if (!$member)
+            {
+                return $this->error('The selected user is not an active member of this clan.');
+            }
+
+            $keepAsManager = $this->filter('keep_old_owner_manager', 'bool');
+            $reason = $this->filter('reason', 'str');
+            $this->service('Warext\\Clans:Ownership\\AdminTransfer', $clan)->transfer($member, \XF::visitor(), $keepAsManager, $reason);
+            return $this->redirect($this->buildLink('warext-clans'), 'Clan ownership updated.');
+        }
+
+        $members = $this->finder('Warext\\Clans:ClanMember')
+            ->where('clan_id', $clan->clan_id)
+            ->where('member_state', 'active')
+            ->where('user_id', '<>', $clan->owner_user_id)
+            ->with('User')
+            ->order('join_date', 'ASC')
+            ->fetch();
+
+        return $this->view('Warext\\Clans:ForceOwner', 'wx_clans_admin_force_owner', [
+            'clan' => $clan,
+            'members' => $members
+        ]);
+    }
+
+    public function actionMaintenance()
+    {
+        $service = $this->service('Warext\\Clans:Maintenance');
+        if ($this->isPost())
+        {
+            $result = $service->run();
+            $message = sprintf(
+                'Maintenance completed: %d invitations expired, %d stale transfers cancelled, %d stale owner requests cancelled, %d display preferences repaired, %d clan member counts reconciled.',
+                $result['expired_invitations'],
+                $result['cancelled_transfers'],
+                $result['cancelled_requests'],
+                $result['cleared_preferences'],
+                $result['recounted_clans']
+            );
+            return $this->redirect($this->buildLink('warext-clans/maintenance'), $message);
+        }
+
+        return $this->view('Warext\\Clans:Maintenance', 'wx_clans_admin_maintenance', [
+            'stats' => $service->getStats()
+        ]);
     }
 
     protected function assertClanExists(int $id): \Warext\Clans\Entity\Clan

@@ -85,4 +85,16 @@
   <phrase title="admin_permission.wxClansManage" version_id="1000070" version_string="0.7.0 Alpha">Manage clan and group system</phrase>
   <phrase title="admin_navigation.wxClansSettings" version_id="1000070" version_string="0.7.0 Alpha">Settings</phrase>
   <phrase title="option_group_description.wxClans" version_id="1000070" version_string="0.7.0 Alpha">Configure global limits and invitation behavior for the clan and group system.</phrase>
+  <phrase title="option.wxClansReservedTags" version_id="1000080" version_string="0.8.0 Alpha">Reserved clan tags</phrase>
+  <phrase title="option_explain.wxClansReservedTags" version_id="1000080" version_string="0.8.0 Alpha">Comma, semicolon or line-separated tag values that clan applications and identity changes may not use.</phrase>
+  <phrase title="option.wxClansReservedNames" version_id="1000080" version_string="0.8.0 Alpha">Reserved clan names</phrase>
+  <phrase title="option_explain.wxClansReservedNames" version_id="1000080" version_string="0.8.0 Alpha">Comma, semicolon or line-separated exact clan names reserved by forum management.</phrase>
+  <phrase title="admin_navigation.wxClansMaintenance" version_id="1000080" version_string="0.8.0 Alpha">Maintenance</phrase>
+  <phrase title="alert_opt_out.wx_clan_moderation_status_changed" version_id="1000080" version_string="0.8.0 Alpha">Clan moderation status changed</phrase>
+  <phrase title="alert_opt_out.wx_clan_ownership_forced" version_id="1000080" version_string="0.8.0 Alpha">Clan ownership changed by forum management</phrase>
+  <phrase title="mod_log.wx_clan_owner_forced_change" version_id="1000080" version_string="0.8.0 Alpha">Changed clan owner from {old_owner_user_id} to {new_owner_user_id}</phrase>
+  <phrase title="cron_entry.wx_clans_maintenance" version_id="1000080" version_string="0.8.0 Alpha">Warext Clans maintenance</phrase>
+  <phrase title="alert_opt_out.wx_clan_member_added" version_id="1000080" version_string="0.8.0 Alpha">Clan notifications: member added</phrase>
+  <phrase title="alert_opt_out.wx_clan_manager_assigned" version_id="1000080" version_string="0.8.0 Alpha">Clan notifications: manager assigned</phrase>
+  <phrase title="alert_opt_out.wx_clan_clan_approved" version_id="1000080" version_string="0.8.0 Alpha">Clan notifications: clan approved</phrase>
 </phrases>

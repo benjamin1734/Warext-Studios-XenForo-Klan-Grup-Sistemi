@@ -43,9 +43,22 @@ class SubmitCreate extends AbstractService
         {
             $errors[] = 'Clan tag must be 2-24 characters and contain only letters, numbers, _ or -.';
         }
-        if (!$this->repository('Warext\\Clans:Clan')->isTagAvailable($tag, 0, $this->existing ? $this->existing->application_id : 0))
+        $clanRepo = $this->repository('Warext\\Clans:Clan');
+        if ($clanRepo->isTagReserved($tag))
+        {
+            $errors[] = 'This clan tag is reserved by forum management.';
+        }
+        if ($clanRepo->isTitleReserved($title))
+        {
+            $errors[] = 'This clan name is reserved by forum management.';
+        }
+        if (!$clanRepo->isTagAvailable($tag, 0, $this->existing ? $this->existing->application_id : 0))
         {
             $errors[] = 'This clan tag is already in use or awaiting approval.';
+        }
+        if (!$clanRepo->isTitleAvailable($title, 0, $this->existing ? $this->existing->application_id : 0))
+        {
+            $errors[] = 'This clan name is already in use or awaiting approval.';
         }
 
         $tagColor = $this->normalizeColor((string)($this->input['requested_tag_color'] ?? '#4f46e5'));

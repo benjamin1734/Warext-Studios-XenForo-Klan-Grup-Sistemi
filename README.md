@@ -8,9 +8,9 @@ The system is intentionally independent from XenForo forum moderation. Clan owne
 
 ## Current version
 
-**0.7.0 Alpha**
+**0.8.0 Alpha**
 
-0.7.0 adds the controlled clan lifecycle workflow, stronger Admin CP permissions, list/history improvements and repository hardening while keeping the existing membership, invitation, role, ownership, tag/banner and XenForo moderation integrations.
+0.8.0 adds reserved clan identities, automatic maintenance, forum-forced ownership recovery, moderation reasons/Owner alerts and full membership display on member profiles, while preserving the existing lifecycle, membership, invitation, role and moderation workflows.
 
 ## Main features
 
@@ -104,7 +104,30 @@ A separate **My Clans** area provides the user's memberships, pending applicatio
 - A user with multiple clan memberships can select an active clan for display.
 - Invalid/expired active selections fall back safely to an eligible active membership.
 - Tag/banner output is integrated into XenForo postbit, member profile and member tooltip through XenForo class/template extension mechanisms.
+- Member profiles additionally list all active clan memberships; postbit and tooltip continue to use only the selected active clan.
 - Leaving a clan or losing manager status automatically removes the corresponding display privileges.
+
+### Reserved clan identities
+
+- Administrators can reserve clan tags such as `ADMIN`, `MOD`, `STAFF` or any site-specific value.
+- Administrators can also reserve full clan names.
+- Reserved values are checked when a clan is requested, when an identity change is requested, and again at staff approval time.
+- Clan names are also checked for duplicate active/pending identities instead of protecting only the short tag.
+
+### Automatic maintenance
+
+- A daily XenForo cron expires overdue invitations without requiring a user to open a clan page.
+- Stale ownership transfers and owner-bound identity/lifecycle requests are cancelled after ownership changes.
+- Invalid active-clan display preferences are repaired automatically.
+- Cached clan member counts are reconciled against active membership rows.
+- Administrators can inspect maintenance state and run the same maintenance manually from Admin CP.
+
+### Forum ownership recovery and moderation reasons
+
+- Authorized Admin CP users can transfer a clan to another active member when the normal Owner workflow cannot be used.
+- The old Owner can optionally remain a clan Manager or be demoted to a normal member.
+- Forced ownership changes are written to clan audit and XenForo Moderator Log and notify affected users.
+- Forum status changes support a moderation reason; the Owner receives the old state, new state and reason through XenForo alerts.
 
 ### Announcements
 
@@ -178,6 +201,9 @@ The add-on provides a dedicated **Clans & Groups** section containing:
 - Ownership-transfer requests
 - Clan close/reopen lifecycle requests
 - Global clan settings
+- Reserved clan tag/name settings
+- Maintenance status and manual maintenance
+- Forced Owner recovery for eligible active members
 
 A dedicated `wxClansManage` Admin CP permission protects clan administration routes.
 
@@ -188,6 +214,8 @@ Administrators can configure:
 - Maximum active clan memberships per user
 - Maximum clans owned per user
 - Clan invitation lifetime
+- Reserved clan tags
+- Reserved clan names
 
 A value of `0` can be used for unlimited limits where supported.
 
@@ -297,9 +325,9 @@ Sistemin temel güvenlik kuralı şudur: **klan yöneticiliği forum moderatörl
 
 ## Güncel sürüm
 
-**0.7.0 Alpha**
+**0.8.0 Alpha**
 
-0.7.0 ile kontrollü klan kapatma/yeniden açma akışı, ayrı ACP yönetim izni, liste/geçmiş geliştirmeleri ve repo/CI sağlamlaştırması eklendi. Önceki üyelik, başvuru, davet, sahiplik, tag/banner, rol ve XenForo moderasyon entegrasyonları korunur.
+0.8.0 ile rezerve klan kimlikleri, otomatik bakım, forum yönetimi tarafından zorunlu sahiplik kurtarma, moderasyon nedeni/Owner bildirimi ve kullanıcı profilinde tüm klan üyeliklerinin gösterimi eklendi. Mevcut yaşam döngüsü, üyelik, davet, rol ve moderasyon akışları korunur.
 
 ## Temel özellikler
 
@@ -374,7 +402,30 @@ Klan sayfalarında klan adı/tagı, açıklama, kurallar, kategori, üye sayıs�
 - Birden fazla klana üye kullanıcı hangi klanı aktif göstereceğini seçebilir.
 - Geçersiz hale gelen seçim güvenli biçimde uygun başka aktif üyeliğe düşer.
 - Tag/banner postbit, kullanıcı profili ve kullanıcı tooltip alanına XenForo'nun class/template extension sistemiyle entegredir.
+- Kullanıcı profilinde ayrıca tüm aktif klan üyelikleri listelenir; postbit ve tooltip yalnızca seçili aktif klanı kullanır.
 - Klandan ayrılma veya Manager yetkisinin kaldırılması ilgili görünür yetkileri otomatik düşürür.
+
+### Rezerve klan kimlikleri
+
+- Yönetici; `ADMIN`, `MOD`, `STAFF` gibi veya siteye özel klan taglarını rezerve edebilir.
+- Tam klan adları da rezerve edilebilir.
+- Rezerve değerler klan başvurusunda, kimlik değişikliği talebinde ve forum yönetimi onayı sırasında tekrar kontrol edilir.
+- Yalnızca kısa tag değil, klan adı için de mevcut/bekleyen kayıt çakışması kontrol edilir.
+
+### Otomatik bakım sistemi
+
+- Günlük XenForo cron'u süresi dolmuş davetleri kullanıcı sayfa açmadan otomatik kapatır.
+- Sahiplik değişimiyle geçersiz kalan sahiplik transferleri ve Owner'a bağlı kimlik/yaşam döngüsü talepleri iptal edilir.
+- Geçersiz aktif-klan gösterim tercihleri otomatik düzeltilir.
+- Klan üye sayaçları gerçek aktif üyelik kayıtlarıyla uzlaştırılır.
+- ACP'den bakım durumu görülebilir ve aynı bakım manuel çalıştırılabilir.
+
+### Forum sahiplik kurtarma ve moderasyon nedeni
+
+- Normal Owner aktarım akışı kullanılamadığında yetkili ACP kullanıcısı sahipliği başka bir aktif klan üyesine aktarabilir.
+- Eski Owner isteğe göre Manager olarak bırakılabilir veya normal üyeye düşürülebilir.
+- Zorunlu sahiplik değişikliği klan denetim kaydına ve XenForo Moderator Log'a yazılır; ilgili kullanıcılara bildirim gönderilir.
+- Forum durum değişikliklerinde moderasyon nedeni girilebilir; eski/yeni durum ve neden XenForo bildirimiyle Owner'a iletilir.
 
 ### Klan duyuruları
 
@@ -443,6 +494,9 @@ ACP içinde bağımsız **Klanlar & Gruplar** bölümü bulunur:
 - Sahiplik devir talepleri
 - Klan kapatma/yeniden açma talepleri
 - Global klan ayarları
+- Rezerve klan tag/ad ayarları
+- Bakım durumu ve manuel bakım
+- Uygun aktif üyeye zorunlu Owner devri
 
 Klan yönetim controller'ları ayrı `wxClansManage` ACP izniyle korunur.
 
