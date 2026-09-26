@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language title="Warext Clans Türkçe (TR)" date_format="j F Y" time_format="H:i" decimal_point="," thousands_separator="." language_code="tr-TR" text_direction="LTR">
+  <phrase title="admin_navigation.wxClans" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Clans &amp; Groups]]></phrase>
+  <phrase title="admin_navigation.wxClansApplications" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan başvuruları]]></phrase>
+  <phrase title="admin_navigation.wxClansIdentity" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Kimlik değişiklikleri]]></phrase>
+  <phrase title="admin_navigation.wxClansOwnership" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Sahiplik devirleri]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_application_approved" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan bildirimleri: başvuru onaylandı]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_application_rejected" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan bildirimleri: başvuru reddedildi]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_identity_change_approved" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan bildirimleri: kimlik değişikliği onaylandı]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_identity_change_rejected" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan bildirimleri: kimlik değişikliği reddedildi]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_invited" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan bildirimleri: davet edildi]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_join_application" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan bildirimleri: üyelik başvurusu]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_member_joined" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan bildirimleri: üye katıldı]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_ownership_transfer_approved" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan bildirimleri: sahiplik devri onaylandı]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_ownership_transfer_requested" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan bildirimleri: sahiplik devri talep edildi]]></phrase>
+  <phrase title="content_type.wx_clan" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan]]></phrase>
+  <phrase title="mod_log.wx_clan_approve_creation" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan oluşturmayı onayladı]]></phrase>
+  <phrase title="mod_log.wx_clan_change_manager_banner" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan yönetici bannerını değiştirdi]]></phrase>
+  <phrase title="mod_log.wx_clan_change_owner_user_id" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan sahibini değiştirdi]]></phrase>
+  <phrase title="mod_log.wx_clan_change_status" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan durumunu {old} durumundan {new} durumuna değiştirdi]]></phrase>
+  <phrase title="mod_log.wx_clan_change_tag" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan tagını değiştirdi]]></phrase>
+  <phrase title="mod_log.wx_clan_change_title" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan adını değiştirdi]]></phrase>
+  <phrase title="mod_log.wx_clan_identity_change_approved" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan kimliği değişikliğini onayladı]]></phrase>
+  <phrase title="mod_log.wx_clan_identity_change_rejected" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan kimliği değişikliğini reddetti]]></phrase>
+  <phrase title="mod_log.wx_clan_ownership_transfer_approved" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan sahiplik devrini onayladı]]></phrase>
+  <phrase title="mod_log.wx_clan_ownership_transfer_rejected" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan sahiplik devrini reddetti]]></phrase>
+  <phrase title="mod_log.wx_clan_status_update" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan durumunu {old} durumundan {new} durumuna değiştirdi]]></phrase>
+  <phrase title="nav.wxClans" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klanlar]]></phrase>
+  <phrase title="nav.wxClansMy" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klanlarım]]></phrase>
+  <phrase title="option.wxClansInviteDays" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan daveti geçerlilik süresi (gün)]]></phrase>
+  <phrase title="option.wxClansMaxMemberships" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Kullanıcı başına maksimum klan üyeliği]]></phrase>
+  <phrase title="option.wxClansMaxOwned" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Kullanıcı başına maksimum sahip olunan klan]]></phrase>
+  <phrase title="option_explain.wxClansInviteDays" addon_id="Warext/Clans" global_cache="0" version_id="1000070" version_string="0.7.0 Alpha"><![CDATA[Bir klan davetinin süresinin dolmasına kadar geçecek gün sayısı.]]></phrase>
+  <phrase title="option_explain.wxClansMaxMemberships" addon_id="Warext/Clans" global_cache="0" version_id="1000070" version_string="0.7.0 Alpha"><![CDATA[Bir kullanıcının sahip olabileceği maksimum aktif klan üyeliği. Sınırsız için 0 girin.]]></phrase>
+  <phrase title="option_explain.wxClansMaxOwned" addon_id="Warext/Clans" global_cache="0" version_id="1000070" version_string="0.7.0 Alpha"><![CDATA[Bir kullanıcının aynı anda sahip olabileceği maksimum klan sayısı. Sınırsız için 0 girin.]]></phrase>
+  <phrase title="option_group.wxClans" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Clans &amp; Groups]]></phrase>
+  <phrase title="permission.wxClans_apply" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan oluşturmak için başvurabilir]]></phrase>
+  <phrase title="permission.wxClans_moderate" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klanları modere edebilir]]></phrase>
+  <phrase title="permission.wxClans_view" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klanları görüntüleyebilir]]></phrase>
+  <phrase title="permission_interface.wxClans" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Clans &amp; Groups]]></phrase>
+  <phrase title="permission_interface.wxClansModerator" addon_id="Warext/Clans" global_cache="0" version_id="1000050" version_string="0.5.0 Alpha"><![CDATA[Klan moderasyonu]]></phrase>
+  <phrase title="content_type.wx_clan_announcement" addon_id="Warext/Clans" global_cache="0" version_id="1000060" version_string="0.6.0 Alpha"><![CDATA[Klan duyurusu]]></phrase>
+  <phrase title="mod_log.wx_clan_announcement_removed" addon_id="Warext/Clans" global_cache="0" version_id="1000060" version_string="0.6.0 Alpha"><![CDATA[{title} klan duyurusunu kaldırdı]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_ownership_transfer_rejected" addon_id="Warext/Clans" global_cache="0" version_id="1000060" version_string="0.6.0 Alpha"><![CDATA[Sahiplik devri reddedildi]]></phrase>
+  <phrase title="admin_navigation.wxClansLifecycle" addon_id="Warext/Clans" global_cache="0" version_id="1000070" version_string="0.7.0 Alpha"><![CDATA[Yaşam döngüsü talepleri]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_lifecycle_approved" addon_id="Warext/Clans" global_cache="0" version_id="1000070" version_string="0.7.0 Alpha"><![CDATA[Klan yaşam döngüsü talebi onaylandı]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_lifecycle_rejected" addon_id="Warext/Clans" global_cache="0" version_id="1000070" version_string="0.7.0 Alpha"><![CDATA[Klan yaşam döngüsü talebi reddedildi]]></phrase>
+  <phrase title="mod_log.wx_clan_lifecycle_approved" addon_id="Warext/Clans" global_cache="0" version_id="1000070" version_string="0.7.0 Alpha"><![CDATA[Klan yaşam döngüsü talebini onayladı ({type})]]></phrase>
+  <phrase title="mod_log.wx_clan_lifecycle_rejected" addon_id="Warext/Clans" global_cache="0" version_id="1000070" version_string="0.7.0 Alpha"><![CDATA[Klan yaşam döngüsü talebini reddetti ({type})]]></phrase>
+  <phrase title="admin_permission.wxClansManage" addon_id="Warext/Clans" global_cache="0" version_id="1000070" version_string="0.7.0 Alpha"><![CDATA[Klan ve grup sistemini yönet]]></phrase>
+  <phrase title="admin_navigation.wxClansSettings" addon_id="Warext/Clans" global_cache="0" version_id="1000070" version_string="0.7.0 Alpha"><![CDATA[Ayarlar]]></phrase>
+  <phrase title="option_group_description.wxClans" addon_id="Warext/Clans" global_cache="0" version_id="1000070" version_string="0.7.0 Alpha"><![CDATA[Klan ve grup sistemi için global limitleri ve davet davranışını yapılandırın.]]></phrase>
+  <phrase title="option.wxClansReservedTags" addon_id="Warext/Clans" global_cache="0" version_id="1000080" version_string="0.8.0 Alpha"><![CDATA[Rezerve klan tagları]]></phrase>
+  <phrase title="option_explain.wxClansReservedTags" addon_id="Warext/Clans" global_cache="0" version_id="1000080" version_string="0.8.0 Alpha"><![CDATA[Klan başvuruları ve kimlik değişikliklerinde kullanılamayacak virgül, noktalı virgül veya satır ile ayrılmış tag değerleri.]]></phrase>
+  <phrase title="option.wxClansReservedNames" addon_id="Warext/Clans" global_cache="0" version_id="1000080" version_string="0.8.0 Alpha"><![CDATA[Rezerve klan adları]]></phrase>
+  <phrase title="option_explain.wxClansReservedNames" addon_id="Warext/Clans" global_cache="0" version_id="1000080" version_string="0.8.0 Alpha"><![CDATA[Forum yönetimi tarafından rezerve edilen virgül, noktalı virgül veya satır ile ayrılmış tam klan adları.]]></phrase>
+  <phrase title="admin_navigation.wxClansMaintenance" addon_id="Warext/Clans" global_cache="0" version_id="1000080" version_string="0.8.0 Alpha"><![CDATA[Bakım]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_moderation_status_changed" addon_id="Warext/Clans" global_cache="0" version_id="1000080" version_string="0.8.0 Alpha"><![CDATA[Klan moderasyon durumu değişti]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_ownership_forced" addon_id="Warext/Clans" global_cache="0" version_id="1000080" version_string="0.8.0 Alpha"><![CDATA[Klan sahipliği forum yönetimi tarafından değiştirildi]]></phrase>
+  <phrase title="mod_log.wx_clan_owner_forced_change" addon_id="Warext/Clans" global_cache="0" version_id="1000080" version_string="0.8.0 Alpha"><![CDATA[Klan sahibini {old_owner_user_id} kullanıcısından {new_owner_user_id} kullanıcısına değiştirdi]]></phrase>
+  <phrase title="cron_entry.wx_clans_maintenance" addon_id="Warext/Clans" global_cache="0" version_id="1000080" version_string="0.8.0 Alpha"><![CDATA[Warext Klanlar bakımı]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_member_added" addon_id="Warext/Clans" global_cache="0" version_id="1000080" version_string="0.8.0 Alpha"><![CDATA[Klan bildirimleri: üye eklendi]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_manager_assigned" addon_id="Warext/Clans" global_cache="0" version_id="1000080" version_string="0.8.0 Alpha"><![CDATA[Klan bildirimleri: yönetici atandı]]></phrase>
+  <phrase title="alert_opt_out.wx_clan_clan_approved" addon_id="Warext/Clans" global_cache="0" version_id="1000080" version_string="0.8.0 Alpha"><![CDATA[Klan bildirimleri: klan onaylandı]]></phrase>
+  <phrase title="option.wxClansMaxMembersPerClan" addon_id="Warext/Clans" global_cache="0" version_id="1000090" version_string="0.9.0 Alpha"><![CDATA[Klan başına maksimum üye]]></phrase>
+  <phrase title="option_explain.wxClansMaxMembersPerClan" addon_id="Warext/Clans" global_cache="0" version_id="1000090" version_string="0.9.0 Alpha"><![CDATA[Bir klanda izin verilen maksimum aktif üye. Sınırsız için 0 girin.]]></phrase>
+  <phrase title="option.wxClansMaxManagersPerClan" addon_id="Warext/Clans" global_cache="0" version_id="1000090" version_string="0.9.0 Alpha"><![CDATA[Klan başına maksimum Manager]]></phrase>
+  <phrase title="option_explain.wxClansMaxManagersPerClan" addon_id="Warext/Clans" global_cache="0" version_id="1000090" version_string="0.9.0 Alpha"><![CDATA[Owner hariç bir klanda izin verilen maksimum Manager rolündeki üye. Sınırsız için 0 girin.]]></phrase>
+  <phrase title="option.wxClansJoinCooldownHours" addon_id="Warext/Clans" global_cache="0" version_id="1000090" version_string="0.9.0 Alpha"><![CDATA[Üyelik başvurusu bekleme süresi (saat)]]></phrase>
+  <phrase title="option_explain.wxClansJoinCooldownHours" addon_id="Warext/Clans" global_cache="0" version_id="1000090" version_string="0.9.0 Alpha"><![CDATA[Reddedilen veya iptal edilen bir üyelik başvurusundan sonra aynı klana yeniden başvurmak için kullanıcının beklemesi gereken saat. Devre dışı bırakmak için 0 girin.]]></phrase>
+  <phrase title="option.wxClansInviteCooldown" addon_id="Warext/Clans" global_cache="0" version_id="1000090" version_string="0.9.0 Alpha"><![CDATA[Daveti yeniden gönderme bekleme süresi (saat)]]></phrase>
+  <phrase title="option_explain.wxClansInviteCooldown" addon_id="Warext/Clans" global_cache="0" version_id="1000090" version_string="0.9.0 Alpha"><![CDATA[Önceki davet sonuçlandıktan sonra aynı kullanıcıya yeni davet göndermek için klan yönetiminin beklemesi gereken saat. Devre dışı bırakmak için 0 girin.]]></phrase>
+  <phrase title="option.wxClansMembersPerPage" addon_id="Warext/Clans" global_cache="0" version_id="1000100" version_string="0.10.0 Alpha"><![CDATA[Sayfa başına klan üyesi]]></phrase>
+  <phrase title="option_explain.wxClansMembersPerPage" addon_id="Warext/Clans" global_cache="0" version_id="1000100" version_string="0.10.0 Alpha"><![CDATA[Public klan profilleri ve klan yönetim ekranlarında sayfa başına yüklenecek üye sayısı. İzin verilen aralık: 10–100.]]></phrase>
+  <phrase title="option.wxClansMaxRoles" addon_id="Warext/Clans" global_cache="0" version_id="1000120" version_string="0.12.0 RC"><![CDATA[Klan başına maksimum özel rol]]></phrase>
+  <phrase title="option_explain.wxClansMaxRoles" addon_id="Warext/Clans" global_cache="0" version_id="1000120" version_string="0.12.0 RC"><![CDATA[Maksimum özel klan rolü sayısı. Sınırsız için 0 girin.]]></phrase>
+  <phrase title="option.wxClansMaxFields" addon_id="Warext/Clans" global_cache="0" version_id="1000120" version_string="0.12.0 RC"><![CDATA[Klan başına maksimum başvuru alanı]]></phrase>
+  <phrase title="option_explain.wxClansMaxFields" addon_id="Warext/Clans" global_cache="0" version_id="1000120" version_string="0.12.0 RC"><![CDATA[Klan başına maksimum özel üyelik başvurusu sorusu. Sınırsız için 0 girin.]]></phrase>
+  <phrase title="option.wxClansMaxAnnouncements" addon_id="Warext/Clans" global_cache="0" version_id="1000120" version_string="0.12.0 RC"><![CDATA[Klan başına maksimum duyuru]]></phrase>
+  <phrase title="option_explain.wxClansMaxAnnouncements" addon_id="Warext/Clans" global_cache="0" version_id="1000120" version_string="0.12.0 RC"><![CDATA[Saklanabilecek maksimum klan duyurusu sayısı. Sınırsız için 0 girin.]]></phrase>
+  <phrase title="wx_clans_i18n_rejection_reason" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Red nedeni]]></phrase>
+  <phrase title="wx_clans_i18n_reason_requested_changes" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Neden / istenen değişiklikler]]></phrase>
+  <phrase title="wx_clans_i18n_decision" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Karar]]></phrase>
+  <phrase title="wx_clans_i18n_save_decision" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Kararı kaydet]]></phrase>
+  <phrase title="wx_clans_i18n_forum_feedback" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum geri bildirimi]]></phrase>
+  <phrase title="wx_clans_i18n_clan_name" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan adı]]></phrase>
+  <phrase title="wx_clans_i18n_clan_tag" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan tagı]]></phrase>
+  <phrase title="wx_clans_i18n_2_24_characters_letters_numbers_underscore_or_hyph" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[2-24 karakter: harf, rakam, alt çizgi veya tire.]]></phrase>
+  <phrase title="wx_clans_i18n_description" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Açıklama]]></phrase>
+  <phrase title="wx_clans_i18n_game_category" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Oyun / kategori]]></phrase>
+  <phrase title="wx_clans_i18n_requested_manager_banner" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Talep edilen yönetici bannerı]]></phrase>
+  <phrase title="wx_clans_i18n_tag_icon" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Tag ikonu]]></phrase>
+  <phrase title="wx_clans_i18n_tag_color" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Tag rengi]]></phrase>
+  <phrase title="wx_clans_i18n_manager_banner_icon" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager banner ikonu]]></phrase>
+  <phrase title="wx_clans_i18n_manager_banner_color" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager banner rengi]]></phrase>
+  <phrase title="wx_clans_i18n_submit_for_forum_approval" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum onayına gönder]]></phrase>
+  <phrase title="wx_clans_i18n_submit_application" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Başvuruyu gönder]]></phrase>
+  <phrase title="wx_clans_i18n_role_title" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Rol adı]]></phrase>
+  <phrase title="wx_clans_i18n_display_order" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Görüntüleme sırası]]></phrase>
+  <phrase title="wx_clans_i18n_save_role" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Rolü kaydet]]></phrase>
+  <phrase title="wx_clans_i18n_question" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Soru]]></phrase>
+  <phrase title="wx_clans_i18n_field_key" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Alan anahtarı]]></phrase>
+  <phrase title="wx_clans_i18n_field_type" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Alan türü]]></phrase>
+  <phrase title="wx_clans_i18n_options" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Seçenekler]]></phrase>
+  <phrase title="wx_clans_i18n_for_select_multiple_choice_one_option_per_line" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Seçim / çoklu seçim için satır başına bir seçenek.]]></phrase>
+  <phrase title="wx_clans_i18n_save_question" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Soruyu kaydet]]></phrase>
+  <phrase title="wx_clans_i18n_title" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Başlık]]></phrase>
+  <phrase title="wx_clans_i18n_message" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Mesaj]]></phrase>
+  <phrase title="wx_clans_i18n_save_announcement" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Duyuruyu kaydet]]></phrase>
+  <phrase title="wx_clans_i18n_search" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Ara]]></phrase>
+  <phrase title="wx_clans_i18n_clan_name_or_tag" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan adı veya tag]]></phrase>
+  <phrase title="wx_clans_i18n_status" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Durum]]></phrase>
+  <phrase title="wx_clans_i18n_category" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Kategori]]></phrase>
+  <phrase title="wx_clans_i18n_filter" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Filtrele]]></phrase>
+  <phrase title="wx_clans_i18n_optional_moderation_reason" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Opsiyonel moderasyon nedeni]]></phrase>
+  <phrase title="wx_clans_i18n_join_mode" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Katılım modu]]></phrase>
+  <phrase title="wx_clans_i18n_sort" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Sıralama]]></phrase>
+  <phrase title="wx_clans_i18n_clan_rules" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan kuralları]]></phrase>
+  <phrase title="wx_clans_i18n_member_list_visibility" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Üye listesi görünürlüğü]]></phrase>
+  <phrase title="wx_clans_i18n_announcement_visibility" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Duyuru görünürlüğü]]></phrase>
+  <phrase title="wx_clans_i18n_logo_url" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Logo URL]]></phrase>
+  <phrase title="wx_clans_i18n_cover_url" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Kapak URL]]></phrase>
+  <phrase title="wx_clans_i18n_save_settings" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Ayarları kaydet]]></phrase>
+  <phrase title="wx_clans_i18n_pending_request" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bekleyen talep]]></phrase>
+  <phrase title="wx_clans_i18n_manager_banner" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager bannerı]]></phrase>
+  <phrase title="wx_clans_i18n_request_forum_approval" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum onayı iste]]></phrase>
+  <phrase title="wx_clans_i18n_new_owner_username" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Yeni Owner kullanıcı adı]]></phrase>
+  <phrase title="wx_clans_i18n_the_user_must_already_be_a_clan_member_they_must_a" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Kullanıcı zaten klan üyesi olmalıdır. Önce kullanıcı kabul etmeli, ardından forum yönetimi onaylamalıdır.]]></phrase>
+  <phrase title="wx_clans_i18n_start_ownership_transfer" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Sahiplik devrini başlat]]></phrase>
+  <phrase title="wx_clans_i18n_invite_username" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Davet edilecek kullanıcı adı]]></phrase>
+  <phrase title="wx_clans_i18n_send_invitation" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Daveti gönder]]></phrase>
+  <phrase title="wx_clans_i18n_directly_add_username" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Doğrudan eklenecek kullanıcı adı]]></phrase>
+  <phrase title="wx_clans_i18n_add_member" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Üye ekle]]></phrase>
+  <phrase title="wx_clans_i18n_optional_rejection_reason" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Opsiyonel red nedeni]]></phrase>
+  <phrase title="wx_clans_i18n_new_question" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Yeni soru]]></phrase>
+  <phrase title="wx_clans_i18n_optional_generated_automatically_if_blank" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Opsiyonel; boş bırakılırsa otomatik oluşturulur.]]></phrase>
+  <phrase title="wx_clans_i18n_add_question" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Soru ekle]]></phrase>
+  <phrase title="wx_clans_i18n_create_role" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Rol oluştur]]></phrase>
+  <phrase title="wx_clans_i18n_allowed_actions" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[İzin verilen işlemler]]></phrase>
+  <phrase title="wx_clans_i18n_security" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Güvenlik]]></phrase>
+  <phrase title="wx_clans_i18n_save_manager_permissions" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager izinlerini kaydet]]></phrase>
+  <phrase title="wx_clans_i18n_username" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Kullanıcı adı]]></phrase>
+  <phrase title="wx_clans_i18n_reason" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Neden]]></phrase>
+  <phrase title="wx_clans_i18n_duration_in_days" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Süre (gün)]]></phrase>
+  <phrase title="wx_clans_i18n_0_permanent" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[0 = kalıcı]]></phrase>
+  <phrase title="wx_clans_i18n_add_to_clan_blacklist" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan kara listesine ekle]]></phrase>
+  <phrase title="wx_clans_i18n_publish_announcement" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Duyuruyu yayınla]]></phrase>
+  <phrase title="wx_clans_i18n_closing_reason" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Kapatma nedeni]]></phrase>
+  <phrase title="wx_clans_i18n_request_clan_closure" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klanın kapatılmasını iste]]></phrase>
+  <phrase title="wx_clans_i18n_displayed_clan" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Gösterilen klan]]></phrase>
+  <phrase title="wx_clans_i18n_save" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Kaydet]]></phrase>
+  <phrase title="wx_clans_i18n_reopen_reason" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Yeniden açma nedeni]]></phrase>
+  <phrase title="wx_clans_i18n_request_reopening" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Yeniden açılmasını iste]]></phrase>
+  <phrase title="wx_clans_i18n_clan_status" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan durumu]]></phrase>
+  <phrase title="wx_clans_i18n_moderation_reason" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Moderasyon nedeni]]></phrase>
+  <phrase title="wx_clans_i18n_optional_the_clan_owner_will_receive_this_reason_w" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Opsiyonel. Klan Owner'ı bu nedeni XenForo bildirimiyle alır.]]></phrase>
+  <phrase title="wx_clans_i18n_update_moderation_status" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Moderasyon durumunu güncelle]]></phrase>
+  <phrase title="wx_clans_i18n_current_owner" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Mevcut Owner]]></phrase>
+  <phrase title="wx_clans_i18n_new_owner" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Yeni Owner]]></phrase>
+  <phrase title="wx_clans_i18n_required_stored_in_clan_audit_and_xenforo_moderato" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Zorunlu. Klan denetim ve XenForo moderator log kayıtlarında saklanır ve etkilenen kullanıcı bildirimlerine eklenir.]]></phrase>
+  <phrase title="wx_clans_i18n_change_owner" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Owner'ı değiştir]]></phrase>
+  <phrase title="wx_clans_i18n_expired_invitations_still_pending" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Süresi dolduğu halde bekleyen davetler]]></phrase>
+  <phrase title="wx_clans_i18n_stale_ownership_transfers" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Eski sahiplik devirleri]]></phrase>
+  <phrase title="wx_clans_i18n_stale_owner_bound_requests" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Eski Owner'a bağlı talepler]]></phrase>
+  <phrase title="wx_clans_i18n_invalid_display_preferences" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Geçersiz gösterim tercihleri]]></phrase>
+  <phrase title="wx_clans_i18n_active_display_preferences" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Aktif gösterim tercihleri]]></phrase>
+  <phrase title="wx_clans_i18n_total_clans" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Toplam klan]]></phrase>
+  <phrase title="wx_clans_i18n_run_maintenance_now" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bakımı şimdi çalıştır]]></phrase>
+  <phrase title="wx_clans_i18n_choose_from_the_color_wheel_or_enter_hex_rgb_value" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Renk dairesinden seçebilir veya HEX / RGB değerlerini elle girebilirsiniz.]]></phrase>
+  <phrase title="wx_clans_i18n_open_color_picker" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Renk seçiciyi aç]]></phrase>
+  <phrase title="wx_clans_i18n_select_one_of_the_xenforo_font_awesome_icons" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[XenForo / Font Awesome ikonlarından birini seçin.]]></phrase>
+  <phrase title="wx_clans_i18n_approve" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Onayla]]></phrase>
+  <phrase title="wx_clans_i18n_reject_request_changes" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Reddet / değişiklik iste]]></phrase>
+  <phrase title="wx_clans_i18n_no_pending_clan_applications" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bekleyen klan başvurusu yok.]]></phrase>
+  <phrase title="wx_clans_i18n_clan_identity_changes" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan kimliği değişiklikleri]]></phrase>
+  <phrase title="wx_clans_i18n_requested_manager_banner_1" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Talep edilen Manager bannerı:]]></phrase>
+  <phrase title="wx_clans_i18n_reject" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Reddet]]></phrase>
+  <phrase title="wx_clans_i18n_no_pending_identity_changes" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bekleyen kimlik değişikliği yok.]]></phrase>
+  <phrase title="wx_clans_i18n_accepted" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Kabul edildi]]></phrase>
+  <phrase title="wx_clans_i18n_approve_transfer" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Devri onayla]]></phrase>
+  <phrase title="wx_clans_i18n_no_transfers_awaiting_forum_approval" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum onayı bekleyen devir yok.]]></phrase>
+  <phrase title="wx_clans_i18n_review_clan_application" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan başvurusunu incele]]></phrase>
+  <phrase title="wx_clans_i18n_request_changes" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Değişiklik iste]]></phrase>
+  <phrase title="wx_clans_i18n_your_application_to" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Şu klana başvurunuz:]]></phrase>
+  <phrase title="wx_clans_i18n_was_rejected" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[reddedildi.]]></phrase>
+  <phrase title="wx_clans_i18n_your_clan" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klanınız]]></phrase>
+  <phrase title="wx_clans_i18n_the_identity_change_request_for" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Şu klan için kimlik değişikliği talebi:]]></phrase>
+  <phrase title="wx_clans_i18n_the_ownership_transfer_for" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Şu klan için sahiplik devri:]]></phrase>
+  <phrase title="wx_clans_i18n_select" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Seç...]]></phrase>
+  <phrase title="wx_clans_i18n_no_additional_questions_are_required" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Ek soru gerekli değil.]]></phrase>
+  <phrase title="wx_clans_i18n_edit_clan_role" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan rolünü düzenle]]></phrase>
+  <phrase title="wx_clans_i18n_edit_application_question" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Başvuru sorusunu düzenle]]></phrase>
+  <phrase title="wx_clans_i18n_text" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Metin]]></phrase>
+  <phrase title="wx_clans_i18n_long_text" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Uzun metin]]></phrase>
+  <phrase title="wx_clans_i18n_select_2" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Seçim]]></phrase>
+  <phrase title="wx_clans_i18n_multiple_choice" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Çoklu seçim]]></phrase>
+  <phrase title="wx_clans_i18n_number" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Sayı]]></phrase>
+  <phrase title="wx_clans_i18n_date" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Tarih]]></phrase>
+  <phrase title="wx_clans_i18n_required" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Zorunlu]]></phrase>
+  <phrase title="wx_clans_i18n_active" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Aktif]]></phrase>
+  <phrase title="wx_clans_i18n_edit_clan_announcement" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan duyurusunu düzenle]]></phrase>
+  <phrase title="wx_clans_i18n_pin_announcement" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Duyuruyu sabitle]]></phrase>
+  <phrase title="wx_clans_i18n_warext_clans" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Warext Klanlar]]></phrase>
+  <phrase title="wx_clans_i18n_system_overview" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Sistem özeti]]></phrase>
+  <phrase title="wx_clans_i18n_clans" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klanlar:]]></phrase>
+  <phrase title="wx_clans_i18n_active_memberships" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Aktif üyelikler:]]></phrase>
+  <phrase title="wx_clans_i18n_pending_review" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bekleyen inceleme:]]></phrase>
+  <phrase title="wx_clans_i18n_all" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Tümü]]></phrase>
+  <phrase title="wx_clans_i18n_restricted" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Kısıtlı]]></phrase>
+  <phrase title="wx_clans_i18n_suspended" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Askıya alınmış]]></phrase>
+  <phrase title="wx_clans_i18n_closed" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Kapalı]]></phrase>
+  <phrase title="wx_clans_i18n_update_status" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Durumu güncelle]]></phrase>
+  <phrase title="wx_clans_i18n_no_clans_found" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan bulunamadı.]]></phrase>
+  <phrase title="wx_clans_i18n_clan_lifecycle_requests" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan yaşam döngüsü talepleri]]></phrase>
+  <phrase title="wx_clans_i18n_no_pending_lifecycle_requests" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bekleyen yaşam döngüsü talebi yok.]]></phrase>
+  <phrase title="wx_clans_i18n_clans_groups" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klanlar & Gruplar]]></phrase>
+  <phrase title="wx_clans_i18n_create_apply" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Oluştur / başvur]]></phrase>
+  <phrase title="wx_clans_i18n_all_categories" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Tüm kategoriler]]></phrase>
+  <phrase title="wx_clans_i18n_open" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Açık]]></phrase>
+  <phrase title="wx_clans_i18n_application" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Başvuru]]></phrase>
+  <phrase title="wx_clans_i18n_invite_only" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Yalnız davet]]></phrase>
+  <phrase title="wx_clans_i18n_newest" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[En yeni]]></phrase>
+  <phrase title="wx_clans_i18n_most_members" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[En çok üye]]></phrase>
+  <phrase title="wx_clans_i18n_name" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Ad]]></phrase>
+  <phrase title="wx_clans_i18n_no_clans_matched_your_filters" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Filtrelerinize uyan klan bulunamadı.]]></phrase>
+  <phrase title="wx_clans_i18n_view_clan" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klanı görüntüle]]></phrase>
+  <phrase title="wx_clans_i18n_clan_profile_settings" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan profil ayarları]]></phrase>
+  <phrase title="wx_clans_i18n_public" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Herkese açık]]></phrase>
+  <phrase title="wx_clans_i18n_clan_members_only" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Yalnız klan üyeleri]]></phrase>
+  <phrase title="wx_clans_i18n_owner_forum_staff_only" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Yalnız Owner / forum ekibi]]></phrase>
+  <phrase title="wx_clans_i18n_forum_approved_clan_identity" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum onaylı klan kimliği]]></phrase>
+  <phrase title="wx_clans_i18n_a_clan_name_tag_banner_change_is_waiting_for_forum" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bir klan adı/tag/banner değişikliği forum onayı bekliyor.]]></phrase>
+  <phrase title="wx_clans_i18n_ownership_transfer" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Sahiplik devri]]></phrase>
+  <phrase title="wx_clans_i18n_transfer_to" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Devredilecek kullanıcı]]></phrase>
+  <phrase title="wx_clans_i18n_cancel" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[İptal]]></phrase>
+  <phrase title="wx_clans_i18n_invite_add_member" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Davet et / üye ekle]]></phrase>
+  <phrase title="wx_clans_i18n_members" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Üyeler]]></phrase>
+  <phrase title="wx_clans_i18n_owner" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Owner]]></phrase>
+  <phrase title="wx_clans_i18n_manager" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager]]></phrase>
+  <phrase title="wx_clans_i18n_member" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Üye]]></phrase>
+  <phrase title="wx_clans_i18n_joined" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Katılım tarihi]]></phrase>
+  <phrase title="wx_clans_i18n_set_role" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Rol ata]]></phrase>
+  <phrase title="wx_clans_i18n_remove" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Kaldır]]></phrase>
+  <phrase title="wx_clans_i18n_pending_join_applications" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bekleyen üyelik başvuruları]]></phrase>
+  <phrase title="wx_clans_i18n_no_pending_applications" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bekleyen başvuru yok.]]></phrase>
+  <phrase title="wx_clans_i18n_application_form" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Başvuru formu]]></phrase>
+  <phrase title="wx_clans_i18n_edit" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Düzenle]]></phrase>
+  <phrase title="wx_clans_i18n_delete" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Sil]]></phrase>
+  <phrase title="wx_clans_i18n_custom_clan_roles" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Özel klan rolleri]]></phrase>
+  <phrase title="wx_clans_i18n_manager_permissions" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager izinleri]]></phrase>
+  <phrase title="wx_clans_i18n_these_permissions_are_limited_to_this_clan_and_nev" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bu izinler yalnızca bu klanla sınırlıdır ve hiçbir zaman XenForo forum moderasyon yetkisi vermez.]]></phrase>
+  <phrase title="wx_clans_i18n_clan_blacklist" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan kara listesi]]></phrase>
+  <phrase title="wx_clans_i18n_until" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[· bitiş]]></phrase>
+  <phrase title="wx_clans_i18n_announcements" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Duyurular]]></phrase>
+  <phrase title="wx_clans_i18n_clan_audit_log" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan denetim kaydı]]></phrase>
+  <phrase title="wx_clans_i18n_system" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Sistem]]></phrase>
+  <phrase title="wx_clans_i18n_pending" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bekleyen:]]></phrase>
+  <phrase title="wx_clans_i18n_recent_application_history" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Son başvuru geçmişi]]></phrase>
+  <phrase title="wx_clans_i18n_invitation_history" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Davet geçmişi]]></phrase>
+  <phrase title="wx_clans_i18n_ownership_history" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Sahiplik geçmişi]]></phrase>
+  <phrase title="wx_clans_i18n_identity_change_history" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Kimlik değişikliği geçmişi]]></phrase>
+  <phrase title="wx_clans_i18n_browse_clans" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klanlara göz at]]></phrase>
+  <phrase title="wx_clans_i18n_create_clan" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan oluştur]]></phrase>
+  <phrase title="wx_clans_i18n_memberships_displayed_tag" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Üyelikler / gösterilen tag]]></phrase>
+  <phrase title="wx_clans_i18n_automatic" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Otomatik]]></phrase>
+  <phrase title="wx_clans_i18n_pending_invitations" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bekleyen davetler]]></phrase>
+  <phrase title="wx_clans_i18n_accept" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Kabul et]]></phrase>
+  <phrase title="wx_clans_i18n_decline" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Reddet]]></phrase>
+  <phrase title="wx_clans_i18n_accept_transfer" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Devri kabul et]]></phrase>
+  <phrase title="wx_clans_i18n_my_applications_requests" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Başvurularım / taleplerim]]></phrase>
+  <phrase title="wx_clans_i18n_revise" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Düzenle]]></phrase>
+  <phrase title="wx_clans_i18n_no_applications_yet" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Henüz başvuru yok.]]></phrase>
+  <phrase title="wx_clans_i18n_ownership_transfer_history" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Sahiplik devri geçmişi]]></phrase>
+  <phrase title="wx_clans_i18n_manage_clan" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klanı yönet]]></phrase>
+  <phrase title="wx_clans_i18n_report" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Raporla]]></phrase>
+  <phrase title="wx_clans_i18n_owner_3" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Owner:]]></phrase>
+  <phrase title="wx_clans_i18n_members_4" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Üyeler:]]></phrase>
+  <phrase title="wx_clans_i18n_category_5" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Kategori:]]></phrase>
+  <phrase title="wx_clans_i18n_status_6" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Durum:]]></phrase>
+  <phrase title="wx_clans_i18n_join_mode_7" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Katılım modu:]]></phrase>
+  <phrase title="wx_clans_i18n_forum_status" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum durumu:]]></phrase>
+  <phrase title="wx_clans_i18n_leave_clan" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klandan ayrıl]]></phrase>
+  <phrase title="wx_clans_i18n_join_clan" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klana katıl]]></phrase>
+  <phrase title="wx_clans_i18n_apply_to_join" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Katılmak için başvur]]></phrase>
+  <phrase title="wx_clans_i18n_clan_lifecycle" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan yaşam döngüsü]]></phrase>
+  <phrase title="wx_clans_i18n_request_is_waiting_for_forum_approval" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[talebi forum onayı bekliyor.]]></phrase>
+  <phrase title="wx_clans_i18n_cancel_request" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Talebi iptal et]]></phrase>
+  <phrase title="wx_clans_i18n_this_clan_state_can_only_be_changed_by_forum_moder" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bu klan durumu yalnızca forum moderasyonu tarafından değiştirilebilir.]]></phrase>
+  <phrase title="wx_clans_i18n_report_announcement" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Duyuruyu raporla]]></phrase>
+  <phrase title="wx_clans_i18n_forum_moderation" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum moderasyonu]]></phrase>
+  <phrase title="wx_clans_i18n_clan_lifecycle_request_was_approved" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[klan yaşam döngüsü talebi onaylandı.]]></phrase>
+  <phrase title="wx_clans_i18n_your_lifecycle_request_for" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Şu klan için yaşam döngüsü talebiniz:]]></phrase>
+  <phrase title="wx_clans_i18n_change_clan_owner" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan Owner'ını değiştir]]></phrase>
+  <phrase title="wx_clans_i18n_select_an_active_member" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Aktif bir üye seçin...]]></phrase>
+  <phrase title="wx_clans_i18n_keep_the_current_owner_as_a_clan_manager" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Mevcut Owner'ı klan Manager'ı olarak tut]]></phrase>
+  <phrase title="wx_clans_i18n_this_forum_management_action_bypasses_the_normal_o" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bu forum yönetimi işlemi normal Owner kabul akışını atlar. Eski sahiplik durumuna bağlı bekleyen sahiplik, kimlik ve yaşam döngüsü talepleri iptal edilir.]]></phrase>
+  <phrase title="wx_clans_i18n_clan_system_maintenance" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan sistemi bakımı]]></phrase>
+  <phrase title="wx_clans_i18n_current_maintenance_state" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Mevcut bakım durumu]]></phrase>
+  <phrase title="wx_clans_i18n_maintenance_expires_stale_invitations_cancels_owne" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Bakım; süresi geçen davetleri kapatır, önceki sahiplik değişimiyle geçersiz kalan sahiplik devirlerini ve Owner'a bağlı talepleri iptal eder, geçersiz aktif-klan seçimlerini düzeltir ve önbellekteki üye sayılarını uzlaştırır.]]></phrase>
+  <phrase title="wx_clans_i18n_forum_management_changed_the_status_of" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum yönetimi şu klanın durumunu değiştirdi:]]></phrase>
+  <phrase title="wx_clans_i18n_from" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[şundan]]></phrase>
+  <phrase title="wx_clans_i18n_to" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[şuna]]></phrase>
+  <phrase title="wx_clans_i18n_forum_management_changed_the_ownership_of" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum yönetimi şu klanın sahipliğini değiştirdi:]]></phrase>
+  <phrase title="wx_clans_i18n_you_are_now_the_clan_owner" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Artık klanın Owner'ısınız.]]></phrase>
+  <phrase title="wx_clans_i18n_your_previous_owner_role_was_removed" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Önceki Owner rolünüz kaldırıldı.]]></phrase>
+  <phrase title="wx_clans_i18n_brightness" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Parlaklık]]></phrase>
+  <phrase title="wx_clans_i18n_r" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[R]]></phrase>
+  <phrase title="wx_clans_i18n_g" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[G]]></phrase>
+  <phrase title="wx_clans_i18n_b" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[B]]></phrase>
+  <phrase title="wx_clans_i18n_revise_clan_application" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan başvurusunu düzenle]]></phrase>
+  <phrase title="wx_clans_i18n_create_a_clan" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Klan oluştur]]></phrase>
+  <phrase title="wx_clans_i18n_remove_manager" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager'ı kaldır]]></phrase>
+  <phrase title="wx_clans_i18n_make_manager" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager yap]]></phrase>
+  <phrase title="wx_clans_i18n_optional" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Opsiyonel]]></phrase>
+</language>
