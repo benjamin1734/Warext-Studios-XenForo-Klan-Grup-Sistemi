@@ -2,7 +2,7 @@
 
 ## Version
 
-`0.12.1 RC`
+`0.13.0 RC`
 
 ## Add-on ID
 
@@ -245,6 +245,10 @@ Join applications and repeated invitations can also use configurable cooldown wi
 
 Member-list visibility is evaluated by the Clan entity and may be public, active-members only or Owner/forum-staff only. Announcement visibility may be public or active-members only. Controllers avoid loading protected collections when the current visitor cannot view them.
 
+## Clan identity presentation
+
+Clan identity presentation stores independent tag and Manager-banner colors/icons. Colors are persisted as validated six-digit HEX values. Icons are restricted to the add-on's XenForo/Font Awesome whitelist and rendered with XenForo's `<xf:fa>` template tag. Creation and identity-change requests carry requested icon/color values through the existing forum-approval workflow.
+
 ## Bounded clan-managed resources
 
 Custom roles, custom join-form fields and stored announcements have configurable per-clan ceilings. These ceilings are enforced in service classes. Select/checkbox fields also cap unique options to avoid unbounded payload growth.
@@ -290,7 +294,7 @@ Notifications should be emitted after the committed state exists whenever practi
 
 Existing installations are upgraded in place. Upgrade packages must not require resetting the XenForo database or reinstalling the add-on.
 
-Version `0.2.0` introduced base role normalization. Version `0.5.0` introduced later tables/fields needed by ownership, blacklist, announcements and active preferences. Version `0.7.0` added lifecycle behavior without requiring destructive schema reset. Version `0.8.0` adds option/cron/service behavior and does not require a destructive schema reset. Version `0.9.0` adds two clan privacy columns through an in-place schema upgrade plus service-level capacity/cooldown controls. Version `0.10.0` adds pagination and ownership-limit hardening without a schema change. Version `0.11.0 Beta` hardens XenForo public permission enforcement without a schema change. Version `0.12.0 RC` adds bounded clan-managed resources, stricter content/media validation and stable-aware release automation without a schema change. Version `0.12.1 RC` adds report-privacy hardening, atomic multi-record deletes and CI schema parity checks without a schema change.
+Version `0.2.0` introduced base role normalization. Version `0.5.0` introduced later tables/fields needed by ownership, blacklist, announcements and active preferences. Version `0.7.0` added lifecycle behavior without requiring destructive schema reset. Version `0.8.0` adds option/cron/service behavior and does not require a destructive schema reset. Version `0.9.0` adds two clan privacy columns through an in-place schema upgrade plus service-level capacity/cooldown controls. Version `0.10.0` adds pagination and ownership-limit hardening without a schema change. Version `0.11.0 Beta` hardens XenForo public permission enforcement without a schema change. Version `0.12.0 RC` adds bounded clan-managed resources, stricter content/media validation and stable-aware release automation without a schema change. Version `0.12.1 RC` adds report-privacy hardening, atomic multi-record deletes and CI schema parity checks without a schema change. Version `0.13.0 RC` adds clan identity icons and the interactive color-picker UI through an in-place schema upgrade.
 
 ## Repository layout
 

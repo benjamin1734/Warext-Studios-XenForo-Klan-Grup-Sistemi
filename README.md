@@ -207,6 +207,11 @@ The add-on provides a dedicated **Clans & Groups** section containing:
 
 A dedicated `wxClansManage` Admin CP permission protects clan administration routes.
 
+### Clan identity appearance
+
+- Tag and Manager banner colors use a circular HSV picker with synchronized HEX/RGB controls.
+- Tag and Manager banner icons are selected from a XenForo-rendered Font Awesome grid and require forum approval with other identity changes.
+
 ### Capacity, anti-spam and privacy
 
 - Custom roles, join-form fields and stored announcements have configurable per-clan ceilings.
@@ -287,7 +292,7 @@ A licensed live XenForo installation is still required for final runtime/theme v
 
 ## Installation
 
-Use the ZIP attached to the latest GitHub Release. Releases provide a full direct-install package and, when a previous version is available, a smaller UPDATE ZIP containing only changed runtime files:
+Use the ZIP attached to the latest GitHub Release. Releases provide one normal XenForo direct-install/upgrade package:
 
 1. Open XenForo Admin CP.
 2. Go to **Add-ons → Install/upgrade from archive**.
@@ -516,6 +521,11 @@ ACP içinde bağımsız **Klanlar & Gruplar** bölümü bulunur:
 
 Klan yönetim controller'ları ayrı `wxClansManage` ACP izniyle korunur.
 
+### Klan kimliği görünümü
+
+- Tag ve Manager banner renkleri HEX/RGB senkronlu dairesel HSV renk seçiciyle seçilir.
+- Tag ve Manager banner ikonları XenForo'nun render ettiği Font Awesome ikon gridinden seçilir ve diğer kimlik değişiklikleri gibi forum onayından geçer.
+
 ### Kapasite, spam koruması ve gizlilik
 
 - Özel roller, başvuru formu alanları ve saklanan duyurular için klan başına ayarlanabilir üst sınırlar bulunur.
@@ -594,7 +604,7 @@ Lisanslı gerçek XenForo kurulumu CI ortamında bulunmadığı için final runt
 
 ## Kurulum
 
-En son GitHub Release altındaki ZIP dosyasını kullanın. Release; tam kurulum paketini ve önceki sürüm mevcutsa yalnız değişen runtime dosyalarını içeren daha küçük UPDATE ZIP'ini birlikte sağlar:
+En son GitHub Release altındaki ZIP dosyasını kullanın. Release tek normal XenForo kurulum/güncelleme paketini sağlar:
 
 1. XenForo Admin CP'yi açın.
 2. **Add-ons → Install/upgrade from archive** bölümüne girin.

@@ -26,8 +26,6 @@ jobs:
           echo "safe_version=$SAFE_VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=v$SAFE_VERSION" >> "$GITHUB_OUTPUT"
           echo "file=Warext-Studios-XenForo-Klan-Grup-Sistemi-v$SAFE_VERSION.zip" >> "$GITHUB_OUTPUT"
-          PREV_TAG=$(git tag --list 'v*' --sort=-version:refname | grep -vx "v$SAFE_VERSION" | head -n 1 || true)
-          echo "previous_tag=$PREV_TAG" >> "$GITHUB_OUTPUT"
           LOWER_VERSION=$(printf '%s' "$VERSION" | tr '[:upper:]' '[:lower:]')
           if printf '%s' "$LOWER_VERSION" | grep -Eq '(alpha|beta|rc)'; then
             echo "prerelease=true" >> "$GITHUB_OUTPUT"
@@ -41,32 +39,6 @@ jobs:
           rm -rf dist
           mkdir -p dist
           zip -q -r "dist/${{ steps.version.outputs.file }}" upload -x '*/.DS_Store' '*/Thumbs.db'
-
-      - name: Build UPDATE ZIP
-        if: steps.version.outputs.previous_tag != ''
-        shell: bash
-        env:
-          PREV_TAG: ${{ steps.version.outputs.previous_tag }}
-          SAFE_VERSION: ${{ steps.version.outputs.safe_version }}
-        run: |
-          PREV_SAFE=${PREV_TAG#v}
-          UPDATE_FILE="Warext-Clans-${PREV_SAFE}-to-${SAFE_VERSION}-UPDATE.zip"
-          rm -rf /tmp/wxclans-update
-          mkdir -p /tmp/wxclans-update
-          git diff --name-only --diff-filter=ACMRT "$PREV_TAG"..HEAD -- upload/ | while IFS= read -r path; do
-            [ -z "$path" ] && continue
-            mkdir -p "/tmp/wxclans-update/$(dirname "$path")"
-            cp "$path" "/tmp/wxclans-update/$path"
-          done
-          git diff --name-only --diff-filter=D "$PREV_TAG"..HEAD -- upload/ > /tmp/wxclans-update/UPDATE-DELETE.txt
-          if [ ! -s /tmp/wxclans-update/UPDATE-DELETE.txt ]; then
-            rm -f /tmp/wxclans-update/UPDATE-DELETE.txt
-          fi
-          if find /tmp/wxclans-update -type f | grep -q .; then
-            (cd /tmp/wxclans-update && zip -q -r "$GITHUB_WORKSPACE/dist/$UPDATE_FILE" .)
-            echo "UPDATE_FILE=$UPDATE_FILE" >> "$GITHUB_ENV"
-          fi
-
       - name: Validate package
         shell: bash
         run: |
@@ -80,7 +52,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: xenforo-clans-${{ steps.version.outputs.safe_version }}
-          path: dist/*.zip
+          path: dist/${{ steps.version.outputs.file }}
           if-no-files-found: error
 
       - name: Publish GitHub Release
@@ -120,13 +92,6 @@ jobs:
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release edit "$TAG" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md "${RELEASE_FLAGS[@]}"
             gh release upload "$TAG" "dist/$FILE" --clobber
-            if [ -n "${UPDATE_FILE:-}" ] && [ -f "dist/$UPDATE_FILE" ]; then
-              gh release upload "$TAG" "dist/$UPDATE_FILE" --clobber
-            fi
           else
-            ASSETS=("dist/$FILE")
-            if [ -n "${UPDATE_FILE:-}" ] && [ -f "dist/$UPDATE_FILE" ]; then
-              ASSETS+=("dist/$UPDATE_FILE")
-            fi
-            gh release create "$TAG" "${ASSETS[@]}" --target "$GITHUB_SHA" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md "${RELEASE_FLAGS[@]}"
+            gh release create "$TAG" "dist/$FILE" --target "$GITHUB_SHA" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md "${RELEASE_FLAGS[@]}"
           fi

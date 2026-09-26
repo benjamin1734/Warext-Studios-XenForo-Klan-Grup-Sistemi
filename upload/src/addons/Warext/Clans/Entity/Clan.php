@@ -238,6 +238,8 @@ class Clan extends Entity
             'member_list_visibility' => ['type' => self::STR, 'default' => 'public', 'allowedValues' => ['public','members','staff']],
             'announcement_visibility' => ['type' => self::STR, 'default' => 'public', 'allowedValues' => ['public','members']],
             'manager_banner' => ['type' => self::STR, 'maxLength' => 100, 'default' => ''],
+            'tag_icon' => ['type' => self::STR, 'maxLength' => 40, 'default' => ''],
+            'manager_banner_icon' => ['type' => self::STR, 'maxLength' => 40, 'default' => ''],
             'tag_color' => ['type' => self::STR, 'maxLength' => 7, 'default' => '#4f46e5'],
             'manager_banner_color' => ['type' => self::STR, 'maxLength' => 7, 'default' => '#805ad5'],
             'logo_url' => ['type' => self::STR, 'maxLength' => 255, 'default' => ''],

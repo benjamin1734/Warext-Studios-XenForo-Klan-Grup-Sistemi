@@ -9,7 +9,7 @@
 </template>
   <template type="admin" title="wx_clans_admin_identity_changes" version_id="1000050" version_string="0.5.0 Alpha">&lt;xf:title&gt;Clan identity changes&lt;/xf:title&gt;
 &lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
-&lt;xf:foreach loop="$requests" value="$request"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$request.Clan.title}&lt;/strong&gt; → &lt;strong&gt;[{$request.tag}] {$request.title}&lt;/strong&gt;&lt;div&gt;Requested manager banner: {$request.requested_manager_banner}&lt;/div&gt;&lt;div class="u-muted"&gt;Tag color {$request.requested_tag_color} · Banner color {$request.requested_manager_banner_color} · requested by {$request.User.username}&lt;/div&gt;
+&lt;xf:foreach loop="$requests" value="$request"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;{$request.Clan.title}&lt;/strong&gt; → &lt;strong&gt;&lt;xf:if is="$request.requested_tag_icon"&gt;&lt;xf:fa icon="{$request.requested_tag_icon}" /&gt; &lt;/xf:if&gt;[{$request.tag}] {$request.title}&lt;/strong&gt;&lt;div&gt;Requested manager banner: &lt;xf:if is="$request.requested_manager_banner_icon"&gt;&lt;xf:fa icon="{$request.requested_manager_banner_icon}" /&gt; &lt;/xf:if&gt;{$request.requested_manager_banner}&lt;/div&gt;&lt;div class="u-muted"&gt;Tag color {$request.requested_tag_color} · Banner color {$request.requested_manager_banner_color} · requested by {$request.User.username}&lt;/div&gt;
 &lt;xf:form action="{{ link('warext-clans/identity-changes/approve', $request) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:button type="submit" class="button--cta"&gt;Approve&lt;/xf:button&gt;&lt;/xf:form&gt;
 &lt;xf:form action="{{ link('warext-clans/identity-changes/reject', $request) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:textbox name="reason" placeholder="Rejection reason" /&gt;&lt;xf:button type="submit"&gt;Reject&lt;/xf:button&gt;&lt;/xf:form&gt;&lt;/div&gt;&lt;xf:else /&gt;&lt;div class="block-row"&gt;No pending identity changes.&lt;/div&gt;&lt;/xf:foreach&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
@@ -57,8 +57,33 @@
 .wxClanProfileMemberships { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .wxClanProfileMembership { display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; border: 1px solid @xf-borderColor; border-radius: @xf-borderRadiusMedium; background: @xf-contentBg; text-decoration: none; }
 .wxClanProfileMembership-tag { font-weight: 700; }
+
+.wxIdentityColor { position: relative; max-width: 520px; }
+.wxIdentityColor-line { display: flex; align-items: center; gap: 10px; }
+.wxIdentityColor-swatch { width: 38px; height: 38px; border-radius: 50%; border: 2px solid @xf-borderColor; cursor: pointer; box-shadow: 0 0 0 2px @xf-contentBg inset; flex: 0 0 auto; }
+.wxIdentityColor-hex { max-width: 160px; font-family: monospace; }
+.wxIdentityColor-panel { position: absolute; z-index: 500; top: 46px; left: 0; width: 310px; max-width: calc(100vw - 40px); padding: 14px; background: @xf-contentBg; border: 1px solid @xf-borderColor; border-radius: @xf-borderRadiusLarge; box-shadow: 0 10px 32px rgba(0,0,0,.22); }
+.wxIdentityColor-wheel { position: relative; width: 220px; height: 220px; max-width: 100%; aspect-ratio: 1; margin: 0 auto 12px; border-radius: 50%; cursor: crosshair; background: radial-gradient(circle at center, #fff 0%, rgba(255,255,255,0) 72%), conic-gradient(#f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00); touch-action: none; }
+.wxIdentityColor-pointer { position: absolute; width: 14px; height: 14px; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 0 1px rgba(0,0,0,.55); transform: translate(-50%, -50%); pointer-events: none; }
+.wxIdentityColor-brightness { display: grid; grid-template-columns: 80px 1fr; gap: 8px; align-items: center; margin: 8px 0 12px; }
+.wxIdentityColor-brightness input { width: 100%; }
+.wxIdentityColor-rgb { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.wxIdentityColor-rgb label { display: grid; gap: 4px; font-size: 12px; font-weight: 600; }
+.wxIdentityColor-rgb .input { min-width: 0; }
+
+.wxIdentityIcon { display: grid; grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); gap: 7px; max-width: 520px; }
+.wxIdentityIcon-choice { min-height: 40px; padding: 6px; border: 1px solid @xf-borderColor; border-radius: @xf-borderRadiusMedium; background: @xf-contentBg; color: @xf-textColor; cursor: pointer; font-size: 16px; }
+.wxIdentityIcon-choice:hover { background: @xf-contentAltBg; }
+.wxIdentityIcon-choice.is-selected { border-color: @xf-paletteAccent2; box-shadow: 0 0 0 2px fade(@xf-paletteAccent2, 25%); background: @xf-contentHighlightBg; }
+
+@media (max-width: @xf-responsiveNarrow)
+{
+    .wxIdentityColor-panel { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+}
 </template>
-  <template type="public" title="wx_clans_apply" version_id="1000050" version_string="0.5.0 Alpha">&lt;xf:title&gt;{{ $application ? 'Revise clan application' : 'Create a clan' }}&lt;/xf:title&gt;
+  <template type="public" title="wx_clans_apply" version_id="1000130" version_string="0.13.0 RC">&lt;xf:css src="wx_clans.less" /&gt;
+&lt;xf:js src="warext/clans/identity-picker.js" min="1" /&gt;
+&lt;xf:title&gt;{{ $application ? 'Revise clan application' : 'Create a clan' }}&lt;/xf:title&gt;
 &lt;xf:form action="{{ link('clans/apply') }}" class="block" ajax="true"&gt;
     &lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
         &lt;xf:if is="$application"&gt;&lt;xf:hiddenval name="application_id" value="{$application.application_id}" /&gt;&lt;xf:inforow label="Forum feedback"&gt;{$application.decision_reason}&lt;/xf:inforow&gt;&lt;/xf:if&gt;
@@ -67,8 +92,10 @@
         &lt;xf:textarearow name="description" value="{$application.description}" label="Description" autosize="true" /&gt;
         &lt;xf:textboxrow name="category" value="{$application.category}" label="Game / category" maxlength="50" /&gt;
         &lt;xf:textboxrow name="requested_manager_banner" value="{$application.requested_manager_banner}" label="Requested manager banner" maxlength="100" /&gt;
-        &lt;xf:textboxrow name="requested_tag_color" value="{{ $application ? $application.requested_tag_color : '#4f46e5' }}" label="Tag color" explain="Hex color, for example #4f46e5" /&gt;
-        &lt;xf:textboxrow name="requested_manager_banner_color" value="{{ $application ? $application.requested_manager_banner_color : '#805ad5' }}" label="Manager banner color" explain="Hex color, for example #805ad5" /&gt;
+        &lt;xf:macro template="wx_clans_identity_controls" name="icon" arg-name="requested_tag_icon" arg-value="{{ $application ? $application.requested_tag_icon : 'fa-users' }}" arg-label="Tag icon" /&gt;
+        &lt;xf:macro template="wx_clans_identity_controls" name="color" arg-name="requested_tag_color" arg-value="{{ $application ? $application.requested_tag_color : '#4f46e5' }}" arg-label="Tag color" /&gt;
+        &lt;xf:macro template="wx_clans_identity_controls" name="icon" arg-name="requested_manager_banner_icon" arg-value="{{ $application ? $application.requested_manager_banner_icon : 'fa-shield-alt' }}" arg-label="Manager banner icon" /&gt;
+        &lt;xf:macro template="wx_clans_identity_controls" name="color" arg-name="requested_manager_banner_color" arg-value="{{ $application ? $application.requested_manager_banner_color : '#805ad5' }}" arg-label="Manager banner color" /&gt;
     &lt;/div&gt;&lt;xf:submitrow submit="Submit for forum approval" /&gt;&lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
@@ -97,9 +124,9 @@
   <template type="public" title="wx_clans_user_badges" version_id="1000080" version_string="0.8.0 Alpha">&lt;xf:macro name="badges" arg-user="!"&gt;
     &lt;xf:set var="$membership" value="{$user.wx_active_clan_membership}" /&gt;
     &lt;xf:if is="$membership &amp;&amp; $membership.Clan"&gt;
-        &lt;a href="{{ link('clans', $membership.Clan) }}" class="userBanner wxClanTag" style="background-color:{$membership.Clan.tag_color};border-color:{$membership.Clan.tag_color}"&gt;&lt;strong&gt;[{$membership.Clan.tag}]&lt;/strong&gt;&lt;/a&gt;
+        &lt;a href="{{ link('clans', $membership.Clan) }}" class="userBanner wxClanTag" style="background-color:{$membership.Clan.tag_color};border-color:{$membership.Clan.tag_color}"&gt;&lt;xf:if is="$membership.Clan.tag_icon"&gt;&lt;xf:fa icon="{$membership.Clan.tag_icon}" /&gt; &lt;/xf:if&gt;&lt;strong&gt;[{$membership.Clan.tag}]&lt;/strong&gt;&lt;/a&gt;
         &lt;xf:if is="$membership.is_owner || $membership.is_manager"&gt;
-            &lt;span class="userBanner wxClanManagerBanner" style="background-color:{$membership.Clan.manager_banner_color};border-color:{$membership.Clan.manager_banner_color}"&gt;&lt;strong&gt;{{ $membership.Clan.manager_banner ?: 'Clan management' }}&lt;/strong&gt;&lt;/span&gt;
+            &lt;span class="userBanner wxClanManagerBanner" style="background-color:{$membership.Clan.manager_banner_color};border-color:{$membership.Clan.manager_banner_color}"&gt;&lt;xf:if is="$membership.Clan.manager_banner_icon"&gt;&lt;xf:fa icon="{$membership.Clan.manager_banner_icon}" /&gt; &lt;/xf:if&gt;&lt;strong&gt;{{ $membership.Clan.manager_banner ?: 'Clan management' }}&lt;/strong&gt;&lt;/span&gt;
         &lt;/xf:if&gt;
     &lt;/xf:if&gt;
 &lt;/xf:macro&gt;
@@ -110,7 +137,7 @@
         &lt;div class="wxClanProfileMemberships"&gt;
             &lt;xf:foreach loop="$memberships" value="$membership"&gt;
                 &lt;a href="{{ link('clans', $membership.Clan) }}" class="wxClanProfileMembership"&gt;
-                    &lt;span class="wxClanProfileMembership-tag" style="color:{$membership.Clan.tag_color}"&gt;[{$membership.Clan.tag}]&lt;/span&gt;
+                    &lt;span class="wxClanProfileMembership-tag" style="color:{$membership.Clan.tag_color}"&gt;&lt;xf:if is="$membership.Clan.tag_icon"&gt;&lt;xf:fa icon="{$membership.Clan.tag_icon}" /&gt; &lt;/xf:if&gt;[{$membership.Clan.tag}]&lt;/span&gt;
                     &lt;span&gt;{$membership.Clan.title}&lt;/span&gt;
                     &lt;span class="u-muted"&gt;{{ $membership.is_owner ? 'Owner' : ($membership.is_manager ? 'Manager' : ($membership.Role &amp;&amp; $membership.Role.role_type == 'custom' ? $membership.Role.title : 'Member')) }}&lt;/span&gt;
                 &lt;/a&gt;
@@ -234,7 +261,9 @@
 &lt;/div&gt;
 &lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="clans" params="{{ {'q': $query, 'category': $category, 'join_mode': $joinMode, 'sort': $sort} }}" /&gt;
 </template>
-  <template type="public" title="wx_clans_manage" version_id="1000100" version_string="0.10.0 Alpha">&lt;xf:title&gt;Manage {$clan.title}&lt;/xf:title&gt;
+  <template type="public" title="wx_clans_manage" version_id="1000130" version_string="0.13.0 RC">&lt;xf:css src="wx_clans.less" /&gt;
+&lt;xf:js src="warext/clans/identity-picker.js" min="1" /&gt;
+&lt;xf:title&gt;Manage {$clan.title}&lt;/xf:title&gt;
 &lt;xf:pageaction&gt;&lt;xf:button href="{{ link('clans', $clan) }}"&gt;View clan&lt;/xf:button&gt;&lt;/xf:pageaction&gt;
 
 &lt;xf:if is="$clan.canManagePermission('manage_settings')"&gt;
@@ -257,8 +286,10 @@
         &lt;xf:textboxrow name="title" value="{$clan.title}" label="Clan name" /&gt;
         &lt;xf:textboxrow name="tag" value="{$clan.tag}" label="Clan tag" /&gt;
         &lt;xf:textboxrow name="manager_banner" value="{$clan.manager_banner}" label="Manager banner" /&gt;
-        &lt;xf:textboxrow name="tag_color" value="{$clan.tag_color}" label="Tag color" /&gt;
-        &lt;xf:textboxrow name="manager_banner_color" value="{$clan.manager_banner_color}" label="Manager banner color" /&gt;
+        &lt;xf:macro template="wx_clans_identity_controls" name="icon" arg-name="tag_icon" arg-value="{$clan.tag_icon}" arg-label="Tag icon" /&gt;
+        &lt;xf:macro template="wx_clans_identity_controls" name="color" arg-name="tag_color" arg-value="{$clan.tag_color}" arg-label="Tag color" /&gt;
+        &lt;xf:macro template="wx_clans_identity_controls" name="icon" arg-name="manager_banner_icon" arg-value="{$clan.manager_banner_icon}" arg-label="Manager banner icon" /&gt;
+        &lt;xf:macro template="wx_clans_identity_controls" name="color" arg-name="manager_banner_color" arg-value="{$clan.manager_banner_color}" arg-label="Manager banner color" /&gt;
         &lt;xf:submitrow submit="Request forum approval" /&gt;
     &lt;/xf:form&gt;&lt;/xf:if&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
@@ -555,5 +586,46 @@
   <template type="public" title="alert_wx_clan_moderation_status_changed" version_id="1000080" version_string="0.8.0 Alpha">Forum management changed the status of &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt; from &lt;strong&gt;{$extra.old}&lt;/strong&gt; to &lt;strong&gt;{$extra.new}&lt;/strong&gt;.&lt;xf:if is="$extra.reason"&gt; Reason: {$extra.reason}&lt;/xf:if&gt;
 </template>
   <template type="public" title="alert_wx_clan_ownership_forced" version_id="1000080" version_string="0.8.0 Alpha">Forum management changed the ownership of &lt;a href="{{ link('clans', $content) }}"&gt;[{$content.tag}] {$content.title}&lt;/a&gt;.&lt;xf:if is="$extra.role == 'new_owner'"&gt; You are now the clan owner.&lt;xf:else /&gt; Your previous owner role was removed.&lt;/xf:if&gt;&lt;xf:if is="$extra.reason"&gt; Reason: {$extra.reason}&lt;/xf:if&gt;
+</template>
+  <template type="public" title="wx_clans_identity_controls" version_id="1000130" version_string="0.13.0 RC">&lt;xf:macro name="color" arg-name="!" arg-value="!" arg-label="!"&gt;
+&lt;xf:formrow label="{$label}" explain="Renk dairesinden seçebilir veya HEX / RGB değerlerini elle girebilirsiniz."&gt;
+    &lt;div class="wxIdentityColor" data-wx-color-picker&gt;
+        &lt;div class="wxIdentityColor-line"&gt;
+            &lt;button type="button" class="wxIdentityColor-swatch js-wxColorToggle" style="background-color:{$value}" aria-label="Open color picker"&gt;&lt;/button&gt;
+            &lt;xf:textbox name="{$name}" value="{$value}" maxlength="7" class="js-wxColorHex wxIdentityColor-hex" /&gt;
+        &lt;/div&gt;
+        &lt;div class="wxIdentityColor-panel js-wxColorPanel" hidden="hidden"&gt;
+            &lt;div class="wxIdentityColor-wheel js-wxColorWheel"&gt;&lt;span class="wxIdentityColor-pointer js-wxColorPointer"&gt;&lt;/span&gt;&lt;/div&gt;
+            &lt;label class="wxIdentityColor-brightness"&gt;&lt;span&gt;Brightness&lt;/span&gt;&lt;input type="range" min="0" max="100" value="100" class="js-wxColorBrightness" /&gt;&lt;/label&gt;
+            &lt;div class="wxIdentityColor-rgb"&gt;
+                &lt;label&gt;R&lt;input type="number" min="0" max="255" class="input js-wxColorRgb" /&gt;&lt;/label&gt;
+                &lt;label&gt;G&lt;input type="number" min="0" max="255" class="input js-wxColorRgb" /&gt;&lt;/label&gt;
+                &lt;label&gt;B&lt;input type="number" min="0" max="255" class="input js-wxColorRgb" /&gt;&lt;/label&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/xf:formrow&gt;
+&lt;/xf:macro&gt;
+
+&lt;xf:macro name="icon" arg-name="!" arg-value="" arg-label="!"&gt;
+&lt;xf:formrow label="{$label}" explain="XenForo / Font Awesome ikonlarından birini seçin."&gt;
+    &lt;div class="wxIdentityIcon" data-wx-icon-picker&gt;
+        &lt;input type="hidden" name="{$name}" value="{$value}" class="js-wxIconValue" /&gt;
+        &lt;button type="button" class="wxIdentityIcon-choice {{ !$value ? 'is-selected' : '' }}" data-wx-icon-value="" title="No icon"&gt;×&lt;/button&gt;
+        &lt;button type="button" class="wxIdentityIcon-choice {{ $value == 'fa-users' ? 'is-selected' : '' }}" data-wx-icon-value="fa-users" title="Users"&gt;&lt;xf:fa icon="fa-users" /&gt;&lt;/button&gt;
+        &lt;button type="button" class="wxIdentityIcon-choice {{ $value == 'fa-shield-alt' ? 'is-selected' : '' }}" data-wx-icon-value="fa-shield-alt" title="Shield"&gt;&lt;xf:fa icon="fa-shield-alt" /&gt;&lt;/button&gt;
+        &lt;button type="button" class="wxIdentityIcon-choice {{ $value == 'fa-crown' ? 'is-selected' : '' }}" data-wx-icon-value="fa-crown" title="Crown"&gt;&lt;xf:fa icon="fa-crown" /&gt;&lt;/button&gt;
+        &lt;button type="button" class="wxIdentityIcon-choice {{ $value == 'fa-star' ? 'is-selected' : '' }}" data-wx-icon-value="fa-star" title="Star"&gt;&lt;xf:fa icon="fa-star" /&gt;&lt;/button&gt;
+        &lt;button type="button" class="wxIdentityIcon-choice {{ $value == 'fa-bolt' ? 'is-selected' : '' }}" data-wx-icon-value="fa-bolt" title="Bolt"&gt;&lt;xf:fa icon="fa-bolt" /&gt;&lt;/button&gt;
+        &lt;button type="button" class="wxIdentityIcon-choice {{ $value == 'fa-fire' ? 'is-selected' : '' }}" data-wx-icon-value="fa-fire" title="Fire"&gt;&lt;xf:fa icon="fa-fire" /&gt;&lt;/button&gt;
+        &lt;button type="button" class="wxIdentityIcon-choice {{ $value == 'fa-gamepad' ? 'is-selected' : '' }}" data-wx-icon-value="fa-gamepad" title="Gamepad"&gt;&lt;xf:fa icon="fa-gamepad" /&gt;&lt;/button&gt;
+        &lt;button type="button" class="wxIdentityIcon-choice {{ $value == 'fa-trophy' ? 'is-selected' : '' }}" data-wx-icon-value="fa-trophy" title="Trophy"&gt;&lt;xf:fa icon="fa-trophy" /&gt;&lt;/button&gt;
+        &lt;button type="button" class="wxIdentityIcon-choice {{ $value == 'fa-flag' ? 'is-selected' : '' }}" data-wx-icon-value="fa-flag" title="Flag"&gt;&lt;xf:fa icon="fa-flag" /&gt;&lt;/button&gt;
+        &lt;button type="button" class="wxIdentityIcon-choice {{ $value == 'fa-gem' ? 'is-selected' : '' }}" data-wx-icon-value="fa-gem" title="Gem"&gt;&lt;xf:fa icon="fa-gem" /&gt;&lt;/button&gt;
+        &lt;button type="button" class="wxIdentityIcon-choice {{ $value == 'fa-heart' ? 'is-selected' : '' }}" data-wx-icon-value="fa-heart" title="Heart"&gt;&lt;xf:fa icon="fa-heart" /&gt;&lt;/button&gt;
+        &lt;button type="button" class="wxIdentityIcon-choice {{ $value == 'fa-circle' ? 'is-selected' : '' }}" data-wx-icon-value="fa-circle" title="Circle"&gt;&lt;xf:fa icon="fa-circle" /&gt;&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/xf:formrow&gt;
+&lt;/xf:macro&gt;
 </template>
 </templates>

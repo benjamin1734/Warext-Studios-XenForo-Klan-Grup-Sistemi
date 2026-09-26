@@ -2,6 +2,7 @@
 
 namespace Warext\Clans\Service\Application;
 
+use Warext\Clans\Util\Presentation;
 use XF\Service\AbstractService;
 
 class SubmitCreate extends AbstractService
@@ -78,9 +79,19 @@ class SubmitCreate extends AbstractService
 
         $tagColor = $this->normalizeColor((string)($this->input['requested_tag_color'] ?? '#4f46e5'));
         $bannerColor = $this->normalizeColor((string)($this->input['requested_manager_banner_color'] ?? '#805ad5'));
+        $tagIcon = Presentation::normalizeIcon((string)($this->input['requested_tag_icon'] ?? ''));
+        $bannerIcon = Presentation::normalizeIcon((string)($this->input['requested_manager_banner_icon'] ?? ''));
         if (!$tagColor || !$bannerColor)
         {
             $errors[] = 'Tag and banner colors must be valid hexadecimal colors.';
+        }
+        if (!empty($this->input['requested_tag_icon']) && !$tagIcon)
+        {
+            $errors[] = 'Invalid tag icon.';
+        }
+        if (!empty($this->input['requested_manager_banner_icon']) && !$bannerIcon)
+        {
+            $errors[] = 'Invalid manager banner icon.';
         }
 
         $maxOwned = (int)($this->app->options()->wxClansMaxOwned ?? 0);
@@ -125,6 +136,8 @@ class SubmitCreate extends AbstractService
             'description' => trim((string)($this->input['description'] ?? '')),
             'category' => trim((string)($this->input['category'] ?? '')),
             'requested_manager_banner' => mb_substr(trim((string)($this->input['requested_manager_banner'] ?? '')), 0, 100),
+            'requested_tag_icon' => Presentation::normalizeIcon((string)($this->input['requested_tag_icon'] ?? '')),
+            'requested_manager_banner_icon' => Presentation::normalizeIcon((string)($this->input['requested_manager_banner_icon'] ?? '')),
             'requested_tag_color' => $this->normalizeColor((string)($this->input['requested_tag_color'] ?? '#4f46e5')),
             'requested_manager_banner_color' => $this->normalizeColor((string)($this->input['requested_manager_banner_color'] ?? '#805ad5')),
             'status' => 'pending',

@@ -2,6 +2,7 @@
 
 namespace Warext\Clans\Service\Identity;
 
+use Warext\Clans\Util\Presentation;
 use XF\Service\AbstractService;
 
 class Manager extends AbstractService
@@ -40,6 +41,8 @@ class Manager extends AbstractService
         $banner = mb_substr(trim((string)($input['manager_banner'] ?? $this->clan->manager_banner)), 0, 100);
         $tagColor = $this->normalizeColor((string)($input['tag_color'] ?? $this->clan->tag_color));
         $bannerColor = $this->normalizeColor((string)($input['manager_banner_color'] ?? $this->clan->manager_banner_color));
+        $tagIcon = Presentation::normalizeIcon((string)($input['tag_icon'] ?? $this->clan->tag_icon));
+        $bannerIcon = Presentation::normalizeIcon((string)($input['manager_banner_icon'] ?? $this->clan->manager_banner_icon));
 
         if (mb_strlen($title) < 3 || mb_strlen($title) > 100)
         {
@@ -70,6 +73,14 @@ class Manager extends AbstractService
         {
             throw new \XF\PrintableException('Tag and banner colors must be valid hexadecimal colors.');
         }
+        if (!empty($input['tag_icon']) && !$tagIcon)
+        {
+            throw new \XF\PrintableException('Invalid tag icon.');
+        }
+        if (!empty($input['manager_banner_icon']) && !$bannerIcon)
+        {
+            throw new \XF\PrintableException('Invalid manager banner icon.');
+        }
 
         $application = $this->em()->create('Warext\\Clans:ClanApplication');
         $application->bulkSet([
@@ -79,6 +90,8 @@ class Manager extends AbstractService
             'title' => $title,
             'tag' => $tag,
             'requested_manager_banner' => $banner,
+            'requested_tag_icon' => $tagIcon,
+            'requested_manager_banner_icon' => $bannerIcon,
             'requested_tag_color' => $tagColor,
             'requested_manager_banner_color' => $bannerColor,
             'status' => 'pending',
@@ -127,6 +140,8 @@ class Manager extends AbstractService
             $this->clan->tag = $application->tag;
             $this->clan->slug = \XF::app()->router()->prepareStringForUrl($application->title);
             $this->clan->manager_banner = $application->requested_manager_banner;
+            $this->clan->tag_icon = Presentation::normalizeIcon($application->requested_tag_icon);
+            $this->clan->manager_banner_icon = Presentation::normalizeIcon($application->requested_manager_banner_icon);
             $this->clan->tag_color = $application->requested_tag_color;
             $this->clan->manager_banner_color = $application->requested_manager_banner_color;
             $this->clan->save();

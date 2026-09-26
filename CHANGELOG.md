@@ -1,5 +1,27 @@
 # Changelog / Değişiklik Günlüğü
 
+## 0.13.0 RC - 2026-09-26
+
+### English
+
+- Replaced plain clan identity HEX fields with an interactive circular HSV color picker that keeps HEX and RGB values synchronized.
+- Added separate XenForo/Font Awesome icon selection for clan tags and Manager banners.
+- Added approved tag/Manager icon persistence to clans and pending creation/identity-change applications.
+- Render clan identity icons using XenForo's native `<xf:fa>` template tag in postbit, profile and management-related output.
+- Added a safe server-side whitelist for selectable icon names.
+- Added an in-place 0.13 schema upgrade for existing installations; existing clans remain iconless until configured.
+- Removed separate UPDATE ZIP generation from GitHub Releases to match the other Warext XenForo add-ons. XenForo's normal full add-on ZIP remains the single install/upgrade package.
+
+### Türkçe
+
+- Klan kimliğindeki düz HEX kutuları, HEX ve RGB değerlerini canlı senkronlayan tıklanabilir/sürüklenebilir dairesel HSV renk seçiciyle değiştirildi.
+- Klan tagı ve Manager bannerı için ayrı XenForo/Font Awesome ikon seçimi eklendi.
+- Tag/Manager ikonları hem klan kayıtlarında hem de oluşturma/kimlik değişikliği onay taleplerinde saklanır hale getirildi.
+- Klan ikonları postbit, profil ve ilgili görünümlerde XenForo'nun yerel `<xf:fa>` template etiketiyle render ediliyor.
+- Seçilebilir ikon isimleri için güvenli sunucu tarafı whitelist eklendi.
+- Mevcut kurulumlar için yerinde 0.13 schema upgrade eklendi; eski klanlar ikon seçilene kadar ikonsuz kalır.
+- Diğer Warext XenForo eklentileriyle aynı standarda dönmek için ayrı UPDATE ZIP üretimi GitHub Release workflow'undan kaldırıldı. Kurulum/güncelleme için tek normal XenForo ZIP'i kullanılır.
+
 ## 0.12.2 RC - 2026-09-26
 
 ### English

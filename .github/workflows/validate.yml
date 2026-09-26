@@ -66,8 +66,8 @@ jobs:
           data = root / '_data'
 
           addon = json.loads((root / 'addon.json').read_text(encoding='utf-8'))
-          if addon.get('version_id') != 1000122 or addon.get('version_string') != '0.12.2 RC':
-              raise SystemExit('Expected version is 0.12.2 RC / 1000122')
+          if addon.get('version_id') != 1000130 or addon.get('version_string') != '0.13.0 RC':
+              raise SystemExit('Expected version is 0.13.0 RC / 1000130')
           if addon.get('require', {}).get('XF', [0])[0] != 2030000:
               raise SystemExit('XenForo 2.3.0+ requirement is missing')
           if addon.get('require', {}).get('php', [''])[0] != '8.1.0':
@@ -383,6 +383,29 @@ jobs:
               controller_text = controller_path.read_text(encoding='utf-8')
               if '$this->db()' in controller_text:
                   raise SystemExit(f'Unsupported controller db() call found in {controller_path.relative_to(root)}')
+
+          presentation = (root / 'Util/Presentation.php').read_text(encoding='utf-8')
+          for icon in ['fa-users','fa-shield-alt','fa-crown','fa-star','fa-bolt','fa-fire','fa-gamepad','fa-trophy','fa-flag','fa-gem','fa-heart','fa-circle']:
+              if icon not in presentation:
+                  raise SystemExit('0.13 XenForo icon whitelist is incomplete: ' + icon)
+
+          if 'tag_icon' not in clan_entity or 'manager_banner_icon' not in clan_entity:
+              raise SystemExit('0.13 clan icon columns are missing')
+          application_entity = (root / 'Entity/ClanApplication.php').read_text(encoding='utf-8')
+          if 'requested_tag_icon' not in application_entity or 'requested_manager_banner_icon' not in application_entity:
+              raise SystemExit('0.13 application icon columns are missing')
+
+          picker_js = Path('upload/js/warext/clans/identity-picker.js')
+          if not picker_js.is_file():
+              raise SystemExit('0.13 identity picker JavaScript is missing')
+          picker_text = picker_js.read_text(encoding='utf-8')
+          for needle in ['data-wx-color-picker', 'hsvToRgb', 'data-wx-icon-value']:
+              if needle not in picker_text:
+                  raise SystemExit('0.13 identity picker JavaScript is incomplete: ' + needle)
+
+          release_workflow = Path('.github/workflows/release-package.yml').read_text(encoding='utf-8')
+          if 'Build UPDATE ZIP' in release_workflow or 'UPDATE_FILE' in release_workflow:
+              raise SystemExit('XenForo release workflow must not generate separate UPDATE ZIP files')
 
           print(f'Validated {len(trees)} XML files, {len(templates)} templates and {len(routes)} routes.')
           PY

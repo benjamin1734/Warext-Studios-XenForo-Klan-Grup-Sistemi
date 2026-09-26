@@ -223,6 +223,8 @@ class Clan extends AbstractController
                 'description' => 'str',
                 'category' => 'str',
                 'requested_manager_banner' => 'str',
+                'requested_tag_icon' => 'str',
+                'requested_manager_banner_icon' => 'str',
                 'requested_tag_color' => 'str',
                 'requested_manager_banner_color' => 'str'
             ]);
@@ -797,7 +799,7 @@ class Clan extends AbstractController
     {
         $this->assertPostOnly();
         $clan = $this->assertClanExists($params->clan_id);
-        $input = $this->filter(['title'=>'str','tag'=>'str','manager_banner'=>'str','tag_color'=>'str','manager_banner_color'=>'str']);
+        $input = $this->filter(['title'=>'str','tag'=>'str','manager_banner'=>'str','tag_icon'=>'str','manager_banner_icon'=>'str','tag_color'=>'str','manager_banner_color'=>'str']);
         $this->service('Warext\\Clans:Identity\\Manager', $clan)->submit($input, \XF::visitor());
         return $this->redirect($this->buildLink('clans/manage', $clan), 'Clan identity change request submitted for forum approval.');
     }

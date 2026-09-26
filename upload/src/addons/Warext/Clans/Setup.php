@@ -35,6 +35,8 @@ class Setup extends AbstractSetup
             $table->addColumn('member_list_visibility', 'varchar', 20)->setDefault('public');
             $table->addColumn('announcement_visibility', 'varchar', 20)->setDefault('public');
             $table->addColumn('manager_banner', 'varchar', 100)->setDefault('');
+            $table->addColumn('tag_icon', 'varchar', 40)->setDefault('');
+            $table->addColumn('manager_banner_icon', 'varchar', 40)->setDefault('');
             $table->addColumn('tag_color', 'varchar', 7)->setDefault('#4f46e5');
             $table->addColumn('manager_banner_color', 'varchar', 7)->setDefault('#805ad5');
             $table->addColumn('logo_url', 'varchar', 255)->setDefault('');
@@ -86,6 +88,8 @@ class Setup extends AbstractSetup
             $table->addColumn('description', 'mediumtext')->nullable(true);
             $table->addColumn('category', 'varchar', 50)->setDefault('');
             $table->addColumn('requested_manager_banner', 'varchar', 100)->setDefault('');
+            $table->addColumn('requested_tag_icon', 'varchar', 40)->setDefault('');
+            $table->addColumn('requested_manager_banner_icon', 'varchar', 40)->setDefault('');
             $table->addColumn('requested_tag_color', 'varchar', 7)->setDefault('#4f46e5');
             $table->addColumn('requested_manager_banner_color', 'varchar', 7)->setDefault('#805ad5');
             $table->addColumn('status', 'varchar', 20)->setDefault('pending');
@@ -289,6 +293,23 @@ class Setup extends AbstractSetup
         {
             $table->addColumn('member_list_visibility', 'varchar', 20)->setDefault('public');
             $table->addColumn('announcement_visibility', 'varchar', 20)->setDefault('public');
+        });
+    }
+
+    public function upgrade1000130Step1(): void
+    {
+        $sm = $this->schemaManager();
+
+        $sm->alterTable('xf_wx_clan', function (Alter $table)
+        {
+            $table->addColumn('tag_icon', 'varchar', 40)->setDefault('');
+            $table->addColumn('manager_banner_icon', 'varchar', 40)->setDefault('');
+        });
+
+        $sm->alterTable('xf_wx_clan_application', function (Alter $table)
+        {
+            $table->addColumn('requested_tag_icon', 'varchar', 40)->setDefault('');
+            $table->addColumn('requested_manager_banner_icon', 'varchar', 40)->setDefault('');
         });
     }
 

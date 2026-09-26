@@ -47,6 +47,8 @@ class ClanApplication extends Entity
             'description' => ['type' => self::STR, 'default' => ''],
             'category' => ['type' => self::STR, 'maxLength' => 50, 'default' => ''],
             'requested_manager_banner' => ['type' => self::STR, 'maxLength' => 100, 'default' => ''],
+            'requested_tag_icon' => ['type' => self::STR, 'maxLength' => 40, 'default' => ''],
+            'requested_manager_banner_icon' => ['type' => self::STR, 'maxLength' => 40, 'default' => ''],
             'requested_tag_color' => ['type' => self::STR, 'maxLength' => 7, 'default' => '#4f46e5'],
             'requested_manager_banner_color' => ['type' => self::STR, 'maxLength' => 7, 'default' => '#805ad5'],
             'status' => ['type' => self::STR, 'default' => 'pending', 'allowedValues' => ['pending','approved','rejected','changes_requested','cancelled']],

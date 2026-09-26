@@ -59,6 +59,8 @@ class Decision extends AbstractService
                 'description' => $this->application->description,
                 'category' => $this->application->category,
                 'manager_banner' => $this->application->requested_manager_banner,
+                'tag_icon' => $this->application->requested_tag_icon,
+                'manager_banner_icon' => $this->application->requested_manager_banner_icon,
                 'tag_color' => $this->application->requested_tag_color,
                 'manager_banner_color' => $this->application->requested_manager_banner_color,
                 'status' => 'active',
