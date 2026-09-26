@@ -1,3 +1,15 @@
+## 0.14.0 RC - 2026-09-26
+
+### English
+- Added native XenForo Turkish/English language support.
+- Moved visible clan/admin/member UI strings to phrases.
+- Added importable Turkish and English XML language packs.
+
+### Türkçe
+- Native XenForo Türkçe/İngilizce dil desteği eklendi.
+- Görünür klan/ACP/üye arayüz metinleri phrase sistemine taşındı.
+- İçe aktarılabilir Türkçe ve İngilizce XML dil paketleri eklendi.
+
 # Changelog / Değişiklik Günlüğü
 
 ## 0.13.0 RC - 2026-09-26
