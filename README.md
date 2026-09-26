@@ -8,7 +8,7 @@ The system is intentionally independent from XenForo forum moderation. Clan owne
 
 ## Current version
 
-**0.13.0 RC**
+**0.14.0 RC**
 
 0.13.0 RC adds an interactive circular HSV color picker with synchronized HEX/RGB values, separate XenForo/Font Awesome icon selection for clan tags and Manager banners, approved icon persistence across clan creation and identity-change requests, and the in-place 0.13 schema upgrade. Releases now follow the same Warext XenForo add-on standard: one normal XenForo installation/upgrade ZIP, without a separate UPDATE ZIP.
 
@@ -346,7 +346,7 @@ Sistemin temel güvenlik kuralı şudur: **klan yöneticiliği forum moderatörl
 
 ## Güncel sürüm
 
-**0.13.0 RC**
+**0.14.0 RC**
 
 0.13.0 RC ile HEX/RGB değerlerini canlı senkronlayan dairesel HSV renk seçici, klan tagı ve Manager bannerı için ayrı XenForo/Font Awesome ikon seçimi, ikonların klan oluşturma ve kimlik değişikliği onay akışlarında saklanması ve mevcut kurulumlar için yerinde 0.13 şema yükseltmesi eklendi. Release yapısı da diğer Warext XenForo eklentileriyle aynı standarda getirildi: ayrı UPDATE ZIP olmadan tek normal XenForo kurulum/güncelleme ZIP'i.
 
@@ -647,3 +647,8 @@ MIT License
 Sorular, hata bildirimleri, kurulum desteği ve diğer Warext Studios XenForo eklentileri için:
 
 **Discord:** https://discord.gg/tgsV5XMcFS
+
+
+## Language support / Dil desteği
+
+0.14.0 RC adds native Turkish/English XenForo language packs under `languages/` and phrase-backed UI. See `LANGUAGE.md`.
