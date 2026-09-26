@@ -113,4 +113,238 @@
   <phrase title="option_explain.wxClansMaxFields" version_id="1000120" version_string="0.12.0 RC">Maximum number of custom join-application questions per clan. Set to 0 for unlimited.</phrase>
   <phrase title="option.wxClansMaxAnnouncements" version_id="1000120" version_string="0.12.0 RC">Maximum announcements per clan</phrase>
   <phrase title="option_explain.wxClansMaxAnnouncements" version_id="1000120" version_string="0.12.0 RC">Maximum number of stored clan announcements. Set to 0 for unlimited.</phrase>
+  <phrase title="wx_clans_i18n_rejection_reason" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Rejection reason]]></phrase>
+  <phrase title="wx_clans_i18n_reason_requested_changes" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Reason / requested changes]]></phrase>
+  <phrase title="wx_clans_i18n_decision" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Decision]]></phrase>
+  <phrase title="wx_clans_i18n_save_decision" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Save decision]]></phrase>
+  <phrase title="wx_clans_i18n_forum_feedback" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum feedback]]></phrase>
+  <phrase title="wx_clans_i18n_clan_name" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clan name]]></phrase>
+  <phrase title="wx_clans_i18n_clan_tag" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clan tag]]></phrase>
+  <phrase title="wx_clans_i18n_2_24_characters_letters_numbers_underscore_or_hyph" version_id="1000140" version_string="0.14.0 RC"><![CDATA[2-24 characters: letters, numbers, underscore or hyphen.]]></phrase>
+  <phrase title="wx_clans_i18n_description" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Description]]></phrase>
+  <phrase title="wx_clans_i18n_game_category" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Game / category]]></phrase>
+  <phrase title="wx_clans_i18n_requested_manager_banner" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Requested manager banner]]></phrase>
+  <phrase title="wx_clans_i18n_tag_icon" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Tag icon]]></phrase>
+  <phrase title="wx_clans_i18n_tag_color" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Tag color]]></phrase>
+  <phrase title="wx_clans_i18n_manager_banner_icon" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager banner icon]]></phrase>
+  <phrase title="wx_clans_i18n_manager_banner_color" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager banner color]]></phrase>
+  <phrase title="wx_clans_i18n_submit_for_forum_approval" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Submit for forum approval]]></phrase>
+  <phrase title="wx_clans_i18n_submit_application" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Submit application]]></phrase>
+  <phrase title="wx_clans_i18n_role_title" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Role title]]></phrase>
+  <phrase title="wx_clans_i18n_display_order" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Display order]]></phrase>
+  <phrase title="wx_clans_i18n_save_role" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Save role]]></phrase>
+  <phrase title="wx_clans_i18n_question" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Question]]></phrase>
+  <phrase title="wx_clans_i18n_field_key" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Field key]]></phrase>
+  <phrase title="wx_clans_i18n_field_type" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Field type]]></phrase>
+  <phrase title="wx_clans_i18n_options" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Options]]></phrase>
+  <phrase title="wx_clans_i18n_for_select_multiple_choice_one_option_per_line" version_id="1000140" version_string="0.14.0 RC"><![CDATA[For select / multiple choice, one option per line.]]></phrase>
+  <phrase title="wx_clans_i18n_save_question" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Save question]]></phrase>
+  <phrase title="wx_clans_i18n_title" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Title]]></phrase>
+  <phrase title="wx_clans_i18n_message" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Message]]></phrase>
+  <phrase title="wx_clans_i18n_save_announcement" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Save announcement]]></phrase>
+  <phrase title="wx_clans_i18n_search" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Search]]></phrase>
+  <phrase title="wx_clans_i18n_clan_name_or_tag" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clan name or tag]]></phrase>
+  <phrase title="wx_clans_i18n_status" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Status]]></phrase>
+  <phrase title="wx_clans_i18n_category" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Category]]></phrase>
+  <phrase title="wx_clans_i18n_filter" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Filter]]></phrase>
+  <phrase title="wx_clans_i18n_optional_moderation_reason" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Optional moderation reason]]></phrase>
+  <phrase title="wx_clans_i18n_join_mode" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Join mode]]></phrase>
+  <phrase title="wx_clans_i18n_sort" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Sort]]></phrase>
+  <phrase title="wx_clans_i18n_clan_rules" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clan rules]]></phrase>
+  <phrase title="wx_clans_i18n_member_list_visibility" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Member list visibility]]></phrase>
+  <phrase title="wx_clans_i18n_announcement_visibility" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Announcement visibility]]></phrase>
+  <phrase title="wx_clans_i18n_logo_url" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Logo URL]]></phrase>
+  <phrase title="wx_clans_i18n_cover_url" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Cover URL]]></phrase>
+  <phrase title="wx_clans_i18n_save_settings" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Save settings]]></phrase>
+  <phrase title="wx_clans_i18n_pending_request" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Pending request]]></phrase>
+  <phrase title="wx_clans_i18n_manager_banner" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager banner]]></phrase>
+  <phrase title="wx_clans_i18n_request_forum_approval" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Request forum approval]]></phrase>
+  <phrase title="wx_clans_i18n_new_owner_username" version_id="1000140" version_string="0.14.0 RC"><![CDATA[New owner username]]></phrase>
+  <phrase title="wx_clans_i18n_the_user_must_already_be_a_clan_member_they_must_a" version_id="1000140" version_string="0.14.0 RC"><![CDATA[The user must already be a clan member. They must accept, then forum management must approve.]]></phrase>
+  <phrase title="wx_clans_i18n_start_ownership_transfer" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Start ownership transfer]]></phrase>
+  <phrase title="wx_clans_i18n_invite_username" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Invite username]]></phrase>
+  <phrase title="wx_clans_i18n_send_invitation" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Send invitation]]></phrase>
+  <phrase title="wx_clans_i18n_directly_add_username" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Directly add username]]></phrase>
+  <phrase title="wx_clans_i18n_add_member" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Add member]]></phrase>
+  <phrase title="wx_clans_i18n_optional_rejection_reason" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Optional rejection reason]]></phrase>
+  <phrase title="wx_clans_i18n_new_question" version_id="1000140" version_string="0.14.0 RC"><![CDATA[New question]]></phrase>
+  <phrase title="wx_clans_i18n_optional_generated_automatically_if_blank" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Optional; generated automatically if blank.]]></phrase>
+  <phrase title="wx_clans_i18n_add_question" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Add question]]></phrase>
+  <phrase title="wx_clans_i18n_create_role" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Create role]]></phrase>
+  <phrase title="wx_clans_i18n_allowed_actions" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Allowed actions]]></phrase>
+  <phrase title="wx_clans_i18n_security" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Security]]></phrase>
+  <phrase title="wx_clans_i18n_save_manager_permissions" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Save manager permissions]]></phrase>
+  <phrase title="wx_clans_i18n_username" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Username]]></phrase>
+  <phrase title="wx_clans_i18n_reason" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Reason]]></phrase>
+  <phrase title="wx_clans_i18n_duration_in_days" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Duration in days]]></phrase>
+  <phrase title="wx_clans_i18n_0_permanent" version_id="1000140" version_string="0.14.0 RC"><![CDATA[0 = permanent]]></phrase>
+  <phrase title="wx_clans_i18n_add_to_clan_blacklist" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Add to clan blacklist]]></phrase>
+  <phrase title="wx_clans_i18n_publish_announcement" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Publish announcement]]></phrase>
+  <phrase title="wx_clans_i18n_closing_reason" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Closing reason]]></phrase>
+  <phrase title="wx_clans_i18n_request_clan_closure" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Request clan closure]]></phrase>
+  <phrase title="wx_clans_i18n_displayed_clan" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Displayed clan]]></phrase>
+  <phrase title="wx_clans_i18n_save" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Save]]></phrase>
+  <phrase title="wx_clans_i18n_reopen_reason" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Reopen reason]]></phrase>
+  <phrase title="wx_clans_i18n_request_reopening" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Request reopening]]></phrase>
+  <phrase title="wx_clans_i18n_clan_status" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clan status]]></phrase>
+  <phrase title="wx_clans_i18n_moderation_reason" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Moderation reason]]></phrase>
+  <phrase title="wx_clans_i18n_optional_the_clan_owner_will_receive_this_reason_w" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Optional. The clan owner will receive this reason with the XenForo alert.]]></phrase>
+  <phrase title="wx_clans_i18n_update_moderation_status" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Update moderation status]]></phrase>
+  <phrase title="wx_clans_i18n_current_owner" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Current owner]]></phrase>
+  <phrase title="wx_clans_i18n_new_owner" version_id="1000140" version_string="0.14.0 RC"><![CDATA[New owner]]></phrase>
+  <phrase title="wx_clans_i18n_required_stored_in_clan_audit_and_xenforo_moderato" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Required. Stored in clan audit and XenForo moderator logs and included in affected-user alerts.]]></phrase>
+  <phrase title="wx_clans_i18n_change_owner" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Change owner]]></phrase>
+  <phrase title="wx_clans_i18n_expired_invitations_still_pending" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Expired invitations still pending]]></phrase>
+  <phrase title="wx_clans_i18n_stale_ownership_transfers" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Stale ownership transfers]]></phrase>
+  <phrase title="wx_clans_i18n_stale_owner_bound_requests" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Stale owner-bound requests]]></phrase>
+  <phrase title="wx_clans_i18n_invalid_display_preferences" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Invalid display preferences]]></phrase>
+  <phrase title="wx_clans_i18n_active_display_preferences" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Active display preferences]]></phrase>
+  <phrase title="wx_clans_i18n_total_clans" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Total clans]]></phrase>
+  <phrase title="wx_clans_i18n_run_maintenance_now" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Run maintenance now]]></phrase>
+  <phrase title="wx_clans_i18n_choose_from_the_color_wheel_or_enter_hex_rgb_value" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Renk dairesinden seçebilir veya HEX / RGB değerlerini elle girebilirsiniz.]]></phrase>
+  <phrase title="wx_clans_i18n_open_color_picker" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Open color picker]]></phrase>
+  <phrase title="wx_clans_i18n_select_one_of_the_xenforo_font_awesome_icons" version_id="1000140" version_string="0.14.0 RC"><![CDATA[XenForo / Font Awesome ikonlarından birini seçin.]]></phrase>
+  <phrase title="wx_clans_i18n_approve" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Approve]]></phrase>
+  <phrase title="wx_clans_i18n_reject_request_changes" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Reject / request changes]]></phrase>
+  <phrase title="wx_clans_i18n_no_pending_clan_applications" version_id="1000140" version_string="0.14.0 RC"><![CDATA[No pending clan applications.]]></phrase>
+  <phrase title="wx_clans_i18n_clan_identity_changes" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clan identity changes]]></phrase>
+  <phrase title="wx_clans_i18n_requested_manager_banner_1" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Requested manager banner:]]></phrase>
+  <phrase title="wx_clans_i18n_reject" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Reject]]></phrase>
+  <phrase title="wx_clans_i18n_no_pending_identity_changes" version_id="1000140" version_string="0.14.0 RC"><![CDATA[No pending identity changes.]]></phrase>
+  <phrase title="wx_clans_i18n_accepted" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Accepted]]></phrase>
+  <phrase title="wx_clans_i18n_approve_transfer" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Approve transfer]]></phrase>
+  <phrase title="wx_clans_i18n_no_transfers_awaiting_forum_approval" version_id="1000140" version_string="0.14.0 RC"><![CDATA[No transfers awaiting forum approval.]]></phrase>
+  <phrase title="wx_clans_i18n_review_clan_application" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Review clan application]]></phrase>
+  <phrase title="wx_clans_i18n_request_changes" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Request changes]]></phrase>
+  <phrase title="wx_clans_i18n_your_application_to" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Your application to]]></phrase>
+  <phrase title="wx_clans_i18n_was_rejected" version_id="1000140" version_string="0.14.0 RC"><![CDATA[was rejected.]]></phrase>
+  <phrase title="wx_clans_i18n_your_clan" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Your clan]]></phrase>
+  <phrase title="wx_clans_i18n_the_identity_change_request_for" version_id="1000140" version_string="0.14.0 RC"><![CDATA[The identity change request for]]></phrase>
+  <phrase title="wx_clans_i18n_the_ownership_transfer_for" version_id="1000140" version_string="0.14.0 RC"><![CDATA[The ownership transfer for]]></phrase>
+  <phrase title="wx_clans_i18n_select" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Select...]]></phrase>
+  <phrase title="wx_clans_i18n_no_additional_questions_are_required" version_id="1000140" version_string="0.14.0 RC"><![CDATA[No additional questions are required.]]></phrase>
+  <phrase title="wx_clans_i18n_edit_clan_role" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Edit clan role]]></phrase>
+  <phrase title="wx_clans_i18n_edit_application_question" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Edit application question]]></phrase>
+  <phrase title="wx_clans_i18n_text" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Text]]></phrase>
+  <phrase title="wx_clans_i18n_long_text" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Long text]]></phrase>
+  <phrase title="wx_clans_i18n_select_2" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Select]]></phrase>
+  <phrase title="wx_clans_i18n_multiple_choice" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Multiple choice]]></phrase>
+  <phrase title="wx_clans_i18n_number" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Number]]></phrase>
+  <phrase title="wx_clans_i18n_date" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Date]]></phrase>
+  <phrase title="wx_clans_i18n_required" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Required]]></phrase>
+  <phrase title="wx_clans_i18n_active" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Active]]></phrase>
+  <phrase title="wx_clans_i18n_edit_clan_announcement" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Edit clan announcement]]></phrase>
+  <phrase title="wx_clans_i18n_pin_announcement" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Pin announcement]]></phrase>
+  <phrase title="wx_clans_i18n_warext_clans" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Warext Clans]]></phrase>
+  <phrase title="wx_clans_i18n_system_overview" version_id="1000140" version_string="0.14.0 RC"><![CDATA[System overview]]></phrase>
+  <phrase title="wx_clans_i18n_clans" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clans:]]></phrase>
+  <phrase title="wx_clans_i18n_active_memberships" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Active memberships:]]></phrase>
+  <phrase title="wx_clans_i18n_pending_review" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Pending review:]]></phrase>
+  <phrase title="wx_clans_i18n_all" version_id="1000140" version_string="0.14.0 RC"><![CDATA[All]]></phrase>
+  <phrase title="wx_clans_i18n_restricted" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Restricted]]></phrase>
+  <phrase title="wx_clans_i18n_suspended" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Suspended]]></phrase>
+  <phrase title="wx_clans_i18n_closed" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Closed]]></phrase>
+  <phrase title="wx_clans_i18n_update_status" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Update status]]></phrase>
+  <phrase title="wx_clans_i18n_no_clans_found" version_id="1000140" version_string="0.14.0 RC"><![CDATA[No clans found.]]></phrase>
+  <phrase title="wx_clans_i18n_clan_lifecycle_requests" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clan lifecycle requests]]></phrase>
+  <phrase title="wx_clans_i18n_no_pending_lifecycle_requests" version_id="1000140" version_string="0.14.0 RC"><![CDATA[No pending lifecycle requests.]]></phrase>
+  <phrase title="wx_clans_i18n_clans_groups" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clans & Groups]]></phrase>
+  <phrase title="wx_clans_i18n_create_apply" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Create / apply]]></phrase>
+  <phrase title="wx_clans_i18n_all_categories" version_id="1000140" version_string="0.14.0 RC"><![CDATA[All categories]]></phrase>
+  <phrase title="wx_clans_i18n_open" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Open]]></phrase>
+  <phrase title="wx_clans_i18n_application" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Application]]></phrase>
+  <phrase title="wx_clans_i18n_invite_only" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Invite only]]></phrase>
+  <phrase title="wx_clans_i18n_newest" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Newest]]></phrase>
+  <phrase title="wx_clans_i18n_most_members" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Most members]]></phrase>
+  <phrase title="wx_clans_i18n_name" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Name]]></phrase>
+  <phrase title="wx_clans_i18n_no_clans_matched_your_filters" version_id="1000140" version_string="0.14.0 RC"><![CDATA[No clans matched your filters.]]></phrase>
+  <phrase title="wx_clans_i18n_view_clan" version_id="1000140" version_string="0.14.0 RC"><![CDATA[View clan]]></phrase>
+  <phrase title="wx_clans_i18n_clan_profile_settings" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clan profile settings]]></phrase>
+  <phrase title="wx_clans_i18n_public" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Public]]></phrase>
+  <phrase title="wx_clans_i18n_clan_members_only" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clan members only]]></phrase>
+  <phrase title="wx_clans_i18n_owner_forum_staff_only" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Owner / forum staff only]]></phrase>
+  <phrase title="wx_clans_i18n_forum_approved_clan_identity" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum-approved clan identity]]></phrase>
+  <phrase title="wx_clans_i18n_a_clan_name_tag_banner_change_is_waiting_for_forum" version_id="1000140" version_string="0.14.0 RC"><![CDATA[A clan name/tag/banner change is waiting for forum approval.]]></phrase>
+  <phrase title="wx_clans_i18n_ownership_transfer" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Ownership transfer]]></phrase>
+  <phrase title="wx_clans_i18n_transfer_to" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Transfer to]]></phrase>
+  <phrase title="wx_clans_i18n_cancel" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Cancel]]></phrase>
+  <phrase title="wx_clans_i18n_invite_add_member" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Invite / add member]]></phrase>
+  <phrase title="wx_clans_i18n_members" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Members]]></phrase>
+  <phrase title="wx_clans_i18n_owner" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Owner]]></phrase>
+  <phrase title="wx_clans_i18n_manager" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager]]></phrase>
+  <phrase title="wx_clans_i18n_member" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Member]]></phrase>
+  <phrase title="wx_clans_i18n_joined" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Joined]]></phrase>
+  <phrase title="wx_clans_i18n_set_role" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Set role]]></phrase>
+  <phrase title="wx_clans_i18n_remove" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Remove]]></phrase>
+  <phrase title="wx_clans_i18n_pending_join_applications" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Pending join applications]]></phrase>
+  <phrase title="wx_clans_i18n_no_pending_applications" version_id="1000140" version_string="0.14.0 RC"><![CDATA[No pending applications.]]></phrase>
+  <phrase title="wx_clans_i18n_application_form" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Application form]]></phrase>
+  <phrase title="wx_clans_i18n_edit" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Edit]]></phrase>
+  <phrase title="wx_clans_i18n_delete" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Delete]]></phrase>
+  <phrase title="wx_clans_i18n_custom_clan_roles" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Custom clan roles]]></phrase>
+  <phrase title="wx_clans_i18n_manager_permissions" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager permissions]]></phrase>
+  <phrase title="wx_clans_i18n_these_permissions_are_limited_to_this_clan_and_nev" version_id="1000140" version_string="0.14.0 RC"><![CDATA[These permissions are limited to this clan and never grant XenForo forum moderation privileges.]]></phrase>
+  <phrase title="wx_clans_i18n_clan_blacklist" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clan blacklist]]></phrase>
+  <phrase title="wx_clans_i18n_until" version_id="1000140" version_string="0.14.0 RC"><![CDATA[· until]]></phrase>
+  <phrase title="wx_clans_i18n_announcements" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Announcements]]></phrase>
+  <phrase title="wx_clans_i18n_clan_audit_log" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clan audit log]]></phrase>
+  <phrase title="wx_clans_i18n_system" version_id="1000140" version_string="0.14.0 RC"><![CDATA[System]]></phrase>
+  <phrase title="wx_clans_i18n_pending" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Pending:]]></phrase>
+  <phrase title="wx_clans_i18n_recent_application_history" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Recent application history]]></phrase>
+  <phrase title="wx_clans_i18n_invitation_history" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Invitation history]]></phrase>
+  <phrase title="wx_clans_i18n_ownership_history" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Ownership history]]></phrase>
+  <phrase title="wx_clans_i18n_identity_change_history" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Identity change history]]></phrase>
+  <phrase title="wx_clans_i18n_browse_clans" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Browse clans]]></phrase>
+  <phrase title="wx_clans_i18n_create_clan" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Create clan]]></phrase>
+  <phrase title="wx_clans_i18n_memberships_displayed_tag" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Memberships / displayed tag]]></phrase>
+  <phrase title="wx_clans_i18n_automatic" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Automatic]]></phrase>
+  <phrase title="wx_clans_i18n_pending_invitations" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Pending invitations]]></phrase>
+  <phrase title="wx_clans_i18n_accept" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Accept]]></phrase>
+  <phrase title="wx_clans_i18n_decline" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Decline]]></phrase>
+  <phrase title="wx_clans_i18n_accept_transfer" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Accept transfer]]></phrase>
+  <phrase title="wx_clans_i18n_my_applications_requests" version_id="1000140" version_string="0.14.0 RC"><![CDATA[My applications / requests]]></phrase>
+  <phrase title="wx_clans_i18n_revise" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Revise]]></phrase>
+  <phrase title="wx_clans_i18n_no_applications_yet" version_id="1000140" version_string="0.14.0 RC"><![CDATA[No applications yet.]]></phrase>
+  <phrase title="wx_clans_i18n_ownership_transfer_history" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Ownership transfer history]]></phrase>
+  <phrase title="wx_clans_i18n_manage_clan" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manage clan]]></phrase>
+  <phrase title="wx_clans_i18n_report" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Report]]></phrase>
+  <phrase title="wx_clans_i18n_owner_3" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Owner:]]></phrase>
+  <phrase title="wx_clans_i18n_members_4" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Members:]]></phrase>
+  <phrase title="wx_clans_i18n_category_5" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Category:]]></phrase>
+  <phrase title="wx_clans_i18n_status_6" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Status:]]></phrase>
+  <phrase title="wx_clans_i18n_join_mode_7" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Join mode:]]></phrase>
+  <phrase title="wx_clans_i18n_forum_status" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum status:]]></phrase>
+  <phrase title="wx_clans_i18n_leave_clan" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Leave clan]]></phrase>
+  <phrase title="wx_clans_i18n_join_clan" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Join clan]]></phrase>
+  <phrase title="wx_clans_i18n_apply_to_join" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Apply to join]]></phrase>
+  <phrase title="wx_clans_i18n_clan_lifecycle" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clan lifecycle]]></phrase>
+  <phrase title="wx_clans_i18n_request_is_waiting_for_forum_approval" version_id="1000140" version_string="0.14.0 RC"><![CDATA[request is waiting for forum approval.]]></phrase>
+  <phrase title="wx_clans_i18n_cancel_request" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Cancel request]]></phrase>
+  <phrase title="wx_clans_i18n_this_clan_state_can_only_be_changed_by_forum_moder" version_id="1000140" version_string="0.14.0 RC"><![CDATA[This clan state can only be changed by forum moderation.]]></phrase>
+  <phrase title="wx_clans_i18n_report_announcement" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Report announcement]]></phrase>
+  <phrase title="wx_clans_i18n_forum_moderation" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum moderation]]></phrase>
+  <phrase title="wx_clans_i18n_clan_lifecycle_request_was_approved" version_id="1000140" version_string="0.14.0 RC"><![CDATA[clan lifecycle request was approved.]]></phrase>
+  <phrase title="wx_clans_i18n_your_lifecycle_request_for" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Your lifecycle request for]]></phrase>
+  <phrase title="wx_clans_i18n_change_clan_owner" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Change clan owner]]></phrase>
+  <phrase title="wx_clans_i18n_select_an_active_member" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Select an active member...]]></phrase>
+  <phrase title="wx_clans_i18n_keep_the_current_owner_as_a_clan_manager" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Keep the current owner as a clan manager]]></phrase>
+  <phrase title="wx_clans_i18n_this_forum_management_action_bypasses_the_normal_o" version_id="1000140" version_string="0.14.0 RC"><![CDATA[This forum-management action bypasses the normal owner acceptance workflow. Pending ownership, identity and lifecycle requests for the old ownership state are cancelled.]]></phrase>
+  <phrase title="wx_clans_i18n_clan_system_maintenance" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Clan system maintenance]]></phrase>
+  <phrase title="wx_clans_i18n_current_maintenance_state" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Current maintenance state]]></phrase>
+  <phrase title="wx_clans_i18n_maintenance_expires_stale_invitations_cancels_owne" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Maintenance expires stale invitations, cancels ownership transfers and owner-bound requests invalidated by a previous ownership change, repairs invalid active-clan selections and reconciles cached member counts.]]></phrase>
+  <phrase title="wx_clans_i18n_forum_management_changed_the_status_of" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum management changed the status of]]></phrase>
+  <phrase title="wx_clans_i18n_from" version_id="1000140" version_string="0.14.0 RC"><![CDATA[from]]></phrase>
+  <phrase title="wx_clans_i18n_to" version_id="1000140" version_string="0.14.0 RC"><![CDATA[to]]></phrase>
+  <phrase title="wx_clans_i18n_forum_management_changed_the_ownership_of" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Forum management changed the ownership of]]></phrase>
+  <phrase title="wx_clans_i18n_you_are_now_the_clan_owner" version_id="1000140" version_string="0.14.0 RC"><![CDATA[You are now the clan owner.]]></phrase>
+  <phrase title="wx_clans_i18n_your_previous_owner_role_was_removed" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Your previous owner role was removed.]]></phrase>
+  <phrase title="wx_clans_i18n_brightness" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Brightness]]></phrase>
+  <phrase title="wx_clans_i18n_r" version_id="1000140" version_string="0.14.0 RC"><![CDATA[R]]></phrase>
+  <phrase title="wx_clans_i18n_g" version_id="1000140" version_string="0.14.0 RC"><![CDATA[G]]></phrase>
+  <phrase title="wx_clans_i18n_b" version_id="1000140" version_string="0.14.0 RC"><![CDATA[B]]></phrase>
+  <phrase title="wx_clans_i18n_revise_clan_application" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Revise clan application]]></phrase>
+  <phrase title="wx_clans_i18n_create_a_clan" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Create a clan]]></phrase>
+  <phrase title="wx_clans_i18n_remove_manager" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Remove manager]]></phrase>
+  <phrase title="wx_clans_i18n_make_manager" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Make manager]]></phrase>
+  <phrase title="wx_clans_i18n_optional" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Optional]]></phrase>
 </phrases>
