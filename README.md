@@ -8,9 +8,9 @@ The system is intentionally independent from XenForo forum moderation. Clan owne
 
 ## Current version
 
-**0.9.0 Alpha**
+**0.13.0 RC**
 
-0.8.0 adds reserved clan identities, automatic maintenance, forum-forced ownership recovery, moderation reasons/Owner alerts and full membership display on member profiles, while preserving the existing lifecycle, membership, invitation, role and moderation workflows.
+0.13.0 RC adds an interactive circular HSV color picker with synchronized HEX/RGB values, separate XenForo/Font Awesome icon selection for clan tags and Manager banners, approved icon persistence across clan creation and identity-change requests, and the in-place 0.13 schema upgrade. Releases now follow the same Warext XenForo add-on standard: one normal XenForo installation/upgrade ZIP, without a separate UPDATE ZIP.
 
 ## Main features
 
@@ -346,9 +346,9 @@ Sistemin temel güvenlik kuralı şudur: **klan yöneticiliği forum moderatörl
 
 ## Güncel sürüm
 
-**0.9.0 Alpha**
+**0.13.0 RC**
 
-0.8.0 ile rezerve klan kimlikleri, otomatik bakım, forum yönetimi tarafından zorunlu sahiplik kurtarma, moderasyon nedeni/Owner bildirimi ve kullanıcı profilinde tüm klan üyeliklerinin gösterimi eklendi. Mevcut yaşam döngüsü, üyelik, davet, rol ve moderasyon akışları korunur.
+0.13.0 RC ile HEX/RGB değerlerini canlı senkronlayan dairesel HSV renk seçici, klan tagı ve Manager bannerı için ayrı XenForo/Font Awesome ikon seçimi, ikonların klan oluşturma ve kimlik değişikliği onay akışlarında saklanması ve mevcut kurulumlar için yerinde 0.13 şema yükseltmesi eklendi. Release yapısı da diğer Warext XenForo eklentileriyle aynı standarda getirildi: ayrı UPDATE ZIP olmadan tek normal XenForo kurulum/güncelleme ZIP'i.
 
 ## Temel özellikler
 
