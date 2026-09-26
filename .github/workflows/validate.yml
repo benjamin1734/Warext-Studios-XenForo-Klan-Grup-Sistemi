@@ -66,8 +66,8 @@ jobs:
           data = root / '_data'
 
           addon = json.loads((root / 'addon.json').read_text(encoding='utf-8'))
-          if addon.get('version_id') != 1000121 or addon.get('version_string') != '0.12.1 RC':
-              raise SystemExit('Expected version is 0.12.1 RC / 1000121')
+          if addon.get('version_id') != 1000122 or addon.get('version_string') != '0.12.2 RC':
+              raise SystemExit('Expected version is 0.12.2 RC / 1000122')
           if addon.get('require', {}).get('XF', [0])[0] != 2030000:
               raise SystemExit('XenForo 2.3.0+ requirement is missing')
           if addon.get('require', {}).get('php', [''])[0] != '8.1.0':
@@ -378,6 +378,11 @@ jobs:
                   entity_mismatches.append(f'{entity_path.name}: missing={missing}, extra={extra}')
           if entity_mismatches:
               raise SystemExit('Entity/install schema mismatch: ' + '; '.join(entity_mismatches))
+
+          for controller_path in sorted(root.glob('**/Controller/*.php')):
+              controller_text = controller_path.read_text(encoding='utf-8')
+              if '$this->db()' in controller_text:
+                  raise SystemExit(f'Unsupported controller db() call found in {controller_path.relative_to(root)}')
 
           print(f'Validated {len(trees)} XML files, {len(templates)} templates and {len(routes)} routes.')
           PY

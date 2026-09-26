@@ -1,5 +1,21 @@
 # Changelog / Değişiklik Günlüğü
 
+## 0.12.2 RC - 2026-09-26
+
+### English
+
+- Fixed a real XenForo runtime fatal error caused by calling the non-existent `$this->db()` helper from public/Admin controllers.
+- Replaced controller database access with XenForo's supported `$this->app()->db()` access.
+- Fixed the public clan index category query and all Admin CP clan dashboard/category/statistic queries.
+- Added a permanent CI guard that rejects `$this->db()` inside controller classes.
+
+### Türkçe
+
+- Public/Admin controller sınıflarında bulunmayan `$this->db()` metodunun çağrılması nedeniyle oluşan gerçek XenForo fatal runtime hatası düzeltildi.
+- Controller veritabanı erişimi XenForo'nun desteklenen `$this->app()->db()` kullanımına geçirildi.
+- Public klan liste kategori sorgusu ile ACP klan dashboard/kategori/istatistik sorgularının tamamı düzeltildi.
+- Controller sınıflarında tekrar `$this->db()` kullanılmasını engelleyen kalıcı CI kontrolü eklendi.
+
 ## 0.12.1 RC - 2026-09-25
 
 ### English

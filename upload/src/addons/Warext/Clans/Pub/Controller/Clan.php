@@ -46,7 +46,7 @@ class Clan extends AbstractController
         $total = $finder->total();
         $finder->limitByPage($page, $perPage);
 
-        $categories = $this->db()->fetchAllColumn("SELECT DISTINCT category FROM xf_wx_clan WHERE status IN ('active', 'restricted') AND category <> '' ORDER BY category");
+        $categories = $this->app()->db()->fetchAllColumn("SELECT DISTINCT category FROM xf_wx_clan WHERE status IN ('active', 'restricted') AND category <> '' ORDER BY category");
 
         return $this->view('Warext\\Clans:ClanList', 'wx_clans_list', [
             'clans' => $finder->fetch(),
