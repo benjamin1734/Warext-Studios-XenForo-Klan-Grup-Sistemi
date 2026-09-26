@@ -6,7 +6,7 @@ final class Presentation
 {
     public const ICONS = [
         'fa-users',
-        'fa-shield-alt',
+        'fa-shield',
         'fa-crown',
         'fa-star',
         'fa-bolt',
