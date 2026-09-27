@@ -326,4 +326,24 @@
   <phrase title="wx_clans_i18n_heart_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Heart]]></phrase>
   <phrase title="wx_clans_i18n_circle_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Circle]]></phrase>
   <phrase title="wx_clans_i18n_ownership_transfers" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Clan ownership transfers]]></phrase>
+  <phrase title="admin_navigation.wxClansManagement" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Clan management]]></phrase>
+  <phrase title="wx_clans_i18n_open_public_page" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Open public page]]></phrase>
+  <phrase title="wx_clans_i18n_detailed_management" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Detailed management]]></phrase>
+  <phrase title="wx_clans_i18n_managers" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Managers]]></phrase>
+  <phrase title="wx_clans_i18n_created" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Created]]></phrase>
+  <phrase title="wx_clans_i18n_clan_details" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Clan details]]></phrase>
+  <phrase title="wx_clans_i18n_demote_manager" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Demote manager]]></phrase>
+  <phrase title="wx_clans_i18n_promote_manager" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Promote to manager]]></phrase>
+  <phrase title="wx_clans_i18n_remove_member" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Remove member]]></phrase>
+  <phrase title="wx_clans_i18n_recent_requests" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Recent requests]]></phrase>
+  <phrase title="wx_clans_i18n_no_requests_found" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[No requests found.]]></phrase>
+  <phrase title="wx_clans_i18n_recent_audit_log" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Recent audit log]]></phrase>
+  <phrase title="wx_clans_i18n_no_audit_entries" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[No audit entries found.]]></phrase>
+  <phrase title="wx_clans_i18n_danger_zone" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Danger zone]]></phrase>
+  <phrase title="wx_clans_i18n_delete_clan_warning" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Permanently deleting a clan removes its memberships, roles, applications, invitations, announcements, blacklist and clan audit history. This cannot be undone.]]></phrase>
+  <phrase title="wx_clans_i18n_delete_clan" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Delete clan]]></phrase>
+  <phrase title="wx_clans_i18n_delete_reason" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Deletion reason]]></phrase>
+  <phrase title="wx_clans_i18n_permanently_delete" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Permanently delete]]></phrase>
+  <phrase title="mod_log.wx_clan_admin_edit" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Edited clan through Admin CP]]></phrase>
+  <phrase title="mod_log.wx_clan_delete" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Permanently deleted clan]]></phrase>
 </language>
