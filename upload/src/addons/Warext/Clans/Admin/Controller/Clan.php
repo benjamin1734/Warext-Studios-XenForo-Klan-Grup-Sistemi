@@ -57,6 +57,152 @@ class Clan extends AbstractController
         ]);
     }
 
+    public function actionManage(ParameterBag $params)
+    {
+        $clan = $this->assertClanExists($params->clan_id);
+
+        $memberPage = $this->filterPage();
+        $memberPerPage = 50;
+        $memberFinder = $this->finder('Warext\\Clans:ClanMember')
+            ->where('clan_id', $clan->clan_id)
+            ->where('member_state', 'active')
+            ->with(['User', 'Role'])
+            ->order('is_owner', 'DESC')
+            ->order('is_manager', 'DESC')
+            ->order('join_date', 'ASC');
+        $memberTotal = $memberFinder->total();
+        $memberFinder->limitByPage($memberPage, $memberPerPage);
+        $members = $memberFinder->fetch();
+
+        $applications = $this->finder('Warext\\Clans:ClanApplication')
+            ->whereOr(['clan_id', $clan->clan_id], ['created_clan_id', $clan->clan_id])
+            ->with(['User', 'DecisionUser'])
+            ->order('create_date', 'DESC')
+            ->limit(30)
+            ->fetch();
+
+        $auditLogs = $this->finder('Warext\\Clans:ClanAuditLog')
+            ->where('clan_id', $clan->clan_id)
+            ->with('User')
+            ->order('log_date', 'DESC')
+            ->limit(50)
+            ->fetch();
+
+        $db = $this->app()->db();
+        $stats = [
+            'active_members' => (int)$db->fetchOne("SELECT COUNT(*) FROM xf_wx_clan_member WHERE clan_id = ? AND member_state = 'active'", $clan->clan_id),
+            'managers' => (int)$db->fetchOne("SELECT COUNT(*) FROM xf_wx_clan_member WHERE clan_id = ? AND member_state = 'active' AND is_manager = 1 AND is_owner = 0", $clan->clan_id),
+            'roles' => (int)$db->fetchOne('SELECT COUNT(*) FROM xf_wx_clan_role WHERE clan_id = ?', $clan->clan_id),
+            'announcements' => (int)$db->fetchOne('SELECT COUNT(*) FROM xf_wx_clan_announcement WHERE clan_id = ?', $clan->clan_id),
+            'pending_join' => (int)$db->fetchOne("SELECT COUNT(*) FROM xf_wx_clan_application WHERE clan_id = ? AND application_type = 'join' AND status = 'pending'", $clan->clan_id),
+            'pending_identity' => (int)$db->fetchOne("SELECT COUNT(*) FROM xf_wx_clan_application WHERE clan_id = ? AND application_type = 'change' AND status = 'pending'", $clan->clan_id),
+            'pending_lifecycle' => (int)$db->fetchOne("SELECT COUNT(*) FROM xf_wx_clan_application WHERE clan_id = ? AND application_type IN ('close','reopen') AND status = 'pending'", $clan->clan_id),
+            'pending_invitations' => (int)$db->fetchOne("SELECT COUNT(*) FROM xf_wx_clan_invitation WHERE clan_id = ? AND status = 'pending'", $clan->clan_id),
+            'pending_ownership' => (int)$db->fetchOne("SELECT COUNT(*) FROM xf_wx_clan_ownership_transfer WHERE clan_id = ? AND status IN ('pending','accepted')", $clan->clan_id)
+        ];
+
+        return $this->view('Warext\\Clans:ClanManage', 'wx_clans_admin_manage', [
+            'clan' => $clan,
+            'members' => $members,
+            'applications' => $applications,
+            'auditLogs' => $auditLogs,
+            'stats' => $stats,
+            'memberPage' => $memberPage,
+            'memberPerPage' => $memberPerPage,
+            'memberTotal' => $memberTotal
+        ]);
+    }
+
+    public function actionSave(ParameterBag $params)
+    {
+        $this->assertPostOnly();
+        $clan = $this->assertClanExists($params->clan_id);
+        $input = $this->filter([
+            'title' => 'str',
+            'tag' => 'str',
+            'description' => 'str',
+            'rules' => 'str',
+            'category' => 'str',
+            'join_mode' => 'str',
+            'member_list_visibility' => 'str',
+            'announcement_visibility' => 'str',
+            'manager_banner' => 'str',
+            'tag_icon' => 'str',
+            'manager_banner_icon' => 'str',
+            'tag_color' => 'str',
+            'manager_banner_color' => 'str',
+            'logo_url' => 'str',
+            'cover_url' => 'str'
+        ]);
+
+        $this->service('Warext\\Clans:Admin\\ClanManager', $clan)->update($input, \XF::visitor());
+
+        return $this->redirect(
+            $this->buildLink('warext-clans/clans/manage', $clan),
+            'Clan details updated.'
+        );
+    }
+
+    public function actionMemberManager(ParameterBag $params)
+    {
+        $this->assertPostOnly();
+        $clan = $this->assertClanExists($params->clan_id);
+        $member = $this->assertClanMemberExists($clan->clan_id, $this->filter('user_id', 'uint'));
+        $mode = $this->filter('mode', 'str');
+        if (!in_array($mode, ['promote', 'demote'], true))
+        {
+            return $this->error('Invalid clan manager action.');
+        }
+        $this->service('Warext\\Clans:Clan\\MemberManager', $clan)
+            ->setManager($member, $mode === 'promote', \XF::visitor()->user_id);
+
+        return $this->redirect($this->buildLink('warext-clans/clans/manage', $clan));
+    }
+
+    public function actionMemberRemove(ParameterBag $params)
+    {
+        $clan = $this->assertClanExists($params->clan_id);
+        $member = $this->assertClanMemberExists($clan->clan_id, $this->filter('user_id', 'uint'));
+
+        if ($this->isPost())
+        {
+            $reason = trim($this->filter('reason', 'str'));
+            if ($reason === '')
+            {
+                return $this->error('A reason is required to remove a clan member from Admin CP.');
+            }
+
+            $this->service('Warext\\Clans:Clan\\MemberManager', $clan)
+                ->removeMember($member, \XF::visitor()->user_id, $reason);
+
+            return $this->redirect(
+                $this->buildLink('warext-clans/clans/manage', $clan),
+                'Clan member removed.'
+            );
+        }
+
+        return $this->view('Warext\\Clans:ClanMemberRemove', 'wx_clans_admin_member_remove', [
+            'clan' => $clan,
+            'member' => $member
+        ]);
+    }
+
+    public function actionDelete(ParameterBag $params)
+    {
+        $clan = $this->assertClanExists($params->clan_id);
+
+        if ($this->isPost())
+        {
+            $reason = $this->filter('reason', 'str');
+            $this->service('Warext\\Clans:Admin\\ClanManager', $clan)->delete(\XF::visitor(), $reason);
+            return $this->redirect($this->buildLink('warext-clans'), 'Clan permanently deleted.');
+        }
+
+        return $this->view('Warext\\Clans:ClanDelete', 'wx_clans_admin_delete', [
+            'clan' => $clan
+        ]);
+    }
+
     public function actionStatus(ParameterBag $params)
     {
         $this->assertPostOnly();
@@ -64,6 +210,10 @@ class Clan extends AbstractController
         $status = $this->filter('status','str');
         $reason = $this->filter('reason','str');
         $this->service('Warext\\Clans:Moderation\\StatusManager', $clan)->change($status, \XF::visitor(), $reason);
+        if ($this->filter('from_manage', 'bool'))
+        {
+            return $this->redirect($this->buildLink('warext-clans/clans/manage', $clan));
+        }
         return $this->redirect($this->buildLink('warext-clans'));
     }
 
@@ -120,6 +270,17 @@ class Clan extends AbstractController
         return $this->view('Warext\\Clans:Maintenance', 'wx_clans_admin_maintenance', [
             'stats' => $service->getStats()
         ]);
+    }
+
+    protected function assertClanMemberExists(int $clanId, int $userId): \Warext\Clans\Entity\ClanMember
+    {
+        $member = $this->em()->find('Warext\\Clans:ClanMember', [$clanId, $userId], ['User', 'Role']);
+        if (!$member)
+        {
+            throw $this->exception($this->notFound('Clan member not found.'));
+        }
+
+        return $member;
     }
 
     protected function assertClanExists(int $id): \Warext\Clans\Entity\Clan

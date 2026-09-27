@@ -1,3 +1,23 @@
+## 1.0.3 - 2026-09-27
+
+### English
+- Added a dedicated Admin CP clan-management entry and a detailed per-clan management screen.
+- Administrators with `wxClansManage` can now edit clan identity/details, join mode, privacy, banner/icon/color and media settings directly.
+- Added forum-level status moderation, forced Owner change access, member Manager promotion/demotion, and confirmed member removal from the same management screen.
+- Added per-clan statistics, recent requests and recent clan audit history to Admin CP.
+- Added permanent clan deletion with a required reason and a confirmation screen. Related clan memberships, roles, applications, invitations, announcements, blacklist entries, preferences and clan audit records are cleaned transactionally.
+- Added moderator-log coverage for Admin CP edits and permanent deletion.
+- Added Turkish/English phrases for the new management surfaces.
+
+### Türkçe
+- Admin CP'ye ayrı bir Klan Yönetimi menüsü ve her klan için detaylı yönetim ekranı eklendi.
+- `wxClansManage` yetkisine sahip yöneticiler artık klan kimliği/detayları, katılım modu, gizlilik, banner/ikon/renk ve medya ayarlarını doğrudan düzenleyebilir.
+- Aynı yönetim ekranına forum seviyesinde durum moderasyonu, zorunlu Owner değiştirme, üyeyi Manager yapma/Manager'dan çıkarma ve onay ekranlı üye çıkarma işlemleri eklendi.
+- Klan bazında istatistikler, son talepler ve son klan denetim kayıtları Admin CP'de gösterilir hale getirildi.
+- Zorunlu neden ve onay ekranı ile kalıcı klan silme eklendi. İlgili üyelik, rol, başvuru, davet, duyuru, kara liste, tercih ve klan denetim kayıtları transaction içinde temizlenir.
+- Admin CP düzenleme ve kalıcı silme işlemleri XenForo Moderator Log'a bağlandı.
+- Yeni yönetim ekranları için Türkçe/İngilizce phrase kapsamı eklendi.
+
 ## 1.0.2 - 2026-09-27
 
 ### English

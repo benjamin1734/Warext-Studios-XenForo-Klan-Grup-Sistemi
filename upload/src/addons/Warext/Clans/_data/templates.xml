@@ -199,7 +199,7 @@
 &lt;/div&gt;&lt;xf:submitrow submit="{{ phrase('wx_clans_i18n_filter') }}" /&gt;&lt;/div&gt;&lt;/xf:form&gt;
 &lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
 &lt;xf:foreach loop="$clans" value="$clan"&gt;&lt;div class="block-row block-row--separated"&gt;&lt;strong&gt;[{$clan.tag}] {$clan.title}&lt;/strong&gt; · {$clan.status} · {$clan.member_count} members · owner {$clan.Owner.username}
-&lt;div class="u-spacerTop"&gt;&lt;xf:form action="{{ link('warext-clans/status', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:select name="status" value="{$clan.status}"&gt;&lt;xf:option value="active"&gt;{{ phrase('wx_clans_i18n_active') }}&lt;/xf:option&gt;&lt;xf:option value="restricted"&gt;{{ phrase('wx_clans_i18n_restricted') }}&lt;/xf:option&gt;&lt;xf:option value="suspended"&gt;{{ phrase('wx_clans_i18n_suspended') }}&lt;/xf:option&gt;&lt;xf:option value="closed"&gt;{{ phrase('wx_clans_i18n_closed') }}&lt;/xf:option&gt;&lt;/xf:select&gt;&lt;xf:textbox name="reason" placeholder="{{ phrase('wx_clans_i18n_optional_moderation_reason') }}" /&gt;&lt;xf:button type="submit"&gt;{{ phrase('wx_clans_i18n_update_status') }}&lt;/xf:button&gt;&lt;/xf:form&gt; &lt;xf:button href="{{ link('warext-clans/clans/force-owner', $clan) }}" overlay="true"&gt;{{ phrase('wx_clans_i18n_change_owner') }}&lt;/xf:button&gt;&lt;/div&gt;&lt;/div&gt;&lt;xf:else /&gt;&lt;div class="block-row"&gt;{{ phrase('wx_clans_i18n_no_clans_found') }}&lt;/div&gt;&lt;/xf:foreach&gt;
+&lt;div class="u-spacerTop"&gt;&lt;xf:form action="{{ link('warext-clans/status', $clan) }}" class="u-inlineBlock" ajax="true"&gt;&lt;xf:select name="status" value="{$clan.status}"&gt;&lt;xf:option value="active"&gt;{{ phrase('wx_clans_i18n_active') }}&lt;/xf:option&gt;&lt;xf:option value="restricted"&gt;{{ phrase('wx_clans_i18n_restricted') }}&lt;/xf:option&gt;&lt;xf:option value="suspended"&gt;{{ phrase('wx_clans_i18n_suspended') }}&lt;/xf:option&gt;&lt;xf:option value="closed"&gt;{{ phrase('wx_clans_i18n_closed') }}&lt;/xf:option&gt;&lt;/xf:select&gt;&lt;xf:textbox name="reason" placeholder="{{ phrase('wx_clans_i18n_optional_moderation_reason') }}" /&gt;&lt;xf:button type="submit"&gt;{{ phrase('wx_clans_i18n_update_status') }}&lt;/xf:button&gt;&lt;/xf:form&gt; &lt;xf:button href="{{ link('warext-clans/clans/manage', $clan) }}" class="button--cta"&gt;{{ phrase('wx_clans_i18n_manage_clan') }}&lt;/xf:button&gt; &lt;xf:button href="{{ link('warext-clans/clans/force-owner', $clan) }}" overlay="true"&gt;{{ phrase('wx_clans_i18n_change_owner') }}&lt;/xf:button&gt; &lt;xf:button href="{{ link('warext-clans/clans/delete', $clan) }}" overlay="true"&gt;{{ phrase('wx_clans_i18n_delete_clan') }}&lt;/xf:button&gt;&lt;/div&gt;&lt;/div&gt;&lt;xf:else /&gt;&lt;div class="block-row"&gt;{{ phrase('wx_clans_i18n_no_clans_found') }}&lt;/div&gt;&lt;/xf:foreach&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="warext-clans" params="{{ {'q': $query, 'status': $status, 'category': $category} }}" /&gt;
 </template>
@@ -628,4 +628,174 @@
 &lt;/xf:formrow&gt;
 &lt;/xf:macro&gt;
 </template>
+
+  <template type="admin" title="wx_clans_admin_manage" version_id="1001030" version_string="1.0.3">&lt;xf:title&gt;{{ phrase('wx_clans_i18n_manage_clan') }}: [{$clan.tag}] {$clan.title}&lt;/xf:title&gt;
+&lt;xf:pageaction&gt;
+    &lt;xf:button href="{{ link('canonical:clans', $clan) }}" target="_blank"&gt;{{ phrase('wx_clans_i18n_open_public_page') }}&lt;/xf:button&gt;
+    &lt;xf:button href="{{ link('warext-clans/clans/force-owner', $clan) }}" overlay="true"&gt;{{ phrase('wx_clans_i18n_change_owner') }}&lt;/xf:button&gt;
+    &lt;xf:button href="{{ link('warext-clans/clans/delete', $clan) }}" overlay="true" class="button--link"&gt;{{ phrase('wx_clans_i18n_delete_clan') }}&lt;/xf:button&gt;
+&lt;/xf:pageaction&gt;
+
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;
+&lt;h3 class="block-header"&gt;{{ phrase('wx_clans_i18n_detailed_management') }}&lt;/h3&gt;
+&lt;div class="block-body"&gt;
+    &lt;xf:inforow label="{{ phrase('content_type.wx_clan') }} ID"&gt;{$clan.clan_id}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_owner') }}"&gt;&lt;xf:if is="$clan.Owner"&gt;{$clan.Owner.username}&lt;xf:else /&gt;#{$clan.owner_user_id}&lt;/xf:if&gt;&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_members') }}"&gt;{$stats.active_members} · {$stats.managers} {{ phrase('wx_clans_i18n_managers') }}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_roles') }}"&gt;{$stats.roles}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_announcements') }}"&gt;{$stats.announcements}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_pending_join_applications') }}"&gt;{$stats.pending_join}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_clan_identity_changes') }}"&gt;{$stats.pending_identity}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_clan_lifecycle_requests') }}"&gt;{$stats.pending_lifecycle}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_ownership_transfers') }}"&gt;{$stats.pending_ownership}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_pending_invitations') }}"&gt;{$stats.pending_invitations}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_created') }}"&gt;&lt;xf:date time="$clan.created_date" /&gt;&lt;/xf:inforow&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;xf:form action="{{ link('warext-clans/clans/save', $clan) }}" class="block" ajax="true"&gt;
+&lt;div class="block-container"&gt;
+&lt;h3 class="block-header"&gt;{{ phrase('wx_clans_i18n_clan_details') }}&lt;/h3&gt;
+&lt;div class="block-body"&gt;
+    &lt;xf:textboxrow name="title" value="{$clan.title}" label="{{ phrase('wx_clans_i18n_clan_name') }}" maxlength="100" required="true" /&gt;
+    &lt;xf:textboxrow name="tag" value="{$clan.tag}" label="{{ phrase('wx_clans_i18n_clan_tag') }}" maxlength="24" required="true" /&gt;
+    &lt;xf:textarearow name="description" value="{$clan.description}" label="{{ phrase('wx_clans_i18n_description') }}" autosize="true" /&gt;
+    &lt;xf:textarearow name="rules" value="{$clan.rules}" label="{{ phrase('wx_clans_i18n_clan_rules') }}" autosize="true" /&gt;
+    &lt;xf:textboxrow name="category" value="{$clan.category}" label="{{ phrase('wx_clans_i18n_category') }}" maxlength="50" /&gt;
+    &lt;xf:selectrow name="join_mode" value="{$clan.join_mode}" label="{{ phrase('wx_clans_i18n_join_mode') }}"&gt;
+        &lt;xf:option value="open"&gt;{{ phrase('wx_clans_i18n_open') }}&lt;/xf:option&gt;
+        &lt;xf:option value="application"&gt;{{ phrase('wx_clans_i18n_application') }}&lt;/xf:option&gt;
+        &lt;xf:option value="invite"&gt;{{ phrase('wx_clans_i18n_invite_only') }}&lt;/xf:option&gt;
+        &lt;xf:option value="closed"&gt;{{ phrase('wx_clans_i18n_closed') }}&lt;/xf:option&gt;
+    &lt;/xf:selectrow&gt;
+    &lt;xf:selectrow name="member_list_visibility" value="{$clan.member_list_visibility}" label="{{ phrase('wx_clans_i18n_member_list_visibility') }}"&gt;
+        &lt;xf:option value="public"&gt;{{ phrase('wx_clans_i18n_public') }}&lt;/xf:option&gt;
+        &lt;xf:option value="members"&gt;{{ phrase('wx_clans_i18n_members') }}&lt;/xf:option&gt;
+        &lt;xf:option value="staff"&gt;{{ phrase('wx_clans_i18n_owner_forum_staff_only') }}&lt;/xf:option&gt;
+    &lt;/xf:selectrow&gt;
+    &lt;xf:selectrow name="announcement_visibility" value="{$clan.announcement_visibility}" label="{{ phrase('wx_clans_i18n_announcement_visibility') }}"&gt;
+        &lt;xf:option value="public"&gt;{{ phrase('wx_clans_i18n_public') }}&lt;/xf:option&gt;
+        &lt;xf:option value="members"&gt;{{ phrase('wx_clans_i18n_members') }}&lt;/xf:option&gt;
+    &lt;/xf:selectrow&gt;
+    &lt;xf:textboxrow name="manager_banner" value="{$clan.manager_banner}" label="{{ phrase('wx_clans_i18n_manager_banner') }}" maxlength="100" /&gt;
+    &lt;xf:textboxrow name="tag_icon" value="{$clan.tag_icon}" label="{{ phrase('wx_clans_i18n_tag_icon') }}" explain="fa-users, fa-shield, fa-crown, fa-star, fa-bolt, fa-fire, fa-gamepad, fa-trophy, fa-flag, fa-gem, fa-heart, fa-circle" /&gt;
+    &lt;xf:textboxrow name="manager_banner_icon" value="{$clan.manager_banner_icon}" label="{{ phrase('wx_clans_i18n_manager_banner_icon') }}" /&gt;
+    &lt;xf:textboxrow name="tag_color" value="{$clan.tag_color}" label="{{ phrase('wx_clans_i18n_tag_color') }}" maxlength="7" /&gt;
+    &lt;xf:textboxrow name="manager_banner_color" value="{$clan.manager_banner_color}" label="{{ phrase('wx_clans_i18n_manager_banner_color') }}" maxlength="7" /&gt;
+    &lt;xf:textboxrow name="logo_url" value="{$clan.logo_url}" label="{{ phrase('wx_clans_i18n_logo_url') }}" /&gt;
+    &lt;xf:textboxrow name="cover_url" value="{$clan.cover_url}" label="{{ phrase('wx_clans_i18n_cover_url') }}" /&gt;
+&lt;/div&gt;
+&lt;xf:submitrow submit="{{ phrase('wx_clans_i18n_save') }}" /&gt;
+&lt;/div&gt;
+&lt;/xf:form&gt;
+
+&lt;xf:form action="{{ link('warext-clans/status', $clan) }}" class="block" ajax="true"&gt;
+&lt;xf:hiddenval name="from_manage" value="1" /&gt;
+&lt;div class="block-container"&gt;
+&lt;h3 class="block-header"&gt;{{ phrase('wx_clans_i18n_forum_moderation') }}&lt;/h3&gt;
+&lt;div class="block-body"&gt;
+    &lt;xf:selectrow name="status" value="{$clan.status}" label="{{ phrase('wx_clans_i18n_status') }}"&gt;
+        &lt;xf:option value="active"&gt;{{ phrase('wx_clans_i18n_active') }}&lt;/xf:option&gt;
+        &lt;xf:option value="restricted"&gt;{{ phrase('wx_clans_i18n_restricted') }}&lt;/xf:option&gt;
+        &lt;xf:option value="suspended"&gt;{{ phrase('wx_clans_i18n_suspended') }}&lt;/xf:option&gt;
+        &lt;xf:option value="closed"&gt;{{ phrase('wx_clans_i18n_closed') }}&lt;/xf:option&gt;
+    &lt;/xf:selectrow&gt;
+    &lt;xf:textarearow name="reason" label="{{ phrase('wx_clans_i18n_moderation_reason') }}" autosize="true" /&gt;
+&lt;/div&gt;
+&lt;xf:submitrow submit="{{ phrase('wx_clans_i18n_update_status') }}" /&gt;
+&lt;/div&gt;
+&lt;/xf:form&gt;
+
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;
+&lt;h3 class="block-header"&gt;{{ phrase('wx_clans_i18n_members') }} ({$stats.active_members})&lt;/h3&gt;
+&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$members" value="$member"&gt;
+    &lt;div class="block-row block-row--separated"&gt;
+        &lt;strong&gt;&lt;xf:if is="$member.User"&gt;{$member.User.username}&lt;xf:else /&gt;#{$member.user_id}&lt;/xf:if&gt;&lt;/strong&gt;
+        &lt;xf:if is="$member.is_owner"&gt; · {{ phrase('wx_clans_i18n_owner') }}
+        &lt;xf:elseif is="$member.is_manager" /&gt; · {{ phrase('wx_clans_i18n_manager') }}
+        &lt;xf:elseif is="$member.Role" /&gt; · {$member.Role.title}
+        &lt;/xf:if&gt;
+        &lt;div class="u-spacerTop"&gt;
+        &lt;xf:if is="!$member.is_owner"&gt;
+            &lt;xf:form action="{{ link('warext-clans/clans/member-manager', $clan) }}" class="u-inlineBlock" ajax="true"&gt;
+                &lt;xf:hiddenval name="user_id" value="{$member.user_id}" /&gt;
+                &lt;xf:if is="$member.is_manager"&gt;
+                    &lt;xf:hiddenval name="mode" value="demote" /&gt;
+                    &lt;xf:button type="submit"&gt;{{ phrase('wx_clans_i18n_demote_manager') }}&lt;/xf:button&gt;
+                &lt;xf:else /&gt;
+                    &lt;xf:hiddenval name="mode" value="promote" /&gt;
+                    &lt;xf:button type="submit"&gt;{{ phrase('wx_clans_i18n_promote_manager') }}&lt;/xf:button&gt;
+                &lt;/xf:if&gt;
+            &lt;/xf:form&gt;
+            &lt;xf:button href="{{ link('warext-clans/clans/member-remove', $clan, {'user_id': $member.user_id}) }}" overlay="true"&gt;{{ phrase('wx_clans_i18n_remove_member') }}&lt;/xf:button&gt;
+        &lt;/xf:if&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/xf:foreach&gt;
+&lt;/div&gt;
+&lt;xf:if is="$memberTotal &gt; $memberPerPage"&gt;
+    &lt;div class="block-footer"&gt;&lt;xf:pagenav page="$memberPage" perpage="$memberPerPage" total="$memberTotal" link="warext-clans/clans/manage" data="$clan" /&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;
+&lt;h3 class="block-header"&gt;{{ phrase('wx_clans_i18n_recent_requests') }}&lt;/h3&gt;
+&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$applications" value="$application"&gt;
+    &lt;div class="block-row block-row--separated"&gt;
+        &lt;strong&gt;{$application.application_type}&lt;/strong&gt; · {$application.status} · &lt;xf:if is="$application.User"&gt;{$application.User.username}&lt;xf:else /&gt;#{$application.user_id}&lt;/xf:if&gt;
+        &lt;div class="u-muted"&gt;&lt;xf:date time="$application.create_date" /&gt;&lt;xf:if is="$application.decision_reason"&gt; · {$application.decision_reason}&lt;/xf:if&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;xf:else /&gt;
+    &lt;div class="block-row"&gt;{{ phrase('wx_clans_i18n_no_requests_found') }}&lt;/div&gt;
+&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;
+&lt;h3 class="block-header"&gt;{{ phrase('wx_clans_i18n_recent_audit_log') }}&lt;/h3&gt;
+&lt;div class="block-body"&gt;
+&lt;xf:foreach loop="$auditLogs" value="$log"&gt;
+    &lt;div class="block-row block-row--separated"&gt;
+        &lt;strong&gt;{$log.action}&lt;/strong&gt; · &lt;xf:if is="$log.User"&gt;{$log.User.username}&lt;xf:else /&gt;{{ phrase('wx_clans_i18n_system') }}&lt;/xf:if&gt;
+        &lt;div class="u-muted"&gt;&lt;xf:date time="$log.log_date" /&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;xf:else /&gt;
+    &lt;div class="block-row"&gt;{{ phrase('wx_clans_i18n_no_audit_entries') }}&lt;/div&gt;
+&lt;/xf:foreach&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;
+&lt;h3 class="block-header"&gt;{{ phrase('wx_clans_i18n_danger_zone') }}&lt;/h3&gt;
+&lt;div class="block-body"&gt;
+    &lt;div class="block-row blockMessage blockMessage--important"&gt;{{ phrase('wx_clans_i18n_delete_clan_warning') }}&lt;/div&gt;
+    &lt;div class="block-row"&gt;&lt;xf:button href="{{ link('warext-clans/clans/delete', $clan) }}" overlay="true"&gt;{{ phrase('wx_clans_i18n_delete_clan') }}&lt;/xf:button&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+</template>
+
+  <template type="admin" title="wx_clans_admin_delete" version_id="1001030" version_string="1.0.3">&lt;xf:title&gt;{{ phrase('wx_clans_i18n_delete_clan') }}: [{$clan.tag}] {$clan.title}&lt;/xf:title&gt;
+&lt;div class="blockMessage blockMessage--important"&gt;{{ phrase('wx_clans_i18n_delete_clan_warning') }}&lt;/div&gt;
+&lt;xf:form action="{{ link('warext-clans/clans/delete', $clan) }}" class="block" ajax="true"&gt;
+&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_owner') }}"&gt;{$clan.Owner.username}&lt;/xf:inforow&gt;
+    &lt;xf:textarearow name="reason" label="{{ phrase('wx_clans_i18n_delete_reason') }}" autosize="true" required="true" /&gt;
+&lt;/div&gt;
+&lt;xf:submitrow submit="{{ phrase('wx_clans_i18n_permanently_delete') }}" /&gt;
+&lt;/div&gt;
+&lt;/xf:form&gt;
+</template>
+
+
+  <template type="admin" title="wx_clans_admin_member_remove" version_id="1001030" version_string="1.0.3">&lt;xf:title&gt;{{ phrase('wx_clans_i18n_remove_member') }}: {$member.User.username}&lt;/xf:title&gt;
+&lt;div class="blockMessage blockMessage--important"&gt;{{ phrase('wx_clans_i18n_remove_member_warning') }}&lt;/div&gt;
+&lt;xf:form action="{{ link('warext-clans/clans/member-remove', $clan, {'user_id': $member.user_id}) }}" class="block" ajax="true"&gt;
+&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+    &lt;xf:inforow label="{{ phrase('content_type.wx_clan') }}"&gt;[{$clan.tag}] {$clan.title}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_member') }}"&gt;{$member.User.username}&lt;/xf:inforow&gt;
+    &lt;xf:textarearow name="reason" label="{{ phrase('wx_clans_i18n_removal_reason') }}" autosize="true" required="true" /&gt;
+&lt;/div&gt;
+&lt;xf:submitrow submit="{{ phrase('wx_clans_i18n_remove_member') }}" /&gt;
+&lt;/div&gt;
+&lt;/xf:form&gt;
+</template>
+
 </templates>

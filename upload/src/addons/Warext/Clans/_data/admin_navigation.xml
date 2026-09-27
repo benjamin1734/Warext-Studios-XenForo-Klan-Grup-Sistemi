@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <admin_navigation>
   <admin_navigation_entry navigation_id="wxClans" display_order="900" link="warext-clans" icon="fa-users" debug_only="0" development_only="0" hide_no_children="0" admin_permission_id="wxClansManage" />
+  <admin_navigation_entry navigation_id="wxClansManagement" parent_navigation_id="wxClans" display_order="5" link="warext-clans" debug_only="0" development_only="0" hide_no_children="0" admin_permission_id="wxClansManage" />
   <admin_navigation_entry navigation_id="wxClansApplications" parent_navigation_id="wxClans" display_order="10" link="warext-clans/applications" debug_only="0" development_only="0" hide_no_children="0" admin_permission_id="wxClansManage" />
   <admin_navigation_entry navigation_id="wxClansIdentity" parent_navigation_id="wxClans" display_order="20" link="warext-clans/identity-changes" debug_only="0" development_only="0" hide_no_children="0" admin_permission_id="wxClansManage" />
   <admin_navigation_entry navigation_id="wxClansOwnership" parent_navigation_id="wxClans" display_order="30" link="warext-clans/ownership-transfers" debug_only="0" development_only="0" hide_no_children="0" admin_permission_id="wxClansManage" />
