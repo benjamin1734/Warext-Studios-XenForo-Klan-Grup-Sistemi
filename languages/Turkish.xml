@@ -326,4 +326,24 @@
   <phrase title="wx_clans_i18n_heart_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Kalp]]></phrase>
   <phrase title="wx_clans_i18n_circle_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Daire]]></phrase>
   <phrase title="wx_clans_i18n_ownership_transfers" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Klan sahiplik devirleri]]></phrase>
+  <phrase title="admin_navigation.wxClansManagement" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Klan yönetimi]]></phrase>
+  <phrase title="wx_clans_i18n_open_public_page" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Herkese açık sayfayı aç]]></phrase>
+  <phrase title="wx_clans_i18n_detailed_management" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Detaylı yönetim]]></phrase>
+  <phrase title="wx_clans_i18n_managers" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Yöneticiler]]></phrase>
+  <phrase title="wx_clans_i18n_created" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Oluşturulma]]></phrase>
+  <phrase title="wx_clans_i18n_clan_details" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Klan detayları]]></phrase>
+  <phrase title="wx_clans_i18n_demote_manager" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Yöneticilikten çıkar]]></phrase>
+  <phrase title="wx_clans_i18n_promote_manager" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Yönetici yap]]></phrase>
+  <phrase title="wx_clans_i18n_remove_member" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Üyeyi çıkar]]></phrase>
+  <phrase title="wx_clans_i18n_recent_requests" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Son talepler]]></phrase>
+  <phrase title="wx_clans_i18n_no_requests_found" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Talep bulunamadı.]]></phrase>
+  <phrase title="wx_clans_i18n_recent_audit_log" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Son denetim kayıtları]]></phrase>
+  <phrase title="wx_clans_i18n_no_audit_entries" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Denetim kaydı bulunamadı.]]></phrase>
+  <phrase title="wx_clans_i18n_danger_zone" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Tehlikeli bölge]]></phrase>
+  <phrase title="wx_clans_i18n_delete_clan_warning" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Klanı kalıcı olarak silmek; üyelikleri, rolleri, başvuruları, davetleri, duyuruları, kara listeyi ve klan denetim geçmişini siler. Bu işlem geri alınamaz.]]></phrase>
+  <phrase title="wx_clans_i18n_delete_clan" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Klanı sil]]></phrase>
+  <phrase title="wx_clans_i18n_delete_reason" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Silme nedeni]]></phrase>
+  <phrase title="wx_clans_i18n_permanently_delete" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Kalıcı olarak sil]]></phrase>
+  <phrase title="mod_log.wx_clan_admin_edit" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Klanı Admin CP üzerinden düzenledi]]></phrase>
+  <phrase title="mod_log.wx_clan_delete" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Klanı kalıcı olarak sildi]]></phrase>
 </language>
