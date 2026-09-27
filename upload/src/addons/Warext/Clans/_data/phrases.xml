@@ -347,4 +347,18 @@
   <phrase title="wx_clans_i18n_remove_manager" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Remove manager]]></phrase>
   <phrase title="wx_clans_i18n_make_manager" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Make manager]]></phrase>
   <phrase title="wx_clans_i18n_optional" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Optional]]></phrase>
+  <phrase title="wx_clans_i18n_no_icon" version_id="1001010" version_string="1.0.1"><![CDATA[No icon]]></phrase>
+  <phrase title="wx_clans_i18n_users_icon" version_id="1001010" version_string="1.0.1"><![CDATA[Users]]></phrase>
+  <phrase title="wx_clans_i18n_shield_icon" version_id="1001010" version_string="1.0.1"><![CDATA[Shield]]></phrase>
+  <phrase title="wx_clans_i18n_crown_icon" version_id="1001010" version_string="1.0.1"><![CDATA[Crown]]></phrase>
+  <phrase title="wx_clans_i18n_star_icon" version_id="1001010" version_string="1.0.1"><![CDATA[Star]]></phrase>
+  <phrase title="wx_clans_i18n_bolt_icon" version_id="1001010" version_string="1.0.1"><![CDATA[Bolt]]></phrase>
+  <phrase title="wx_clans_i18n_fire_icon" version_id="1001010" version_string="1.0.1"><![CDATA[Fire]]></phrase>
+  <phrase title="wx_clans_i18n_gamepad_icon" version_id="1001010" version_string="1.0.1"><![CDATA[Gamepad]]></phrase>
+  <phrase title="wx_clans_i18n_trophy_icon" version_id="1001010" version_string="1.0.1"><![CDATA[Trophy]]></phrase>
+  <phrase title="wx_clans_i18n_flag_icon" version_id="1001010" version_string="1.0.1"><![CDATA[Flag]]></phrase>
+  <phrase title="wx_clans_i18n_gem_icon" version_id="1001010" version_string="1.0.1"><![CDATA[Gem]]></phrase>
+  <phrase title="wx_clans_i18n_heart_icon" version_id="1001010" version_string="1.0.1"><![CDATA[Heart]]></phrase>
+  <phrase title="wx_clans_i18n_circle_icon" version_id="1001010" version_string="1.0.1"><![CDATA[Circle]]></phrase>
+  <phrase title="wx_clans_i18n_ownership_transfers" version_id="1001010" version_string="1.0.1"><![CDATA[Clan ownership transfers]]></phrase>
 </phrases>
