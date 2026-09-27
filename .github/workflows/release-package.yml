@@ -16,6 +16,44 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Preflight source validation
+        shell: bash
+        run: |
+          find upload/src/addons/Warext/Clans -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          import xml.etree.ElementTree as ET
+
+          root = Path('upload/src/addons/Warext/Clans')
+          addon = json.loads((root / 'addon.json').read_text(encoding='utf-8'))
+          if addon.get('version_id') != 1001030 or addon.get('version_string') != '1.0.3':
+              raise SystemExit('Expected release version is 1.0.3 / 1001030')
+
+          for path in sorted((root / '_data').glob('*.xml')):
+              ET.parse(path)
+          ET.parse('languages/English.xml')
+          ET.parse('languages/Turkish.xml')
+
+          templates = ET.parse(root / '_data/templates.xml').getroot()
+          titles = {node.attrib.get('title') for node in templates.findall('template')}
+          required = {'wx_clans_admin_manage', 'wx_clans_admin_delete', 'wx_clans_admin_member_remove'}
+          missing = sorted(required - titles)
+          if missing:
+              raise SystemExit('Missing Admin CP templates: ' + ', '.join(missing))
+
+          nav = ET.parse(root / '_data/admin_navigation.xml').getroot()
+          nav_ids = {node.attrib.get('navigation_id') for node in nav.findall('admin_navigation_entry')}
+          if 'wxClansManagement' not in nav_ids:
+              raise SystemExit('wxClansManagement Admin CP navigation entry is missing')
+          PY
+
       - name: Read version
         id: version
         shell: bash
