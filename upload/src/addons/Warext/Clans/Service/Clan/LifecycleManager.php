@@ -72,7 +72,7 @@ class LifecycleManager extends AbstractService
 
     public function cancel(\Warext\Clans\Entity\ClanApplication $request, \XF\Entity\User $actor): void
     {
-        if ($request->clan_id !== $this->clan->clan_id || !$request->isLifecycleRequest() || $request->status !== 'pending' || $actor->user_id !== $this->clan->owner_user_id)
+        if ($request->clan_id !== $this->clan->clan_id || !$request->isLifecycleRequest() || !$request->isPending() || $actor->user_id !== $this->clan->owner_user_id)
         {
             throw new \XF\PrintableException('This request cannot be cancelled.');
         }
@@ -85,7 +85,17 @@ class LifecycleManager extends AbstractService
 
     public function decide(\Warext\Clans\Entity\ClanApplication $request, bool $approve, \XF\Entity\User $actor, string $reason = ''): void
     {
-        if (!$request->isLifecycleRequest() || $request->clan_id !== $this->clan->clan_id || $request->status !== 'pending')
+        if (!$request->isLifecycleRequest() || $request->clan_id !== $this->clan->clan_id)
+        {
+            throw new \XF\PrintableException('This lifecycle request is invalid.');
+        }
+
+        $status = $request->normalizedStatus();
+        if (($approve && $status === 'approved') || (!$approve && $status === 'rejected'))
+        {
+            return;
+        }
+        if (!$request->isPending())
         {
             throw new \XF\PrintableException('This lifecycle request is no longer pending.');
         }
