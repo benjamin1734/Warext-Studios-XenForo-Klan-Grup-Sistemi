@@ -7,6 +7,21 @@ use XF\Mvc\Entity\Structure;
 
 class ClanOwnershipTransfer extends Entity
 {
+    public function normalizedStatus(): string
+    {
+        return strtolower(trim((string)$this->status));
+    }
+
+    public function isPending(): bool
+    {
+        return $this->normalizedStatus() === 'pending';
+    }
+
+    public function isAccepted(): bool
+    {
+        return $this->normalizedStatus() === 'accepted';
+    }
+
     public static function getStructure(Structure $structure)
     {
         $structure->table='xf_wx_clan_ownership_transfer';
