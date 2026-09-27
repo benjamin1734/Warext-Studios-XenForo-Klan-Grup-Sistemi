@@ -72,7 +72,7 @@ class Manager extends AbstractService
             throw new \XF\PrintableException('This clan is currently locked by forum management.');
         }
 
-        if ($transfer->clan_id !== $this->clan->clan_id || $transfer->to_user_id !== $user->user_id || $transfer->status !== 'pending')
+        if ($transfer->clan_id !== $this->clan->clan_id || $transfer->to_user_id !== $user->user_id || !$transfer->isPending())
         {
             throw new \XF\PrintableException('This ownership transfer is no longer available.');
         }
@@ -99,7 +99,7 @@ class Manager extends AbstractService
 
     public function cancel(\Warext\Clans\Entity\ClanOwnershipTransfer $transfer, \XF\Entity\User $owner): void
     {
-        if ($this->clan->owner_user_id !== $owner->user_id || $transfer->clan_id !== $this->clan->clan_id || !in_array($transfer->status, ['pending','accepted'], true))
+        if ($this->clan->owner_user_id !== $owner->user_id || $transfer->clan_id !== $this->clan->clan_id || !in_array($transfer->normalizedStatus(), ['pending','accepted'], true))
         {
             throw new \XF\PrintableException('This ownership transfer cannot be cancelled.');
         }
@@ -110,7 +110,15 @@ class Manager extends AbstractService
 
     public function approve(\Warext\Clans\Entity\ClanOwnershipTransfer $transfer, \XF\Entity\User $actor): void
     {
-        if ($transfer->clan_id !== $this->clan->clan_id || $transfer->status !== 'accepted')
+        if ($transfer->clan_id !== $this->clan->clan_id)
+        {
+            throw new \XF\PrintableException('This ownership transfer is invalid.');
+        }
+        if ($transfer->normalizedStatus() === 'approved')
+        {
+            return;
+        }
+        if (!$transfer->isAccepted())
         {
             throw new \XF\PrintableException('The new owner must accept the transfer before forum approval.');
         }
@@ -213,7 +221,15 @@ class Manager extends AbstractService
 
     public function reject(\Warext\Clans\Entity\ClanOwnershipTransfer $transfer, \XF\Entity\User $actor, string $reason = ''): void
     {
-        if ($transfer->clan_id !== $this->clan->clan_id || !in_array($transfer->status, ['pending','accepted'], true))
+        if ($transfer->clan_id !== $this->clan->clan_id)
+        {
+            throw new \XF\PrintableException('This ownership transfer is invalid.');
+        }
+        if ($transfer->normalizedStatus() === 'rejected')
+        {
+            return;
+        }
+        if (!in_array($transfer->normalizedStatus(), ['pending','accepted'], true))
         {
             throw new \XF\PrintableException('This ownership transfer can no longer be rejected.');
         }
