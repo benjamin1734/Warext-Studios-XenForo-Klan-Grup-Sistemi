@@ -312,4 +312,18 @@
   <phrase title="wx_clans_i18n_remove_manager" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager'ı kaldır]]></phrase>
   <phrase title="wx_clans_i18n_make_manager" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Manager yap]]></phrase>
   <phrase title="wx_clans_i18n_optional" addon_id="Warext/Clans" global_cache="0" version_id="1000140" version_string="0.14.0 RC"><![CDATA[Opsiyonel]]></phrase>
+  <phrase title="wx_clans_i18n_no_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[İkon yok]]></phrase>
+  <phrase title="wx_clans_i18n_users_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Kullanıcılar]]></phrase>
+  <phrase title="wx_clans_i18n_shield_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Kalkan]]></phrase>
+  <phrase title="wx_clans_i18n_crown_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Taç]]></phrase>
+  <phrase title="wx_clans_i18n_star_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Yıldız]]></phrase>
+  <phrase title="wx_clans_i18n_bolt_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Şimşek]]></phrase>
+  <phrase title="wx_clans_i18n_fire_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Ateş]]></phrase>
+  <phrase title="wx_clans_i18n_gamepad_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Oyun kolu]]></phrase>
+  <phrase title="wx_clans_i18n_trophy_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Kupa]]></phrase>
+  <phrase title="wx_clans_i18n_flag_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Bayrak]]></phrase>
+  <phrase title="wx_clans_i18n_gem_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Mücevher]]></phrase>
+  <phrase title="wx_clans_i18n_heart_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Kalp]]></phrase>
+  <phrase title="wx_clans_i18n_circle_icon" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Daire]]></phrase>
+  <phrase title="wx_clans_i18n_ownership_transfers" addon_id="Warext/Clans" global_cache="0" version_id="1001010" version_string="1.0.1"><![CDATA[Klan sahiplik devirleri]]></phrase>
 </language>
