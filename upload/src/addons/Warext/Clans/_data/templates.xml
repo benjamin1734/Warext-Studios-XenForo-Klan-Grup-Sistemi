@@ -640,9 +640,15 @@
 &lt;h3 class="block-header"&gt;{{ phrase('wx_clans_i18n_detailed_management') }}&lt;/h3&gt;
 &lt;div class="block-body"&gt;
     &lt;xf:inforow label="{{ phrase('content_type.wx_clan') }} ID"&gt;{$clan.clan_id}&lt;/xf:inforow&gt;
-    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_owner') }}"&gt;{$clan.Owner.username}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_owner') }}"&gt;&lt;xf:if is="$clan.Owner"&gt;{$clan.Owner.username}&lt;xf:else /&gt;#{$clan.owner_user_id}&lt;/xf:if&gt;&lt;/xf:inforow&gt;
     &lt;xf:inforow label="{{ phrase('wx_clans_i18n_members') }}"&gt;{$stats.active_members} · {$stats.managers} {{ phrase('wx_clans_i18n_managers') }}&lt;/xf:inforow&gt;
-    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_pending_review') }}"&gt;{$stats.pending_join} join · {$stats.pending_identity} identity · {$stats.pending_lifecycle} lifecycle · {$stats.pending_ownership} ownership · {$stats.pending_invitations} invitations&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_roles') }}"&gt;{$stats.roles}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_announcements') }}"&gt;{$stats.announcements}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_pending_join_applications') }}"&gt;{$stats.pending_join}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_clan_identity_changes') }}"&gt;{$stats.pending_identity}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_clan_lifecycle_requests') }}"&gt;{$stats.pending_lifecycle}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_ownership_transfers') }}"&gt;{$stats.pending_ownership}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_pending_invitations') }}"&gt;{$stats.pending_invitations}&lt;/xf:inforow&gt;
     &lt;xf:inforow label="{{ phrase('wx_clans_i18n_created') }}"&gt;&lt;xf:date time="$clan.created_date" /&gt;&lt;/xf:inforow&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -704,7 +710,7 @@
 &lt;div class="block-body"&gt;
 &lt;xf:foreach loop="$members" value="$member"&gt;
     &lt;div class="block-row block-row--separated"&gt;
-        &lt;strong&gt;{$member.User.username}&lt;/strong&gt;
+        &lt;strong&gt;&lt;xf:if is="$member.User"&gt;{$member.User.username}&lt;xf:else /&gt;#{$member.user_id}&lt;/xf:if&gt;&lt;/strong&gt;
         &lt;xf:if is="$member.is_owner"&gt; · {{ phrase('wx_clans_i18n_owner') }}
         &lt;xf:elseif is="$member.is_manager" /&gt; · {{ phrase('wx_clans_i18n_manager') }}
         &lt;xf:elseif is="$member.Role" /&gt; · {$member.Role.title}
@@ -737,7 +743,7 @@
 &lt;div class="block-body"&gt;
 &lt;xf:foreach loop="$applications" value="$application"&gt;
     &lt;div class="block-row block-row--separated"&gt;
-        &lt;strong&gt;{$application.application_type}&lt;/strong&gt; · {$application.status} · {$application.User.username}
+        &lt;strong&gt;{$application.application_type}&lt;/strong&gt; · {$application.status} · &lt;xf:if is="$application.User"&gt;{$application.User.username}&lt;xf:else /&gt;#{$application.user_id}&lt;/xf:if&gt;
         &lt;div class="u-muted"&gt;&lt;xf:date time="$application.create_date" /&gt;&lt;xf:if is="$application.decision_reason"&gt; · {$application.decision_reason}&lt;/xf:if&gt;&lt;/div&gt;
     &lt;/div&gt;
 &lt;xf:else /&gt;
