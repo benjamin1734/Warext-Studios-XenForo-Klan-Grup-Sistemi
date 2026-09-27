@@ -118,7 +118,7 @@ class Decision extends AbstractService
             ]);
             $member->save();
 
-            $this->application->bulkSet(['status'=>'approved','decision_date'=>\XF::$time,'decision_user_id'=>$actor->user_id,'created_clan_id'=>$clan->clan_id,'decision_reason'=>'']);
+            $this->application->bulkSet(['application_type'=>'create','status'=>'approved','decision_date'=>\XF::$time,'decision_user_id'=>$actor->user_id,'created_clan_id'=>$clan->clan_id,'decision_reason'=>'']);
             $this->application->save();
 
             $this->service('Warext\\Clans:Audit\\Logger')->log($clan->clan_id, $actor->user_id, 'clan_created_from_application', ['application_id'=>$this->application->application_id], 'clan_application', $this->application->application_id);
