@@ -159,7 +159,7 @@ jobs:
               'wx_clans_admin_lifecycle_requests', 'report_content_wx_clan',
               'report_content_wx_clan_announcement', 'wx_clans_user_badges',
               'alert_wx_clan_lifecycle_approved', 'alert_wx_clan_lifecycle_rejected',
-              'wx_clans_admin_force_owner', 'wx_clans_admin_maintenance', 'wx_clans_admin_manage', 'wx_clans_admin_delete',
+              'wx_clans_admin_force_owner', 'wx_clans_admin_maintenance', 'wx_clans_admin_manage', 'wx_clans_admin_delete', 'wx_clans_admin_member_remove',
               'alert_wx_clan_moderation_status_changed', 'alert_wx_clan_ownership_forced'
           }
           if not required_templates.issubset(template_titles):
