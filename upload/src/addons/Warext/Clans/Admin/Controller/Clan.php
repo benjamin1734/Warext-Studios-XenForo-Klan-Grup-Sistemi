@@ -61,15 +61,18 @@ class Clan extends AbstractController
     {
         $clan = $this->assertClanExists($params->clan_id);
 
-        $members = $this->finder('Warext\\Clans:ClanMember')
+        $memberPage = $this->filterPage();
+        $memberPerPage = 50;
+        $memberFinder = $this->finder('Warext\\Clans:ClanMember')
             ->where('clan_id', $clan->clan_id)
             ->where('member_state', 'active')
             ->with(['User', 'Role'])
             ->order('is_owner', 'DESC')
             ->order('is_manager', 'DESC')
-            ->order('join_date', 'ASC')
-            ->limit(100)
-            ->fetch();
+            ->order('join_date', 'ASC');
+        $memberTotal = $memberFinder->total();
+        $memberFinder->limitByPage($memberPage, $memberPerPage);
+        $members = $memberFinder->fetch();
 
         $applications = $this->finder('Warext\\Clans:ClanApplication')
             ->whereOr(['clan_id', $clan->clan_id], ['created_clan_id', $clan->clan_id])
@@ -103,7 +106,10 @@ class Clan extends AbstractController
             'members' => $members,
             'applications' => $applications,
             'auditLogs' => $auditLogs,
-            'stats' => $stats
+            'stats' => $stats,
+            'memberPage' => $memberPage,
+            'memberPerPage' => $memberPerPage,
+            'memberTotal' => $memberTotal
         ]);
     }
 
@@ -143,6 +149,10 @@ class Clan extends AbstractController
         $clan = $this->assertClanExists($params->clan_id);
         $member = $this->assertClanMemberExists($clan->clan_id, $this->filter('user_id', 'uint'));
         $mode = $this->filter('mode', 'str');
+        if (!in_array($mode, ['promote', 'demote'], true))
+        {
+            return $this->error('Invalid clan manager action.');
+        }
         $this->service('Warext\\Clans:Clan\\MemberManager', $clan)
             ->setManager($member, $mode === 'promote', \XF::visitor()->user_id);
 
