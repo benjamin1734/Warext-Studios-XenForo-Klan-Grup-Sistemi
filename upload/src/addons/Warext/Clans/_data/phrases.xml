@@ -381,4 +381,6 @@
   <phrase title="wx_clans_i18n_permanently_delete" version_id="1001030" version_string="1.0.3"><![CDATA[Permanently delete]]></phrase>
   <phrase title="mod_log.wx_clan_admin_edit" version_id="1001030" version_string="1.0.3"><![CDATA[Edited clan through Admin CP]]></phrase>
   <phrase title="mod_log.wx_clan_delete" version_id="1001030" version_string="1.0.3"><![CDATA[Permanently deleted clan]]></phrase>
+  <phrase title="wx_clans_i18n_remove_member_warning" version_id="1001030" version_string="1.0.3"><![CDATA[This member will be removed from the clan. The clan owner cannot be removed through this action.]]></phrase>
+  <phrase title="wx_clans_i18n_removal_reason" version_id="1001030" version_string="1.0.3"><![CDATA[Removal reason]]></phrase>
 </phrases>
