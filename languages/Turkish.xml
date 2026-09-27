@@ -348,4 +348,5 @@
   <phrase title="mod_log.wx_clan_delete" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Klanı kalıcı olarak sildi]]></phrase>
   <phrase title="wx_clans_i18n_remove_member_warning" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Bu üye klandan çıkarılacaktır. Klan sahibi bu işlem üzerinden çıkarılamaz.]]></phrase>
   <phrase title="wx_clans_i18n_removal_reason" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Çıkarma nedeni]]></phrase>
+  <phrase title="wx_clans_i18n_roles" addon_id="Warext/Clans" global_cache="0" version_id="1001030" version_string="1.0.3"><![CDATA[Roller]]></phrase>
 </language>
