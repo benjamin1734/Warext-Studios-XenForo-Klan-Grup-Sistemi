@@ -67,8 +67,8 @@ jobs:
           data = root / '_data'
 
           addon = json.loads((root / 'addon.json').read_text(encoding='utf-8'))
-          if addon.get('version_id') != 1001020 or addon.get('version_string') != '1.0.2':
-              raise SystemExit('Expected version is 1.0.2 / 1001020')
+          if addon.get('version_id') != 1001030 or addon.get('version_string') != '1.0.3':
+              raise SystemExit('Expected version is 1.0.3 / 1001030')
           if addon.get('require', {}).get('XF', [0])[0] != 2030000:
               raise SystemExit('XenForo 2.3.0+ requirement is missing')
           if addon.get('require', {}).get('php', [''])[0] != '8.1.0':
@@ -117,10 +117,10 @@ jobs:
               raise SystemExit('wxClansManage admin permission is missing')
 
           nav = {e.attrib.get('navigation_id'): e for e in trees['admin_navigation.xml'].getroot().findall('admin_navigation_entry')}
-          required_nav = {'wxClans', 'wxClansApplications', 'wxClansIdentity', 'wxClansOwnership', 'wxClansLifecycle', 'wxClansMaintenance', 'wxClansSettings'}
+          required_nav = {'wxClans', 'wxClansManagement', 'wxClansApplications', 'wxClansIdentity', 'wxClansOwnership', 'wxClansLifecycle', 'wxClansMaintenance', 'wxClansSettings'}
           if not required_nav.issubset(nav):
               raise SystemExit('Admin navigation entries are missing: ' + ', '.join(sorted(required_nav - set(nav))))
-          for key in ('wxClans', 'wxClansApplications', 'wxClansIdentity', 'wxClansOwnership', 'wxClansLifecycle', 'wxClansMaintenance'):
+          for key in ('wxClans', 'wxClansManagement', 'wxClansApplications', 'wxClansIdentity', 'wxClansOwnership', 'wxClansLifecycle', 'wxClansMaintenance'):
               if nav[key].attrib.get('admin_permission_id') != 'wxClansManage':
                   raise SystemExit(f'{key} is not protected by wxClansManage')
           if nav['wxClansSettings'].attrib.get('admin_permission_id') != 'option':
@@ -159,7 +159,7 @@ jobs:
               'wx_clans_admin_lifecycle_requests', 'report_content_wx_clan',
               'report_content_wx_clan_announcement', 'wx_clans_user_badges',
               'alert_wx_clan_lifecycle_approved', 'alert_wx_clan_lifecycle_rejected',
-              'wx_clans_admin_force_owner', 'wx_clans_admin_maintenance',
+              'wx_clans_admin_force_owner', 'wx_clans_admin_maintenance', 'wx_clans_admin_manage', 'wx_clans_admin_delete',
               'alert_wx_clan_moderation_status_changed', 'alert_wx_clan_ownership_forced'
           }
           if not required_templates.issubset(template_titles):
@@ -194,6 +194,7 @@ jobs:
               root / 'Service/Maintenance.php',
               root / 'Service/Moderation/StatusManager.php',
               root / 'Service/Ownership/AdminTransfer.php',
+              root / 'Service/Admin/ClanManager.php',
               root / 'Cron/Maintenance.php',
               root / 'Report/Clan.php',
               root / 'Report/Announcement.php',
@@ -233,9 +234,14 @@ jobs:
               raise SystemExit('Public clan moderation status must use StatusManager')
 
           admin_controller = (root / 'Admin/Controller/Clan.php').read_text(encoding='utf-8')
-          for needle in ('actionForceOwner', r'Ownership\\AdminTransfer', 'actionMaintenance', r'Warext\\Clans:Maintenance'):
+          for needle in ('actionForceOwner', r'Ownership\\AdminTransfer', 'actionMaintenance', r'Warext\\Clans:Maintenance', 'actionManage', 'actionSave', 'actionDelete', 'actionMemberManager', 'actionMemberRemove', r'Admin\\ClanManager'):
               if needle not in admin_controller:
-                  raise SystemExit('0.8 Admin CP clan management feature is missing: ' + needle)
+                  raise SystemExit('Admin CP clan management feature is missing: ' + needle)
+
+          admin_manager = (root / 'Service/Admin/ClanManager.php').read_text(encoding='utf-8')
+          for needle in ('xf_wx_clan_member', 'xf_wx_clan_role', 'xf_wx_clan_application', 'xf_wx_clan_announcement', 'forum_admin_details_updated'):
+              if needle not in admin_manager:
+                  raise SystemExit('Admin CP detailed clan manager is incomplete: ' + needle)
 
           alert_handler = (root / 'Alert/Clan.php').read_text(encoding='utf-8')
           opt_match = re.search(r'getOptOutActions\(\).*?return\s*\[(.*?)\];', alert_handler, flags=re.S)
