@@ -361,4 +361,24 @@
   <phrase title="wx_clans_i18n_heart_icon" version_id="1001010" version_string="1.0.1"><![CDATA[Heart]]></phrase>
   <phrase title="wx_clans_i18n_circle_icon" version_id="1001010" version_string="1.0.1"><![CDATA[Circle]]></phrase>
   <phrase title="wx_clans_i18n_ownership_transfers" version_id="1001010" version_string="1.0.1"><![CDATA[Clan ownership transfers]]></phrase>
+  <phrase title="admin_navigation.wxClansManagement" version_id="1001030" version_string="1.0.3"><![CDATA[Clan management]]></phrase>
+  <phrase title="wx_clans_i18n_open_public_page" version_id="1001030" version_string="1.0.3"><![CDATA[Open public page]]></phrase>
+  <phrase title="wx_clans_i18n_detailed_management" version_id="1001030" version_string="1.0.3"><![CDATA[Detailed management]]></phrase>
+  <phrase title="wx_clans_i18n_managers" version_id="1001030" version_string="1.0.3"><![CDATA[Managers]]></phrase>
+  <phrase title="wx_clans_i18n_created" version_id="1001030" version_string="1.0.3"><![CDATA[Created]]></phrase>
+  <phrase title="wx_clans_i18n_clan_details" version_id="1001030" version_string="1.0.3"><![CDATA[Clan details]]></phrase>
+  <phrase title="wx_clans_i18n_demote_manager" version_id="1001030" version_string="1.0.3"><![CDATA[Demote manager]]></phrase>
+  <phrase title="wx_clans_i18n_promote_manager" version_id="1001030" version_string="1.0.3"><![CDATA[Promote to manager]]></phrase>
+  <phrase title="wx_clans_i18n_remove_member" version_id="1001030" version_string="1.0.3"><![CDATA[Remove member]]></phrase>
+  <phrase title="wx_clans_i18n_recent_requests" version_id="1001030" version_string="1.0.3"><![CDATA[Recent requests]]></phrase>
+  <phrase title="wx_clans_i18n_no_requests_found" version_id="1001030" version_string="1.0.3"><![CDATA[No requests found.]]></phrase>
+  <phrase title="wx_clans_i18n_recent_audit_log" version_id="1001030" version_string="1.0.3"><![CDATA[Recent audit log]]></phrase>
+  <phrase title="wx_clans_i18n_no_audit_entries" version_id="1001030" version_string="1.0.3"><![CDATA[No audit entries found.]]></phrase>
+  <phrase title="wx_clans_i18n_danger_zone" version_id="1001030" version_string="1.0.3"><![CDATA[Danger zone]]></phrase>
+  <phrase title="wx_clans_i18n_delete_clan_warning" version_id="1001030" version_string="1.0.3"><![CDATA[Permanently deleting a clan removes its memberships, roles, applications, invitations, announcements, blacklist and clan audit history. This cannot be undone.]]></phrase>
+  <phrase title="wx_clans_i18n_delete_clan" version_id="1001030" version_string="1.0.3"><![CDATA[Delete clan]]></phrase>
+  <phrase title="wx_clans_i18n_delete_reason" version_id="1001030" version_string="1.0.3"><![CDATA[Deletion reason]]></phrase>
+  <phrase title="wx_clans_i18n_permanently_delete" version_id="1001030" version_string="1.0.3"><![CDATA[Permanently delete]]></phrase>
+  <phrase title="mod_log.wx_clan_admin_edit" version_id="1001030" version_string="1.0.3"><![CDATA[Edited clan through Admin CP]]></phrase>
+  <phrase title="mod_log.wx_clan_delete" version_id="1001030" version_string="1.0.3"><![CDATA[Permanently deleted clan]]></phrase>
 </phrases>
