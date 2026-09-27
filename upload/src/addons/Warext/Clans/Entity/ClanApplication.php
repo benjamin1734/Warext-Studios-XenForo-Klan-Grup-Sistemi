@@ -7,29 +7,39 @@ use XF\Mvc\Entity\Structure;
 
 class ClanApplication extends Entity
 {
+    public function normalizedStatus(): string
+    {
+        return strtolower(trim((string)$this->status));
+    }
+
+    public function normalizedApplicationType(): string
+    {
+        return strtolower(trim((string)$this->application_type));
+    }
+
     public function isPending(): bool
     {
-        return $this->status === 'pending';
+        return $this->normalizedStatus() === 'pending';
     }
 
     public function isJoinApplication(): bool
     {
-        return $this->application_type === 'join';
+        return $this->normalizedApplicationType() === 'join';
     }
 
     public function isCreateApplication(): bool
     {
-        return $this->application_type === 'create';
+        return $this->normalizedApplicationType() === 'create';
     }
 
     public function isChangeRequest(): bool
     {
-        return $this->application_type === 'change';
+        return $this->normalizedApplicationType() === 'change';
     }
 
     public function isLifecycleRequest(): bool
     {
-        return in_array($this->application_type, ['close', 'reopen'], true);
+        return in_array($this->normalizedApplicationType(), ['close', 'reopen'], true);
     }
 
     public static function getStructure(Structure $structure)
