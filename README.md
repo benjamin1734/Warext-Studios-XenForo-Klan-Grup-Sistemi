@@ -652,3 +652,9 @@ Sorular, hata bildirimleri, kurulum desteği ve diğer Warext Studios XenForo ek
 ## Language support / Dil desteği
 
 1.0.0 Stable includes native Turkish/English XenForo language packs under `languages/` and phrase-backed UI. See `LANGUAGE.md`.
+
+
+## 1.0.1 language completion
+
+- Remaining clan alert fragments, ownership labels and icon selector labels now use XenForo phrases.
+- Turkish and English XML language packs are attached to GitHub releases.
