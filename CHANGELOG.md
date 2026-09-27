@@ -1,3 +1,13 @@
+## 1.0.1 - 2026-09-27
+
+### English
+- Completed phrase coverage for remaining clan UI fragments and icon labels.
+- GitHub releases now include standalone English and Turkish XML language packs.
+
+### Türkçe
+- Kalan klan arayüz parçaları ve ikon etiketleri phrase sistemine taşındı.
+- GitHub release artık bağımsız Türkçe ve İngilizce XML dil paketlerini de içeriyor.
+
 # Changelog / Değişiklik Günlüğü
 
 ## 1.0.0 - 2026-09-27
