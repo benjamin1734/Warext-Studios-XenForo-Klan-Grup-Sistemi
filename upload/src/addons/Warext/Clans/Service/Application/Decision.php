@@ -17,9 +17,25 @@ class Decision extends AbstractService
 
     public function approve(\XF\Entity\User $actor): \Warext\Clans\Entity\Clan
     {
-        if ($this->application->status !== 'pending' || $this->application->application_type !== 'create')
+        if (!$this->application->isCreateApplication())
         {
-            throw new \LogicException('Application is not pending.');
+            throw new \XF\PrintableException('This is not a clan creation application.');
+        }
+
+        $status = $this->application->normalizedStatus();
+        if ($status === 'approved' && $this->application->created_clan_id)
+        {
+            $existingClan = $this->application->CreatedClan
+                ?: $this->em()->find('Warext\\Clans:Clan', $this->application->created_clan_id);
+            if ($existingClan)
+            {
+                return $existingClan;
+            }
+        }
+
+        if ($status !== 'pending')
+        {
+            throw new \XF\PrintableException('This clan application has already been processed.');
         }
         $clanRepo = $this->repository('Warext\\Clans:Clan');
         if ($clanRepo->isTagReserved($this->application->tag) || $clanRepo->isTitleReserved($this->application->title))
@@ -135,11 +151,22 @@ class Decision extends AbstractService
 
     protected function decideStatus(string $status, \XF\Entity\User $actor, string $reason): void
     {
-        if ($this->application->status !== 'pending')
+        if (!$this->application->isCreateApplication())
         {
-            throw new \LogicException('Application is not pending.');
+            throw new \XF\PrintableException('This is not a clan creation application.');
         }
-        $this->application->bulkSet(['status'=>$status,'decision_date'=>\XF::$time,'decision_user_id'=>$actor->user_id,'decision_reason'=>trim($reason)]);
+
+        $currentStatus = $this->application->normalizedStatus();
+        if ($currentStatus === $status)
+        {
+            return;
+        }
+        if ($currentStatus !== 'pending')
+        {
+            throw new \XF\PrintableException('This clan application has already been processed.');
+        }
+
+        $this->application->bulkSet(['application_type'=>'create','status'=>$status,'decision_date'=>\XF::$time,'decision_user_id'=>$actor->user_id,'decision_reason'=>trim($reason)]);
         $this->application->save();
     }
 }
