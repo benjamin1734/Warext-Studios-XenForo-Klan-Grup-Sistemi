@@ -656,19 +656,19 @@
     &lt;xf:textarearow name="rules" value="{$clan.rules}" label="{{ phrase('wx_clans_i18n_clan_rules') }}" autosize="true" /&gt;
     &lt;xf:textboxrow name="category" value="{$clan.category}" label="{{ phrase('wx_clans_i18n_category') }}" maxlength="50" /&gt;
     &lt;xf:selectrow name="join_mode" value="{$clan.join_mode}" label="{{ phrase('wx_clans_i18n_join_mode') }}"&gt;
-        &lt;xf:option value="open"&gt;Open&lt;/xf:option&gt;
-        &lt;xf:option value="application"&gt;Application&lt;/xf:option&gt;
-        &lt;xf:option value="invite"&gt;Invite only&lt;/xf:option&gt;
-        &lt;xf:option value="closed"&gt;Closed&lt;/xf:option&gt;
+        &lt;xf:option value="open"&gt;{{ phrase('wx_clans_i18n_open') }}&lt;/xf:option&gt;
+        &lt;xf:option value="application"&gt;{{ phrase('wx_clans_i18n_application') }}&lt;/xf:option&gt;
+        &lt;xf:option value="invite"&gt;{{ phrase('wx_clans_i18n_invite_only') }}&lt;/xf:option&gt;
+        &lt;xf:option value="closed"&gt;{{ phrase('wx_clans_i18n_closed') }}&lt;/xf:option&gt;
     &lt;/xf:selectrow&gt;
     &lt;xf:selectrow name="member_list_visibility" value="{$clan.member_list_visibility}" label="{{ phrase('wx_clans_i18n_member_list_visibility') }}"&gt;
-        &lt;xf:option value="public"&gt;Public&lt;/xf:option&gt;
-        &lt;xf:option value="members"&gt;Members&lt;/xf:option&gt;
-        &lt;xf:option value="staff"&gt;Owner / forum staff&lt;/xf:option&gt;
+        &lt;xf:option value="public"&gt;{{ phrase('wx_clans_i18n_public') }}&lt;/xf:option&gt;
+        &lt;xf:option value="members"&gt;{{ phrase('wx_clans_i18n_members') }}&lt;/xf:option&gt;
+        &lt;xf:option value="staff"&gt;{{ phrase('wx_clans_i18n_owner_forum_staff_only') }}&lt;/xf:option&gt;
     &lt;/xf:selectrow&gt;
     &lt;xf:selectrow name="announcement_visibility" value="{$clan.announcement_visibility}" label="{{ phrase('wx_clans_i18n_announcement_visibility') }}"&gt;
-        &lt;xf:option value="public"&gt;Public&lt;/xf:option&gt;
-        &lt;xf:option value="members"&gt;Members&lt;/xf:option&gt;
+        &lt;xf:option value="public"&gt;{{ phrase('wx_clans_i18n_public') }}&lt;/xf:option&gt;
+        &lt;xf:option value="members"&gt;{{ phrase('wx_clans_i18n_members') }}&lt;/xf:option&gt;
     &lt;/xf:selectrow&gt;
     &lt;xf:textboxrow name="manager_banner" value="{$clan.manager_banner}" label="{{ phrase('wx_clans_i18n_manager_banner') }}" maxlength="100" /&gt;
     &lt;xf:textboxrow name="tag_icon" value="{$clan.tag_icon}" label="{{ phrase('wx_clans_i18n_tag_icon') }}" explain="fa-users, fa-shield, fa-crown, fa-star, fa-bolt, fa-fire, fa-gamepad, fa-trophy, fa-flag, fa-gem, fa-heart, fa-circle" /&gt;
@@ -741,7 +741,7 @@
 &lt;div class="block-body"&gt;
 &lt;xf:foreach loop="$auditLogs" value="$log"&gt;
     &lt;div class="block-row block-row--separated"&gt;
-        &lt;strong&gt;{$log.action}&lt;/strong&gt; · {{ $log.User ? $log.User.username : 'System' }}
+        &lt;strong&gt;{$log.action}&lt;/strong&gt; · {{ $log.User ? $log.User.username : phrase('wx_clans_i18n_system') }}
         &lt;div class="u-muted"&gt;&lt;xf:date time="$log.log_date" /&gt;&lt;/div&gt;
     &lt;/div&gt;
 &lt;xf:else /&gt;
