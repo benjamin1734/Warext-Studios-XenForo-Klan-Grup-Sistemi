@@ -6,12 +6,6 @@ Warext Studios XenForo Clan & Group System is an open-source, general-purpose cl
 
 The system is intentionally independent from XenForo forum moderation. Clan owners and clan managers can manage only their own clan responsibilities; they do not gain forum moderation powers. Forum staff remains the authority for clan approval, official clan identity changes, ownership transfers requiring staff review, lifecycle requests and reported clan content.
 
-## Current version
-
-**1.0.3 Stable**
-
-1.0.3 adds a dedicated Admin CP clan-management area with per-clan editing, moderation, member controls, Owner recovery, audit/request visibility and confirmed permanent deletion. Releases use one normal XenForo installation/upgrade ZIP without a separate UPDATE ZIP.
-
 ## Main features
 
 ### Forum-approved clan creation
@@ -302,10 +296,6 @@ Use the ZIP attached to the latest GitHub Release. Releases provide one normal X
 
 For manual installation, upload the repository's `upload/` directory into the XenForo installation root and install the add-on from Admin CP.
 
-## Upgrade
-
-Replace the add-on files with the newer release package and run XenForo's normal add-on upgrade process from Admin CP. Database and permission changes are handled by the add-on setup/upgrade routines; no manual SQL reset is required.
-
 ## Source-code rules
 
 - XenForo core files are never modified.
@@ -317,7 +307,6 @@ Replace the add-on files with the newer release package and run XenForo's normal
 
 ## Project documentation
 
-- `CHANGELOG.md` — version history
 - `SECURITY.md` — security policy
 - `CONTRIBUTING.md` — contribution rules
 - `docs/ARCHITECTURE.md` — technical architecture and authority boundaries
@@ -343,12 +332,6 @@ For questions, bug reports, installation support and other Warext Studios XenFor
 Warext Studios XenForo Klan & Grup Sistemi; XenForo 2.3.x üzerinde genel amaçlı klan, ekip, guild ve topluluk yönetimi sağlayan açık kaynak bir eklentidir.
 
 Sistemin temel güvenlik kuralı şudur: **klan yöneticiliği forum moderatörlüğü değildir.** Klan sahibi ve klan yöneticileri yalnızca kendi klanlarına ait üyelik, başvuru, davet, rol ve benzeri işlemleri yönetebilir. Forum genelindeki konu/mesaj silme, kullanıcı uyarma, yasaklama veya moderatör raporlarına erişim gibi yetkiler kazanmazlar.
-
-## Güncel sürüm
-
-**1.0.3 Stable**
-
-1.0.3 ile Admin CP'ye ayrı Klan Yönetimi alanı eklendi. Yetkililer klan detaylarını ve görünüm ayarlarını düzenleyebilir, durum moderasyonu yapabilir, Owner değiştirebilir, üyeleri Manager yapabilir/çıkarabilir, talepleri ve denetim geçmişini görebilir ve onay ekranı üzerinden klanı kalıcı olarak silebilir. Release yapısı ayrı UPDATE ZIP olmadan tek normal XenForo kurulum/güncelleme ZIP'i olarak devam eder.
 
 ## Temel özellikler
 
@@ -614,10 +597,6 @@ En son GitHub Release altındaki ZIP dosyasını kullanın. Release tek normal X
 
 Manuel kurulumda repodaki `upload/` klasörünün içeriğini XenForo kurulum köküne yükleyip ACP üzerinden eklentiyi kurabilirsiniz.
 
-## Güncelleme
-
-Yeni sürüm dosyalarını mevcut dosyaların üzerine yükleyin ve XenForo ACP üzerinden normal add-on upgrade işlemini çalıştırın. Veritabanı ve izin değişiklikleri Setup/upgrade adımlarıyla uygulanır; veritabanını sıfırlamak veya manuel SQL çalıştırmak gerekmez.
-
 ## Kaynak kod kuralları
 
 - XenForo çekirdek dosyaları değiştirilmez.
@@ -629,7 +608,6 @@ Yeni sürüm dosyalarını mevcut dosyaların üzerine yükleyin ve XenForo ACP 
 
 ## Proje belgeleri
 
-- `CHANGELOG.md` — sürüm değişiklikleri
 - `SECURITY.md` — güvenlik politikası
 - `CONTRIBUTING.md` — katkı kuralları
 - `docs/ARCHITECTURE.md` — teknik mimari ve yetki sınırları
@@ -648,13 +626,6 @@ Sorular, hata bildirimleri, kurulum desteği ve diğer Warext Studios XenForo ek
 
 **Discord:** https://discord.gg/tgsV5XMcFS
 
-
 ## Language support / Dil desteği
 
 1.0.0 Stable includes native Turkish/English XenForo language packs under `languages/` and phrase-backed UI. See `LANGUAGE.md`.
-
-
-## 1.0.1 language completion
-
-- Remaining clan alert fragments, ownership labels and icon selector labels now use XenForo phrases.
-- Turkish and English XML language packs are attached to GitHub releases.
