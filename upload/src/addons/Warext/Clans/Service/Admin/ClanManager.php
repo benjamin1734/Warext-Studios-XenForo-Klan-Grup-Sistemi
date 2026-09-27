@@ -111,10 +111,9 @@ class ClanManager extends AbstractService
             'cover_url' => (string)$this->clan->cover_url
         ];
 
-        $this->clan->bulkSet([
+        $newValues = [
             'title' => $title,
             'tag' => $tag,
-            'slug' => \XF::app()->router()->prepareStringForUrl($title),
             'description' => $description,
             'rules' => $rules,
             'category' => $category,
@@ -128,26 +127,55 @@ class ClanManager extends AbstractService
             'manager_banner_color' => $managerBannerColor,
             'logo_url' => $logoUrl,
             'cover_url' => $coverUrl
-        ]);
-        $this->clan->save();
+        ];
 
         $changes = [];
         foreach ($before as $key => $oldValue)
         {
-            $newValue = (string)$this->clan->$key;
+            $newValue = (string)$newValues[$key];
             if ($oldValue !== $newValue)
             {
-                $changes[$key] = ['old' => $oldValue, 'new' => $newValue];
+                $changes[] = $key;
             }
         }
 
-        if ($changes)
+        if (!$changes)
         {
+            return;
+        }
+
+        $db = $this->db();
+        $db->beginTransaction();
+        try
+        {
+            $this->clan->bulkSet($newValues + [
+                'slug' => \XF::app()->router()->prepareStringForUrl($title)
+            ]);
+            $this->clan->save();
+
+            $identityFields = ['title', 'tag', 'manager_banner', 'tag_icon', 'manager_banner_icon', 'tag_color', 'manager_banner_color'];
+            if (array_intersect($changes, $identityFields))
+            {
+                $db->query(
+                    "UPDATE xf_wx_clan_application
+                     SET status = 'cancelled', decision_date = ?, decision_user_id = ?, decision_reason = ?
+                     WHERE clan_id = ?
+                       AND application_type = 'change'
+                       AND status = 'pending'",
+                    [
+                        \XF::$time,
+                        $actor->user_id,
+                        'Cancelled because forum management directly changed clan identity.',
+                        $this->clan->clan_id
+                    ]
+                );
+            }
+
             $this->service('Warext\\Clans:Audit\\Logger')->log(
                 $this->clan->clan_id,
                 $actor->user_id,
                 'forum_admin_details_updated',
-                ['changes' => $changes],
+                ['fields' => $changes],
                 'clan',
                 $this->clan->clan_id
             );
@@ -158,11 +186,18 @@ class ClanManager extends AbstractService
                     'wx_clan',
                     $this->clan,
                     'admin_edit',
-                    ['changes' => $changes],
+                    ['fields' => implode(', ', $changes)],
                     false,
                     $actor
                 );
             }
+
+            $db->commit();
+        }
+        catch (\Throwable $e)
+        {
+            $db->rollback();
+            throw $e;
         }
     }
 
