@@ -151,7 +151,17 @@ class Manager extends AbstractService
 
     public function decideApplication(\Warext\Clans\Entity\ClanApplication $application, bool $approve, \XF\Entity\User $actor, string $reason = ''): void
     {
-        if ($application->application_type !== 'join' || $application->clan_id !== $this->clan->clan_id || $application->status !== 'pending')
+        if (!$application->isJoinApplication() || $application->clan_id !== $this->clan->clan_id)
+        {
+            throw new \XF\PrintableException('This join application is invalid.');
+        }
+
+        $status = $application->normalizedStatus();
+        if (($approve && $status === 'approved') || (!$approve && $status === 'rejected'))
+        {
+            return;
+        }
+        if (!$application->isPending())
         {
             throw new \XF\PrintableException('This join application is no longer pending.');
         }
