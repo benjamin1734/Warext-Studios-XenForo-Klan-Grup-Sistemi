@@ -91,7 +91,7 @@ jobs:
           fi
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release edit "$TAG" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md "${RELEASE_FLAGS[@]}"
-            gh release upload "$TAG" "dist/$FILE" --clobber
+            gh release upload "$TAG" "dist/$FILE" languages/Turkish.xml languages/English.xml --clobber
           else
-            gh release create "$TAG" "dist/$FILE" --target "$GITHUB_SHA" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md "${RELEASE_FLAGS[@]}"
+            gh release create "$TAG" "dist/$FILE" languages/Turkish.xml languages/English.xml --target "$GITHUB_SHA" --title "Warext Studios XenForo Klan & Grup Sistemi $VERSION" --notes-file /tmp/release-notes.md "${RELEASE_FLAGS[@]}"
           fi
