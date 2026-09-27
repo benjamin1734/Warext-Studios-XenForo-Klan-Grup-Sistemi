@@ -716,11 +716,7 @@
                 &lt;xf:hiddenval name="mode" value="{{ $member.is_manager ? 'demote' : 'promote' }}" /&gt;
                 &lt;xf:button type="submit"&gt;{{ $member.is_manager ? phrase('wx_clans_i18n_demote_manager') : phrase('wx_clans_i18n_promote_manager') }}&lt;/xf:button&gt;
             &lt;/xf:form&gt;
-            &lt;xf:form action="{{ link('warext-clans/clans/member-remove', $clan) }}" class="u-inlineBlock" ajax="true"&gt;
-                &lt;xf:hiddenval name="user_id" value="{$member.user_id}" /&gt;
-                &lt;xf:textbox name="reason" placeholder="{{ phrase('wx_clans_i18n_optional_moderation_reason') }}" /&gt;
-                &lt;xf:button type="submit"&gt;{{ phrase('wx_clans_i18n_remove_member') }}&lt;/xf:button&gt;
-            &lt;/xf:form&gt;
+            &lt;xf:button href="{{ link('warext-clans/clans/member-remove', $clan, {'user_id': $member.user_id}) }}" overlay="true"&gt;{{ phrase('wx_clans_i18n_remove_member') }}&lt;/xf:button&gt;
         &lt;/xf:if&gt;
         &lt;/div&gt;
     &lt;/div&gt;
@@ -769,6 +765,20 @@
     &lt;xf:textarearow name="reason" label="{{ phrase('wx_clans_i18n_delete_reason') }}" autosize="true" required="true" /&gt;
 &lt;/div&gt;
 &lt;xf:submitrow submit="{{ phrase('wx_clans_i18n_permanently_delete') }}" /&gt;
+&lt;/div&gt;
+&lt;/xf:form&gt;
+</template>
+
+
+  <template type="admin" title="wx_clans_admin_member_remove" version_id="1001030" version_string="1.0.3">&lt;xf:title&gt;{{ phrase('wx_clans_i18n_remove_member') }}: {$member.User.username}&lt;/xf:title&gt;
+&lt;div class="blockMessage blockMessage--important"&gt;{{ phrase('wx_clans_i18n_remove_member_warning') }}&lt;/div&gt;
+&lt;xf:form action="{{ link('warext-clans/clans/member-remove', $clan, {'user_id': $member.user_id}) }}" class="block" ajax="true"&gt;
+&lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+    &lt;xf:inforow label="{{ phrase('content_type.wx_clan') }}"&gt;[{$clan.tag}] {$clan.title}&lt;/xf:inforow&gt;
+    &lt;xf:inforow label="{{ phrase('wx_clans_i18n_member') }}"&gt;{$member.User.username}&lt;/xf:inforow&gt;
+    &lt;xf:textarearow name="reason" label="{{ phrase('wx_clans_i18n_removal_reason') }}" autosize="true" required="true" /&gt;
+&lt;/div&gt;
+&lt;xf:submitrow submit="{{ phrase('wx_clans_i18n_remove_member') }}" /&gt;
 &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
