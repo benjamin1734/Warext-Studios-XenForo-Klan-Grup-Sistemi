@@ -105,7 +105,15 @@ class Manager extends AbstractService
 
     public function approve(\Warext\Clans\Entity\ClanApplication $application, \XF\Entity\User $actor): void
     {
-        if ($application->application_type !== 'change' || $application->clan_id !== $this->clan->clan_id || $application->status !== 'pending')
+        if (!$application->isChangeRequest() || $application->clan_id !== $this->clan->clan_id)
+        {
+            throw new \XF\PrintableException('This identity change request is invalid.');
+        }
+        if ($application->normalizedStatus() === 'approved')
+        {
+            return;
+        }
+        if (!$application->isPending())
         {
             throw new \XF\PrintableException('This identity change request is no longer pending.');
         }
@@ -169,7 +177,15 @@ class Manager extends AbstractService
 
     public function reject(\Warext\Clans\Entity\ClanApplication $application, \XF\Entity\User $actor, string $reason = ''): void
     {
-        if ($application->application_type !== 'change' || $application->clan_id !== $this->clan->clan_id || $application->status !== 'pending')
+        if (!$application->isChangeRequest() || $application->clan_id !== $this->clan->clan_id)
+        {
+            throw new \XF\PrintableException('This identity change request is invalid.');
+        }
+        if ($application->normalizedStatus() === 'rejected')
+        {
+            return;
+        }
+        if (!$application->isPending())
         {
             throw new \XF\PrintableException('This identity change request is no longer pending.');
         }
