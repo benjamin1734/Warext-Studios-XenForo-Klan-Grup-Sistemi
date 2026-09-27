@@ -151,18 +151,30 @@ class Clan extends AbstractController
 
     public function actionMemberRemove(ParameterBag $params)
     {
-        $this->assertPostOnly();
         $clan = $this->assertClanExists($params->clan_id);
         $member = $this->assertClanMemberExists($clan->clan_id, $this->filter('user_id', 'uint'));
-        $reason = $this->filter('reason', 'str');
 
-        $this->service('Warext\\Clans:Clan\\MemberManager', $clan)
-            ->removeMember($member, \XF::visitor()->user_id, $reason);
+        if ($this->isPost())
+        {
+            $reason = trim($this->filter('reason', 'str'));
+            if ($reason === '')
+            {
+                return $this->error('A reason is required to remove a clan member from Admin CP.');
+            }
 
-        return $this->redirect(
-            $this->buildLink('warext-clans/clans/manage', $clan),
-            'Clan member removed.'
-        );
+            $this->service('Warext\\Clans:Clan\\MemberManager', $clan)
+                ->removeMember($member, \XF::visitor()->user_id, $reason);
+
+            return $this->redirect(
+                $this->buildLink('warext-clans/clans/manage', $clan),
+                'Clan member removed.'
+            );
+        }
+
+        return $this->view('Warext\\Clans:ClanMemberRemove', 'wx_clans_admin_member_remove', [
+            'clan' => $clan,
+            'member' => $member
+        ]);
     }
 
     public function actionDelete(ParameterBag $params)
