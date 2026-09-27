@@ -713,15 +713,24 @@
         &lt;xf:if is="!$member.is_owner"&gt;
             &lt;xf:form action="{{ link('warext-clans/clans/member-manager', $clan) }}" class="u-inlineBlock" ajax="true"&gt;
                 &lt;xf:hiddenval name="user_id" value="{$member.user_id}" /&gt;
-                &lt;xf:hiddenval name="mode" value="{{ $member.is_manager ? 'demote' : 'promote' }}" /&gt;
-                &lt;xf:button type="submit"&gt;{{ $member.is_manager ? phrase('wx_clans_i18n_demote_manager') : phrase('wx_clans_i18n_promote_manager') }}&lt;/xf:button&gt;
+                &lt;xf:if is="$member.is_manager"&gt;
+                    &lt;xf:hiddenval name="mode" value="demote" /&gt;
+                    &lt;xf:button type="submit"&gt;{{ phrase('wx_clans_i18n_demote_manager') }}&lt;/xf:button&gt;
+                &lt;xf:else /&gt;
+                    &lt;xf:hiddenval name="mode" value="promote" /&gt;
+                    &lt;xf:button type="submit"&gt;{{ phrase('wx_clans_i18n_promote_manager') }}&lt;/xf:button&gt;
+                &lt;/xf:if&gt;
             &lt;/xf:form&gt;
             &lt;xf:button href="{{ link('warext-clans/clans/member-remove', $clan, {'user_id': $member.user_id}) }}" overlay="true"&gt;{{ phrase('wx_clans_i18n_remove_member') }}&lt;/xf:button&gt;
         &lt;/xf:if&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/xf:foreach&gt;
-&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;xf:if is="$memberTotal &gt; $memberPerPage"&gt;
+    &lt;div class="block-footer"&gt;&lt;xf:pagenav page="$memberPage" perpage="$memberPerPage" total="$memberTotal" link="warext-clans/clans/manage" data="$clan" /&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+&lt;/div&gt;&lt;/div&gt;
 
 &lt;div class="block"&gt;&lt;div class="block-container"&gt;
 &lt;h3 class="block-header"&gt;{{ phrase('wx_clans_i18n_recent_requests') }}&lt;/h3&gt;
@@ -741,7 +750,7 @@
 &lt;div class="block-body"&gt;
 &lt;xf:foreach loop="$auditLogs" value="$log"&gt;
     &lt;div class="block-row block-row--separated"&gt;
-        &lt;strong&gt;{$log.action}&lt;/strong&gt; · {{ $log.User ? $log.User.username : phrase('wx_clans_i18n_system') }}
+        &lt;strong&gt;{$log.action}&lt;/strong&gt; · &lt;xf:if is="$log.User"&gt;{$log.User.username}&lt;xf:else /&gt;{{ phrase('wx_clans_i18n_system') }}&lt;/xf:if&gt;
         &lt;div class="u-muted"&gt;&lt;xf:date time="$log.log_date" /&gt;&lt;/div&gt;
     &lt;/div&gt;
 &lt;xf:else /&gt;
