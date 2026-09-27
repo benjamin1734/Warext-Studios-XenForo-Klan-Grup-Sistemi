@@ -1,3 +1,17 @@
+## 1.0.2 - 2026-09-27
+
+### English
+- Fixed Admin CP clan creation approval/rejection failures caused by strict raw application-state comparisons.
+- Added normalized application state/type handling so legacy casing or whitespace no longer blocks valid pending requests.
+- Made creation, join, identity, lifecycle and ownership decision paths safely idempotent for repeated submissions.
+- Added an in-place upgrade step that canonicalizes existing application and ownership-transfer states without resetting data.
+
+### Türkçe
+- ACP klan oluşturma onay/red işlemlerinde ham durum değerlerinin katı karşılaştırılması nedeniyle oluşan karar hatası düzeltildi.
+- Eski kayıtlardaki büyük/küçük harf veya boşluk farklılıklarının geçerli bekleyen talepleri engellememesi için başvuru durum/tür normalizasyonu eklendi.
+- Klan oluşturma, katılım, kimlik değişikliği, yaşam döngüsü ve sahiplik karar akışları tekrarlanan isteklerde güvenli/idempotent hale getirildi.
+- Mevcut başvuru ve sahiplik-devri durumlarını veri sıfırlamadan standartlaştıran yerinde upgrade adımı eklendi.
+
 ## 1.0.1 - 2026-09-27
 
 ### English
