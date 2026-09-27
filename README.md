@@ -8,9 +8,9 @@ The system is intentionally independent from XenForo forum moderation. Clan owne
 
 ## Current version
 
-**1.0.0 Stable**
+**1.0.2 Stable**
 
-1.0.0 Stable is the first production release. It includes the complete clan/group workflow, forum-reviewed official clan identity and ownership operations, clan-scoped roles and permissions, membership/application/invitation systems, moderation/audit integrations, privacy and capacity controls, HSV color and XenForo icon identity controls, and native Turkish/English language support. Releases use one normal XenForo installation/upgrade ZIP without a separate UPDATE ZIP.
+1.0.2 is a stability hotfix for the forum-review workflow. It normalizes legacy application/transfer state values, prevents valid pending clan requests from being rejected because of raw state formatting, and makes repeated approve/reject submissions safe without duplicating clan data. Releases use one normal XenForo installation/upgrade ZIP without a separate UPDATE ZIP.
 
 ## Main features
 
@@ -346,9 +346,9 @@ Sistemin temel güvenlik kuralı şudur: **klan yöneticiliği forum moderatörl
 
 ## Güncel sürüm
 
-**0.14.0 RC**
+**1.0.2 Stable**
 
-0.13.0 RC ile HEX/RGB değerlerini canlı senkronlayan dairesel HSV renk seçici, klan tagı ve Manager bannerı için ayrı XenForo/Font Awesome ikon seçimi, ikonların klan oluşturma ve kimlik değişikliği onay akışlarında saklanması ve mevcut kurulumlar için yerinde 0.13 şema yükseltmesi eklendi. Release yapısı da diğer Warext XenForo eklentileriyle aynı standarda getirildi: ayrı UPDATE ZIP olmadan tek normal XenForo kurulum/güncelleme ZIP'i.
+1.0.2, forum inceleme/onay akışına yönelik stabilite düzeltmesidir. Eski başvuru ve sahiplik-devri durum değerleri standartlaştırılır; geçerli bekleyen taleplerin ham durum biçimi yüzünden reddedilmesi engellenir ve tekrarlanan onay/red istekleri klan verisini çoğaltmadan güvenli şekilde ele alınır. Release yapısı ayrı UPDATE ZIP olmadan tek normal XenForo kurulum/güncelleme ZIP'i olarak devam eder.
 
 ## Temel özellikler
 
