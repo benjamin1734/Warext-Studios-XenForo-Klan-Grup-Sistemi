@@ -8,9 +8,9 @@ The system is intentionally independent from XenForo forum moderation. Clan owne
 
 ## Current version
 
-**0.14.0 RC**
+**1.0.0 Stable**
 
-0.13.0 RC adds an interactive circular HSV color picker with synchronized HEX/RGB values, separate XenForo/Font Awesome icon selection for clan tags and Manager banners, approved icon persistence across clan creation and identity-change requests, and the in-place 0.13 schema upgrade. Releases now follow the same Warext XenForo add-on standard: one normal XenForo installation/upgrade ZIP, without a separate UPDATE ZIP.
+1.0.0 Stable is the first production release. It includes the complete clan/group workflow, forum-reviewed official clan identity and ownership operations, clan-scoped roles and permissions, membership/application/invitation systems, moderation/audit integrations, privacy and capacity controls, HSV color and XenForo icon identity controls, and native Turkish/English language support. Releases use one normal XenForo installation/upgrade ZIP without a separate UPDATE ZIP.
 
 ## Main features
 
@@ -600,7 +600,7 @@ Ana tablolar:
 
 Repo CI sistemi PHP 8.1, 8.2, 8.3 ve 8.4 üzerinde syntax kontrolü; XML/JSON doğrulaması ve önemli route/template/izin/handler çapraz kontrollerini çalıştırır.
 
-Lisanslı gerçek XenForo kurulumu CI ortamında bulunmadığı için final runtime ve tema testi ayrıca gerçek XenForo 2.3 kurulumunda yapılmalıdır.
+1.0.0 Stable, final RC hattının gerçek XenForo 2.3 ortamındaki başarılı runtime testinden sonra yayınlanmıştır.
 
 ## Kurulum
 
@@ -651,4 +651,4 @@ Sorular, hata bildirimleri, kurulum desteği ve diğer Warext Studios XenForo ek
 
 ## Language support / Dil desteği
 
-0.14.0 RC adds native Turkish/English XenForo language packs under `languages/` and phrase-backed UI. See `LANGUAGE.md`.
+1.0.0 Stable includes native Turkish/English XenForo language packs under `languages/` and phrase-backed UI. See `LANGUAGE.md`.

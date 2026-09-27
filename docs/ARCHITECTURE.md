@@ -2,7 +2,7 @@
 
 ## Version
 
-`0.13.0 RC`
+`1.0.0 Stable`
 
 ## Add-on ID
 
@@ -294,7 +294,7 @@ Notifications should be emitted after the committed state exists whenever practi
 
 Existing installations are upgraded in place. Upgrade packages must not require resetting the XenForo database or reinstalling the add-on.
 
-Version `0.2.0` introduced base role normalization. Version `0.5.0` introduced later tables/fields needed by ownership, blacklist, announcements and active preferences. Version `0.7.0` added lifecycle behavior without requiring destructive schema reset. Version `0.8.0` adds option/cron/service behavior and does not require a destructive schema reset. Version `0.9.0` adds two clan privacy columns through an in-place schema upgrade plus service-level capacity/cooldown controls. Version `0.10.0` adds pagination and ownership-limit hardening without a schema change. Version `0.11.0 Beta` hardens XenForo public permission enforcement without a schema change. Version `0.12.0 RC` adds bounded clan-managed resources, stricter content/media validation and stable-aware release automation without a schema change. Version `0.12.1 RC` adds report-privacy hardening, atomic multi-record deletes and CI schema parity checks without a schema change. Version `0.13.0 RC` adds clan identity icons and the interactive color-picker UI through an in-place schema upgrade.
+Version `0.2.0` introduced base role normalization. Version `0.5.0` introduced later tables/fields needed by ownership, blacklist, announcements and active preferences. Version `0.7.0` added lifecycle behavior without requiring destructive schema reset. Version `0.8.0` adds option/cron/service behavior and does not require a destructive schema reset. Version `0.9.0` adds two clan privacy columns through an in-place schema upgrade plus service-level capacity/cooldown controls. Version `0.10.0` adds pagination and ownership-limit hardening without a schema change. Version `0.11.0 Beta` hardens XenForo public permission enforcement without a schema change. Version `0.12.0 RC` adds bounded clan-managed resources, stricter content/media validation and stable-aware release automation without a schema change. Version `0.12.1 RC` adds report-privacy hardening, atomic multi-record deletes and CI schema parity checks without a schema change. Version `0.13.0 RC` adds clan identity icons and the interactive color-picker UI through an in-place schema upgrade. Version `0.14.0 RC` adds native Turkish/English phrase/language support without a destructive schema change. Version `1.0.0` promotes the tested RC line to stable without additional schema changes.
 
 ## Repository layout
 

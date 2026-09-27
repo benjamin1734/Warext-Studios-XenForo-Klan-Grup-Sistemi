@@ -1,3 +1,21 @@
+# Changelog / Değişiklik Günlüğü
+
+## 1.0.0 - 2026-09-27
+
+### English
+
+- Promoted the Clan & Group System to the first stable release after successful real XenForo runtime testing of the final release-candidate build.
+- Finalized the production release line with clan creation/review, membership and invitation flows, Owner/Manager/member hierarchy, clan-scoped roles and permissions, ownership transfer, lifecycle moderation, announcements, blacklist, audit history, Report Center/Moderator Log/alert integrations, active-clan display, privacy/capacity controls, identity colors/icons and Turkish/English XenForo language support.
+- Retained the single standard XenForo installation/upgrade ZIP release format; no separate UPDATE ZIP is produced.
+- Stable release metadata and CI expectations were finalized without destructive database changes.
+
+### Türkçe
+
+- Son RC sürümünün gerçek XenForo ortamında sorunsuz çalışmasının ardından Klan & Grup Sistemi ilk stabil sürümüne yükseltildi.
+- Klan oluşturma/onay, üyelik ve davet akışları, Owner/Manager/üye hiyerarşisi, klan içi rol/yetkiler, sahiplik devri, yaşam döngüsü moderasyonu, duyurular, kara liste, denetim geçmişi, Report Center/Moderator Log/bildirim entegrasyonları, aktif klan gösterimi, gizlilik/kapasite kontrolleri, kimlik renk/ikon sistemi ve Türkçe/İngilizce XenForo dil desteği final sürüm hattına alındı.
+- Diğer Warext XenForo eklentileriyle aynı şekilde tek standart kurulum/güncelleme ZIP'i korunur; ayrı UPDATE ZIP üretilmez.
+- Stabil sürüm metadata'sı ve CI beklentileri yıkıcı veritabanı değişikliği olmadan finalize edildi.
+
 ## 0.14.0 RC - 2026-09-26
 
 ### English
@@ -9,8 +27,6 @@
 - Native XenForo Türkçe/İngilizce dil desteği eklendi.
 - Görünür klan/ACP/üye arayüz metinleri phrase sistemine taşındı.
 - İçe aktarılabilir Türkçe ve İngilizce XML dil paketleri eklendi.
-
-# Changelog / Değişiklik Günlüğü
 
 ## 0.13.0 RC - 2026-09-26
 
