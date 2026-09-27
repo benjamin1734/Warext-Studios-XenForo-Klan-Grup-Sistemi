@@ -313,6 +313,27 @@ class Setup extends AbstractSetup
         });
     }
 
+    public function upgrade1001020Step1(): void
+    {
+        $db = $this->db();
+
+        $db->query(
+            "UPDATE xf_wx_clan_application
+             SET application_type = LOWER(TRIM(application_type))
+             WHERE LOWER(TRIM(application_type)) IN ('create','join','change','close','reopen')"
+        );
+        $db->query(
+            "UPDATE xf_wx_clan_application
+             SET status = LOWER(TRIM(status))
+             WHERE LOWER(TRIM(status)) IN ('pending','approved','rejected','changes_requested','cancelled')"
+        );
+        $db->query(
+            "UPDATE xf_wx_clan_ownership_transfer
+             SET status = LOWER(TRIM(status))
+             WHERE LOWER(TRIM(status)) IN ('pending','accepted','approved','rejected','cancelled')"
+        );
+    }
+
     protected function ensureBaseRoles(): void
     {
         $db = $this->db();
