@@ -8,9 +8,9 @@ The system is intentionally independent from XenForo forum moderation. Clan owne
 
 ## Current version
 
-**1.0.2 Stable**
+**1.0.3 Stable**
 
-1.0.2 is a stability hotfix for the forum-review workflow. It normalizes legacy application/transfer state values, prevents valid pending clan requests from being rejected because of raw state formatting, and makes repeated approve/reject submissions safe without duplicating clan data. Releases use one normal XenForo installation/upgrade ZIP without a separate UPDATE ZIP.
+1.0.3 adds a dedicated Admin CP clan-management area with per-clan editing, moderation, member controls, Owner recovery, audit/request visibility and confirmed permanent deletion. Releases use one normal XenForo installation/upgrade ZIP without a separate UPDATE ZIP.
 
 ## Main features
 
@@ -346,9 +346,9 @@ Sistemin temel güvenlik kuralı şudur: **klan yöneticiliği forum moderatörl
 
 ## Güncel sürüm
 
-**1.0.2 Stable**
+**1.0.3 Stable**
 
-1.0.2, forum inceleme/onay akışına yönelik stabilite düzeltmesidir. Eski başvuru ve sahiplik-devri durum değerleri standartlaştırılır; geçerli bekleyen taleplerin ham durum biçimi yüzünden reddedilmesi engellenir ve tekrarlanan onay/red istekleri klan verisini çoğaltmadan güvenli şekilde ele alınır. Release yapısı ayrı UPDATE ZIP olmadan tek normal XenForo kurulum/güncelleme ZIP'i olarak devam eder.
+1.0.3 ile Admin CP'ye ayrı Klan Yönetimi alanı eklendi. Yetkililer klan detaylarını ve görünüm ayarlarını düzenleyebilir, durum moderasyonu yapabilir, Owner değiştirebilir, üyeleri Manager yapabilir/çıkarabilir, talepleri ve denetim geçmişini görebilir ve onay ekranı üzerinden klanı kalıcı olarak silebilir. Release yapısı ayrı UPDATE ZIP olmadan tek normal XenForo kurulum/güncelleme ZIP'i olarak devam eder.
 
 ## Temel özellikler
 
