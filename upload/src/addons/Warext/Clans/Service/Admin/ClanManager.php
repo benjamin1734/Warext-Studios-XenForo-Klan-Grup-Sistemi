@@ -241,6 +241,19 @@ class ClanManager extends AbstractService
             $db->query('DELETE FROM xf_wx_clan_application WHERE clan_id = ? OR created_clan_id = ?', [$clanId, $clanId]);
             $db->delete('xf_wx_clan_member', 'clan_id = ?', $clanId);
             $db->delete('xf_wx_clan_role', 'clan_id = ?', $clanId);
+
+            if ($actor->user_id && ($actor->is_moderator || $actor->is_admin))
+            {
+                \XF::app()->logger()->moderatorLogger()->log(
+                    'wx_clan',
+                    $this->clan,
+                    'delete',
+                    $snapshot,
+                    false,
+                    $actor
+                );
+            }
+
             $db->delete('xf_wx_clan_audit_log', 'clan_id = ?', $clanId);
             $this->clan->delete();
 
@@ -252,17 +265,6 @@ class ClanManager extends AbstractService
             throw $e;
         }
 
-        if ($actor->user_id && ($actor->is_moderator || $actor->is_admin))
-        {
-            \XF::app()->logger()->moderatorLogger()->log(
-                'wx_clan',
-                $this->clan,
-                'delete',
-                $snapshot,
-                false,
-                $actor
-            );
-        }
     }
 
     protected function normalizeColor(string $color): string
